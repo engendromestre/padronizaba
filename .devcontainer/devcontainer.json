@@ -1,0 +1,29 @@
+{
+  "name": "Padronizaba",
+  "dockerComposeFile": "compose.yml",
+  "service": "app",
+  "workspaceFolder": "/home/node/app",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropics.claude-code",
+        "prisma.prisma",
+        "bradlc.vscode-tailwindcss",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "rangav.vscode-thunder-client",
+        "ms-azuretools.vscode-docker",
+        "github.vscode-github-actions",
+        "usernamehw.errorlens"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "js/ts.tsdk.path": "node_modules/typescript/lib"
+      }
+    }
+  },
+  "forwardPorts": [3000, 5432]
+}
