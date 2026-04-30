@@ -7,20 +7,23 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to VPS
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /opt/padronizaba
-            git pull origin main
-            docker compose up -d --build
-            docker compose exec app npx prisma migrate deploy
+      - name: Pull latest changes
+        run: |
+          cd /opt/padronizaba
+          git pull origin main
+
+      - name: Build and restart containers
+        run: |
+          cd /opt/padronizaba
+          docker compose up -d --build
+
+      - name: Run migrations
+        run: |
+          cd /opt/padronizaba
+          docker compose exec app npx prisma migrate deploy
