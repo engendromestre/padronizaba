@@ -7,13 +7,58 @@ datasource db {
   provider = "postgresql"
 }
 
+model Estado {
+  id        String   @id @default(cuid())
+  nome      String
+  uf        String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cidades   Cidade[]
+  empresas  Empresa[]
+
+  @@map("estados")
+}
+
+model Cidade {
+  id       String @id @default(cuid())
+  nome     String
+  ibge     String? @unique
+  estadoId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  estado       Estado        @relation(fields: [estadoId], references: [id])
+  frigorificos Frigorifico[]
+  fazendas     Fazenda[]
+
+  @@map("cidades")
+}
+
+model Frigorifico {
+  id        String   @id @default(cuid())
+  nome      String
+  cnpj      String?  @unique
+  cidadeId  String
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cidade    Cidade     @relation(fields: [cidadeId], references: [id])
+  consultas Consulta[]
+
+  @@map("frigorificos")
+}
+
 model Empresa {
-  id          String      @id @default(cuid())
-  nome        String
-  estado      String
-  ativo       Boolean     @default(true)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id        String   @id @default(cuid())
+  nome      String
+  estadoId  String
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  estado      Estado      @relation(fields: [estadoId], references: [id])
   clientes    Cliente[]
   consultores Consultor[]
   consultas   Consulta[]
@@ -22,20 +67,35 @@ model Empresa {
 }
 
 model Cliente {
-  id           String          @id @default(cuid())
+  id           String   @id @default(cuid())
   empresaId    String
   nomeProdutor String
-  nomeFazenda  String
-  frigorifico  String
-  cidade       String
-  ativo        Boolean         @default(true)
-  createdAt    DateTime        @default(now())
-  updatedAt    DateTime        @updatedAt
-  empresa      Empresa         @relation(fields: [empresaId], references: [id])
-  grupos       GrupoWhatsapp[]
-  consultas    Consulta[]
+  ativo        Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  empresa   Empresa         @relation(fields: [empresaId], references: [id])
+  fazendas  Fazenda[]
+  grupos    GrupoWhatsapp[]
+  consultas Consulta[]
 
   @@map("clientes")
+}
+
+model Fazenda {
+  id        String   @id @default(cuid())
+  nome      String
+  clienteId String
+  cidadeId  String
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  cliente   Cliente    @relation(fields: [clienteId], references: [id])
+  cidade    Cidade     @relation(fields: [cidadeId], references: [id])
+  consultas Consulta[]
+
+  @@map("fazendas")
 }
 
 model GrupoWhatsapp {
@@ -46,20 +106,33 @@ model GrupoWhatsapp {
   ativo           Boolean  @default(true)
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
-  cliente         Cliente  @relation(fields: [clienteId], references: [id])
+
+  cliente Cliente @relation(fields: [clienteId], references: [id])
 
   @@map("grupos_whatsapp")
 }
 
+model CategoriaAnimal {
+  id        String   @id @default(cuid())
+  nome      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  consultas Consulta[]
+
+  @@map("categorias_animal")
+}
+
 model Consultor {
-  id        String         @id @default(cuid())
+  id        String   @id @default(cuid())
   empresaId String
   nome      String
-  email     String         @unique
+  email     String   @unique
   senhaHash String
-  ativo     Boolean        @default(true)
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   empresa   Empresa        @relation(fields: [empresaId], references: [id])
   consultas Consulta[]
   logs      AuditoriaLog[]
@@ -68,38 +141,60 @@ model Consultor {
 }
 
 model Consulta {
-  id               String              @id @default(cuid())
-  empresaId        String
-  clienteId        String
-  consultorId      String
-  dataAbate        DateTime
-  frigorifico      String
-  cidade           String
-  qtdMachos        Int                 @default(0)
-  qtdFemeas        Int                 @default(0)
-  pesoVivoKg       Float
-  pesoCarcacaKg    Float
-  mediaArroba      Float
-  rcPercentual     Float
-  maturidadeJson   Json
-  acabamentoJson   Json
+  id                String   @id @default(cuid())
+  empresaId         String
+  clienteId         String
+  fazendaId         String
+  consultorId       String
+  frigorificoId     String
+  categoriaAnimalId String
+  dataAbate         DateTime
+
+  qtdMachos       Int @default(0)
+  qtdFemeas       Int @default(0)
+  pesoVivoKg      Float
+  pesoTotalLoteKg Float
+  pesoCarcacaKg   Float
+  mediaArroba     Float
+  rcPercentual    Float
+
+  dentes0 Int @default(0)
+  dentes2 Int @default(0)
+  dentes4 Int @default(0)
+  dentes6 Int @default(0)
+  dentes8 Int @default(0)
+
+  gordura1 Int @default(0)
+  gordura2 Int @default(0)
+  gordura3 Int @default(0)
+  gordura4 Int @default(0)
+  gordura5 Int @default(0)
+
   penalizacoes     String?
   dif              String?
   escoreRuminal    String?
   perdaVacinalKg   Float?
-  bezerrosJson     Json?
+  bezerrosP        Int     @default(0)
+  bezerrosM        Int     @default(0)
+  bezerrosG        Int     @default(0)
   contaminacaoGiKg Float?
   hematomasKg      Float?
-  deslocamento     Boolean             @default(false)
-  relatorioAbate   Boolean             @default(false)
-  dataFaturamento  DateTime?
-  createdAt        DateTime            @default(now())
-  updatedAt        DateTime            @updatedAt
-  empresa          Empresa             @relation(fields: [empresaId], references: [id])
-  cliente          Cliente             @relation(fields: [clienteId], references: [id])
-  consultor        Consultor           @relation(fields: [consultorId], references: [id])
-  financeiro       ConsultaFinanceiro?
-  logs             AuditoriaLog[]
+
+  deslocamento    Boolean   @default(false)
+  relatorioAbate  Boolean   @default(false)
+  dataFaturamento DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  empresa         Empresa            @relation(fields: [empresaId], references: [id])
+  cliente         Cliente            @relation(fields: [clienteId], references: [id])
+  fazenda         Fazenda            @relation(fields: [fazendaId], references: [id])
+  consultor       Consultor          @relation(fields: [consultorId], references: [id])
+  frigorifico     Frigorifico        @relation(fields: [frigorificoId], references: [id])
+  categoriaAnimal CategoriaAnimal    @relation(fields: [categoriaAnimalId], references: [id])
+  financeiro      ConsultaFinanceiro?
+  whatsappLogs    WhatsAppLog[]
+  logs            AuditoriaLog[]
 
   @@map("consultas")
 }
@@ -115,14 +210,27 @@ model ConsultaFinanceiro {
   meses         Int?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  consulta      Consulta @relation(fields: [consultaId], references: [id])
+
+  consulta Consulta @relation(fields: [consultaId], references: [id])
 
   @@map("consulta_financeiro")
 }
 
+model WhatsAppLog {
+  id         String   @id @default(cuid())
+  consultaId String
+  status     String
+  messageId  String?
+  erro       String?
+  sentAt     DateTime @default(now())
+
+  consulta Consulta @relation(fields: [consultaId], references: [id])
+
+  @@map("whatsapp_logs")
+}
+
 model AuditoriaLog {
-  id            String     @id @default(cuid())
-  empresaId     String?
+  id            String    @id @default(cuid())
   consultorId   String?
   consultaId    String?
   tabelaAfetada String
@@ -131,9 +239,10 @@ model AuditoriaLog {
   dadosAntes    Json?
   dadosDepois   Json?
   ipOrigem      String?
-  createdAt     DateTime   @default(now())
-  consultor     Consultor? @relation(fields: [consultorId], references: [id])
-  consulta      Consulta?  @relation(fields: [consultaId], references: [id])
+  createdAt     DateTime  @default(now())
+
+  consultor Consultor? @relation(fields: [consultorId], references: [id])
+  consulta  Consulta?  @relation(fields: [consultaId], references: [id])
 
   @@map("auditoria_logs")
 }
