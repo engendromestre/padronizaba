@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  lint:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          cd $GITHUB_WORKSPACE
+          npm ci
+
+      - name: Run lint
+        run: |
+          cd $GITHUB_WORKSPACE
+          npm run lint
+
+      - name: Check types
+        run: |
+          cd $GITHUB_WORKSPACE
+          npx tsc --noEmit
