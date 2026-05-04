@@ -6,7 +6,7 @@ import { Etapa3Maturidade } from "@/app/components/formulario/Etapa3Maturidade"
 import { Etapa4Acabamento } from "@/app/components/formulario/Etapa4Acabamento"
 import { Etapa5Adicionais } from "@/app/components/formulario/Etapa5Adicionais"
 import { FormProgress } from "@/app/components/formulario/FormProgress"
-import { ConsultaForm, consultaSchema } from "@/lib/schemas/consulta"
+import { ConsultaForm, consultaSchema, calcularTotais  } from "@/lib/schemas/consulta"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -51,11 +51,21 @@ export default function NovaConsultaPage() {
       dentes4: 0,
       dentes6: 0,
       dentes8: 0,
+      dentes0Pct: 0,
+      dentes2Pct: 0,
+      dentes4Pct: 0,
+      dentes6Pct: 0,
+      dentes8Pct: 0,
       gordura1: 0,
       gordura2: 0,
       gordura3: 0,
       gordura4: 0,
       gordura5: 0,
+      gordura1Pct: 0,
+      gordura2Pct: 0,
+      gordura3Pct: 0,
+      gordura4Pct: 0,
+      gordura5Pct: 0,
       bezerrosP: 0,
       bezerrosM: 0,
       bezerrosG: 0,
@@ -98,12 +108,28 @@ export default function NovaConsultaPage() {
     setLoading(true)
     setErro("")
 
+     // Calcular percentuais automaticamente
+    const totais = calcularTotais(data)
+    const dataComTotais = {
+      ...data,
+      dentes0Pct: totais.dentes0Pct,
+      dentes2Pct: totais.dentes2Pct,
+      dentes4Pct: totais.dentes4Pct,
+      dentes6Pct: totais.dentes6Pct,
+      dentes8Pct: totais.dentes8Pct,
+      gordura1Pct: totais.gordura1Pct,
+      gordura2Pct: totais.gordura2Pct,
+      gordura3Pct: totais.gordura3Pct,
+      gordura4Pct: totais.gordura4Pct,
+      gordura5Pct: totais.gordura5Pct,
+    }
+
     try {
       // Tenta enviar online
       const res = await fetch("/api/consultas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(dataComTotais),
       })
 
       if (res.ok) {
@@ -114,7 +140,7 @@ export default function NovaConsultaPage() {
       throw new Error("Erro ao salvar")
     } catch {
       // Offline: salva no IndexedDB
-      await salvarOffline(data)
+      await salvarOffline(dataComTotais)
       router.push("/dashboard?offline=1")
     } finally {
       setLoading(false)

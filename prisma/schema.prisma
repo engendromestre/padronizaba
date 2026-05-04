@@ -163,11 +163,23 @@ model Consulta {
   dentes6 Int @default(0)
   dentes8 Int @default(0)
 
+  dentes0Pct Float @default(0)
+  dentes2Pct Float @default(0)
+  dentes4Pct Float @default(0)
+  dentes6Pct Float @default(0)
+  dentes8Pct Float @default(0)
+
   gordura1 Int @default(0)
   gordura2 Int @default(0)
   gordura3 Int @default(0)
   gordura4 Int @default(0)
   gordura5 Int @default(0)
+
+  gordura1Pct Float @default(0)
+  gordura2Pct Float @default(0)
+  gordura3Pct Float @default(0)
+  gordura4Pct Float @default(0)
+  gordura5Pct Float @default(0)
 
   penalizacoes     String?
   dif              String?
