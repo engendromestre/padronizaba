@@ -9,7 +9,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "anthropics.claude-code",
+        "codeium.codeium",
         "prisma.prisma",
         "bradlc.vscode-tailwindcss",
         "dbaeumer.vscode-eslint",
