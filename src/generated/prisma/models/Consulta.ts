@@ -39,11 +39,21 @@ export type ConsultaAvgAggregateOutputType = {
   dentes4: number | null
   dentes6: number | null
   dentes8: number | null
+  dentes0Pct: number | null
+  dentes2Pct: number | null
+  dentes4Pct: number | null
+  dentes6Pct: number | null
+  dentes8Pct: number | null
   gordura1: number | null
   gordura2: number | null
   gordura3: number | null
   gordura4: number | null
   gordura5: number | null
+  gordura1Pct: number | null
+  gordura2Pct: number | null
+  gordura3Pct: number | null
+  gordura4Pct: number | null
+  gordura5Pct: number | null
   perdaVacinalKg: number | null
   bezerrosP: number | null
   bezerrosM: number | null
@@ -65,11 +75,21 @@ export type ConsultaSumAggregateOutputType = {
   dentes4: number | null
   dentes6: number | null
   dentes8: number | null
+  dentes0Pct: number | null
+  dentes2Pct: number | null
+  dentes4Pct: number | null
+  dentes6Pct: number | null
+  dentes8Pct: number | null
   gordura1: number | null
   gordura2: number | null
   gordura3: number | null
   gordura4: number | null
   gordura5: number | null
+  gordura1Pct: number | null
+  gordura2Pct: number | null
+  gordura3Pct: number | null
+  gordura4Pct: number | null
+  gordura5Pct: number | null
   perdaVacinalKg: number | null
   bezerrosP: number | null
   bezerrosM: number | null
@@ -99,11 +119,21 @@ export type ConsultaMinAggregateOutputType = {
   dentes4: number | null
   dentes6: number | null
   dentes8: number | null
+  dentes0Pct: number | null
+  dentes2Pct: number | null
+  dentes4Pct: number | null
+  dentes6Pct: number | null
+  dentes8Pct: number | null
   gordura1: number | null
   gordura2: number | null
   gordura3: number | null
   gordura4: number | null
   gordura5: number | null
+  gordura1Pct: number | null
+  gordura2Pct: number | null
+  gordura3Pct: number | null
+  gordura4Pct: number | null
+  gordura5Pct: number | null
   penalizacoes: string | null
   dif: string | null
   escoreRuminal: string | null
@@ -141,11 +171,21 @@ export type ConsultaMaxAggregateOutputType = {
   dentes4: number | null
   dentes6: number | null
   dentes8: number | null
+  dentes0Pct: number | null
+  dentes2Pct: number | null
+  dentes4Pct: number | null
+  dentes6Pct: number | null
+  dentes8Pct: number | null
   gordura1: number | null
   gordura2: number | null
   gordura3: number | null
   gordura4: number | null
   gordura5: number | null
+  gordura1Pct: number | null
+  gordura2Pct: number | null
+  gordura3Pct: number | null
+  gordura4Pct: number | null
+  gordura5Pct: number | null
   penalizacoes: string | null
   dif: string | null
   escoreRuminal: string | null
@@ -183,11 +223,21 @@ export type ConsultaCountAggregateOutputType = {
   dentes4: number
   dentes6: number
   dentes8: number
+  dentes0Pct: number
+  dentes2Pct: number
+  dentes4Pct: number
+  dentes6Pct: number
+  dentes8Pct: number
   gordura1: number
   gordura2: number
   gordura3: number
   gordura4: number
   gordura5: number
+  gordura1Pct: number
+  gordura2Pct: number
+  gordura3Pct: number
+  gordura4Pct: number
+  gordura5Pct: number
   penalizacoes: number
   dif: number
   escoreRuminal: number
@@ -219,11 +269,21 @@ export type ConsultaAvgAggregateInputType = {
   dentes4?: true
   dentes6?: true
   dentes8?: true
+  dentes0Pct?: true
+  dentes2Pct?: true
+  dentes4Pct?: true
+  dentes6Pct?: true
+  dentes8Pct?: true
   gordura1?: true
   gordura2?: true
   gordura3?: true
   gordura4?: true
   gordura5?: true
+  gordura1Pct?: true
+  gordura2Pct?: true
+  gordura3Pct?: true
+  gordura4Pct?: true
+  gordura5Pct?: true
   perdaVacinalKg?: true
   bezerrosP?: true
   bezerrosM?: true
@@ -245,11 +305,21 @@ export type ConsultaSumAggregateInputType = {
   dentes4?: true
   dentes6?: true
   dentes8?: true
+  dentes0Pct?: true
+  dentes2Pct?: true
+  dentes4Pct?: true
+  dentes6Pct?: true
+  dentes8Pct?: true
   gordura1?: true
   gordura2?: true
   gordura3?: true
   gordura4?: true
   gordura5?: true
+  gordura1Pct?: true
+  gordura2Pct?: true
+  gordura3Pct?: true
+  gordura4Pct?: true
+  gordura5Pct?: true
   perdaVacinalKg?: true
   bezerrosP?: true
   bezerrosM?: true
@@ -279,11 +349,21 @@ export type ConsultaMinAggregateInputType = {
   dentes4?: true
   dentes6?: true
   dentes8?: true
+  dentes0Pct?: true
+  dentes2Pct?: true
+  dentes4Pct?: true
+  dentes6Pct?: true
+  dentes8Pct?: true
   gordura1?: true
   gordura2?: true
   gordura3?: true
   gordura4?: true
   gordura5?: true
+  gordura1Pct?: true
+  gordura2Pct?: true
+  gordura3Pct?: true
+  gordura4Pct?: true
+  gordura5Pct?: true
   penalizacoes?: true
   dif?: true
   escoreRuminal?: true
@@ -321,11 +401,21 @@ export type ConsultaMaxAggregateInputType = {
   dentes4?: true
   dentes6?: true
   dentes8?: true
+  dentes0Pct?: true
+  dentes2Pct?: true
+  dentes4Pct?: true
+  dentes6Pct?: true
+  dentes8Pct?: true
   gordura1?: true
   gordura2?: true
   gordura3?: true
   gordura4?: true
   gordura5?: true
+  gordura1Pct?: true
+  gordura2Pct?: true
+  gordura3Pct?: true
+  gordura4Pct?: true
+  gordura5Pct?: true
   penalizacoes?: true
   dif?: true
   escoreRuminal?: true
@@ -363,11 +453,21 @@ export type ConsultaCountAggregateInputType = {
   dentes4?: true
   dentes6?: true
   dentes8?: true
+  dentes0Pct?: true
+  dentes2Pct?: true
+  dentes4Pct?: true
+  dentes6Pct?: true
+  dentes8Pct?: true
   gordura1?: true
   gordura2?: true
   gordura3?: true
   gordura4?: true
   gordura5?: true
+  gordura1Pct?: true
+  gordura2Pct?: true
+  gordura3Pct?: true
+  gordura4Pct?: true
+  gordura5Pct?: true
   penalizacoes?: true
   dif?: true
   escoreRuminal?: true
@@ -492,11 +592,21 @@ export type ConsultaGroupByOutputType = {
   dentes4: number
   dentes6: number
   dentes8: number
+  dentes0Pct: number
+  dentes2Pct: number
+  dentes4Pct: number
+  dentes6Pct: number
+  dentes8Pct: number
   gordura1: number
   gordura2: number
   gordura3: number
   gordura4: number
   gordura5: number
+  gordura1Pct: number
+  gordura2Pct: number
+  gordura3Pct: number
+  gordura4Pct: number
+  gordura5Pct: number
   penalizacoes: string | null
   dif: string | null
   escoreRuminal: string | null
@@ -557,11 +667,21 @@ export type ConsultaWhereInput = {
   dentes4?: Prisma.IntFilter<"Consulta"> | number
   dentes6?: Prisma.IntFilter<"Consulta"> | number
   dentes8?: Prisma.IntFilter<"Consulta"> | number
+  dentes0Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes2Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes4Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes6Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes8Pct?: Prisma.FloatFilter<"Consulta"> | number
   gordura1?: Prisma.IntFilter<"Consulta"> | number
   gordura2?: Prisma.IntFilter<"Consulta"> | number
   gordura3?: Prisma.IntFilter<"Consulta"> | number
   gordura4?: Prisma.IntFilter<"Consulta"> | number
   gordura5?: Prisma.IntFilter<"Consulta"> | number
+  gordura1Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura2Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura3Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura4Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura5Pct?: Prisma.FloatFilter<"Consulta"> | number
   penalizacoes?: Prisma.StringNullableFilter<"Consulta"> | string | null
   dif?: Prisma.StringNullableFilter<"Consulta"> | string | null
   escoreRuminal?: Prisma.StringNullableFilter<"Consulta"> | string | null
@@ -608,11 +728,21 @@ export type ConsultaOrderByWithRelationInput = {
   dentes4?: Prisma.SortOrder
   dentes6?: Prisma.SortOrder
   dentes8?: Prisma.SortOrder
+  dentes0Pct?: Prisma.SortOrder
+  dentes2Pct?: Prisma.SortOrder
+  dentes4Pct?: Prisma.SortOrder
+  dentes6Pct?: Prisma.SortOrder
+  dentes8Pct?: Prisma.SortOrder
   gordura1?: Prisma.SortOrder
   gordura2?: Prisma.SortOrder
   gordura3?: Prisma.SortOrder
   gordura4?: Prisma.SortOrder
   gordura5?: Prisma.SortOrder
+  gordura1Pct?: Prisma.SortOrder
+  gordura2Pct?: Prisma.SortOrder
+  gordura3Pct?: Prisma.SortOrder
+  gordura4Pct?: Prisma.SortOrder
+  gordura5Pct?: Prisma.SortOrder
   penalizacoes?: Prisma.SortOrderInput | Prisma.SortOrder
   dif?: Prisma.SortOrderInput | Prisma.SortOrder
   escoreRuminal?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -662,11 +792,21 @@ export type ConsultaWhereUniqueInput = Prisma.AtLeast<{
   dentes4?: Prisma.IntFilter<"Consulta"> | number
   dentes6?: Prisma.IntFilter<"Consulta"> | number
   dentes8?: Prisma.IntFilter<"Consulta"> | number
+  dentes0Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes2Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes4Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes6Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes8Pct?: Prisma.FloatFilter<"Consulta"> | number
   gordura1?: Prisma.IntFilter<"Consulta"> | number
   gordura2?: Prisma.IntFilter<"Consulta"> | number
   gordura3?: Prisma.IntFilter<"Consulta"> | number
   gordura4?: Prisma.IntFilter<"Consulta"> | number
   gordura5?: Prisma.IntFilter<"Consulta"> | number
+  gordura1Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura2Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura3Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura4Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura5Pct?: Prisma.FloatFilter<"Consulta"> | number
   penalizacoes?: Prisma.StringNullableFilter<"Consulta"> | string | null
   dif?: Prisma.StringNullableFilter<"Consulta"> | string | null
   escoreRuminal?: Prisma.StringNullableFilter<"Consulta"> | string | null
@@ -713,11 +853,21 @@ export type ConsultaOrderByWithAggregationInput = {
   dentes4?: Prisma.SortOrder
   dentes6?: Prisma.SortOrder
   dentes8?: Prisma.SortOrder
+  dentes0Pct?: Prisma.SortOrder
+  dentes2Pct?: Prisma.SortOrder
+  dentes4Pct?: Prisma.SortOrder
+  dentes6Pct?: Prisma.SortOrder
+  dentes8Pct?: Prisma.SortOrder
   gordura1?: Prisma.SortOrder
   gordura2?: Prisma.SortOrder
   gordura3?: Prisma.SortOrder
   gordura4?: Prisma.SortOrder
   gordura5?: Prisma.SortOrder
+  gordura1Pct?: Prisma.SortOrder
+  gordura2Pct?: Prisma.SortOrder
+  gordura3Pct?: Prisma.SortOrder
+  gordura4Pct?: Prisma.SortOrder
+  gordura5Pct?: Prisma.SortOrder
   penalizacoes?: Prisma.SortOrderInput | Prisma.SortOrder
   dif?: Prisma.SortOrderInput | Prisma.SortOrder
   escoreRuminal?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -763,11 +913,21 @@ export type ConsultaScalarWhereWithAggregatesInput = {
   dentes4?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
   dentes6?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
   dentes8?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
+  dentes0Pct?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
+  dentes2Pct?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
+  dentes4Pct?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
+  dentes6Pct?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
+  dentes8Pct?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
   gordura1?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
   gordura2?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
   gordura3?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
   gordura4?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
   gordura5?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
+  gordura1Pct?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
+  gordura2Pct?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
+  gordura3Pct?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
+  gordura4Pct?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
+  gordura5Pct?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
   penalizacoes?: Prisma.StringNullableWithAggregatesFilter<"Consulta"> | string | null
   dif?: Prisma.StringNullableWithAggregatesFilter<"Consulta"> | string | null
   escoreRuminal?: Prisma.StringNullableWithAggregatesFilter<"Consulta"> | string | null
@@ -799,11 +959,21 @@ export type ConsultaCreateInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -850,11 +1020,21 @@ export type ConsultaUncheckedCreateInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -889,11 +1069,21 @@ export type ConsultaUpdateInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -940,11 +1130,21 @@ export type ConsultaUncheckedUpdateInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -985,11 +1185,21 @@ export type ConsultaCreateManyInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -1021,11 +1231,21 @@ export type ConsultaUpdateManyMutationInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1063,11 +1283,21 @@ export type ConsultaUncheckedUpdateManyInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1115,11 +1345,21 @@ export type ConsultaCountOrderByAggregateInput = {
   dentes4?: Prisma.SortOrder
   dentes6?: Prisma.SortOrder
   dentes8?: Prisma.SortOrder
+  dentes0Pct?: Prisma.SortOrder
+  dentes2Pct?: Prisma.SortOrder
+  dentes4Pct?: Prisma.SortOrder
+  dentes6Pct?: Prisma.SortOrder
+  dentes8Pct?: Prisma.SortOrder
   gordura1?: Prisma.SortOrder
   gordura2?: Prisma.SortOrder
   gordura3?: Prisma.SortOrder
   gordura4?: Prisma.SortOrder
   gordura5?: Prisma.SortOrder
+  gordura1Pct?: Prisma.SortOrder
+  gordura2Pct?: Prisma.SortOrder
+  gordura3Pct?: Prisma.SortOrder
+  gordura4Pct?: Prisma.SortOrder
+  gordura5Pct?: Prisma.SortOrder
   penalizacoes?: Prisma.SortOrder
   dif?: Prisma.SortOrder
   escoreRuminal?: Prisma.SortOrder
@@ -1149,11 +1389,21 @@ export type ConsultaAvgOrderByAggregateInput = {
   dentes4?: Prisma.SortOrder
   dentes6?: Prisma.SortOrder
   dentes8?: Prisma.SortOrder
+  dentes0Pct?: Prisma.SortOrder
+  dentes2Pct?: Prisma.SortOrder
+  dentes4Pct?: Prisma.SortOrder
+  dentes6Pct?: Prisma.SortOrder
+  dentes8Pct?: Prisma.SortOrder
   gordura1?: Prisma.SortOrder
   gordura2?: Prisma.SortOrder
   gordura3?: Prisma.SortOrder
   gordura4?: Prisma.SortOrder
   gordura5?: Prisma.SortOrder
+  gordura1Pct?: Prisma.SortOrder
+  gordura2Pct?: Prisma.SortOrder
+  gordura3Pct?: Prisma.SortOrder
+  gordura4Pct?: Prisma.SortOrder
+  gordura5Pct?: Prisma.SortOrder
   perdaVacinalKg?: Prisma.SortOrder
   bezerrosP?: Prisma.SortOrder
   bezerrosM?: Prisma.SortOrder
@@ -1183,11 +1433,21 @@ export type ConsultaMaxOrderByAggregateInput = {
   dentes4?: Prisma.SortOrder
   dentes6?: Prisma.SortOrder
   dentes8?: Prisma.SortOrder
+  dentes0Pct?: Prisma.SortOrder
+  dentes2Pct?: Prisma.SortOrder
+  dentes4Pct?: Prisma.SortOrder
+  dentes6Pct?: Prisma.SortOrder
+  dentes8Pct?: Prisma.SortOrder
   gordura1?: Prisma.SortOrder
   gordura2?: Prisma.SortOrder
   gordura3?: Prisma.SortOrder
   gordura4?: Prisma.SortOrder
   gordura5?: Prisma.SortOrder
+  gordura1Pct?: Prisma.SortOrder
+  gordura2Pct?: Prisma.SortOrder
+  gordura3Pct?: Prisma.SortOrder
+  gordura4Pct?: Prisma.SortOrder
+  gordura5Pct?: Prisma.SortOrder
   penalizacoes?: Prisma.SortOrder
   dif?: Prisma.SortOrder
   escoreRuminal?: Prisma.SortOrder
@@ -1225,11 +1485,21 @@ export type ConsultaMinOrderByAggregateInput = {
   dentes4?: Prisma.SortOrder
   dentes6?: Prisma.SortOrder
   dentes8?: Prisma.SortOrder
+  dentes0Pct?: Prisma.SortOrder
+  dentes2Pct?: Prisma.SortOrder
+  dentes4Pct?: Prisma.SortOrder
+  dentes6Pct?: Prisma.SortOrder
+  dentes8Pct?: Prisma.SortOrder
   gordura1?: Prisma.SortOrder
   gordura2?: Prisma.SortOrder
   gordura3?: Prisma.SortOrder
   gordura4?: Prisma.SortOrder
   gordura5?: Prisma.SortOrder
+  gordura1Pct?: Prisma.SortOrder
+  gordura2Pct?: Prisma.SortOrder
+  gordura3Pct?: Prisma.SortOrder
+  gordura4Pct?: Prisma.SortOrder
+  gordura5Pct?: Prisma.SortOrder
   penalizacoes?: Prisma.SortOrder
   dif?: Prisma.SortOrder
   escoreRuminal?: Prisma.SortOrder
@@ -1259,11 +1529,21 @@ export type ConsultaSumOrderByAggregateInput = {
   dentes4?: Prisma.SortOrder
   dentes6?: Prisma.SortOrder
   dentes8?: Prisma.SortOrder
+  dentes0Pct?: Prisma.SortOrder
+  dentes2Pct?: Prisma.SortOrder
+  dentes4Pct?: Prisma.SortOrder
+  dentes6Pct?: Prisma.SortOrder
+  dentes8Pct?: Prisma.SortOrder
   gordura1?: Prisma.SortOrder
   gordura2?: Prisma.SortOrder
   gordura3?: Prisma.SortOrder
   gordura4?: Prisma.SortOrder
   gordura5?: Prisma.SortOrder
+  gordura1Pct?: Prisma.SortOrder
+  gordura2Pct?: Prisma.SortOrder
+  gordura3Pct?: Prisma.SortOrder
+  gordura4Pct?: Prisma.SortOrder
+  gordura5Pct?: Prisma.SortOrder
   perdaVacinalKg?: Prisma.SortOrder
   bezerrosP?: Prisma.SortOrder
   bezerrosM?: Prisma.SortOrder
@@ -1621,11 +1901,21 @@ export type ConsultaCreateWithoutFrigorificoInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -1670,11 +1960,21 @@ export type ConsultaUncheckedCreateWithoutFrigorificoInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -1744,11 +2044,21 @@ export type ConsultaScalarWhereInput = {
   dentes4?: Prisma.IntFilter<"Consulta"> | number
   dentes6?: Prisma.IntFilter<"Consulta"> | number
   dentes8?: Prisma.IntFilter<"Consulta"> | number
+  dentes0Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes2Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes4Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes6Pct?: Prisma.FloatFilter<"Consulta"> | number
+  dentes8Pct?: Prisma.FloatFilter<"Consulta"> | number
   gordura1?: Prisma.IntFilter<"Consulta"> | number
   gordura2?: Prisma.IntFilter<"Consulta"> | number
   gordura3?: Prisma.IntFilter<"Consulta"> | number
   gordura4?: Prisma.IntFilter<"Consulta"> | number
   gordura5?: Prisma.IntFilter<"Consulta"> | number
+  gordura1Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura2Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura3Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura4Pct?: Prisma.FloatFilter<"Consulta"> | number
+  gordura5Pct?: Prisma.FloatFilter<"Consulta"> | number
   penalizacoes?: Prisma.StringNullableFilter<"Consulta"> | string | null
   dif?: Prisma.StringNullableFilter<"Consulta"> | string | null
   escoreRuminal?: Prisma.StringNullableFilter<"Consulta"> | string | null
@@ -1780,11 +2090,21 @@ export type ConsultaCreateWithoutEmpresaInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -1829,11 +2149,21 @@ export type ConsultaUncheckedCreateWithoutEmpresaInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -1894,11 +2224,21 @@ export type ConsultaCreateWithoutClienteInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -1943,11 +2283,21 @@ export type ConsultaUncheckedCreateWithoutClienteInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2008,11 +2358,21 @@ export type ConsultaCreateWithoutFazendaInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2057,11 +2417,21 @@ export type ConsultaUncheckedCreateWithoutFazendaInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2122,11 +2492,21 @@ export type ConsultaCreateWithoutCategoriaAnimalInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2171,11 +2551,21 @@ export type ConsultaUncheckedCreateWithoutCategoriaAnimalInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2236,11 +2626,21 @@ export type ConsultaCreateWithoutConsultorInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2285,11 +2685,21 @@ export type ConsultaUncheckedCreateWithoutConsultorInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2350,11 +2760,21 @@ export type ConsultaCreateWithoutFinanceiroInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2400,11 +2820,21 @@ export type ConsultaUncheckedCreateWithoutFinanceiroInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2454,11 +2884,21 @@ export type ConsultaUpdateWithoutFinanceiroInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2504,11 +2944,21 @@ export type ConsultaUncheckedUpdateWithoutFinanceiroInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2542,11 +2992,21 @@ export type ConsultaCreateWithoutWhatsappLogsInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2592,11 +3052,21 @@ export type ConsultaUncheckedCreateWithoutWhatsappLogsInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2646,11 +3116,21 @@ export type ConsultaUpdateWithoutWhatsappLogsInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2696,11 +3176,21 @@ export type ConsultaUncheckedUpdateWithoutWhatsappLogsInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2734,11 +3224,21 @@ export type ConsultaCreateWithoutLogsInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2784,11 +3284,21 @@ export type ConsultaUncheckedCreateWithoutLogsInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2838,11 +3348,21 @@ export type ConsultaUpdateWithoutLogsInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2888,11 +3408,21 @@ export type ConsultaUncheckedUpdateWithoutLogsInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2931,11 +3461,21 @@ export type ConsultaCreateManyFrigorificoInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -2967,11 +3507,21 @@ export type ConsultaUpdateWithoutFrigorificoInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3016,11 +3566,21 @@ export type ConsultaUncheckedUpdateWithoutFrigorificoInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3060,11 +3620,21 @@ export type ConsultaUncheckedUpdateManyWithoutFrigorificoInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3101,11 +3671,21 @@ export type ConsultaCreateManyEmpresaInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -3137,11 +3717,21 @@ export type ConsultaUpdateWithoutEmpresaInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3186,11 +3776,21 @@ export type ConsultaUncheckedUpdateWithoutEmpresaInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3230,11 +3830,21 @@ export type ConsultaUncheckedUpdateManyWithoutEmpresaInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3271,11 +3881,21 @@ export type ConsultaCreateManyClienteInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -3307,11 +3927,21 @@ export type ConsultaUpdateWithoutClienteInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3356,11 +3986,21 @@ export type ConsultaUncheckedUpdateWithoutClienteInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3400,11 +4040,21 @@ export type ConsultaUncheckedUpdateManyWithoutClienteInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3441,11 +4091,21 @@ export type ConsultaCreateManyFazendaInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -3477,11 +4137,21 @@ export type ConsultaUpdateWithoutFazendaInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3526,11 +4196,21 @@ export type ConsultaUncheckedUpdateWithoutFazendaInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3570,11 +4250,21 @@ export type ConsultaUncheckedUpdateManyWithoutFazendaInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3611,11 +4301,21 @@ export type ConsultaCreateManyCategoriaAnimalInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -3647,11 +4347,21 @@ export type ConsultaUpdateWithoutCategoriaAnimalInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3696,11 +4406,21 @@ export type ConsultaUncheckedUpdateWithoutCategoriaAnimalInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3740,11 +4460,21 @@ export type ConsultaUncheckedUpdateManyWithoutCategoriaAnimalInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3781,11 +4511,21 @@ export type ConsultaCreateManyConsultorInput = {
   dentes4?: number
   dentes6?: number
   dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
   gordura1?: number
   gordura2?: number
   gordura3?: number
   gordura4?: number
   gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
   penalizacoes?: string | null
   dif?: string | null
   escoreRuminal?: string | null
@@ -3817,11 +4557,21 @@ export type ConsultaUpdateWithoutConsultorInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3866,11 +4616,21 @@ export type ConsultaUncheckedUpdateWithoutConsultorInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3910,11 +4670,21 @@ export type ConsultaUncheckedUpdateManyWithoutConsultorInput = {
   dentes4?: Prisma.IntFieldUpdateOperationsInput | number
   dentes6?: Prisma.IntFieldUpdateOperationsInput | number
   dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   gordura1?: Prisma.IntFieldUpdateOperationsInput | number
   gordura2?: Prisma.IntFieldUpdateOperationsInput | number
   gordura3?: Prisma.IntFieldUpdateOperationsInput | number
   gordura4?: Prisma.IntFieldUpdateOperationsInput | number
   gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
   penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3992,11 +4762,21 @@ export type ConsultaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   dentes4?: boolean
   dentes6?: boolean
   dentes8?: boolean
+  dentes0Pct?: boolean
+  dentes2Pct?: boolean
+  dentes4Pct?: boolean
+  dentes6Pct?: boolean
+  dentes8Pct?: boolean
   gordura1?: boolean
   gordura2?: boolean
   gordura3?: boolean
   gordura4?: boolean
   gordura5?: boolean
+  gordura1Pct?: boolean
+  gordura2Pct?: boolean
+  gordura3Pct?: boolean
+  gordura4Pct?: boolean
+  gordura5Pct?: boolean
   penalizacoes?: boolean
   dif?: boolean
   escoreRuminal?: boolean
@@ -4044,11 +4824,21 @@ export type ConsultaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   dentes4?: boolean
   dentes6?: boolean
   dentes8?: boolean
+  dentes0Pct?: boolean
+  dentes2Pct?: boolean
+  dentes4Pct?: boolean
+  dentes6Pct?: boolean
+  dentes8Pct?: boolean
   gordura1?: boolean
   gordura2?: boolean
   gordura3?: boolean
   gordura4?: boolean
   gordura5?: boolean
+  gordura1Pct?: boolean
+  gordura2Pct?: boolean
+  gordura3Pct?: boolean
+  gordura4Pct?: boolean
+  gordura5Pct?: boolean
   penalizacoes?: boolean
   dif?: boolean
   escoreRuminal?: boolean
@@ -4092,11 +4882,21 @@ export type ConsultaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   dentes4?: boolean
   dentes6?: boolean
   dentes8?: boolean
+  dentes0Pct?: boolean
+  dentes2Pct?: boolean
+  dentes4Pct?: boolean
+  dentes6Pct?: boolean
+  dentes8Pct?: boolean
   gordura1?: boolean
   gordura2?: boolean
   gordura3?: boolean
   gordura4?: boolean
   gordura5?: boolean
+  gordura1Pct?: boolean
+  gordura2Pct?: boolean
+  gordura3Pct?: boolean
+  gordura4Pct?: boolean
+  gordura5Pct?: boolean
   penalizacoes?: boolean
   dif?: boolean
   escoreRuminal?: boolean
@@ -4140,11 +4940,21 @@ export type ConsultaSelectScalar = {
   dentes4?: boolean
   dentes6?: boolean
   dentes8?: boolean
+  dentes0Pct?: boolean
+  dentes2Pct?: boolean
+  dentes4Pct?: boolean
+  dentes6Pct?: boolean
+  dentes8Pct?: boolean
   gordura1?: boolean
   gordura2?: boolean
   gordura3?: boolean
   gordura4?: boolean
   gordura5?: boolean
+  gordura1Pct?: boolean
+  gordura2Pct?: boolean
+  gordura3Pct?: boolean
+  gordura4Pct?: boolean
+  gordura5Pct?: boolean
   penalizacoes?: boolean
   dif?: boolean
   escoreRuminal?: boolean
@@ -4161,7 +4971,7 @@ export type ConsultaSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ConsultaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "clienteId" | "fazendaId" | "consultorId" | "frigorificoId" | "categoriaAnimalId" | "dataAbate" | "qtdMachos" | "qtdFemeas" | "pesoVivoKg" | "pesoTotalLoteKg" | "pesoCarcacaKg" | "mediaArroba" | "rcPercentual" | "dentes0" | "dentes2" | "dentes4" | "dentes6" | "dentes8" | "gordura1" | "gordura2" | "gordura3" | "gordura4" | "gordura5" | "penalizacoes" | "dif" | "escoreRuminal" | "perdaVacinalKg" | "bezerrosP" | "bezerrosM" | "bezerrosG" | "contaminacaoGiKg" | "hematomasKg" | "deslocamento" | "relatorioAbate" | "dataFaturamento" | "createdAt" | "updatedAt", ExtArgs["result"]["consulta"]>
+export type ConsultaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "clienteId" | "fazendaId" | "consultorId" | "frigorificoId" | "categoriaAnimalId" | "dataAbate" | "qtdMachos" | "qtdFemeas" | "pesoVivoKg" | "pesoTotalLoteKg" | "pesoCarcacaKg" | "mediaArroba" | "rcPercentual" | "dentes0" | "dentes2" | "dentes4" | "dentes6" | "dentes8" | "dentes0Pct" | "dentes2Pct" | "dentes4Pct" | "dentes6Pct" | "dentes8Pct" | "gordura1" | "gordura2" | "gordura3" | "gordura4" | "gordura5" | "gordura1Pct" | "gordura2Pct" | "gordura3Pct" | "gordura4Pct" | "gordura5Pct" | "penalizacoes" | "dif" | "escoreRuminal" | "perdaVacinalKg" | "bezerrosP" | "bezerrosM" | "bezerrosG" | "contaminacaoGiKg" | "hematomasKg" | "deslocamento" | "relatorioAbate" | "dataFaturamento" | "createdAt" | "updatedAt", ExtArgs["result"]["consulta"]>
 export type ConsultaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
@@ -4225,11 +5035,21 @@ export type $ConsultaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     dentes4: number
     dentes6: number
     dentes8: number
+    dentes0Pct: number
+    dentes2Pct: number
+    dentes4Pct: number
+    dentes6Pct: number
+    dentes8Pct: number
     gordura1: number
     gordura2: number
     gordura3: number
     gordura4: number
     gordura5: number
+    gordura1Pct: number
+    gordura2Pct: number
+    gordura3Pct: number
+    gordura4Pct: number
+    gordura5Pct: number
     penalizacoes: string | null
     dif: string | null
     escoreRuminal: string | null
@@ -4696,11 +5516,21 @@ export interface ConsultaFieldRefs {
   readonly dentes4: Prisma.FieldRef<"Consulta", 'Int'>
   readonly dentes6: Prisma.FieldRef<"Consulta", 'Int'>
   readonly dentes8: Prisma.FieldRef<"Consulta", 'Int'>
+  readonly dentes0Pct: Prisma.FieldRef<"Consulta", 'Float'>
+  readonly dentes2Pct: Prisma.FieldRef<"Consulta", 'Float'>
+  readonly dentes4Pct: Prisma.FieldRef<"Consulta", 'Float'>
+  readonly dentes6Pct: Prisma.FieldRef<"Consulta", 'Float'>
+  readonly dentes8Pct: Prisma.FieldRef<"Consulta", 'Float'>
   readonly gordura1: Prisma.FieldRef<"Consulta", 'Int'>
   readonly gordura2: Prisma.FieldRef<"Consulta", 'Int'>
   readonly gordura3: Prisma.FieldRef<"Consulta", 'Int'>
   readonly gordura4: Prisma.FieldRef<"Consulta", 'Int'>
   readonly gordura5: Prisma.FieldRef<"Consulta", 'Int'>
+  readonly gordura1Pct: Prisma.FieldRef<"Consulta", 'Float'>
+  readonly gordura2Pct: Prisma.FieldRef<"Consulta", 'Float'>
+  readonly gordura3Pct: Prisma.FieldRef<"Consulta", 'Float'>
+  readonly gordura4Pct: Prisma.FieldRef<"Consulta", 'Float'>
+  readonly gordura5Pct: Prisma.FieldRef<"Consulta", 'Float'>
   readonly penalizacoes: Prisma.FieldRef<"Consulta", 'String'>
   readonly dif: Prisma.FieldRef<"Consulta", 'String'>
   readonly escoreRuminal: Prisma.FieldRef<"Consulta", 'String'>

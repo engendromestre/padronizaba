@@ -16,6 +16,9 @@ export async function POST(req: Request) {
 
   const data = parsed.data
   const { mediaArroba, rcPercentual } = calcularTotais(data)
+  
+
+  const totais = calcularTotais(data)
 
   const consulta = await prisma.consulta.create({
     data: {
@@ -31,18 +34,28 @@ export async function POST(req: Request) {
       pesoVivoKg: data.pesoVivoKg,
       pesoTotalLoteKg: data.pesoTotalLoteKg,
       pesoCarcacaKg: data.pesoCarcacaKg,
-      mediaArroba,
-      rcPercentual,
+      mediaArroba: totais.mediaArroba,
+      rcPercentual: totais.rcPercentual,
       dentes0: data.dentes0,
       dentes2: data.dentes2,
       dentes4: data.dentes4,
       dentes6: data.dentes6,
       dentes8: data.dentes8,
+      dentes0Pct: totais.dentes0Pct,
+      dentes2Pct: totais.dentes2Pct,
+      dentes4Pct: totais.dentes4Pct,
+      dentes6Pct: totais.dentes6Pct,
+      dentes8Pct: totais.dentes8Pct,
       gordura1: data.gordura1,
       gordura2: data.gordura2,
       gordura3: data.gordura3,
       gordura4: data.gordura4,
       gordura5: data.gordura5,
+      gordura1Pct: totais.gordura1Pct,
+      gordura2Pct: totais.gordura2Pct,
+      gordura3Pct: totais.gordura3Pct,
+      gordura4Pct: totais.gordura4Pct,
+      gordura5Pct: totais.gordura5Pct,
       penalizacoes: data.penalizacoes,
       dif: data.dif,
       escoreRuminal: data.escoreRuminal,

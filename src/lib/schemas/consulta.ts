@@ -30,6 +30,18 @@ export const consultaSchema = z.object({
   gordura4: z.number().min(0),
   gordura5: z.number().min(0),
 
+  // Percentuais calculados automaticamente
+  dentes0Pct: z.number().min(0),
+  dentes2Pct: z.number().min(0),
+  dentes4Pct: z.number().min(0),
+  dentes6Pct: z.number().min(0),
+  dentes8Pct: z.number().min(0),
+  gordura1Pct: z.number().min(0),
+  gordura2Pct: z.number().min(0),
+  gordura3Pct: z.number().min(0),
+  gordura4Pct: z.number().min(0),
+  gordura5Pct: z.number().min(0),
+
   // Etapa 5 — Informações Adicionais
   penalizacoes: z.string().optional(),
   dif: z.string().optional(),
@@ -53,35 +65,52 @@ export const consultaSchema = z.object({
 export type ConsultaForm = z.infer<typeof consultaSchema>
 
 export function calcularTotais(data: Partial<ConsultaForm>) {
-  const qtdTotal = Number(data.qtdMachos ?? 0) + Number(data.qtdFemeas ?? 0)
+  const qtdMachos = Number(data.qtdMachos ?? 0)
+  const qtdFemeas = Number(data.qtdFemeas ?? 0)
+  const qtdTotal = qtdMachos + qtdFemeas
 
-  // Lógica inteligente: 
-  // Se o peso da carcaça for absurdamente alto (maior que o peso vivo), 
-  // provavelmente o usuário digitou o peso do LOTE no campo da MÉDIA.
-  let pesoCarcacaIndividual = data.pesoCarcacaKg ?? 0;
-  let pesoTotalLote = data.pesoTotalLoteKg ?? 0;
+  let pesoCarcacaIndividual = Number(data.pesoCarcacaKg ?? 0)
+  let pesoTotalLote = Number(data.pesoTotalLoteKg ?? 0)
 
   if (qtdTotal > 0) {
-    // Se o usuário preencheu o total mas não a média (ou vice-versa)
     if (pesoTotalLote > 0 && pesoCarcacaIndividual === 0) {
-      pesoCarcacaIndividual = pesoTotalLote / qtdTotal;
+      pesoCarcacaIndividual = pesoTotalLote / qtdTotal
     } else if (pesoCarcacaIndividual > 0 && pesoTotalLote === 0) {
-      pesoTotalLote = pesoCarcacaIndividual * qtdTotal;
+      pesoTotalLote = pesoCarcacaIndividual * qtdTotal
     }
   }
 
-  // Média em arroba = Peso médio da carcaça / 15
-  const mediaArroba = pesoCarcacaIndividual / 15;
-
-  // RC% = Peso médio carcaça / Peso vivo médio * 100
+  const mediaArroba = pesoCarcacaIndividual / 15
   const rcPercentual =
     data.pesoVivoKg && pesoCarcacaIndividual
-      ? (pesoCarcacaIndividual / data.pesoVivoKg) * 100
-      : 0;
+      ? (pesoCarcacaIndividual / Number(data.pesoVivoKg)) * 100
+      : 0
+
+  // Percentuais de maturidade
+  const calcPct = (val: number) =>
+    qtdTotal > 0 ? Number(((val / qtdTotal) * 100).toFixed(2)) : 0
+
+  const maturidadePct = {
+    dentes0Pct: calcPct(Number(data.dentes0 ?? 0)),
+    dentes2Pct: calcPct(Number(data.dentes2 ?? 0)),
+    dentes4Pct: calcPct(Number(data.dentes4 ?? 0)),
+    dentes6Pct: calcPct(Number(data.dentes6 ?? 0)),
+    dentes8Pct: calcPct(Number(data.dentes8 ?? 0)),
+  }
+
+  const acabamentoPct = {
+    gordura1Pct: calcPct(Number(data.gordura1 ?? 0)),
+    gordura2Pct: calcPct(Number(data.gordura2 ?? 0)),
+    gordura3Pct: calcPct(Number(data.gordura3 ?? 0)),
+    gordura4Pct: calcPct(Number(data.gordura4 ?? 0)),
+    gordura5Pct: calcPct(Number(data.gordura5 ?? 0)),
+  }
 
   return {
     qtdTotal,
     mediaArroba: Number(mediaArroba.toFixed(2)),
     rcPercentual: Number(rcPercentual.toFixed(2)),
-  };
+    ...maturidadePct,
+    ...acabamentoPct,
+  }
 }
