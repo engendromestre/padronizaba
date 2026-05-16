@@ -1,31 +1,22 @@
-import { auth } from "@/lib/auth"
+// Exemplo de como deve estar a sua API Route
 import { prisma } from "@/lib/prisma"
+import { auth } from "@/lib/auth"
 import { NextResponse } from "next/server"
 
 export async function GET() {
   const session = await auth()
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  if (!session) return new NextResponse("Unauthorized", { status: 401 })
 
   const clientes = await prisma.cliente.findMany({
-    where: {
+    where: { 
       empresaId: session.user.empresaId,
-      ativo: true,
+      ativo: true 
     },
     include: {
-      grupos: {
-        where: { ativo: true },
-      },
-      fazendas: {
-        where: { ativo: true },
-        include: {
-          cidade: {
-            include: {
-              estado: true,
-            },
-          },
-        },
-      },
+      fazendas: true,
+      grupos: true    // ESSENCIAL para o map funcionar
     },
+    orderBy: { nomeProdutor: 'asc' }
   })
 
   return NextResponse.json(clientes)

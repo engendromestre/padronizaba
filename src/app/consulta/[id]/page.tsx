@@ -83,7 +83,7 @@ G - ${consulta.bezerrosG}
 
                 {/* Status WhatsApp */}
                 <div className={`px-4 py-3 rounded-xl text-sm font-medium ${!ultimoLog ? "bg-gray-100 text-gray-600" :
-                    ultimoLog.status === "SENT" ? "bg-green-50 text-green-700" :
+                    ultimoLog.status === "SENT" ? "bg-green-50 text-primary-700" :
                         "bg-red-50 text-red-700"
                     }`}>
                     {!ultimoLog ? "⏳ Mensagem ainda não enviada" :
