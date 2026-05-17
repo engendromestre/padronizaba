@@ -199,6 +199,7 @@ export type GrupoWhatsappWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"GrupoWhatsapp"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"GrupoWhatsapp"> | Date | string
   cliente?: Prisma.XOR<Prisma.ClienteScalarRelationFilter, Prisma.ClienteWhereInput>
+  consultas?: Prisma.ConsultaListRelationFilter
 }
 
 export type GrupoWhatsappOrderByWithRelationInput = {
@@ -210,6 +211,7 @@ export type GrupoWhatsappOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   cliente?: Prisma.ClienteOrderByWithRelationInput
+  consultas?: Prisma.ConsultaOrderByRelationAggregateInput
 }
 
 export type GrupoWhatsappWhereUniqueInput = Prisma.AtLeast<{
@@ -224,6 +226,7 @@ export type GrupoWhatsappWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"GrupoWhatsapp"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"GrupoWhatsapp"> | Date | string
   cliente?: Prisma.XOR<Prisma.ClienteScalarRelationFilter, Prisma.ClienteWhereInput>
+  consultas?: Prisma.ConsultaListRelationFilter
 }, "id" | "groupIdWhatsapp">
 
 export type GrupoWhatsappOrderByWithAggregationInput = {
@@ -260,6 +263,7 @@ export type GrupoWhatsappCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   cliente: Prisma.ClienteCreateNestedOneWithoutGruposInput
+  consultas?: Prisma.ConsultaCreateNestedManyWithoutGruposNotificadosInput
 }
 
 export type GrupoWhatsappUncheckedCreateInput = {
@@ -270,6 +274,7 @@ export type GrupoWhatsappUncheckedCreateInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutGruposNotificadosInput
 }
 
 export type GrupoWhatsappUpdateInput = {
@@ -280,6 +285,7 @@ export type GrupoWhatsappUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutGruposNestedInput
+  consultas?: Prisma.ConsultaUpdateManyWithoutGruposNotificadosNestedInput
 }
 
 export type GrupoWhatsappUncheckedUpdateInput = {
@@ -290,6 +296,7 @@ export type GrupoWhatsappUncheckedUpdateInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutGruposNotificadosNestedInput
 }
 
 export type GrupoWhatsappCreateManyInput = {
@@ -403,6 +410,44 @@ export type GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput = {
   deleteMany?: Prisma.GrupoWhatsappScalarWhereInput | Prisma.GrupoWhatsappScalarWhereInput[]
 }
 
+export type GrupoWhatsappCreateNestedManyWithoutConsultasInput = {
+  create?: Prisma.XOR<Prisma.GrupoWhatsappCreateWithoutConsultasInput, Prisma.GrupoWhatsappUncheckedCreateWithoutConsultasInput> | Prisma.GrupoWhatsappCreateWithoutConsultasInput[] | Prisma.GrupoWhatsappUncheckedCreateWithoutConsultasInput[]
+  connectOrCreate?: Prisma.GrupoWhatsappCreateOrConnectWithoutConsultasInput | Prisma.GrupoWhatsappCreateOrConnectWithoutConsultasInput[]
+  connect?: Prisma.GrupoWhatsappWhereUniqueInput | Prisma.GrupoWhatsappWhereUniqueInput[]
+}
+
+export type GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput = {
+  create?: Prisma.XOR<Prisma.GrupoWhatsappCreateWithoutConsultasInput, Prisma.GrupoWhatsappUncheckedCreateWithoutConsultasInput> | Prisma.GrupoWhatsappCreateWithoutConsultasInput[] | Prisma.GrupoWhatsappUncheckedCreateWithoutConsultasInput[]
+  connectOrCreate?: Prisma.GrupoWhatsappCreateOrConnectWithoutConsultasInput | Prisma.GrupoWhatsappCreateOrConnectWithoutConsultasInput[]
+  connect?: Prisma.GrupoWhatsappWhereUniqueInput | Prisma.GrupoWhatsappWhereUniqueInput[]
+}
+
+export type GrupoWhatsappUpdateManyWithoutConsultasNestedInput = {
+  create?: Prisma.XOR<Prisma.GrupoWhatsappCreateWithoutConsultasInput, Prisma.GrupoWhatsappUncheckedCreateWithoutConsultasInput> | Prisma.GrupoWhatsappCreateWithoutConsultasInput[] | Prisma.GrupoWhatsappUncheckedCreateWithoutConsultasInput[]
+  connectOrCreate?: Prisma.GrupoWhatsappCreateOrConnectWithoutConsultasInput | Prisma.GrupoWhatsappCreateOrConnectWithoutConsultasInput[]
+  upsert?: Prisma.GrupoWhatsappUpsertWithWhereUniqueWithoutConsultasInput | Prisma.GrupoWhatsappUpsertWithWhereUniqueWithoutConsultasInput[]
+  set?: Prisma.GrupoWhatsappWhereUniqueInput | Prisma.GrupoWhatsappWhereUniqueInput[]
+  disconnect?: Prisma.GrupoWhatsappWhereUniqueInput | Prisma.GrupoWhatsappWhereUniqueInput[]
+  delete?: Prisma.GrupoWhatsappWhereUniqueInput | Prisma.GrupoWhatsappWhereUniqueInput[]
+  connect?: Prisma.GrupoWhatsappWhereUniqueInput | Prisma.GrupoWhatsappWhereUniqueInput[]
+  update?: Prisma.GrupoWhatsappUpdateWithWhereUniqueWithoutConsultasInput | Prisma.GrupoWhatsappUpdateWithWhereUniqueWithoutConsultasInput[]
+  updateMany?: Prisma.GrupoWhatsappUpdateManyWithWhereWithoutConsultasInput | Prisma.GrupoWhatsappUpdateManyWithWhereWithoutConsultasInput[]
+  deleteMany?: Prisma.GrupoWhatsappScalarWhereInput | Prisma.GrupoWhatsappScalarWhereInput[]
+}
+
+export type GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput = {
+  create?: Prisma.XOR<Prisma.GrupoWhatsappCreateWithoutConsultasInput, Prisma.GrupoWhatsappUncheckedCreateWithoutConsultasInput> | Prisma.GrupoWhatsappCreateWithoutConsultasInput[] | Prisma.GrupoWhatsappUncheckedCreateWithoutConsultasInput[]
+  connectOrCreate?: Prisma.GrupoWhatsappCreateOrConnectWithoutConsultasInput | Prisma.GrupoWhatsappCreateOrConnectWithoutConsultasInput[]
+  upsert?: Prisma.GrupoWhatsappUpsertWithWhereUniqueWithoutConsultasInput | Prisma.GrupoWhatsappUpsertWithWhereUniqueWithoutConsultasInput[]
+  set?: Prisma.GrupoWhatsappWhereUniqueInput | Prisma.GrupoWhatsappWhereUniqueInput[]
+  disconnect?: Prisma.GrupoWhatsappWhereUniqueInput | Prisma.GrupoWhatsappWhereUniqueInput[]
+  delete?: Prisma.GrupoWhatsappWhereUniqueInput | Prisma.GrupoWhatsappWhereUniqueInput[]
+  connect?: Prisma.GrupoWhatsappWhereUniqueInput | Prisma.GrupoWhatsappWhereUniqueInput[]
+  update?: Prisma.GrupoWhatsappUpdateWithWhereUniqueWithoutConsultasInput | Prisma.GrupoWhatsappUpdateWithWhereUniqueWithoutConsultasInput[]
+  updateMany?: Prisma.GrupoWhatsappUpdateManyWithWhereWithoutConsultasInput | Prisma.GrupoWhatsappUpdateManyWithWhereWithoutConsultasInput[]
+  deleteMany?: Prisma.GrupoWhatsappScalarWhereInput | Prisma.GrupoWhatsappScalarWhereInput[]
+}
+
 export type GrupoWhatsappCreateWithoutClienteInput = {
   id?: string
   groupIdWhatsapp: string
@@ -410,6 +455,7 @@ export type GrupoWhatsappCreateWithoutClienteInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  consultas?: Prisma.ConsultaCreateNestedManyWithoutGruposNotificadosInput
 }
 
 export type GrupoWhatsappUncheckedCreateWithoutClienteInput = {
@@ -419,6 +465,7 @@ export type GrupoWhatsappUncheckedCreateWithoutClienteInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutGruposNotificadosInput
 }
 
 export type GrupoWhatsappCreateOrConnectWithoutClienteInput = {
@@ -460,6 +507,47 @@ export type GrupoWhatsappScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"GrupoWhatsapp"> | Date | string
 }
 
+export type GrupoWhatsappCreateWithoutConsultasInput = {
+  id?: string
+  groupIdWhatsapp: string
+  nomeGrupo: string
+  ativo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  cliente: Prisma.ClienteCreateNestedOneWithoutGruposInput
+}
+
+export type GrupoWhatsappUncheckedCreateWithoutConsultasInput = {
+  id?: string
+  clienteId: string
+  groupIdWhatsapp: string
+  nomeGrupo: string
+  ativo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type GrupoWhatsappCreateOrConnectWithoutConsultasInput = {
+  where: Prisma.GrupoWhatsappWhereUniqueInput
+  create: Prisma.XOR<Prisma.GrupoWhatsappCreateWithoutConsultasInput, Prisma.GrupoWhatsappUncheckedCreateWithoutConsultasInput>
+}
+
+export type GrupoWhatsappUpsertWithWhereUniqueWithoutConsultasInput = {
+  where: Prisma.GrupoWhatsappWhereUniqueInput
+  update: Prisma.XOR<Prisma.GrupoWhatsappUpdateWithoutConsultasInput, Prisma.GrupoWhatsappUncheckedUpdateWithoutConsultasInput>
+  create: Prisma.XOR<Prisma.GrupoWhatsappCreateWithoutConsultasInput, Prisma.GrupoWhatsappUncheckedCreateWithoutConsultasInput>
+}
+
+export type GrupoWhatsappUpdateWithWhereUniqueWithoutConsultasInput = {
+  where: Prisma.GrupoWhatsappWhereUniqueInput
+  data: Prisma.XOR<Prisma.GrupoWhatsappUpdateWithoutConsultasInput, Prisma.GrupoWhatsappUncheckedUpdateWithoutConsultasInput>
+}
+
+export type GrupoWhatsappUpdateManyWithWhereWithoutConsultasInput = {
+  where: Prisma.GrupoWhatsappScalarWhereInput
+  data: Prisma.XOR<Prisma.GrupoWhatsappUpdateManyMutationInput, Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasInput>
+}
+
 export type GrupoWhatsappCreateManyClienteInput = {
   id?: string
   groupIdWhatsapp: string
@@ -476,6 +564,7 @@ export type GrupoWhatsappUpdateWithoutClienteInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consultas?: Prisma.ConsultaUpdateManyWithoutGruposNotificadosNestedInput
 }
 
 export type GrupoWhatsappUncheckedUpdateWithoutClienteInput = {
@@ -485,6 +574,7 @@ export type GrupoWhatsappUncheckedUpdateWithoutClienteInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutGruposNotificadosNestedInput
 }
 
 export type GrupoWhatsappUncheckedUpdateManyWithoutClienteInput = {
@@ -496,6 +586,65 @@ export type GrupoWhatsappUncheckedUpdateManyWithoutClienteInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type GrupoWhatsappUpdateWithoutConsultasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  groupIdWhatsapp?: Prisma.StringFieldUpdateOperationsInput | string
+  nomeGrupo?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  cliente?: Prisma.ClienteUpdateOneRequiredWithoutGruposNestedInput
+}
+
+export type GrupoWhatsappUncheckedUpdateWithoutConsultasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clienteId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupIdWhatsapp?: Prisma.StringFieldUpdateOperationsInput | string
+  nomeGrupo?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type GrupoWhatsappUncheckedUpdateManyWithoutConsultasInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clienteId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupIdWhatsapp?: Prisma.StringFieldUpdateOperationsInput | string
+  nomeGrupo?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type GrupoWhatsappCountOutputType
+ */
+
+export type GrupoWhatsappCountOutputType = {
+  consultas: number
+}
+
+export type GrupoWhatsappCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  consultas?: boolean | GrupoWhatsappCountOutputTypeCountConsultasArgs
+}
+
+/**
+ * GrupoWhatsappCountOutputType without action
+ */
+export type GrupoWhatsappCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GrupoWhatsappCountOutputType
+   */
+  select?: Prisma.GrupoWhatsappCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * GrupoWhatsappCountOutputType without action
+ */
+export type GrupoWhatsappCountOutputTypeCountConsultasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConsultaWhereInput
+}
 
 
 export type GrupoWhatsappSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -507,6 +656,8 @@ export type GrupoWhatsappSelect<ExtArgs extends runtime.Types.Extensions.Interna
   createdAt?: boolean
   updatedAt?: boolean
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
+  consultas?: boolean | Prisma.GrupoWhatsapp$consultasArgs<ExtArgs>
+  _count?: boolean | Prisma.GrupoWhatsappCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["grupoWhatsapp"]>
 
 export type GrupoWhatsappSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -544,6 +695,8 @@ export type GrupoWhatsappSelectScalar = {
 export type GrupoWhatsappOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "clienteId" | "groupIdWhatsapp" | "nomeGrupo" | "ativo" | "createdAt" | "updatedAt", ExtArgs["result"]["grupoWhatsapp"]>
 export type GrupoWhatsappInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
+  consultas?: boolean | Prisma.GrupoWhatsapp$consultasArgs<ExtArgs>
+  _count?: boolean | Prisma.GrupoWhatsappCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type GrupoWhatsappIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
@@ -556,6 +709,7 @@ export type $GrupoWhatsappPayload<ExtArgs extends runtime.Types.Extensions.Inter
   name: "GrupoWhatsapp"
   objects: {
     cliente: Prisma.$ClientePayload<ExtArgs>
+    consultas: Prisma.$ConsultaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -960,6 +1114,7 @@ readonly fields: GrupoWhatsappFieldRefs;
 export interface Prisma__GrupoWhatsappClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   cliente<T extends Prisma.ClienteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClienteDefaultArgs<ExtArgs>>): Prisma.Prisma__ClienteClient<runtime.Types.Result.GetResult<Prisma.$ClientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  consultas<T extends Prisma.GrupoWhatsapp$consultasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GrupoWhatsapp$consultasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConsultaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1394,6 +1549,30 @@ export type GrupoWhatsappDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many GrupoWhatsapps to delete.
    */
   limit?: number
+}
+
+/**
+ * GrupoWhatsapp.consultas
+ */
+export type GrupoWhatsapp$consultasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Consulta
+   */
+  select?: Prisma.ConsultaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Consulta
+   */
+  omit?: Prisma.ConsultaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConsultaInclude<ExtArgs> | null
+  where?: Prisma.ConsultaWhereInput
+  orderBy?: Prisma.ConsultaOrderByWithRelationInput | Prisma.ConsultaOrderByWithRelationInput[]
+  cursor?: Prisma.ConsultaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConsultaScalarFieldEnum | Prisma.ConsultaScalarFieldEnum[]
 }
 
 /**

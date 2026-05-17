@@ -27,8 +27,7 @@ export type AggregateConsulta = {
 }
 
 export type ConsultaAvgAggregateOutputType = {
-  qtdMachos: number | null
-  qtdFemeas: number | null
+  qtdAnimais: number | null
   pesoVivoKg: number | null
   pesoTotalLoteKg: number | null
   pesoCarcacaKg: number | null
@@ -63,8 +62,7 @@ export type ConsultaAvgAggregateOutputType = {
 }
 
 export type ConsultaSumAggregateOutputType = {
-  qtdMachos: number | null
-  qtdFemeas: number | null
+  qtdAnimais: number | null
   pesoVivoKg: number | null
   pesoTotalLoteKg: number | null
   pesoCarcacaKg: number | null
@@ -107,8 +105,8 @@ export type ConsultaMinAggregateOutputType = {
   frigorificoId: string | null
   categoriaAnimalId: string | null
   dataAbate: Date | null
-  qtdMachos: number | null
-  qtdFemeas: number | null
+  qtdAnimais: number | null
+  sexoAnimais: string | null
   pesoVivoKg: number | null
   pesoTotalLoteKg: number | null
   pesoCarcacaKg: number | null
@@ -159,8 +157,8 @@ export type ConsultaMaxAggregateOutputType = {
   frigorificoId: string | null
   categoriaAnimalId: string | null
   dataAbate: Date | null
-  qtdMachos: number | null
-  qtdFemeas: number | null
+  qtdAnimais: number | null
+  sexoAnimais: string | null
   pesoVivoKg: number | null
   pesoTotalLoteKg: number | null
   pesoCarcacaKg: number | null
@@ -211,8 +209,8 @@ export type ConsultaCountAggregateOutputType = {
   frigorificoId: number
   categoriaAnimalId: number
   dataAbate: number
-  qtdMachos: number
-  qtdFemeas: number
+  qtdAnimais: number
+  sexoAnimais: number
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -257,8 +255,7 @@ export type ConsultaCountAggregateOutputType = {
 
 
 export type ConsultaAvgAggregateInputType = {
-  qtdMachos?: true
-  qtdFemeas?: true
+  qtdAnimais?: true
   pesoVivoKg?: true
   pesoTotalLoteKg?: true
   pesoCarcacaKg?: true
@@ -293,8 +290,7 @@ export type ConsultaAvgAggregateInputType = {
 }
 
 export type ConsultaSumAggregateInputType = {
-  qtdMachos?: true
-  qtdFemeas?: true
+  qtdAnimais?: true
   pesoVivoKg?: true
   pesoTotalLoteKg?: true
   pesoCarcacaKg?: true
@@ -337,8 +333,8 @@ export type ConsultaMinAggregateInputType = {
   frigorificoId?: true
   categoriaAnimalId?: true
   dataAbate?: true
-  qtdMachos?: true
-  qtdFemeas?: true
+  qtdAnimais?: true
+  sexoAnimais?: true
   pesoVivoKg?: true
   pesoTotalLoteKg?: true
   pesoCarcacaKg?: true
@@ -389,8 +385,8 @@ export type ConsultaMaxAggregateInputType = {
   frigorificoId?: true
   categoriaAnimalId?: true
   dataAbate?: true
-  qtdMachos?: true
-  qtdFemeas?: true
+  qtdAnimais?: true
+  sexoAnimais?: true
   pesoVivoKg?: true
   pesoTotalLoteKg?: true
   pesoCarcacaKg?: true
@@ -441,8 +437,8 @@ export type ConsultaCountAggregateInputType = {
   frigorificoId?: true
   categoriaAnimalId?: true
   dataAbate?: true
-  qtdMachos?: true
-  qtdFemeas?: true
+  qtdAnimais?: true
+  sexoAnimais?: true
   pesoVivoKg?: true
   pesoTotalLoteKg?: true
   pesoCarcacaKg?: true
@@ -580,8 +576,8 @@ export type ConsultaGroupByOutputType = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date
-  qtdMachos: number
-  qtdFemeas: number
+  qtdAnimais: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -655,8 +651,8 @@ export type ConsultaWhereInput = {
   frigorificoId?: Prisma.StringFilter<"Consulta"> | string
   categoriaAnimalId?: Prisma.StringFilter<"Consulta"> | string
   dataAbate?: Prisma.DateTimeFilter<"Consulta"> | Date | string
-  qtdMachos?: Prisma.IntFilter<"Consulta"> | number
-  qtdFemeas?: Prisma.IntFilter<"Consulta"> | number
+  qtdAnimais?: Prisma.IntFilter<"Consulta"> | number
+  sexoAnimais?: Prisma.StringFilter<"Consulta"> | string
   pesoVivoKg?: Prisma.FloatFilter<"Consulta"> | number
   pesoTotalLoteKg?: Prisma.FloatFilter<"Consulta"> | number
   pesoCarcacaKg?: Prisma.FloatFilter<"Consulta"> | number
@@ -705,6 +701,7 @@ export type ConsultaWhereInput = {
   financeiro?: Prisma.XOR<Prisma.ConsultaFinanceiroNullableScalarRelationFilter, Prisma.ConsultaFinanceiroWhereInput> | null
   whatsappLogs?: Prisma.WhatsAppLogListRelationFilter
   logs?: Prisma.AuditoriaLogListRelationFilter
+  gruposNotificados?: Prisma.GrupoWhatsappListRelationFilter
 }
 
 export type ConsultaOrderByWithRelationInput = {
@@ -716,8 +713,8 @@ export type ConsultaOrderByWithRelationInput = {
   frigorificoId?: Prisma.SortOrder
   categoriaAnimalId?: Prisma.SortOrder
   dataAbate?: Prisma.SortOrder
-  qtdMachos?: Prisma.SortOrder
-  qtdFemeas?: Prisma.SortOrder
+  qtdAnimais?: Prisma.SortOrder
+  sexoAnimais?: Prisma.SortOrder
   pesoVivoKg?: Prisma.SortOrder
   pesoTotalLoteKg?: Prisma.SortOrder
   pesoCarcacaKg?: Prisma.SortOrder
@@ -766,6 +763,7 @@ export type ConsultaOrderByWithRelationInput = {
   financeiro?: Prisma.ConsultaFinanceiroOrderByWithRelationInput
   whatsappLogs?: Prisma.WhatsAppLogOrderByRelationAggregateInput
   logs?: Prisma.AuditoriaLogOrderByRelationAggregateInput
+  gruposNotificados?: Prisma.GrupoWhatsappOrderByRelationAggregateInput
 }
 
 export type ConsultaWhereUniqueInput = Prisma.AtLeast<{
@@ -780,8 +778,8 @@ export type ConsultaWhereUniqueInput = Prisma.AtLeast<{
   frigorificoId?: Prisma.StringFilter<"Consulta"> | string
   categoriaAnimalId?: Prisma.StringFilter<"Consulta"> | string
   dataAbate?: Prisma.DateTimeFilter<"Consulta"> | Date | string
-  qtdMachos?: Prisma.IntFilter<"Consulta"> | number
-  qtdFemeas?: Prisma.IntFilter<"Consulta"> | number
+  qtdAnimais?: Prisma.IntFilter<"Consulta"> | number
+  sexoAnimais?: Prisma.StringFilter<"Consulta"> | string
   pesoVivoKg?: Prisma.FloatFilter<"Consulta"> | number
   pesoTotalLoteKg?: Prisma.FloatFilter<"Consulta"> | number
   pesoCarcacaKg?: Prisma.FloatFilter<"Consulta"> | number
@@ -830,6 +828,7 @@ export type ConsultaWhereUniqueInput = Prisma.AtLeast<{
   financeiro?: Prisma.XOR<Prisma.ConsultaFinanceiroNullableScalarRelationFilter, Prisma.ConsultaFinanceiroWhereInput> | null
   whatsappLogs?: Prisma.WhatsAppLogListRelationFilter
   logs?: Prisma.AuditoriaLogListRelationFilter
+  gruposNotificados?: Prisma.GrupoWhatsappListRelationFilter
 }, "id">
 
 export type ConsultaOrderByWithAggregationInput = {
@@ -841,8 +840,8 @@ export type ConsultaOrderByWithAggregationInput = {
   frigorificoId?: Prisma.SortOrder
   categoriaAnimalId?: Prisma.SortOrder
   dataAbate?: Prisma.SortOrder
-  qtdMachos?: Prisma.SortOrder
-  qtdFemeas?: Prisma.SortOrder
+  qtdAnimais?: Prisma.SortOrder
+  sexoAnimais?: Prisma.SortOrder
   pesoVivoKg?: Prisma.SortOrder
   pesoTotalLoteKg?: Prisma.SortOrder
   pesoCarcacaKg?: Prisma.SortOrder
@@ -901,8 +900,8 @@ export type ConsultaScalarWhereWithAggregatesInput = {
   frigorificoId?: Prisma.StringWithAggregatesFilter<"Consulta"> | string
   categoriaAnimalId?: Prisma.StringWithAggregatesFilter<"Consulta"> | string
   dataAbate?: Prisma.DateTimeWithAggregatesFilter<"Consulta"> | Date | string
-  qtdMachos?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
-  qtdFemeas?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
+  qtdAnimais?: Prisma.IntWithAggregatesFilter<"Consulta"> | number
+  sexoAnimais?: Prisma.StringWithAggregatesFilter<"Consulta"> | string
   pesoVivoKg?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
   pesoTotalLoteKg?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
   pesoCarcacaKg?: Prisma.FloatWithAggregatesFilter<"Consulta"> | number
@@ -947,8 +946,8 @@ export type ConsultaScalarWhereWithAggregatesInput = {
 export type ConsultaCreateInput = {
   id?: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -997,6 +996,7 @@ export type ConsultaCreateInput = {
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUncheckedCreateInput = {
@@ -1008,8 +1008,8 @@ export type ConsultaUncheckedCreateInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -1052,13 +1052,14 @@ export type ConsultaUncheckedCreateInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1107,6 +1108,7 @@ export type ConsultaUpdateInput = {
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateInput = {
@@ -1118,8 +1120,8 @@ export type ConsultaUncheckedUpdateInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1162,6 +1164,7 @@ export type ConsultaUncheckedUpdateInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaCreateManyInput = {
@@ -1173,8 +1176,8 @@ export type ConsultaCreateManyInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -1219,8 +1222,8 @@ export type ConsultaCreateManyInput = {
 export type ConsultaUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1271,8 +1274,8 @@ export type ConsultaUncheckedUpdateManyInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1333,8 +1336,8 @@ export type ConsultaCountOrderByAggregateInput = {
   frigorificoId?: Prisma.SortOrder
   categoriaAnimalId?: Prisma.SortOrder
   dataAbate?: Prisma.SortOrder
-  qtdMachos?: Prisma.SortOrder
-  qtdFemeas?: Prisma.SortOrder
+  qtdAnimais?: Prisma.SortOrder
+  sexoAnimais?: Prisma.SortOrder
   pesoVivoKg?: Prisma.SortOrder
   pesoTotalLoteKg?: Prisma.SortOrder
   pesoCarcacaKg?: Prisma.SortOrder
@@ -1377,8 +1380,7 @@ export type ConsultaCountOrderByAggregateInput = {
 }
 
 export type ConsultaAvgOrderByAggregateInput = {
-  qtdMachos?: Prisma.SortOrder
-  qtdFemeas?: Prisma.SortOrder
+  qtdAnimais?: Prisma.SortOrder
   pesoVivoKg?: Prisma.SortOrder
   pesoTotalLoteKg?: Prisma.SortOrder
   pesoCarcacaKg?: Prisma.SortOrder
@@ -1421,8 +1423,8 @@ export type ConsultaMaxOrderByAggregateInput = {
   frigorificoId?: Prisma.SortOrder
   categoriaAnimalId?: Prisma.SortOrder
   dataAbate?: Prisma.SortOrder
-  qtdMachos?: Prisma.SortOrder
-  qtdFemeas?: Prisma.SortOrder
+  qtdAnimais?: Prisma.SortOrder
+  sexoAnimais?: Prisma.SortOrder
   pesoVivoKg?: Prisma.SortOrder
   pesoTotalLoteKg?: Prisma.SortOrder
   pesoCarcacaKg?: Prisma.SortOrder
@@ -1473,8 +1475,8 @@ export type ConsultaMinOrderByAggregateInput = {
   frigorificoId?: Prisma.SortOrder
   categoriaAnimalId?: Prisma.SortOrder
   dataAbate?: Prisma.SortOrder
-  qtdMachos?: Prisma.SortOrder
-  qtdFemeas?: Prisma.SortOrder
+  qtdAnimais?: Prisma.SortOrder
+  sexoAnimais?: Prisma.SortOrder
   pesoVivoKg?: Prisma.SortOrder
   pesoTotalLoteKg?: Prisma.SortOrder
   pesoCarcacaKg?: Prisma.SortOrder
@@ -1517,8 +1519,7 @@ export type ConsultaMinOrderByAggregateInput = {
 }
 
 export type ConsultaSumOrderByAggregateInput = {
-  qtdMachos?: Prisma.SortOrder
-  qtdFemeas?: Prisma.SortOrder
+  qtdAnimais?: Prisma.SortOrder
   pesoVivoKg?: Prisma.SortOrder
   pesoTotalLoteKg?: Prisma.SortOrder
   pesoCarcacaKg?: Prisma.SortOrder
@@ -1730,6 +1731,44 @@ export type ConsultaUncheckedUpdateManyWithoutFazendaNestedInput = {
   deleteMany?: Prisma.ConsultaScalarWhereInput | Prisma.ConsultaScalarWhereInput[]
 }
 
+export type ConsultaCreateNestedManyWithoutGruposNotificadosInput = {
+  create?: Prisma.XOR<Prisma.ConsultaCreateWithoutGruposNotificadosInput, Prisma.ConsultaUncheckedCreateWithoutGruposNotificadosInput> | Prisma.ConsultaCreateWithoutGruposNotificadosInput[] | Prisma.ConsultaUncheckedCreateWithoutGruposNotificadosInput[]
+  connectOrCreate?: Prisma.ConsultaCreateOrConnectWithoutGruposNotificadosInput | Prisma.ConsultaCreateOrConnectWithoutGruposNotificadosInput[]
+  connect?: Prisma.ConsultaWhereUniqueInput | Prisma.ConsultaWhereUniqueInput[]
+}
+
+export type ConsultaUncheckedCreateNestedManyWithoutGruposNotificadosInput = {
+  create?: Prisma.XOR<Prisma.ConsultaCreateWithoutGruposNotificadosInput, Prisma.ConsultaUncheckedCreateWithoutGruposNotificadosInput> | Prisma.ConsultaCreateWithoutGruposNotificadosInput[] | Prisma.ConsultaUncheckedCreateWithoutGruposNotificadosInput[]
+  connectOrCreate?: Prisma.ConsultaCreateOrConnectWithoutGruposNotificadosInput | Prisma.ConsultaCreateOrConnectWithoutGruposNotificadosInput[]
+  connect?: Prisma.ConsultaWhereUniqueInput | Prisma.ConsultaWhereUniqueInput[]
+}
+
+export type ConsultaUpdateManyWithoutGruposNotificadosNestedInput = {
+  create?: Prisma.XOR<Prisma.ConsultaCreateWithoutGruposNotificadosInput, Prisma.ConsultaUncheckedCreateWithoutGruposNotificadosInput> | Prisma.ConsultaCreateWithoutGruposNotificadosInput[] | Prisma.ConsultaUncheckedCreateWithoutGruposNotificadosInput[]
+  connectOrCreate?: Prisma.ConsultaCreateOrConnectWithoutGruposNotificadosInput | Prisma.ConsultaCreateOrConnectWithoutGruposNotificadosInput[]
+  upsert?: Prisma.ConsultaUpsertWithWhereUniqueWithoutGruposNotificadosInput | Prisma.ConsultaUpsertWithWhereUniqueWithoutGruposNotificadosInput[]
+  set?: Prisma.ConsultaWhereUniqueInput | Prisma.ConsultaWhereUniqueInput[]
+  disconnect?: Prisma.ConsultaWhereUniqueInput | Prisma.ConsultaWhereUniqueInput[]
+  delete?: Prisma.ConsultaWhereUniqueInput | Prisma.ConsultaWhereUniqueInput[]
+  connect?: Prisma.ConsultaWhereUniqueInput | Prisma.ConsultaWhereUniqueInput[]
+  update?: Prisma.ConsultaUpdateWithWhereUniqueWithoutGruposNotificadosInput | Prisma.ConsultaUpdateWithWhereUniqueWithoutGruposNotificadosInput[]
+  updateMany?: Prisma.ConsultaUpdateManyWithWhereWithoutGruposNotificadosInput | Prisma.ConsultaUpdateManyWithWhereWithoutGruposNotificadosInput[]
+  deleteMany?: Prisma.ConsultaScalarWhereInput | Prisma.ConsultaScalarWhereInput[]
+}
+
+export type ConsultaUncheckedUpdateManyWithoutGruposNotificadosNestedInput = {
+  create?: Prisma.XOR<Prisma.ConsultaCreateWithoutGruposNotificadosInput, Prisma.ConsultaUncheckedCreateWithoutGruposNotificadosInput> | Prisma.ConsultaCreateWithoutGruposNotificadosInput[] | Prisma.ConsultaUncheckedCreateWithoutGruposNotificadosInput[]
+  connectOrCreate?: Prisma.ConsultaCreateOrConnectWithoutGruposNotificadosInput | Prisma.ConsultaCreateOrConnectWithoutGruposNotificadosInput[]
+  upsert?: Prisma.ConsultaUpsertWithWhereUniqueWithoutGruposNotificadosInput | Prisma.ConsultaUpsertWithWhereUniqueWithoutGruposNotificadosInput[]
+  set?: Prisma.ConsultaWhereUniqueInput | Prisma.ConsultaWhereUniqueInput[]
+  disconnect?: Prisma.ConsultaWhereUniqueInput | Prisma.ConsultaWhereUniqueInput[]
+  delete?: Prisma.ConsultaWhereUniqueInput | Prisma.ConsultaWhereUniqueInput[]
+  connect?: Prisma.ConsultaWhereUniqueInput | Prisma.ConsultaWhereUniqueInput[]
+  update?: Prisma.ConsultaUpdateWithWhereUniqueWithoutGruposNotificadosInput | Prisma.ConsultaUpdateWithWhereUniqueWithoutGruposNotificadosInput[]
+  updateMany?: Prisma.ConsultaUpdateManyWithWhereWithoutGruposNotificadosInput | Prisma.ConsultaUpdateManyWithWhereWithoutGruposNotificadosInput[]
+  deleteMany?: Prisma.ConsultaScalarWhereInput | Prisma.ConsultaScalarWhereInput[]
+}
+
 export type ConsultaCreateNestedManyWithoutCategoriaAnimalInput = {
   create?: Prisma.XOR<Prisma.ConsultaCreateWithoutCategoriaAnimalInput, Prisma.ConsultaUncheckedCreateWithoutCategoriaAnimalInput> | Prisma.ConsultaCreateWithoutCategoriaAnimalInput[] | Prisma.ConsultaUncheckedCreateWithoutCategoriaAnimalInput[]
   connectOrCreate?: Prisma.ConsultaCreateOrConnectWithoutCategoriaAnimalInput | Prisma.ConsultaCreateOrConnectWithoutCategoriaAnimalInput[]
@@ -1889,8 +1928,8 @@ export type ConsultaUpdateOneWithoutLogsNestedInput = {
 export type ConsultaCreateWithoutFrigorificoInput = {
   id?: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -1938,6 +1977,7 @@ export type ConsultaCreateWithoutFrigorificoInput = {
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUncheckedCreateWithoutFrigorificoInput = {
@@ -1948,8 +1988,8 @@ export type ConsultaUncheckedCreateWithoutFrigorificoInput = {
   consultorId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -1992,6 +2032,7 @@ export type ConsultaUncheckedCreateWithoutFrigorificoInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaCreateOrConnectWithoutFrigorificoInput = {
@@ -2032,8 +2073,8 @@ export type ConsultaScalarWhereInput = {
   frigorificoId?: Prisma.StringFilter<"Consulta"> | string
   categoriaAnimalId?: Prisma.StringFilter<"Consulta"> | string
   dataAbate?: Prisma.DateTimeFilter<"Consulta"> | Date | string
-  qtdMachos?: Prisma.IntFilter<"Consulta"> | number
-  qtdFemeas?: Prisma.IntFilter<"Consulta"> | number
+  qtdAnimais?: Prisma.IntFilter<"Consulta"> | number
+  sexoAnimais?: Prisma.StringFilter<"Consulta"> | string
   pesoVivoKg?: Prisma.FloatFilter<"Consulta"> | number
   pesoTotalLoteKg?: Prisma.FloatFilter<"Consulta"> | number
   pesoCarcacaKg?: Prisma.FloatFilter<"Consulta"> | number
@@ -2078,8 +2119,8 @@ export type ConsultaScalarWhereInput = {
 export type ConsultaCreateWithoutEmpresaInput = {
   id?: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2127,6 +2168,7 @@ export type ConsultaCreateWithoutEmpresaInput = {
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUncheckedCreateWithoutEmpresaInput = {
@@ -2137,8 +2179,8 @@ export type ConsultaUncheckedCreateWithoutEmpresaInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2181,6 +2223,7 @@ export type ConsultaUncheckedCreateWithoutEmpresaInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaCreateOrConnectWithoutEmpresaInput = {
@@ -2212,8 +2255,8 @@ export type ConsultaUpdateManyWithWhereWithoutEmpresaInput = {
 export type ConsultaCreateWithoutClienteInput = {
   id?: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2261,6 +2304,7 @@ export type ConsultaCreateWithoutClienteInput = {
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUncheckedCreateWithoutClienteInput = {
@@ -2271,8 +2315,8 @@ export type ConsultaUncheckedCreateWithoutClienteInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2315,6 +2359,7 @@ export type ConsultaUncheckedCreateWithoutClienteInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaCreateOrConnectWithoutClienteInput = {
@@ -2346,8 +2391,8 @@ export type ConsultaUpdateManyWithWhereWithoutClienteInput = {
 export type ConsultaCreateWithoutFazendaInput = {
   id?: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2395,6 +2440,7 @@ export type ConsultaCreateWithoutFazendaInput = {
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUncheckedCreateWithoutFazendaInput = {
@@ -2405,8 +2451,145 @@ export type ConsultaUncheckedCreateWithoutFazendaInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
+  pesoVivoKg: number
+  pesoTotalLoteKg: number
+  pesoCarcacaKg: number
+  mediaArroba: number
+  rcPercentual: number
+  dentes0?: number
+  dentes2?: number
+  dentes4?: number
+  dentes6?: number
+  dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
+  gordura1?: number
+  gordura2?: number
+  gordura3?: number
+  gordura4?: number
+  gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
+  penalizacoes?: string | null
+  dif?: string | null
+  escoreRuminal?: string | null
+  perdaVacinalKg?: number | null
+  bezerrosP?: number
+  bezerrosM?: number
+  bezerrosG?: number
+  contaminacaoGiKg?: number | null
+  hematomasKg?: number | null
+  deslocamento?: boolean
+  relatorioAbate?: boolean
+  dataFaturamento?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
+  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
+}
+
+export type ConsultaCreateOrConnectWithoutFazendaInput = {
+  where: Prisma.ConsultaWhereUniqueInput
+  create: Prisma.XOR<Prisma.ConsultaCreateWithoutFazendaInput, Prisma.ConsultaUncheckedCreateWithoutFazendaInput>
+}
+
+export type ConsultaCreateManyFazendaInputEnvelope = {
+  data: Prisma.ConsultaCreateManyFazendaInput | Prisma.ConsultaCreateManyFazendaInput[]
+  skipDuplicates?: boolean
+}
+
+export type ConsultaUpsertWithWhereUniqueWithoutFazendaInput = {
+  where: Prisma.ConsultaWhereUniqueInput
+  update: Prisma.XOR<Prisma.ConsultaUpdateWithoutFazendaInput, Prisma.ConsultaUncheckedUpdateWithoutFazendaInput>
+  create: Prisma.XOR<Prisma.ConsultaCreateWithoutFazendaInput, Prisma.ConsultaUncheckedCreateWithoutFazendaInput>
+}
+
+export type ConsultaUpdateWithWhereUniqueWithoutFazendaInput = {
+  where: Prisma.ConsultaWhereUniqueInput
+  data: Prisma.XOR<Prisma.ConsultaUpdateWithoutFazendaInput, Prisma.ConsultaUncheckedUpdateWithoutFazendaInput>
+}
+
+export type ConsultaUpdateManyWithWhereWithoutFazendaInput = {
+  where: Prisma.ConsultaScalarWhereInput
+  data: Prisma.XOR<Prisma.ConsultaUpdateManyMutationInput, Prisma.ConsultaUncheckedUpdateManyWithoutFazendaInput>
+}
+
+export type ConsultaCreateWithoutGruposNotificadosInput = {
+  id?: string
+  dataAbate: Date | string
+  qtdAnimais?: number
+  sexoAnimais: string
+  pesoVivoKg: number
+  pesoTotalLoteKg: number
+  pesoCarcacaKg: number
+  mediaArroba: number
+  rcPercentual: number
+  dentes0?: number
+  dentes2?: number
+  dentes4?: number
+  dentes6?: number
+  dentes8?: number
+  dentes0Pct?: number
+  dentes2Pct?: number
+  dentes4Pct?: number
+  dentes6Pct?: number
+  dentes8Pct?: number
+  gordura1?: number
+  gordura2?: number
+  gordura3?: number
+  gordura4?: number
+  gordura5?: number
+  gordura1Pct?: number
+  gordura2Pct?: number
+  gordura3Pct?: number
+  gordura4Pct?: number
+  gordura5Pct?: number
+  penalizacoes?: string | null
+  dif?: string | null
+  escoreRuminal?: string | null
+  perdaVacinalKg?: number | null
+  bezerrosP?: number
+  bezerrosM?: number
+  bezerrosG?: number
+  contaminacaoGiKg?: number | null
+  hematomasKg?: number | null
+  deslocamento?: boolean
+  relatorioAbate?: boolean
+  dataFaturamento?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  empresa: Prisma.EmpresaCreateNestedOneWithoutConsultasInput
+  cliente: Prisma.ClienteCreateNestedOneWithoutConsultasInput
+  fazenda: Prisma.FazendaCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  frigorifico: Prisma.FrigorificoCreateNestedOneWithoutConsultasInput
+  categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
+  financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
+  whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
+  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+}
+
+export type ConsultaUncheckedCreateWithoutGruposNotificadosInput = {
+  id?: string
+  empresaId: string
+  clienteId: string
+  fazendaId: string
+  consultorId: string
+  frigorificoId: string
+  categoriaAnimalId: string
+  dataAbate: Date | string
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2451,37 +2634,32 @@ export type ConsultaUncheckedCreateWithoutFazendaInput = {
   logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
 }
 
-export type ConsultaCreateOrConnectWithoutFazendaInput = {
+export type ConsultaCreateOrConnectWithoutGruposNotificadosInput = {
   where: Prisma.ConsultaWhereUniqueInput
-  create: Prisma.XOR<Prisma.ConsultaCreateWithoutFazendaInput, Prisma.ConsultaUncheckedCreateWithoutFazendaInput>
+  create: Prisma.XOR<Prisma.ConsultaCreateWithoutGruposNotificadosInput, Prisma.ConsultaUncheckedCreateWithoutGruposNotificadosInput>
 }
 
-export type ConsultaCreateManyFazendaInputEnvelope = {
-  data: Prisma.ConsultaCreateManyFazendaInput | Prisma.ConsultaCreateManyFazendaInput[]
-  skipDuplicates?: boolean
-}
-
-export type ConsultaUpsertWithWhereUniqueWithoutFazendaInput = {
+export type ConsultaUpsertWithWhereUniqueWithoutGruposNotificadosInput = {
   where: Prisma.ConsultaWhereUniqueInput
-  update: Prisma.XOR<Prisma.ConsultaUpdateWithoutFazendaInput, Prisma.ConsultaUncheckedUpdateWithoutFazendaInput>
-  create: Prisma.XOR<Prisma.ConsultaCreateWithoutFazendaInput, Prisma.ConsultaUncheckedCreateWithoutFazendaInput>
+  update: Prisma.XOR<Prisma.ConsultaUpdateWithoutGruposNotificadosInput, Prisma.ConsultaUncheckedUpdateWithoutGruposNotificadosInput>
+  create: Prisma.XOR<Prisma.ConsultaCreateWithoutGruposNotificadosInput, Prisma.ConsultaUncheckedCreateWithoutGruposNotificadosInput>
 }
 
-export type ConsultaUpdateWithWhereUniqueWithoutFazendaInput = {
+export type ConsultaUpdateWithWhereUniqueWithoutGruposNotificadosInput = {
   where: Prisma.ConsultaWhereUniqueInput
-  data: Prisma.XOR<Prisma.ConsultaUpdateWithoutFazendaInput, Prisma.ConsultaUncheckedUpdateWithoutFazendaInput>
+  data: Prisma.XOR<Prisma.ConsultaUpdateWithoutGruposNotificadosInput, Prisma.ConsultaUncheckedUpdateWithoutGruposNotificadosInput>
 }
 
-export type ConsultaUpdateManyWithWhereWithoutFazendaInput = {
+export type ConsultaUpdateManyWithWhereWithoutGruposNotificadosInput = {
   where: Prisma.ConsultaScalarWhereInput
-  data: Prisma.XOR<Prisma.ConsultaUpdateManyMutationInput, Prisma.ConsultaUncheckedUpdateManyWithoutFazendaInput>
+  data: Prisma.XOR<Prisma.ConsultaUpdateManyMutationInput, Prisma.ConsultaUncheckedUpdateManyWithoutGruposNotificadosInput>
 }
 
 export type ConsultaCreateWithoutCategoriaAnimalInput = {
   id?: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2529,6 +2707,7 @@ export type ConsultaCreateWithoutCategoriaAnimalInput = {
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUncheckedCreateWithoutCategoriaAnimalInput = {
@@ -2539,8 +2718,8 @@ export type ConsultaUncheckedCreateWithoutCategoriaAnimalInput = {
   consultorId: string
   frigorificoId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2583,6 +2762,7 @@ export type ConsultaUncheckedCreateWithoutCategoriaAnimalInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaCreateOrConnectWithoutCategoriaAnimalInput = {
@@ -2614,8 +2794,8 @@ export type ConsultaUpdateManyWithWhereWithoutCategoriaAnimalInput = {
 export type ConsultaCreateWithoutConsultorInput = {
   id?: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2663,6 +2843,7 @@ export type ConsultaCreateWithoutConsultorInput = {
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUncheckedCreateWithoutConsultorInput = {
@@ -2673,8 +2854,8 @@ export type ConsultaUncheckedCreateWithoutConsultorInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2717,6 +2898,7 @@ export type ConsultaUncheckedCreateWithoutConsultorInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaCreateOrConnectWithoutConsultorInput = {
@@ -2748,8 +2930,8 @@ export type ConsultaUpdateManyWithWhereWithoutConsultorInput = {
 export type ConsultaCreateWithoutFinanceiroInput = {
   id?: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2797,6 +2979,7 @@ export type ConsultaCreateWithoutFinanceiroInput = {
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUncheckedCreateWithoutFinanceiroInput = {
@@ -2808,8 +2991,8 @@ export type ConsultaUncheckedCreateWithoutFinanceiroInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -2851,6 +3034,7 @@ export type ConsultaUncheckedCreateWithoutFinanceiroInput = {
   updatedAt?: Date | string
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
   logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaCreateOrConnectWithoutFinanceiroInput = {
@@ -2872,8 +3056,8 @@ export type ConsultaUpdateToOneWithWhereWithoutFinanceiroInput = {
 export type ConsultaUpdateWithoutFinanceiroInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2921,6 +3105,7 @@ export type ConsultaUpdateWithoutFinanceiroInput = {
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateWithoutFinanceiroInput = {
@@ -2932,8 +3117,8 @@ export type ConsultaUncheckedUpdateWithoutFinanceiroInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -2975,13 +3160,14 @@ export type ConsultaUncheckedUpdateWithoutFinanceiroInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaCreateWithoutWhatsappLogsInput = {
   id?: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -3029,6 +3215,7 @@ export type ConsultaCreateWithoutWhatsappLogsInput = {
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUncheckedCreateWithoutWhatsappLogsInput = {
@@ -3040,8 +3227,8 @@ export type ConsultaUncheckedCreateWithoutWhatsappLogsInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -3083,6 +3270,7 @@ export type ConsultaUncheckedCreateWithoutWhatsappLogsInput = {
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaCreateOrConnectWithoutWhatsappLogsInput = {
@@ -3104,8 +3292,8 @@ export type ConsultaUpdateToOneWithWhereWithoutWhatsappLogsInput = {
 export type ConsultaUpdateWithoutWhatsappLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3153,6 +3341,7 @@ export type ConsultaUpdateWithoutWhatsappLogsInput = {
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateWithoutWhatsappLogsInput = {
@@ -3164,8 +3353,8 @@ export type ConsultaUncheckedUpdateWithoutWhatsappLogsInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3207,13 +3396,14 @@ export type ConsultaUncheckedUpdateWithoutWhatsappLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaCreateWithoutLogsInput = {
   id?: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -3261,6 +3451,7 @@ export type ConsultaCreateWithoutLogsInput = {
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaUncheckedCreateWithoutLogsInput = {
@@ -3272,8 +3463,8 @@ export type ConsultaUncheckedCreateWithoutLogsInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -3315,6 +3506,7 @@ export type ConsultaUncheckedCreateWithoutLogsInput = {
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
 export type ConsultaCreateOrConnectWithoutLogsInput = {
@@ -3336,8 +3528,8 @@ export type ConsultaUpdateToOneWithWhereWithoutLogsInput = {
 export type ConsultaUpdateWithoutLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3385,6 +3577,7 @@ export type ConsultaUpdateWithoutLogsInput = {
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateWithoutLogsInput = {
@@ -3396,8 +3589,8 @@ export type ConsultaUncheckedUpdateWithoutLogsInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3439,6 +3632,7 @@ export type ConsultaUncheckedUpdateWithoutLogsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaCreateManyFrigorificoInput = {
@@ -3449,8 +3643,8 @@ export type ConsultaCreateManyFrigorificoInput = {
   consultorId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -3495,8 +3689,8 @@ export type ConsultaCreateManyFrigorificoInput = {
 export type ConsultaUpdateWithoutFrigorificoInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3544,6 +3738,7 @@ export type ConsultaUpdateWithoutFrigorificoInput = {
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateWithoutFrigorificoInput = {
@@ -3554,8 +3749,8 @@ export type ConsultaUncheckedUpdateWithoutFrigorificoInput = {
   consultorId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3598,6 +3793,7 @@ export type ConsultaUncheckedUpdateWithoutFrigorificoInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateManyWithoutFrigorificoInput = {
@@ -3608,8 +3804,8 @@ export type ConsultaUncheckedUpdateManyWithoutFrigorificoInput = {
   consultorId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3659,8 +3855,8 @@ export type ConsultaCreateManyEmpresaInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -3705,8 +3901,8 @@ export type ConsultaCreateManyEmpresaInput = {
 export type ConsultaUpdateWithoutEmpresaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3754,6 +3950,7 @@ export type ConsultaUpdateWithoutEmpresaInput = {
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateWithoutEmpresaInput = {
@@ -3764,8 +3961,8 @@ export type ConsultaUncheckedUpdateWithoutEmpresaInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3808,6 +4005,7 @@ export type ConsultaUncheckedUpdateWithoutEmpresaInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateManyWithoutEmpresaInput = {
@@ -3818,8 +4016,8 @@ export type ConsultaUncheckedUpdateManyWithoutEmpresaInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3869,8 +4067,8 @@ export type ConsultaCreateManyClienteInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -3915,8 +4113,8 @@ export type ConsultaCreateManyClienteInput = {
 export type ConsultaUpdateWithoutClienteInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3964,6 +4162,7 @@ export type ConsultaUpdateWithoutClienteInput = {
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateWithoutClienteInput = {
@@ -3974,8 +4173,8 @@ export type ConsultaUncheckedUpdateWithoutClienteInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4018,6 +4217,7 @@ export type ConsultaUncheckedUpdateWithoutClienteInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateManyWithoutClienteInput = {
@@ -4028,8 +4228,8 @@ export type ConsultaUncheckedUpdateManyWithoutClienteInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4079,8 +4279,8 @@ export type ConsultaCreateManyFazendaInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -4125,8 +4325,8 @@ export type ConsultaCreateManyFazendaInput = {
 export type ConsultaUpdateWithoutFazendaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4174,6 +4374,7 @@ export type ConsultaUpdateWithoutFazendaInput = {
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateWithoutFazendaInput = {
@@ -4184,8 +4385,170 @@ export type ConsultaUncheckedUpdateWithoutFazendaInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
+  pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  mediaArroba?: Prisma.FloatFieldUpdateOperationsInput | number
+  rcPercentual?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes0?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes2?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes4?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes6?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura1?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura2?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura3?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura4?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perdaVacinalKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bezerrosP?: Prisma.IntFieldUpdateOperationsInput | number
+  bezerrosM?: Prisma.IntFieldUpdateOperationsInput | number
+  bezerrosG?: Prisma.IntFieldUpdateOperationsInput | number
+  contaminacaoGiKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hematomasKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  deslocamento?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relatorioAbate?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dataFaturamento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
+  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
+}
+
+export type ConsultaUncheckedUpdateManyWithoutFazendaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  empresaId?: Prisma.StringFieldUpdateOperationsInput | string
+  clienteId?: Prisma.StringFieldUpdateOperationsInput | string
+  consultorId?: Prisma.StringFieldUpdateOperationsInput | string
+  frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
+  categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
+  pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  mediaArroba?: Prisma.FloatFieldUpdateOperationsInput | number
+  rcPercentual?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes0?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes2?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes4?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes6?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura1?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura2?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura3?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura4?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perdaVacinalKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bezerrosP?: Prisma.IntFieldUpdateOperationsInput | number
+  bezerrosM?: Prisma.IntFieldUpdateOperationsInput | number
+  bezerrosG?: Prisma.IntFieldUpdateOperationsInput | number
+  contaminacaoGiKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hematomasKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  deslocamento?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relatorioAbate?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dataFaturamento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ConsultaUpdateWithoutGruposNotificadosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
+  pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
+  mediaArroba?: Prisma.FloatFieldUpdateOperationsInput | number
+  rcPercentual?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes0?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes2?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes4?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes6?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes8?: Prisma.IntFieldUpdateOperationsInput | number
+  dentes0Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes6Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  dentes8Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura1?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura2?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura3?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura4?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura5?: Prisma.IntFieldUpdateOperationsInput | number
+  gordura1Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura2Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura3Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura4Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  gordura5Pct?: Prisma.FloatFieldUpdateOperationsInput | number
+  penalizacoes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dif?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  escoreRuminal?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  perdaVacinalKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  bezerrosP?: Prisma.IntFieldUpdateOperationsInput | number
+  bezerrosM?: Prisma.IntFieldUpdateOperationsInput | number
+  bezerrosG?: Prisma.IntFieldUpdateOperationsInput | number
+  contaminacaoGiKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hematomasKg?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  deslocamento?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  relatorioAbate?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dataFaturamento?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutConsultasNestedInput
+  cliente?: Prisma.ClienteUpdateOneRequiredWithoutConsultasNestedInput
+  fazenda?: Prisma.FazendaUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  frigorifico?: Prisma.FrigorificoUpdateOneRequiredWithoutConsultasNestedInput
+  categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
+  financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
+  whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
+  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+}
+
+export type ConsultaUncheckedUpdateWithoutGruposNotificadosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  empresaId?: Prisma.StringFieldUpdateOperationsInput | string
+  clienteId?: Prisma.StringFieldUpdateOperationsInput | string
+  fazendaId?: Prisma.StringFieldUpdateOperationsInput | string
+  consultorId?: Prisma.StringFieldUpdateOperationsInput | string
+  frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
+  categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
+  dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4230,16 +4593,17 @@ export type ConsultaUncheckedUpdateWithoutFazendaInput = {
   logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
 }
 
-export type ConsultaUncheckedUpdateManyWithoutFazendaInput = {
+export type ConsultaUncheckedUpdateManyWithoutGruposNotificadosInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   empresaId?: Prisma.StringFieldUpdateOperationsInput | string
   clienteId?: Prisma.StringFieldUpdateOperationsInput | string
+  fazendaId?: Prisma.StringFieldUpdateOperationsInput | string
   consultorId?: Prisma.StringFieldUpdateOperationsInput | string
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4289,8 +4653,8 @@ export type ConsultaCreateManyCategoriaAnimalInput = {
   consultorId: string
   frigorificoId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -4335,8 +4699,8 @@ export type ConsultaCreateManyCategoriaAnimalInput = {
 export type ConsultaUpdateWithoutCategoriaAnimalInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4384,6 +4748,7 @@ export type ConsultaUpdateWithoutCategoriaAnimalInput = {
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateWithoutCategoriaAnimalInput = {
@@ -4394,8 +4759,8 @@ export type ConsultaUncheckedUpdateWithoutCategoriaAnimalInput = {
   consultorId?: Prisma.StringFieldUpdateOperationsInput | string
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4438,6 +4803,7 @@ export type ConsultaUncheckedUpdateWithoutCategoriaAnimalInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateManyWithoutCategoriaAnimalInput = {
@@ -4448,8 +4814,8 @@ export type ConsultaUncheckedUpdateManyWithoutCategoriaAnimalInput = {
   consultorId?: Prisma.StringFieldUpdateOperationsInput | string
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4499,8 +4865,8 @@ export type ConsultaCreateManyConsultorInput = {
   frigorificoId: string
   categoriaAnimalId: string
   dataAbate: Date | string
-  qtdMachos?: number
-  qtdFemeas?: number
+  qtdAnimais?: number
+  sexoAnimais: string
   pesoVivoKg: number
   pesoTotalLoteKg: number
   pesoCarcacaKg: number
@@ -4545,8 +4911,8 @@ export type ConsultaCreateManyConsultorInput = {
 export type ConsultaUpdateWithoutConsultorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4594,6 +4960,7 @@ export type ConsultaUpdateWithoutConsultorInput = {
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateWithoutConsultorInput = {
@@ -4604,8 +4971,8 @@ export type ConsultaUncheckedUpdateWithoutConsultorInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4648,6 +5015,7 @@ export type ConsultaUncheckedUpdateWithoutConsultorInput = {
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
   logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
 export type ConsultaUncheckedUpdateManyWithoutConsultorInput = {
@@ -4658,8 +5026,8 @@ export type ConsultaUncheckedUpdateManyWithoutConsultorInput = {
   frigorificoId?: Prisma.StringFieldUpdateOperationsInput | string
   categoriaAnimalId?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  qtdMachos?: Prisma.IntFieldUpdateOperationsInput | number
-  qtdFemeas?: Prisma.IntFieldUpdateOperationsInput | number
+  qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
+  sexoAnimais?: Prisma.StringFieldUpdateOperationsInput | string
   pesoVivoKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoTotalLoteKg?: Prisma.FloatFieldUpdateOperationsInput | number
   pesoCarcacaKg?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4709,11 +5077,13 @@ export type ConsultaUncheckedUpdateManyWithoutConsultorInput = {
 export type ConsultaCountOutputType = {
   whatsappLogs: number
   logs: number
+  gruposNotificados: number
 }
 
 export type ConsultaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   whatsappLogs?: boolean | ConsultaCountOutputTypeCountWhatsappLogsArgs
   logs?: boolean | ConsultaCountOutputTypeCountLogsArgs
+  gruposNotificados?: boolean | ConsultaCountOutputTypeCountGruposNotificadosArgs
 }
 
 /**
@@ -4740,6 +5110,13 @@ export type ConsultaCountOutputTypeCountLogsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.AuditoriaLogWhereInput
 }
 
+/**
+ * ConsultaCountOutputType without action
+ */
+export type ConsultaCountOutputTypeCountGruposNotificadosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GrupoWhatsappWhereInput
+}
+
 
 export type ConsultaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -4750,8 +5127,8 @@ export type ConsultaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   frigorificoId?: boolean
   categoriaAnimalId?: boolean
   dataAbate?: boolean
-  qtdMachos?: boolean
-  qtdFemeas?: boolean
+  qtdAnimais?: boolean
+  sexoAnimais?: boolean
   pesoVivoKg?: boolean
   pesoTotalLoteKg?: boolean
   pesoCarcacaKg?: boolean
@@ -4800,6 +5177,7 @@ export type ConsultaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   financeiro?: boolean | Prisma.Consulta$financeiroArgs<ExtArgs>
   whatsappLogs?: boolean | Prisma.Consulta$whatsappLogsArgs<ExtArgs>
   logs?: boolean | Prisma.Consulta$logsArgs<ExtArgs>
+  gruposNotificados?: boolean | Prisma.Consulta$gruposNotificadosArgs<ExtArgs>
   _count?: boolean | Prisma.ConsultaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["consulta"]>
 
@@ -4812,8 +5190,8 @@ export type ConsultaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   frigorificoId?: boolean
   categoriaAnimalId?: boolean
   dataAbate?: boolean
-  qtdMachos?: boolean
-  qtdFemeas?: boolean
+  qtdAnimais?: boolean
+  sexoAnimais?: boolean
   pesoVivoKg?: boolean
   pesoTotalLoteKg?: boolean
   pesoCarcacaKg?: boolean
@@ -4870,8 +5248,8 @@ export type ConsultaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   frigorificoId?: boolean
   categoriaAnimalId?: boolean
   dataAbate?: boolean
-  qtdMachos?: boolean
-  qtdFemeas?: boolean
+  qtdAnimais?: boolean
+  sexoAnimais?: boolean
   pesoVivoKg?: boolean
   pesoTotalLoteKg?: boolean
   pesoCarcacaKg?: boolean
@@ -4928,8 +5306,8 @@ export type ConsultaSelectScalar = {
   frigorificoId?: boolean
   categoriaAnimalId?: boolean
   dataAbate?: boolean
-  qtdMachos?: boolean
-  qtdFemeas?: boolean
+  qtdAnimais?: boolean
+  sexoAnimais?: boolean
   pesoVivoKg?: boolean
   pesoTotalLoteKg?: boolean
   pesoCarcacaKg?: boolean
@@ -4971,7 +5349,7 @@ export type ConsultaSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ConsultaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "clienteId" | "fazendaId" | "consultorId" | "frigorificoId" | "categoriaAnimalId" | "dataAbate" | "qtdMachos" | "qtdFemeas" | "pesoVivoKg" | "pesoTotalLoteKg" | "pesoCarcacaKg" | "mediaArroba" | "rcPercentual" | "dentes0" | "dentes2" | "dentes4" | "dentes6" | "dentes8" | "dentes0Pct" | "dentes2Pct" | "dentes4Pct" | "dentes6Pct" | "dentes8Pct" | "gordura1" | "gordura2" | "gordura3" | "gordura4" | "gordura5" | "gordura1Pct" | "gordura2Pct" | "gordura3Pct" | "gordura4Pct" | "gordura5Pct" | "penalizacoes" | "dif" | "escoreRuminal" | "perdaVacinalKg" | "bezerrosP" | "bezerrosM" | "bezerrosG" | "contaminacaoGiKg" | "hematomasKg" | "deslocamento" | "relatorioAbate" | "dataFaturamento" | "createdAt" | "updatedAt", ExtArgs["result"]["consulta"]>
+export type ConsultaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "clienteId" | "fazendaId" | "consultorId" | "frigorificoId" | "categoriaAnimalId" | "dataAbate" | "qtdAnimais" | "sexoAnimais" | "pesoVivoKg" | "pesoTotalLoteKg" | "pesoCarcacaKg" | "mediaArroba" | "rcPercentual" | "dentes0" | "dentes2" | "dentes4" | "dentes6" | "dentes8" | "dentes0Pct" | "dentes2Pct" | "dentes4Pct" | "dentes6Pct" | "dentes8Pct" | "gordura1" | "gordura2" | "gordura3" | "gordura4" | "gordura5" | "gordura1Pct" | "gordura2Pct" | "gordura3Pct" | "gordura4Pct" | "gordura5Pct" | "penalizacoes" | "dif" | "escoreRuminal" | "perdaVacinalKg" | "bezerrosP" | "bezerrosM" | "bezerrosG" | "contaminacaoGiKg" | "hematomasKg" | "deslocamento" | "relatorioAbate" | "dataFaturamento" | "createdAt" | "updatedAt", ExtArgs["result"]["consulta"]>
 export type ConsultaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
@@ -4982,6 +5360,7 @@ export type ConsultaInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   financeiro?: boolean | Prisma.Consulta$financeiroArgs<ExtArgs>
   whatsappLogs?: boolean | Prisma.Consulta$whatsappLogsArgs<ExtArgs>
   logs?: boolean | Prisma.Consulta$logsArgs<ExtArgs>
+  gruposNotificados?: boolean | Prisma.Consulta$gruposNotificadosArgs<ExtArgs>
   _count?: boolean | Prisma.ConsultaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ConsultaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -5013,6 +5392,7 @@ export type $ConsultaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     financeiro: Prisma.$ConsultaFinanceiroPayload<ExtArgs> | null
     whatsappLogs: Prisma.$WhatsAppLogPayload<ExtArgs>[]
     logs: Prisma.$AuditoriaLogPayload<ExtArgs>[]
+    gruposNotificados: Prisma.$GrupoWhatsappPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -5023,8 +5403,8 @@ export type $ConsultaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     frigorificoId: string
     categoriaAnimalId: string
     dataAbate: Date
-    qtdMachos: number
-    qtdFemeas: number
+    qtdAnimais: number
+    sexoAnimais: string
     pesoVivoKg: number
     pesoTotalLoteKg: number
     pesoCarcacaKg: number
@@ -5467,6 +5847,7 @@ export interface Prisma__ConsultaClient<T, Null = never, ExtArgs extends runtime
   financeiro<T extends Prisma.Consulta$financeiroArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consulta$financeiroArgs<ExtArgs>>): Prisma.Prisma__ConsultaFinanceiroClient<runtime.Types.Result.GetResult<Prisma.$ConsultaFinanceiroPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   whatsappLogs<T extends Prisma.Consulta$whatsappLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consulta$whatsappLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WhatsAppLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   logs<T extends Prisma.Consulta$logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consulta$logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditoriaLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  gruposNotificados<T extends Prisma.Consulta$gruposNotificadosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consulta$gruposNotificadosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GrupoWhatsappPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5504,8 +5885,8 @@ export interface ConsultaFieldRefs {
   readonly frigorificoId: Prisma.FieldRef<"Consulta", 'String'>
   readonly categoriaAnimalId: Prisma.FieldRef<"Consulta", 'String'>
   readonly dataAbate: Prisma.FieldRef<"Consulta", 'DateTime'>
-  readonly qtdMachos: Prisma.FieldRef<"Consulta", 'Int'>
-  readonly qtdFemeas: Prisma.FieldRef<"Consulta", 'Int'>
+  readonly qtdAnimais: Prisma.FieldRef<"Consulta", 'Int'>
+  readonly sexoAnimais: Prisma.FieldRef<"Consulta", 'String'>
   readonly pesoVivoKg: Prisma.FieldRef<"Consulta", 'Float'>
   readonly pesoTotalLoteKg: Prisma.FieldRef<"Consulta", 'Float'>
   readonly pesoCarcacaKg: Prisma.FieldRef<"Consulta", 'Float'>
@@ -6010,6 +6391,30 @@ export type Consulta$logsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.AuditoriaLogScalarFieldEnum | Prisma.AuditoriaLogScalarFieldEnum[]
+}
+
+/**
+ * Consulta.gruposNotificados
+ */
+export type Consulta$gruposNotificadosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GrupoWhatsapp
+   */
+  select?: Prisma.GrupoWhatsappSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GrupoWhatsapp
+   */
+  omit?: Prisma.GrupoWhatsappOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GrupoWhatsappInclude<ExtArgs> | null
+  where?: Prisma.GrupoWhatsappWhereInput
+  orderBy?: Prisma.GrupoWhatsappOrderByWithRelationInput | Prisma.GrupoWhatsappOrderByWithRelationInput[]
+  cursor?: Prisma.GrupoWhatsappWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GrupoWhatsappScalarFieldEnum | Prisma.GrupoWhatsappScalarFieldEnum[]
 }
 
 /**

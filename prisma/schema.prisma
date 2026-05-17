@@ -107,6 +107,7 @@ model GrupoWhatsapp {
   updatedAt       DateTime @updatedAt
 
   cliente Cliente @relation(fields: [clienteId], references: [id])
+  consultas Consulta[] @relation("ConsultaGrupos")
 
   @@map("grupos_whatsapp")
 }
@@ -149,8 +150,8 @@ model Consulta {
   categoriaAnimalId String
   dataAbate         DateTime
 
-  qtdMachos       Int @default(0)
-  qtdFemeas       Int @default(0)
+  qtdAnimais      Int @default(0)
+  sexoAnimais     String
   pesoVivoKg      Float
   pesoTotalLoteKg Float
   pesoCarcacaKg   Float
@@ -206,6 +207,8 @@ model Consulta {
   financeiro      ConsultaFinanceiro?
   whatsappLogs    WhatsAppLog[]
   logs            AuditoriaLog[]
+
+  gruposNotificados GrupoWhatsapp[]   @relation("ConsultaGrupos")
 
   @@map("consultas")
 }

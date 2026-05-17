@@ -1,26 +1,54 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Cores Principais - Padroniza */
+  --color-primary: #C5301E; 
+  --color-primary-700: #a12719; /* Tom mais escuro para Hover */
+  --color-primary-300: #e28a7f; /* Tom mais claro para Disabled */
+  --color-primary-foreground: #ffffff;
+  
+  /* Tons de fundo e superfície para o Dashboard */
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  
+  /* Tons de cinza modernos */
+  --color-muted: #64748b;
+  --color-muted-foreground: #f1f5f9;
+  --color-border: #e2e8f0;
+
+  /* Cores de Status */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  /* Cores para dados técnicos */
+  --color-data-label: #94a3b8;
+  --color-data-value: #1e293b;
+
+  /* Sombras e Bordas */
+  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html, body {
+    @apply h-full antialiased overflow-x-hidden;
   }
-}
+  
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: 'Inter', system-ui, sans-serif;
+  }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Melhorando a aparência global dos Selects para mobile */
+  select {
+    @apply appearance-none bg-no-repeat;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 1rem center;
+    background-size: 1.5em 1.5em;
+  }
 }
