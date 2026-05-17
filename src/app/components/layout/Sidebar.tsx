@@ -66,7 +66,7 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="h-20 mt-auto border-t border-border overflow-hidden flex items-center px-4">
+      <div className="mb-2 h-20 mt-auto border-t border-border overflow-hidden flex items-center px-4">
         <button className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-muted hover:bg-red-50 hover:text-red-600 transition-all group cursor-pointer">
           <LogOut size={22} className="shrink-0 group-hover:translate-x-1 transition-transform" />
           <span className={`transition-opacity duration-300 whitespace-nowrap ${isCollapsed ? "opacity-0 w-0 overflow-hidden" : "opacity-100"}`}>

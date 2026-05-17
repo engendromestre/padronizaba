@@ -21,11 +21,11 @@ export function PageHeader({ title, subtitle, action }: PageHeaderProps) {
           <h1 className="text-xl font-bold text-foreground tracking-tight">
             {title}
           </h1>
-          <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">
+          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
             {subtitle}
           </p>
         </div>
-        
+
         {action && (
           <Link
             href={action.href}

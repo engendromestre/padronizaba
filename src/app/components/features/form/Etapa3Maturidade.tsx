@@ -23,7 +23,7 @@ export function Etapa3Maturidade() {
     0
   )
 
-  const qtdTotalEsperada = Number(valores.qtdMachos ?? 0) + Number(valores.qtdFemeas ?? 0)
+  const qtdTotalEsperada = Number(valores.qtdAnimais ?? 0)
   const isDivergente = qtdTotalEsperada > 0 && totalInformado !== qtdTotalEsperada
 
   return (

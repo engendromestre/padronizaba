@@ -27,11 +27,10 @@ export default async function ConsultaDetalhe({ params }: Props) {
 
     if (!consulta) notFound()
 
-    const qtdTotal = consulta.qtdMachos + consulta.qtdFemeas
+    const qtdTotal = Number(consulta.qtdAnimais || 0)
     const dataAbate = new Intl.DateTimeFormat("pt-BR", { timeZone: "UTC" }).format(new Date(consulta.dataAbate))
-    const tipoAnimal = consulta.qtdMachos > 0 && consulta.qtdFemeas > 0
-        ? "Machos/Fêmeas"
-        : consulta.qtdMachos > 0 ? "Machos" : "Fêmeas"
+
+    const tipoAnimal = consulta.sexoAnimais === "MACHO" ? "Machos" : "Fêmeas"
 
     const templateWhatsApp = `📢 Padroniza Informa
 🐂 Prévia do abate de ${qtdTotal} ${tipoAnimal} ${consulta.categoriaAnimal.nome} - ${consulta.cliente.nomeProdutor} - ${consulta.fazenda.nome} - ${consulta.frigorifico.nome} - ${consulta.frigorifico.cidade.nome} - ${dataAbate} 
@@ -105,7 +104,7 @@ G - ${consulta.bezerrosG}
                     <p className="text-xs text-gray-400 font-medium uppercase mb-3">Peso e Rendimento</p>
                     <div className="grid grid-cols-2 gap-3">
                         {[
-                            { label: "Animais", value: `${qtdTotal} cab` },
+                            { label: "Animais", value: `${qtdTotal} cab ${tipoAnimal}` },
                             { label: "Peso Vivo Médio", value: formatarKg(consulta.pesoVivoKg) },
                             { label: "Peso Total Lote", value: formatarKg(consulta.pesoTotalLoteKg) },
                             { label: "Carcaça Média", value: formatarKg(consulta.pesoCarcacaKg) },

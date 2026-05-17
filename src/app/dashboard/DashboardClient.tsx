@@ -1,4 +1,3 @@
-// src/app/dashboard/DashboardClient.tsx
 "use client"
 
 import Link from "next/link"
@@ -9,8 +8,10 @@ interface Consulta {
     id: string
     createdAt: Date
     dataAbate: Date
-    qtdMachos: number
-    qtdFemeas: number
+    // 💥 CORRIGIDO: Agora espelha os campos reais unificados do banco de dados
+    qtdAnimais: number
+    sexoAnimais?: string
+    sexoLote?: string
     mediaArroba: number
     rcPercentual: number
     cliente: { nomeProdutor: string }
@@ -26,9 +27,9 @@ interface Props {
 
 export function DashboardClient({ consultas }: Props) {
     const [pendentes, setPendentes] = useState(0)
-    
+
     // Estados para gerenciar a paginação interna
-    const ITENS_POR_PAGINA = 4 
+    const ITENS_POR_PAGINA = 4
     const [itensVisiveis, setItensVisiveis] = useState(ITENS_POR_PAGINA)
     const [loadingMais, setLoadingMais] = useState(false)
 
@@ -61,23 +62,22 @@ export function DashboardClient({ consultas }: Props) {
     }
 
     function getStatusConfig(logs: { status: string }[]) {
-        if (logs.length === 0) return { 
-            bg: "bg-muted/10", text: "text-muted", label: "Não enviado" 
+        if (logs.length === 0) return {
+            bg: "bg-muted/10", text: "text-muted", label: "Não enviado"
         }
         const status = logs[0].status
-        if (status === "SENT") return { 
-            bg: "bg-success/10", text: "text-success", label: "Enviado ✅" 
+        if (status === "SENT") return {
+            bg: "bg-success/10", text: "text-success", label: "Enviado ✅"
         }
-        if (status === "FAILED") return { 
-            bg: "bg-primary/10", text: "text-primary-700", label: "Falhou ❌" 
+        if (status === "FAILED") return {
+            bg: "bg-primary/10", text: "text-primary-700", label: "Falhou ❌"
         }
-        return { 
-            bg: "bg-warning/10", text: "text-warning", label: "Pendente ⏳" 
+        return {
+            bg: "bg-warning/10", text: "text-warning", label: "Pendente ⏳"
         }
     }
 
     return (
-        /* ADICIONADO: max-w-lg e mx-auto na raiz do client component para centralizar no Desktop */
         <div className="w-full max-w-lg mx-auto space-y-6 pb-24">
             {/* Alerta Offline */}
             {pendentes > 0 && (
@@ -119,8 +119,10 @@ export function DashboardClient({ consultas }: Props) {
                     {/* Lista de Cards */}
                     {consultasExibidas.map((c) => {
                         const status = getStatusConfig(c.whatsappLogs)
-                        const qtdTotal = c.qtdMachos + c.qtdFemeas
-                        
+
+                        // 💥 CORREGIDO: Pega o valor real direto da nova propriedade unificada
+                        const totalAnimais = Number(c.qtdAnimais || 0)
+
                         return (
                             <Link
                                 key={c.id}
@@ -146,15 +148,16 @@ export function DashboardClient({ consultas }: Props) {
                                 <div className="grid grid-cols-3 gap-3">
                                     <div className="bg-background rounded-xl p-2.5 border border-border/40">
                                         <p className="text-[9px] text-data-label font-bold uppercase mb-0.5">Animais</p>
-                                        <p className="font-bold text-data-value text-sm">{qtdTotal}</p>
+                                        {/* 💥 CORREGIDO: Renderiza o total correto sem NaN */}
+                                        <p className="font-bold text-data-value text-sm">{totalAnimais} cab</p>
                                     </div>
                                     <div className="bg-background rounded-xl p-2.5 border border-border/40">
                                         <p className="text-[9px] text-data-label font-bold uppercase mb-0.5">Média</p>
-                                        <p className="font-bold text-data-value text-sm">{c.mediaArroba.toFixed(1)}@</p>
+                                        <p className="font-bold text-data-value text-sm">{(c.mediaArroba || 0).toFixed(1)}@</p>
                                     </div>
                                     <div className="bg-background rounded-xl p-2.5 border border-border/40">
                                         <p className="text-[9px] text-data-label font-bold uppercase mb-0.5">RC%</p>
-                                        <p className="font-bold text-data-value text-sm">{c.rcPercentual}%</p>
+                                        <p className="font-bold text-data-value text-sm">{c.rcPercentual || 0}%</p>
                                     </div>
                                 </div>
 

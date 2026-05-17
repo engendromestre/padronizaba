@@ -3,7 +3,7 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { FormProvider, useForm } from "react-hook-form"
+import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ChevronLeft, Loader2, Save } from "lucide-react"
 
@@ -62,10 +62,15 @@ export default function NovaConsultaPage() {
   }, [])
 
   const camposPorEtapa: Array<Array<keyof ConsultaForm>> = [
-    ["clienteId", "fazendaId", "frigorificoId", "categoriaAnimalId", "dataAbate"],
-    ["qtdAnimais", "pesoVivoKg", "pesoTotalLoteKg", "pesoCarcacaKg"],
+    // Etapa 1: Adicionado grupoWhatsappId
+    ["clienteId", "fazendaId", "grupoWhatsappId", "frigorificoId", "categoriaAnimalId", "dataAbate"],
+    // Etapa 2: Adicionado sexoLote
+    ["qtdAnimais", "sexoLote", "pesoVivoKg", "pesoTotalLoteKg", "pesoCarcacaKg"],
+    // Etapa 3
     ["dentes0", "dentes2", "dentes4", "dentes6", "dentes8"],
+    // Etapa 4
     ["gordura1", "gordura2", "gordura3", "gordura4", "gordura5"],
+    // Etapa 5
     ["deslocamento", "relatorioAbate"],
   ]
 
@@ -120,11 +125,20 @@ export default function NovaConsultaPage() {
       await salvarOffline(payloadOffline)
       router.push("/dashboard?offline=1")
     } finally {
-      /* CORREÇÃO 2: Substituído o atalho lógico por uma condicional explícita aceita pelo Linter */
       if (loading) {
         setLoading(false)
       }
     }
+  }
+
+  function onError(erros: FieldErrors<ConsultaForm>) {
+    console.log("❌ O Zod barrou o envio! Veja os erros de validação:", erros)
+
+    // Como o onSubmit foi bloqueado, pegamos os dados direto do estado do formulário para inspecionar:
+    const dadosAtuaisDoFormulario = methods.getValues()
+    console.log("📦 Dados que estavam no formulário no momento do erro:", dadosAtuaisDoFormulario)
+
+    setErro("Existem campos obrigatórios não preenchidos nas etapas anteriores. Verifique!")
   }
 
   return (
@@ -166,7 +180,7 @@ export default function NovaConsultaPage() {
 
       {/* RODAPÉ DINÂMICO ADAPTADO À SIDEBAR */}
       <div
-        className={`fixed bottom-16 md:bottom-0 left-0 right-0 bg-card/90 backdrop-blur-lg border-t border-border px-4 z-40 transition-all duration-300 ease-in-out flex items-center h-20
+        className={`mb-2 fixed bottom-16 md:bottom-0 left-0 right-0 bg-card/90 backdrop-blur-lg border-t border-border px-4 z-40 transition-all duration-300 ease-in-out flex items-center h-20
     ${isCollapsed ? "md:left-20" : "md:left-57"}`}
       >
         {/* div interna com w-full para se comportar de forma previsível */}
@@ -193,7 +207,7 @@ export default function NovaConsultaPage() {
             <button
               type="button"
               disabled={loading}
-              onClick={handleSubmit(onSubmit)}
+              onClick={handleSubmit(onSubmit, onError)}
               className="flex-1 py-3.5 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 disabled:opacity-50 flex items-center justify-center gap-2 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
             >
               {loading ? <Loader2 className="animate-spin" size={20} /> : <><Save size={20} /> Salvar</>}
