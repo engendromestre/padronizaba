@@ -24,7 +24,7 @@ export default async function DashboardPage() {
       },
     },
     orderBy: { createdAt: "desc" },
-    take: 20,
+    // take: 20,
   })
 
   // Pegamos apenas o primeiro nome para uma saudação mais próxima (UX Mobile)

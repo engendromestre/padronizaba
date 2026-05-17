@@ -14,6 +14,7 @@ import { Etapa4Acabamento } from "@/app/components/features/form/Etapa4Acabament
 import { Etapa5Adicionais } from "@/app/components/features/form/Etapa5Adicionais"
 import { FormProgress } from "@/app/components/features/form/FormProgress"
 import { ConsultaForm, consultaSchema, calcularTotais } from "@/lib/schemas/consulta"
+import { useSidebar } from "@/app/components/layout/SidebarContext"
 
 const TOTAL_ETAPAS = 5
 
@@ -26,11 +27,12 @@ export default function NovaConsultaPage() {
   const [clientes, setClientes] = useState([])
   const [frigorificos, setFrigorificos] = useState([])
   const [categorias, setCategorias] = useState([])
+  const { isCollapsed } = useSidebar()
 
   const methods = useForm<ConsultaForm>({
     resolver: zodResolver(consultaSchema),
     defaultValues: {
-      qtdMachos: 0, qtdFemeas: 0,
+      qtdAnimais: 0,
       dentes0: 0, dentes2: 0, dentes4: 0, dentes6: 0, dentes8: 0,
       gordura1: 0, gordura2: 0, gordura3: 0, gordura4: 0, gordura5: 0,
       bezerrosP: 0, bezerrosM: 0, bezerrosG: 0,
@@ -38,6 +40,7 @@ export default function NovaConsultaPage() {
     },
   })
 
+  /* CORREÇÃO 1: Removido o 'errors' daqui para zerar o aviso de variável não usada */
   const { handleSubmit, trigger } = methods
 
   useEffect(() => {
@@ -58,13 +61,12 @@ export default function NovaConsultaPage() {
     fetchData()
   }, [])
 
-  // Tipagem correta para o trigger não reclamar do 'any'
   const camposPorEtapa: Array<Array<keyof ConsultaForm>> = [
     ["clienteId", "fazendaId", "frigorificoId", "categoriaAnimalId", "dataAbate"],
-    ["qtdMachos", "qtdFemeas", "pesoVivoKg", "pesoTotalLoteKg", "pesoCarcacaKg"],
+    ["qtdAnimais", "pesoVivoKg", "pesoTotalLoteKg", "pesoCarcacaKg"],
     ["dentes0", "dentes2", "dentes4", "dentes6", "dentes8"],
     ["gordura1", "gordura2", "gordura3", "gordura4", "gordura5"],
-    ["penalizacoes", "escoreRuminal"], // Exemplo de campos da etapa 5
+    ["deslocamento", "relatorioAbate"],
   ]
 
   async function avancar() {
@@ -118,12 +120,17 @@ export default function NovaConsultaPage() {
       await salvarOffline(payloadOffline)
       router.push("/dashboard?offline=1")
     } finally {
-      setLoading(false)
+      /* CORREÇÃO 2: Substituído o atalho lógico por uma condicional explícita aceita pelo Linter */
+      if (loading) {
+        setLoading(false)
+      }
     }
   }
 
   return (
-    <main className="min-h-screen bg-background pb-28">
+    <main className="w-full bg-background pb-44 md:pb-32">
+
+      {/* Header interno da Página */}
       <div className="sticky top-0 z-30 bg-card border-b border-border px-4 py-4">
         <div className="flex items-center gap-3 max-w-lg mx-auto">
           <button onClick={() => router.back()} className="p-2 -ml-2 text-muted hover:text-primary transition-colors">
@@ -133,12 +140,13 @@ export default function NovaConsultaPage() {
         </div>
       </div>
 
-      <div className="max-w-lg mx-auto px-4 pt-6 space-y-8">
+      {/* Área do Formulário */}
+      <div className="max-w-lg mx-auto px-4 pt-6 pb-24 space-y-6 min-h-[calc(100vh-4rem)] flex flex-col">
         <FormProgress etapaAtual={etapa} totalEtapas={TOTAL_ETAPAS} />
 
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} className="pb-10">
-            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex-1 flex flex-col">
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 flex-1">
               {etapa === 1 && <Etapa1Identificacao clientes={clientes} frigorificos={frigorificos} categorias={categorias} />}
               {etapa === 2 && <Etapa2Peso />}
               {etapa === 3 && <Etapa3Maturidade />}
@@ -147,23 +155,27 @@ export default function NovaConsultaPage() {
             </div>
           </form>
         </FormProvider>
-      </div>
-      {/* Renderização do erro */}
-      {erro && (
-        <div className="mt-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl text-sm font-medium flex items-center gap-2 animate-in shake duration-300">
-          <span className="h-2 w-2 bg-red-600 rounded-full animate-pulse" />
-          {erro}
-        </div>
-      )}
 
-      {/* Rodapé com botões usando flex-2 do Tailwind v4 */}
-      <div className="fixed bottom-0 left-0 right-0 bg-card/80 backdrop-blur-lg border-t border-border p-4 z-40">
-        <div className="max-w-lg mx-auto flex gap-3">
+        {erro && (
+          <div className="p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl text-sm font-medium flex items-center gap-2 animate-in shake duration-300">
+            <span className="h-2 w-2 bg-red-600 rounded-full animate-pulse" />
+            {erro}
+          </div>
+        )}
+      </div>
+
+      {/* RODAPÉ DINÂMICO ADAPTADO À SIDEBAR */}
+      <div
+        className={`fixed bottom-16 md:bottom-0 left-0 right-0 bg-card/90 backdrop-blur-lg border-t border-border px-4 z-40 transition-all duration-300 ease-in-out flex items-center h-20
+    ${isCollapsed ? "md:left-20" : "md:left-57"}`}
+      >
+        {/* div interna com w-full para se comportar de forma previsível */}
+        <div className="max-w-lg mx-auto w-full flex gap-3">
           {etapa > 1 && (
             <button
               type="button"
               onClick={voltar}
-              className="flex-1 py-4 rounded-2xl border border-border bg-card text-foreground font-semibold hover:bg-accent transition-all"
+              className="flex-1 py-3.5 rounded-2xl border border-border bg-card text-foreground font-semibold hover:bg-accent active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
             >
               Voltar
             </button>
@@ -173,16 +185,16 @@ export default function NovaConsultaPage() {
             <button
               type="button"
               onClick={avancar}
-              className="flex-2 py-4 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all"
+              className="flex-1 py-3.5 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
             >
               Próxima Etapa
             </button>
           ) : (
             <button
-              type="submit"
+              type="button"
               disabled={loading}
               onClick={handleSubmit(onSubmit)}
-              className="flex-2 py-4 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 disabled:opacity-50 flex items-center justify-center gap-2 transition-all"
+              className="flex-1 py-3.5 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 disabled:opacity-50 flex items-center justify-center gap-2 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
             >
               {loading ? <Loader2 className="animate-spin" size={20} /> : <><Save size={20} /> Salvar</>}
             </button>

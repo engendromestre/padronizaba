@@ -37,62 +37,87 @@ async function main() {
     create: {
       nome: "Frigorífico Teste",
       cnpj: "00.000.000/0001-00",
-      cidadeId: cidade.id,
+      cidadeId: cidade.id, // CORRIGIDO: Era city.id
     },
   })
 
   // Categoria Animal
-  await prisma.categoriaAnimal.upsert({
-    where: { nome: "Nelore" },
-    update: {},
-    create: { nome: "Nelore" },
-  })
+  const categoriasParaCriar = ["Nelore", "Cruzamento", "Misto"]
+  for (const nomeCat of categoriasParaCriar) {
+    await prisma.categoriaAnimal.upsert({
+      where: { nome: nomeCat },
+      update: {},
+      create: { nome: nomeCat },
+    })
+  }
 
-  await prisma.categoriaAnimal.upsert({
-    where: { nome: "Cruzamento" },
-    update: {},
-    create: { nome: "Cruzamento" },
-  })
-
-  await prisma.categoriaAnimal.upsert({
-    where: { nome: "Misto" },
-    update: {},
-    create: { nome: "Misto" },
-  })
-
-  // Cliente
-  const cliente = await prisma.cliente.upsert({
-    where: { id: "cliente-teste-01" },
-    update: {},
-    create: {
-      id: "cliente-teste-01",
+  // --- CONFIGURAÇÃO DOS CLIENTES E SEUS GRUPOS ---
+  const dadosClientes = [
+    {
+      id: "cliente-joao-silva",
       nomeProdutor: "João Silva",
-      empresaId: empresa.id,
+      fazendas: [
+        { id: "fazenda-boa-vista", nome: "Fazenda Boa Vista" }
+      ],
+      grupos: [
+        { id: "grupo-joao-01", nomeGrupo: "TI PADRONIZA JOÃO 1", hash: "120363423598735091@g.us" }, // CORRIGIDO: era nome
+        { id: "grupo-joao-02", nomeGrupo: "TI PADRONIZA JOÃO 2", hash: "120363423598735092@g.us" }  // CORRIGIDO: era nome
+      ]
     },
-  })
+    {
+      id: "cliente-pedro-santos",
+      nomeProdutor: "Pedro Santos",
+      fazendas: [
+        { id: "fazenda-ouro-verde", nome: "Fazenda Ouro Verde" }
+      ],
+      grupos: [
+        { id: "grupo-pedro-01", nomeGrupo: "TI PADRONIZA PEDRO 1", hash: "120363423598735093@g.us" }, // CORRIGIDO: era nome
+        { id: "grupo-pedro-02", nomeGrupo: "TI PADRONIZA PEDRO 2", hash: "120363423598735094@g.us" }  // CORRIGIDO: era nome
+      ]
+    }
+  ]
 
-  // Fazenda
-  await prisma.fazenda.upsert({
-    where: { id: "fazenda-teste-01" },
-    update: {},
-    create: {
-      id: "fazenda-teste-01",
-      nome: "Fazenda Boa Vista",
-      clienteId: cliente.id,
-      cidadeId: cidade.id,
-    },
-  })
+  console.log("⏳ Criando clientes, fazendas e grupos...")
+  
+  for (const c of dadosClientes) {
+    // Upsert do Cliente
+    const cliente = await prisma.cliente.upsert({
+      where: { id: c.id },
+      update: {},
+      create: {
+        id: c.id,
+        nomeProdutor: c.nomeProdutor,
+        empresaId: empresa.id,
+      },
+    })
 
-  // Grupo WhatsApp
-  await prisma.grupoWhatsapp.upsert({
-    where: { groupIdWhatsapp: "120363423598735094@g.us" },
-    update: {},
-    create: {
-      clienteId: cliente.id,
-      groupIdWhatsapp: "120363423598735094@g.us",
-      nomeGrupo: "TI PADRONIZA 2",
-    },
-  })
+    // Upsert das Fazendas do Cliente
+    for (const f of c.fazendas) {
+      await prisma.fazenda.upsert({
+        where: { id: f.id },
+        update: {},
+        create: {
+          id: f.id,
+          nome: f.nome,
+          clienteId: cliente.id,
+          cidadeId: cidade.id,
+        },
+      })
+    }
+
+    // Upsert dos Grupos de WhatsApp do Cliente
+    for (const g of c.grupos) {
+      await prisma.grupoWhatsapp.upsert({
+        where: { groupIdWhatsapp: g.hash },
+        update: {},
+        create: {
+          clienteId: cliente.id,
+          groupIdWhatsapp: g.hash,
+          nomeGrupo: g.nomeGrupo,
+        },
+      })
+    }
+  }
 
   // Consultor
   const senhaHash = await bcrypt.hash("123456", 10)
@@ -110,7 +135,7 @@ async function main() {
   console.log("✅ Seed concluído!")
   console.log(`   Empresa: ${empresa.nome}`)
   console.log(`   Frigorífico: ${frigorifico.nome}`)
-  console.log(`   Cliente: ${cliente.nomeProdutor}`)
+  console.log(`   Clientes Criados: ${dadosClientes.map(c => c.nomeProdutor).join(", ")}`)
   console.log(`   Consultor: ${consultor.email} / senha: 123456`)
 }
 

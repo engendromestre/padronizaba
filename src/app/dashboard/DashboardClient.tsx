@@ -1,8 +1,9 @@
+// src/app/dashboard/DashboardClient.tsx
 "use client"
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { WifiOff, Plus, ChevronRight } from "lucide-react"
+import { WifiOff, Plus, ChevronRight, ChevronDown, Loader2 } from "lucide-react"
 
 interface Consulta {
     id: string
@@ -25,6 +26,14 @@ interface Props {
 
 export function DashboardClient({ consultas }: Props) {
     const [pendentes, setPendentes] = useState(0)
+    
+    // Estados para gerenciar a paginação interna
+    const ITENS_POR_PAGINA = 4 
+    const [itensVisiveis, setItensVisiveis] = useState(ITENS_POR_PAGINA)
+    const [loadingMais, setLoadingMais] = useState(false)
+
+    const consultasExibidas = consultas.slice(0, itensVisiveis)
+    const temMaisItens = itensVisiveis < consultas.length
 
     useEffect(() => {
         async function contarPendentes() {
@@ -43,7 +52,14 @@ export function DashboardClient({ consultas }: Props) {
         contarPendentes()
     }, [])
 
-    // Mapeamento explícito de cores para o Design System
+    const carregarMais = () => {
+        setLoadingMais(true)
+        setTimeout(() => {
+            setItensVisiveis((prev) => prev + ITENS_POR_PAGINA)
+            setLoadingMais(false)
+        }, 500)
+    }
+
     function getStatusConfig(logs: { status: string }[]) {
         if (logs.length === 0) return { 
             bg: "bg-muted/10", text: "text-muted", label: "Não enviado" 
@@ -61,8 +77,9 @@ export function DashboardClient({ consultas }: Props) {
     }
 
     return (
-        <div className="space-y-6 pb-24">
-            {/* Alerta Offline - Usando Cores de Warning do Design System */}
+        /* ADICIONADO: max-w-lg e mx-auto na raiz do client component para centralizar no Desktop */
+        <div className="w-full max-w-lg mx-auto space-y-6 pb-24">
+            {/* Alerta Offline */}
             {pendentes > 0 && (
                 <div className="bg-warning/10 border border-warning/20 px-4 py-4 rounded-2xl flex items-center gap-4 animate-in fade-in slide-in-from-top-2">
                     <div className="bg-warning/20 p-2 rounded-lg text-warning">
@@ -99,7 +116,8 @@ export function DashboardClient({ consultas }: Props) {
                         </h2>
                     </div>
 
-                    {consultas.map((c) => {
+                    {/* Lista de Cards */}
+                    {consultasExibidas.map((c) => {
                         const status = getStatusConfig(c.whatsappLogs)
                         const qtdTotal = c.qtdMachos + c.qtdFemeas
                         
@@ -107,7 +125,7 @@ export function DashboardClient({ consultas }: Props) {
                             <Link
                                 key={c.id}
                                 href={`/consulta/${c.id}`}
-                                className="block bg-card rounded-2xl border border-border p-4 shadow-card hover:border-primary/30 transition-all group"
+                                className="block bg-card rounded-2xl border border-border p-4 shadow-sm hover:border-primary/30 transition-all group animate-in fade-in-50 duration-300"
                             >
                                 <div className="flex items-start justify-between mb-4">
                                     <div className="flex-1 min-w-0">
@@ -149,6 +167,30 @@ export function DashboardClient({ consultas }: Props) {
                             </Link>
                         )
                     })}
+
+                    {/* Botão Dinâmico Carregar Mais */}
+                    {temMaisItens && (
+                        <div className="pt-2 flex justify-center">
+                            <button
+                                type="button"
+                                onClick={carregarMais}
+                                disabled={loadingMais}
+                                className="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-border bg-card text-xs font-bold text-foreground hover:bg-accent active:scale-[0.98] transition-all disabled:opacity-70 cursor-pointer shadow-xs"
+                            >
+                                {loadingMais ? (
+                                    <>
+                                        <Loader2 size={14} className="animate-spin text-primary" />
+                                        <span>Carregando...</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span>Carregar Mais</span>
+                                        <ChevronDown size={14} className="text-muted" />
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

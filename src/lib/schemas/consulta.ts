@@ -4,56 +4,58 @@ export const consultaSchema = z.object({
   // Etapa 1 — Identificação
   clienteId: z.string().min(1, "Selecione o cliente"),
   fazendaId: z.string().min(1, "Selecione a fazenda"),
-  grupoWhatsappId: z.string().min(1, "Selecione o grupo"),
+  grupoWhatsappId: z.array(z.string()).min(1, "Selecione ao menos um grupo de envio"),
   frigorificoId: z.string().min(1, "Selecione o frigorífico"),
   categoriaAnimalId: z.string().min(1, "Selecione a categoria"),
   dataAbate: z.string().min(1, "Informe a data do abate"),
 
   // Etapa 2 — Animais e Peso
-  qtdMachos: z.number().min(0),
-  qtdFemeas: z.number().min(0),
-  pesoVivoKg: z.number().min(0.1, "Informe o peso vivo"),
-  pesoTotalLoteKg: z.number().min(0.1, "Informe o peso total do lote"),
-  pesoCarcacaKg: z.number().min(0.1, "Informe o peso da carcaça"),
+  qtdAnimais: z.coerce.number().int().min(1, "Informe a quantidade de cabeças"),
+  sexoLote: z.enum(["MACHO", "FEMEA"], {
+    message: "Selecione o sexo do lote"
+  }),
+  pesoVivoKg: z.coerce.number().min(0.1, "Informe o peso vivo"),
+  pesoTotalLoteKg: z.coerce.number().min(0.1, "Informe o peso total do lote"),
+  pesoCarcacaKg: z.coerce.number().min(0.1, "Informe o peso da carcaça"),
 
   // Etapa 3 — Maturidade
-  dentes0: z.number().min(0),
-  dentes2: z.number().min(0),
-  dentes4: z.number().min(0),
-  dentes6: z.number().min(0),
-  dentes8: z.number().min(0),
+  dentes0: z.coerce.number().min(0),
+  dentes2: z.coerce.number().min(0),
+  dentes4: z.coerce.number().min(0),
+  dentes6: z.coerce.number().min(0),
+  dentes8: z.coerce.number().min(0),
 
   // Etapa 4 — Acabamento
-  gordura1: z.number().min(0),
-  gordura2: z.number().min(0),
-  gordura3: z.number().min(0),
-  gordura4: z.number().min(0),
-  gordura5: z.number().min(0),
+  gordura1: z.coerce.number().min(0),
+  gordura2: z.coerce.number().min(0),
+  gordura3: z.coerce.number().min(0),
+  gordura4: z.coerce.number().min(0),
+  gordura5: z.coerce.number().min(0),
 
   // Percentuais calculados automaticamente
-  dentes0Pct: z.number().min(0),
-  dentes2Pct: z.number().min(0),
-  dentes4Pct: z.number().min(0),
-  dentes6Pct: z.number().min(0),
-  dentes8Pct: z.number().min(0),
-  gordura1Pct: z.number().min(0),
-  gordura2Pct: z.number().min(0),
-  gordura3Pct: z.number().min(0),
-  gordura4Pct: z.number().min(0),
-  gordura5Pct: z.number().min(0),
+  dentes0Pct: z.coerce.number().min(0),
+  dentes2Pct: z.coerce.number().min(0),
+  dentes4Pct: z.coerce.number().min(0),
+  dentes6Pct: z.coerce.number().min(0),
+  dentes8Pct: z.coerce.number().min(0),
+  gordura1Pct: z.coerce.number().min(0),
+  gordura2Pct: z.coerce.number().min(0),
+  gordura3Pct: z.coerce.number().min(0),
+  gordura4Pct: z.coerce.number().min(0),
+  gordura5Pct: z.coerce.number().min(0),
 
   // Etapa 5 — Informações Adicionais
-  penalizacoes: z.string().optional(),
-  dif: z.string().optional(),
-  escoreRuminal: z.string().optional(),
-  perdaVacinalKg: z.number().optional(),
-  bezerrosP: z.number().min(0),
-  bezerrosM: z.number().min(0),
-  bezerrosG: z.number().min(0),
-  contaminacaoGiKg: z.number().optional(),
-  hematomasKg: z.number().optional(),
-  deslocamento: z.boolean(),
-  relatorioAbate: z.boolean(),
+  penalizacoes: z.string().optional().or(z.literal("")),
+  dif: z.string().optional().or(z.literal("")),
+  escoreRuminal: z.string().optional().or(z.literal("")),
+  perdaVacinalKg: z.coerce.number().optional(),
+  bezerrosP: z.coerce.number().min(0),
+  bezerrosM: z.coerce.number().min(0),
+  bezerrosG: z.coerce.number().min(0),
+  contaminacaoGiKg: z.coerce.number().optional(),
+  hematomasKg: z.coerce.number().optional(),
+  deslocamento: z.boolean().default(false),
+  relatorioAbate: z.boolean().default(false),
 }).refine((data) => {
   const rc = (data.pesoCarcacaKg / data.pesoVivoKg) * 100;
   return rc < 65; // Bloqueia se for maior que 65% (valor de margem segura)
@@ -62,12 +64,10 @@ export const consultaSchema = z.object({
   path: ["pesoCarcacaKg"],
 });
 
-export type ConsultaForm = z.infer<typeof consultaSchema>
+export type ConsultaForm = z.input<typeof consultaSchema>
 
 export function calcularTotais(data: Partial<ConsultaForm>) {
-  const qtdMachos = Number(data.qtdMachos ?? 0)
-  const qtdFemeas = Number(data.qtdFemeas ?? 0)
-  const qtdTotal = qtdMachos + qtdFemeas
+  const qtdTotal = Number(data.qtdAnimais ?? 0)
 
   let pesoCarcacaIndividual = Number(data.pesoCarcacaKg ?? 0)
   let pesoTotalLote = Number(data.pesoTotalLoteKg ?? 0)
