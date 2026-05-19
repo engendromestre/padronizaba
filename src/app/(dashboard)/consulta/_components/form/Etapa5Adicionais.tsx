@@ -2,8 +2,9 @@
 
 import { ConsultaForm } from "@/lib/schemas/consulta"
 import { useFormContext } from "react-hook-form"
-import { CampoNumerico } from "./CampoNumerico"
-import { ClipboardList, Syringe, Baby } from "lucide-react"
+
+import { CampoNumerico } from "@/components/ui/CampoNumerico"
+import { Baby, ClipboardList, Syringe } from "lucide-react"
 
 export function Etapa5Adicionais() {
   const { register, formState: { errors } } = useFormContext<ConsultaForm>()

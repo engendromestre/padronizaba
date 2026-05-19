@@ -2,8 +2,8 @@
 
 import { ConsultaForm } from "@/lib/schemas/consulta"
 import { useFormContext } from "react-hook-form"
-import { CampoNumerico } from "./CampoNumerico"
-import { CheckCircle2, AlertCircle } from "lucide-react"
+import { CampoNumerico } from "@/components/ui/CampoNumerico"
+import { AlertCircle, CheckCircle2 } from "lucide-react"
 
 const categoriasDentes = [
   { name: "dentes0" as const, label: "0 Dentes" },
@@ -19,7 +19,7 @@ export function Etapa3Maturidade() {
 
   // Cálculo dinâmico do total informado na etapa
   const totalInformado = categoriasDentes.reduce(
-    (acc, d) => acc + Number(valores[d.name] ?? 0), 
+    (acc, d) => acc + Number(valores[d.name] ?? 0),
     0
   )
 
@@ -52,8 +52,8 @@ export function Etapa3Maturidade() {
       {/* Card de Conferência */}
       <div className={`
         mt-6 p-4 rounded-3xl border transition-all duration-500
-        ${isDivergente 
-          ? "bg-warning/10 border-warning/20 animate-pulse" 
+        ${isDivergente
+          ? "bg-warning/10 border-warning/20 animate-pulse"
           : "bg-success/10 border-success/20"}
       `}>
         <div className="flex items-center justify-between">
@@ -74,7 +74,7 @@ export function Etapa3Maturidade() {
 
         {/* Barra de Progresso Visual de Conferência */}
         <div className="mt-3 h-1.5 w-full bg-black/5 rounded-full overflow-hidden">
-          <div 
+          <div
             className={`h-full transition-all duration-500 ${isDivergente ? "bg-warning" : "bg-success"}`}
             style={{ width: `${Math.min((totalInformado / (qtdTotalEsperada || 1)) * 100, 100)}%` }}
           />

@@ -2,8 +2,8 @@
 
 import { useFormContext } from "react-hook-form"
 import { ConsultaForm } from "@/lib/schemas/consulta"
-import { CampoNumerico } from "./CampoNumerico"
 import { Beef, CheckCircle2, AlertCircle } from "lucide-react"
+import { CampoNumerico } from "@/components/ui/CampoNumerico"
 
 const acabamentos = [
   { name: "gordura1" as const, label: "1 — Ausente" },
@@ -19,7 +19,7 @@ export function Etapa4Acabamento() {
 
   // Cálculo do total informado nesta etapa
   const totalInformado = acabamentos.reduce(
-    (acc, a) => acc + Number(valores[a.name] ?? 0), 
+    (acc, a) => acc + Number(valores[a.name] ?? 0),
     0
   )
 
@@ -55,8 +55,8 @@ export function Etapa4Acabamento() {
       {/* Card de Conferência (Consistência com a Etapa 3) */}
       <div className={`
         mt-6 p-4 rounded-3xl border transition-all duration-500
-        ${isDivergente 
-          ? "bg-warning/10 border-warning/20 animate-pulse" 
+        ${isDivergente
+          ? "bg-warning/10 border-warning/20 animate-pulse"
           : "bg-success/10 border-success/20"}
       `}>
         <div className="flex items-center justify-between">
@@ -77,7 +77,7 @@ export function Etapa4Acabamento() {
 
         {/* Barra de Progresso Visual */}
         <div className="mt-3 h-1.5 w-full bg-black/5 rounded-full overflow-hidden">
-          <div 
+          <div
             className={`h-full transition-all duration-500 ${isDivergente ? "bg-warning" : "bg-success"}`}
             style={{ width: `${Math.min((totalInformado / (qtdTotalEsperada || 1)) * 100, 100)}%` }}
           />

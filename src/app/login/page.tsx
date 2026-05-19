@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import Image from "next/image"
 
 const loginSchema = z.object({
   email: z.string().email("E-mail inválido"),
@@ -13,6 +14,26 @@ const loginSchema = z.object({
 })
 
 type LoginForm = z.infer<typeof loginSchema>
+
+interface UserCacheInput {
+  id: string
+  nome: string
+  role: "SUPER_ADMIN" | "ADMIN" | "CONSULTOR" | "CLIENTE"
+  empresaId?: string | null
+  clienteId?: string | null
+}
+
+// Função auxiliar movida para fora para respeitar a pureza do React Compiler 19
+function mapearCacheIdentidade(user: UserCacheInput, expiresAtFromAuth: string) {
+  return {
+    id: user.id,
+    nome: user.nome,
+    role: user.role,
+    empresaId: user.empresaId,
+    cachedAt: new Date().toISOString(),
+    expiresAt: expiresAtFromAuth,
+  }
+}
 
 export default function LoginPage() {
   const router = useRouter()
@@ -38,73 +59,165 @@ export default function LoginPage() {
     })
 
     if (result?.error) {
-      setError("E-mail ou senha inválidos")
+      if (result.error.includes("ativação")) {
+        setError("Sua conta foi criada, mas ainda aguarda ativação pelo link do convite.")
+      } else {
+        setError("E-mail ou senha inválidos. Verifique suas credenciais.")
+      }
       setLoading(false)
       return
+    }
+
+    try {
+      const sessionResponse = await fetch("/api/auth/session")
+      const sessionData = await sessionResponse.json()
+
+      if (sessionData?.user) {
+        const identityCache = mapearCacheIdentidade(sessionData.user, sessionData.expires)
+        localStorage.setItem("@padroniza:identity", JSON.stringify(identityCache))
+      }
+    } catch (cacheError) {
+      console.warn("Não foi possível gerar o cache de identidade offline:", cacheError)
     }
 
     router.push("/dashboard")
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-sm">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Padronizaba</h1>
-          <p className="text-gray-500 mt-1">Relatório de Abate</p>
+    <main className="min-h-screen grid grid-cols-1 lg:grid-cols-12 bg-background antialiased">
+
+      {/* 🏛️ Coluna Esquerda: Formulário alinhado ao Design System */}
+      <div className="lg:col-span-5 flex flex-col justify-between p-8 sm:p-12 md:p-16 my-auto bg-card">
+        <div className="w-full max-w-sm mx-auto space-y-8">
+
+          {/* Marca Corporativa Atualizada para usar o Primary Vermelho do Padroniza */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-10 h-10 bg-primary text-primary-foreground rounded-xl flex items-center justify-center font-black text-xl shadow-md">
+                P
+              </div>
+              <span className="text-2xl font-black tracking-tight text-foreground">
+                padroniza<span className="text-primary">.ba</span>
+              </span>
+            </div>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
+              Acesse sua conta
+            </h1>
+            <p className="text-sm text-muted mt-1">
+              Painel de Gestão e Relatórios de Abate
+            </p>
+          </div>
+
+          {/* Formulário de Login */}
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            <div>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-muted mb-1.5">
+                Endereço de E-mail
+              </label>
+              <input
+                {...register("email")}
+                type="email"
+                autoComplete="email"
+                className={`w-full px-4 py-3 rounded-xl border ${errors.email ? "border-red-500 focus:ring-red-500/10" : "border-border focus:border-primary focus:ring-primary/10"
+                  } bg-background text-sm text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-4 transition-all`}
+                placeholder="consultor@padronizaba.com.br"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs font-medium mt-1.5">
+                  ⚠️ {errors.email.message}
+                </p>
+              )}
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-muted">
+                  Senha de Acesso
+                </label>
+                <a href="#" className="text-xs font-semibold text-primary hover:text-primary-700 transition-colors">
+                  Esqueceu a senha?
+                </a>
+              </div>
+              <input
+                {...register("password")}
+                type="password"
+                autoComplete="current-password"
+                className={`w-full px-4 py-3 rounded-xl border ${errors.password ? "border-red-500 focus:ring-red-500/10" : "border-border focus:border-primary focus:ring-primary/10"
+                  } bg-background text-sm text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-4 transition-all`}
+                placeholder="••••••••"
+              />
+              {errors.password && (
+                <p className="text-red-500 text-xs font-medium mt-1.5">
+                  ⚠️ {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            {/* Checkbox utilizando o tom da marca */}
+            <div className="flex items-center">
+              <input
+                id="remember"
+                type="checkbox"
+                className="h-4 w-4 rounded border-border text-primary focus:ring-primary/20 accent-primary"
+                defaultChecked
+                disabled
+              />
+              <label htmlFor="remember" className="ml-2 block text-sm text-muted select-none">
+                Manter conectado por 30 dias (Modo Campo ativo)
+              </label>
+            </div>
+
+            {/* Alertas de Erro customizados de Status */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-600 text-xs font-medium p-3.5 rounded-xl flex items-start gap-2">
+                <span>❌</span>
+                <p className="leading-relaxed">{error}</p>
+              </div>
+            )}
+
+            {/* Botão Principal com Cores do Tema e Estados Diferenciados */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-primary hover:bg-primary-700 disabled:bg-primary-300 text-primary-foreground font-semibold py-3 px-4 rounded-xl shadow-card transition-all active:scale-[0.99] disabled:pointer-events-none text-sm cursor-pointer"
+            >
+              {loading ? "Autenticando..." : "Entrar no Sistema"}
+            </button>
+          </form>
+
         </div>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4"
-        >
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              E-mail
-            </label>
-            <input
-              {...register("email")}
-              type="email"
-              autoComplete="email"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900"
-              placeholder="consultor@padronizaba.com.br"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Senha
-            </label>
-            <input
-              {...register("password")}
-              type="password"
-              autoComplete="current-password"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900"
-              placeholder="••••••••"
-            />
-            {errors.password && (
-              <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
-            )}
-          </div>
-
-          {error && (
-            <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-xl">
-              {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-primary hover:bg-primary-700 disabled:bg-primary-300 text-white font-semibold py-3 rounded-xl transition-colors"
-          >
-            {loading ? "Entrando..." : "Entrar"}
-          </button>
-        </form>
+        {/* Rodapé institucional */}
+        <div className="text-center text-xs text-muted mt-12 lg:mt-0">
+          &copy; 2026 Padroniza.ba. Todos os direitos reservados.
+        </div>
       </div>
+
+      {/* 🥩 Coluna Direita com a nova sintaxe de gradiente do Tailwind v4 */}
+      <div className="hidden lg:block lg:col-span-7 relative bg-gray-900 overflow-hidden">
+        <div className="absolute inset-0 bg-linear-to-tr from-gray-950 via-gray-950/40 to-transparent z-10" />
+
+        <Image
+          src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&q=80&w=1200"
+          alt="Pecuária de Precisão e Padronização de Carcaça"
+          fill
+          priority
+          className="object-cover object-center transform scale-105"
+        />
+
+        <div className="absolute bottom-16 left-16 right-16 z-20 text-white space-y-4">
+          <div className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase inline-block border border-white/20">
+            Pecuária de Precisão
+          </div>
+          <blockquote className="text-3xl font-bold leading-tight tracking-tight max-w-xl">
+            &ldquo;Padronização e clareza nos relatórios de abate, transformando dados de carcaça em inteligência estratégica para o produtor.&rdquo;
+          </blockquote>
+          <p className="text-sm text-gray-300 font-medium">
+            Módulo de Monitoramento de Rendimento e Maturidade Animal.
+          </p>
+        </div>
+      </div>
+
     </main>
   )
 }

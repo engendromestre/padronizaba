@@ -1,10 +1,10 @@
 "use client"
 
+import { CampoNumerico } from "@/components/ui/CampoNumerico"
 import { calcularTotais, ConsultaForm } from "@/lib/schemas/consulta"
+import { AlertTriangle, Info, Scale } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useFormContext } from "react-hook-form"
-import { CampoNumerico } from "./CampoNumerico"
-import { Scale, Info, AlertTriangle } from "lucide-react"
 
 export function Etapa2Peso() {
   const { watch, setValue, formState: { errors } } = useFormContext<ConsultaForm>()

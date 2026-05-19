@@ -1,20 +1,21 @@
 // src/app/consulta/nova/page.tsx
 "use client"
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ChevronLeft, Loader2, Save } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 
-import { Etapa1Identificacao } from "@/app/components/features/form/Etapa1Identificacao"
-import { Etapa2Peso } from "@/app/components/features/form/Etapa2Peso"
-import { Etapa3Maturidade } from "@/app/components/features/form/Etapa3Maturidade"
-import { Etapa4Acabamento } from "@/app/components/features/form/Etapa4Acabamento"
-import { Etapa5Adicionais } from "@/app/components/features/form/Etapa5Adicionais"
-import { FormProgress } from "@/app/components/features/form/FormProgress"
-import { ConsultaForm, consultaSchema, calcularTotais } from "@/lib/schemas/consulta"
-import { useSidebar } from "@/app/components/layout/SidebarContext"
+import { Etapa1Identificacao } from "@/app/(dashboard)/consulta/_components/form/Etapa1Identificacao"
+import { Etapa2Peso } from "@/app/(dashboard)/consulta/_components/form/Etapa2Peso"
+import { Etapa3Maturidade } from "@/app/(dashboard)/consulta/_components/form/Etapa3Maturidade"
+import { Etapa4Acabamento } from "@/app/(dashboard)/consulta/_components/form/Etapa4Acabamento"
+import { Etapa5Adicionais } from "@/app/(dashboard)/consulta/_components/form/Etapa5Adicionais"
+
+import { useSidebar } from "@/components/layout/SidebarContext"
+import { FormProgress } from "@/components/ui/FormProgress"
+import { calcularTotais, ConsultaForm, consultaSchema } from "@/lib/schemas/consulta"
 
 const TOTAL_ETAPAS = 5
 

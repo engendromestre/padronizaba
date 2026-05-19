@@ -6,6 +6,14 @@ datasource db {
   provider = "postgresql"
 }
 
+/* ENUMS DO ECOSSISTEMA */
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  CONSULTOR
+  CLIENTE
+}
+
 model Estado {
   id        String   @id @default(cuid())
   nome      String
@@ -20,10 +28,10 @@ model Estado {
 }
 
 model Cidade {
-  id       String @id @default(cuid())
-  nome     String
-  ibge     String? @unique
-  estadoId String
+  id        String   @id @default(cuid())
+  nome      String
+  ibge      String?  @unique
+  estadoId  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -57,10 +65,10 @@ model Empresa {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  estado      Estado      @relation(fields: [estadoId], references: [id])
-  clientes    Cliente[]
-  consultores Consultor[]
-  consultas   Consulta[]
+  estado    Estado     @relation(fields: [estadoId], references: [id])
+  clientes  Cliente[]
+  usuarios  User[] 
+  consultas Consulta[]
 
   @@map("empresas")
 }
@@ -77,6 +85,7 @@ model Cliente {
   fazendas  Fazenda[]
   grupos    GrupoWhatsapp[]
   consultas Consulta[]
+  usuarios  User[] 
 
   @@map("clientes")
 }
@@ -106,7 +115,7 @@ model GrupoWhatsapp {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  cliente Cliente @relation(fields: [clienteId], references: [id])
+  cliente   Cliente    @relation(fields: [clienteId], references: [id])
   consultas Consulta[] @relation("ConsultaGrupos")
 
   @@map("grupos_whatsapp")
@@ -123,21 +132,37 @@ model CategoriaAnimal {
   @@map("categorias_animal")
 }
 
-model Consultor {
-  id        String   @id @default(cuid())
-  empresaId String
-  nome      String
-  email     String   @unique
-  senhaHash String
-  ativo     Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+/* 💥 CENTRAL DE IDENTIDADE */
+model User {
+  id           String   @id @default(cuid())
+  empresaId    String?  // Opcional apenas para SUPER_ADMIN global
+  clienteId    String?  // Vinculado apenas se a role for CLIENTE
+  nome         String
+  email        String   @unique
+  senhaHash    String
+  role         Role     @default(CONSULTOR)
+  ativo        Boolean  @default(true)
+  
+  // 🔒 Prova de Autenticidade (Convite Administrativo)
+  invitedBy       String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  emailVerifiedAt DateTime? 
+  registrationIp  String?
+  activationToken String?   @unique // 🎫 Token hash único do convite
+  tokenExpires    DateTime?         // ⏱️ Expiração estrita de 48h
 
-  empresa   Empresa        @relation(fields: [empresaId], references: [id])
-  consultas Consulta[]
-  logs      AuditoriaLog[]
+  // 🔐 Segurança de Duplo Fator (2FA TOTP Offline)
+  twoFactorEnabled Boolean @default(false)
+  twoFactorSecret  String?
 
-  @@map("consultores")
+  // Relacionamentos
+  empresa      Empresa?       @relation(fields: [empresaId], references: [id])
+  cliente      Cliente?       @relation(fields: [clienteId], references: [id])
+  consultas    Consulta[]     // Consultas que este usuário cadastrou (se for consultor)
+  auditoriaLogs AuditoriaLog[]
+
+  @@map("users")
 }
 
 model Consulta {
@@ -145,12 +170,12 @@ model Consulta {
   empresaId         String
   clienteId         String
   fazendaId         String
-  consultorId       String
+  consultorId       String   // Continua apontando para o id do usuário que realizou o abate
   frigorificoId     String
   categoriaAnimalId String
   dataAbate         DateTime
 
-  qtdAnimais      Int @default(0)
+  qtdAnimais      Int    @default(0)
   sexoAnimais     String
   pesoVivoKg      Float
   pesoTotalLoteKg Float
@@ -201,12 +226,12 @@ model Consulta {
   empresa         Empresa            @relation(fields: [empresaId], references: [id])
   cliente         Cliente            @relation(fields: [clienteId], references: [id])
   fazenda         Fazenda            @relation(fields: [fazendaId], references: [id])
-  consultor       Consultor          @relation(fields: [consultorId], references: [id])
+  consultor       User               @relation(fields: [consultorId], references: [id]) // 💥 Alterado para User
   frigorifico     Frigorifico        @relation(fields: [frigorificoId], references: [id])
   categoriaAnimal CategoriaAnimal    @relation(fields: [categoriaAnimalId], references: [id])
   financeiro      ConsultaFinanceiro?
   whatsappLogs    WhatsAppLog[]
-  logs            AuditoriaLog[]
+  auditoriaLogs   AuditoriaLog[]
 
   gruposNotificados GrupoWhatsapp[]   @relation("ConsultaGrupos")
 
@@ -244,8 +269,8 @@ model WhatsAppLog {
 }
 
 model AuditoriaLog {
-  id            String    @id @default(cuid())
-  consultorId   String?
+  id            String   @id @default(cuid())
+  usuarioId     String?  // 💥 Alterado de consultorId para usuarioId geral
   consultaId    String?
   tabelaAfetada String
   registroId    String
@@ -253,10 +278,10 @@ model AuditoriaLog {
   dadosAntes    Json?
   dadosDepois   Json?
   ipOrigem      String?
-  createdAt     DateTime  @default(now())
+  createdAt     DateTime @default(now())
 
-  consultor Consultor? @relation(fields: [consultorId], references: [id])
-  consulta  Consulta?  @relation(fields: [consultaId], references: [id])
+  usuario  User?     @relation(fields: [usuarioId], references: [id]) // 💥 Relacionamento com User
+  consulta Consulta? @relation(fields: [consultaId], references: [id])
 
   @@map("auditoria_logs")
 }

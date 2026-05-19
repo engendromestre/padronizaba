@@ -1,8 +1,9 @@
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
-import { PageHeader } from "../components/layout/PageHeader"
-import { DashboardClient } from "./DashboardClient"
+import { PageHeader } from "../../../components/layout/PageHeader"
+import { DashboardClient } from "./_components/DashboardClient"
+
 
 export default async function DashboardPage() {
   const session = await auth()
@@ -10,7 +11,7 @@ export default async function DashboardPage() {
 
   const consultas = await prisma.consulta.findMany({
     where: {
-      empresaId: session.user.empresaId,
+      empresaId: session.user.empresaId || "",
       consultorId: session.user.id,
     },
     include: {

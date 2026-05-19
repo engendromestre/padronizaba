@@ -192,7 +192,7 @@ export type EmpresaWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Empresa"> | Date | string
   estado?: Prisma.XOR<Prisma.EstadoScalarRelationFilter, Prisma.EstadoWhereInput>
   clientes?: Prisma.ClienteListRelationFilter
-  consultores?: Prisma.ConsultorListRelationFilter
+  usuarios?: Prisma.UserListRelationFilter
   consultas?: Prisma.ConsultaListRelationFilter
 }
 
@@ -205,7 +205,7 @@ export type EmpresaOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   estado?: Prisma.EstadoOrderByWithRelationInput
   clientes?: Prisma.ClienteOrderByRelationAggregateInput
-  consultores?: Prisma.ConsultorOrderByRelationAggregateInput
+  usuarios?: Prisma.UserOrderByRelationAggregateInput
   consultas?: Prisma.ConsultaOrderByRelationAggregateInput
 }
 
@@ -221,7 +221,7 @@ export type EmpresaWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Empresa"> | Date | string
   estado?: Prisma.XOR<Prisma.EstadoScalarRelationFilter, Prisma.EstadoWhereInput>
   clientes?: Prisma.ClienteListRelationFilter
-  consultores?: Prisma.ConsultorListRelationFilter
+  usuarios?: Prisma.UserListRelationFilter
   consultas?: Prisma.ConsultaListRelationFilter
 }, "id">
 
@@ -257,7 +257,7 @@ export type EmpresaCreateInput = {
   updatedAt?: Date | string
   estado: Prisma.EstadoCreateNestedOneWithoutEmpresasInput
   clientes?: Prisma.ClienteCreateNestedManyWithoutEmpresaInput
-  consultores?: Prisma.ConsultorCreateNestedManyWithoutEmpresaInput
+  usuarios?: Prisma.UserCreateNestedManyWithoutEmpresaInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutEmpresaInput
 }
 
@@ -269,7 +269,7 @@ export type EmpresaUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   clientes?: Prisma.ClienteUncheckedCreateNestedManyWithoutEmpresaInput
-  consultores?: Prisma.ConsultorUncheckedCreateNestedManyWithoutEmpresaInput
+  usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutEmpresaInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
@@ -281,7 +281,7 @@ export type EmpresaUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.EstadoUpdateOneRequiredWithoutEmpresasNestedInput
   clientes?: Prisma.ClienteUpdateManyWithoutEmpresaNestedInput
-  consultores?: Prisma.ConsultorUpdateManyWithoutEmpresaNestedInput
+  usuarios?: Prisma.UserUpdateManyWithoutEmpresaNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutEmpresaNestedInput
 }
 
@@ -293,7 +293,7 @@ export type EmpresaUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientes?: Prisma.ClienteUncheckedUpdateManyWithoutEmpresaNestedInput
-  consultores?: Prisma.ConsultorUncheckedUpdateManyWithoutEmpresaNestedInput
+  usuarios?: Prisma.UserUncheckedUpdateManyWithoutEmpresaNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
@@ -365,6 +365,11 @@ export type EmpresaScalarRelationFilter = {
   isNot?: Prisma.EmpresaWhereInput
 }
 
+export type EmpresaNullableScalarRelationFilter = {
+  is?: Prisma.EmpresaWhereInput | null
+  isNot?: Prisma.EmpresaWhereInput | null
+}
+
 export type EmpresaCreateNestedManyWithoutEstadoInput = {
   create?: Prisma.XOR<Prisma.EmpresaCreateWithoutEstadoInput, Prisma.EmpresaUncheckedCreateWithoutEstadoInput> | Prisma.EmpresaCreateWithoutEstadoInput[] | Prisma.EmpresaUncheckedCreateWithoutEstadoInput[]
   connectOrCreate?: Prisma.EmpresaCreateOrConnectWithoutEstadoInput | Prisma.EmpresaCreateOrConnectWithoutEstadoInput[]
@@ -421,18 +426,20 @@ export type EmpresaUpdateOneRequiredWithoutClientesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EmpresaUpdateToOneWithWhereWithoutClientesInput, Prisma.EmpresaUpdateWithoutClientesInput>, Prisma.EmpresaUncheckedUpdateWithoutClientesInput>
 }
 
-export type EmpresaCreateNestedOneWithoutConsultoresInput = {
-  create?: Prisma.XOR<Prisma.EmpresaCreateWithoutConsultoresInput, Prisma.EmpresaUncheckedCreateWithoutConsultoresInput>
-  connectOrCreate?: Prisma.EmpresaCreateOrConnectWithoutConsultoresInput
+export type EmpresaCreateNestedOneWithoutUsuariosInput = {
+  create?: Prisma.XOR<Prisma.EmpresaCreateWithoutUsuariosInput, Prisma.EmpresaUncheckedCreateWithoutUsuariosInput>
+  connectOrCreate?: Prisma.EmpresaCreateOrConnectWithoutUsuariosInput
   connect?: Prisma.EmpresaWhereUniqueInput
 }
 
-export type EmpresaUpdateOneRequiredWithoutConsultoresNestedInput = {
-  create?: Prisma.XOR<Prisma.EmpresaCreateWithoutConsultoresInput, Prisma.EmpresaUncheckedCreateWithoutConsultoresInput>
-  connectOrCreate?: Prisma.EmpresaCreateOrConnectWithoutConsultoresInput
-  upsert?: Prisma.EmpresaUpsertWithoutConsultoresInput
+export type EmpresaUpdateOneWithoutUsuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.EmpresaCreateWithoutUsuariosInput, Prisma.EmpresaUncheckedCreateWithoutUsuariosInput>
+  connectOrCreate?: Prisma.EmpresaCreateOrConnectWithoutUsuariosInput
+  upsert?: Prisma.EmpresaUpsertWithoutUsuariosInput
+  disconnect?: Prisma.EmpresaWhereInput | boolean
+  delete?: Prisma.EmpresaWhereInput | boolean
   connect?: Prisma.EmpresaWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.EmpresaUpdateToOneWithWhereWithoutConsultoresInput, Prisma.EmpresaUpdateWithoutConsultoresInput>, Prisma.EmpresaUncheckedUpdateWithoutConsultoresInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EmpresaUpdateToOneWithWhereWithoutUsuariosInput, Prisma.EmpresaUpdateWithoutUsuariosInput>, Prisma.EmpresaUncheckedUpdateWithoutUsuariosInput>
 }
 
 export type EmpresaCreateNestedOneWithoutConsultasInput = {
@@ -456,7 +463,7 @@ export type EmpresaCreateWithoutEstadoInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   clientes?: Prisma.ClienteCreateNestedManyWithoutEmpresaInput
-  consultores?: Prisma.ConsultorCreateNestedManyWithoutEmpresaInput
+  usuarios?: Prisma.UserCreateNestedManyWithoutEmpresaInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutEmpresaInput
 }
 
@@ -467,7 +474,7 @@ export type EmpresaUncheckedCreateWithoutEstadoInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   clientes?: Prisma.ClienteUncheckedCreateNestedManyWithoutEmpresaInput
-  consultores?: Prisma.ConsultorUncheckedCreateNestedManyWithoutEmpresaInput
+  usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutEmpresaInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
@@ -516,7 +523,7 @@ export type EmpresaCreateWithoutClientesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   estado: Prisma.EstadoCreateNestedOneWithoutEmpresasInput
-  consultores?: Prisma.ConsultorCreateNestedManyWithoutEmpresaInput
+  usuarios?: Prisma.UserCreateNestedManyWithoutEmpresaInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutEmpresaInput
 }
 
@@ -527,7 +534,7 @@ export type EmpresaUncheckedCreateWithoutClientesInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  consultores?: Prisma.ConsultorUncheckedCreateNestedManyWithoutEmpresaInput
+  usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutEmpresaInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
@@ -554,7 +561,7 @@ export type EmpresaUpdateWithoutClientesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.EstadoUpdateOneRequiredWithoutEmpresasNestedInput
-  consultores?: Prisma.ConsultorUpdateManyWithoutEmpresaNestedInput
+  usuarios?: Prisma.UserUpdateManyWithoutEmpresaNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutEmpresaNestedInput
 }
 
@@ -565,11 +572,11 @@ export type EmpresaUncheckedUpdateWithoutClientesInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  consultores?: Prisma.ConsultorUncheckedUpdateManyWithoutEmpresaNestedInput
+  usuarios?: Prisma.UserUncheckedUpdateManyWithoutEmpresaNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
-export type EmpresaCreateWithoutConsultoresInput = {
+export type EmpresaCreateWithoutUsuariosInput = {
   id?: string
   nome: string
   ativo?: boolean
@@ -580,7 +587,7 @@ export type EmpresaCreateWithoutConsultoresInput = {
   consultas?: Prisma.ConsultaCreateNestedManyWithoutEmpresaInput
 }
 
-export type EmpresaUncheckedCreateWithoutConsultoresInput = {
+export type EmpresaUncheckedCreateWithoutUsuariosInput = {
   id?: string
   nome: string
   estadoId: string
@@ -591,23 +598,23 @@ export type EmpresaUncheckedCreateWithoutConsultoresInput = {
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
-export type EmpresaCreateOrConnectWithoutConsultoresInput = {
+export type EmpresaCreateOrConnectWithoutUsuariosInput = {
   where: Prisma.EmpresaWhereUniqueInput
-  create: Prisma.XOR<Prisma.EmpresaCreateWithoutConsultoresInput, Prisma.EmpresaUncheckedCreateWithoutConsultoresInput>
+  create: Prisma.XOR<Prisma.EmpresaCreateWithoutUsuariosInput, Prisma.EmpresaUncheckedCreateWithoutUsuariosInput>
 }
 
-export type EmpresaUpsertWithoutConsultoresInput = {
-  update: Prisma.XOR<Prisma.EmpresaUpdateWithoutConsultoresInput, Prisma.EmpresaUncheckedUpdateWithoutConsultoresInput>
-  create: Prisma.XOR<Prisma.EmpresaCreateWithoutConsultoresInput, Prisma.EmpresaUncheckedCreateWithoutConsultoresInput>
+export type EmpresaUpsertWithoutUsuariosInput = {
+  update: Prisma.XOR<Prisma.EmpresaUpdateWithoutUsuariosInput, Prisma.EmpresaUncheckedUpdateWithoutUsuariosInput>
+  create: Prisma.XOR<Prisma.EmpresaCreateWithoutUsuariosInput, Prisma.EmpresaUncheckedCreateWithoutUsuariosInput>
   where?: Prisma.EmpresaWhereInput
 }
 
-export type EmpresaUpdateToOneWithWhereWithoutConsultoresInput = {
+export type EmpresaUpdateToOneWithWhereWithoutUsuariosInput = {
   where?: Prisma.EmpresaWhereInput
-  data: Prisma.XOR<Prisma.EmpresaUpdateWithoutConsultoresInput, Prisma.EmpresaUncheckedUpdateWithoutConsultoresInput>
+  data: Prisma.XOR<Prisma.EmpresaUpdateWithoutUsuariosInput, Prisma.EmpresaUncheckedUpdateWithoutUsuariosInput>
 }
 
-export type EmpresaUpdateWithoutConsultoresInput = {
+export type EmpresaUpdateWithoutUsuariosInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -618,7 +625,7 @@ export type EmpresaUpdateWithoutConsultoresInput = {
   consultas?: Prisma.ConsultaUpdateManyWithoutEmpresaNestedInput
 }
 
-export type EmpresaUncheckedUpdateWithoutConsultoresInput = {
+export type EmpresaUncheckedUpdateWithoutUsuariosInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   estadoId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -637,7 +644,7 @@ export type EmpresaCreateWithoutConsultasInput = {
   updatedAt?: Date | string
   estado: Prisma.EstadoCreateNestedOneWithoutEmpresasInput
   clientes?: Prisma.ClienteCreateNestedManyWithoutEmpresaInput
-  consultores?: Prisma.ConsultorCreateNestedManyWithoutEmpresaInput
+  usuarios?: Prisma.UserCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaUncheckedCreateWithoutConsultasInput = {
@@ -648,7 +655,7 @@ export type EmpresaUncheckedCreateWithoutConsultasInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   clientes?: Prisma.ClienteUncheckedCreateNestedManyWithoutEmpresaInput
-  consultores?: Prisma.ConsultorUncheckedCreateNestedManyWithoutEmpresaInput
+  usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutEmpresaInput
 }
 
 export type EmpresaCreateOrConnectWithoutConsultasInput = {
@@ -675,7 +682,7 @@ export type EmpresaUpdateWithoutConsultasInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   estado?: Prisma.EstadoUpdateOneRequiredWithoutEmpresasNestedInput
   clientes?: Prisma.ClienteUpdateManyWithoutEmpresaNestedInput
-  consultores?: Prisma.ConsultorUpdateManyWithoutEmpresaNestedInput
+  usuarios?: Prisma.UserUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaUncheckedUpdateWithoutConsultasInput = {
@@ -686,7 +693,7 @@ export type EmpresaUncheckedUpdateWithoutConsultasInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientes?: Prisma.ClienteUncheckedUpdateManyWithoutEmpresaNestedInput
-  consultores?: Prisma.ConsultorUncheckedUpdateManyWithoutEmpresaNestedInput
+  usuarios?: Prisma.UserUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
 export type EmpresaCreateManyEstadoInput = {
@@ -704,7 +711,7 @@ export type EmpresaUpdateWithoutEstadoInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientes?: Prisma.ClienteUpdateManyWithoutEmpresaNestedInput
-  consultores?: Prisma.ConsultorUpdateManyWithoutEmpresaNestedInput
+  usuarios?: Prisma.UserUpdateManyWithoutEmpresaNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutEmpresaNestedInput
 }
 
@@ -715,7 +722,7 @@ export type EmpresaUncheckedUpdateWithoutEstadoInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientes?: Prisma.ClienteUncheckedUpdateManyWithoutEmpresaNestedInput
-  consultores?: Prisma.ConsultorUncheckedUpdateManyWithoutEmpresaNestedInput
+  usuarios?: Prisma.UserUncheckedUpdateManyWithoutEmpresaNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutEmpresaNestedInput
 }
 
@@ -734,13 +741,13 @@ export type EmpresaUncheckedUpdateManyWithoutEstadoInput = {
 
 export type EmpresaCountOutputType = {
   clientes: number
-  consultores: number
+  usuarios: number
   consultas: number
 }
 
 export type EmpresaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   clientes?: boolean | EmpresaCountOutputTypeCountClientesArgs
-  consultores?: boolean | EmpresaCountOutputTypeCountConsultoresArgs
+  usuarios?: boolean | EmpresaCountOutputTypeCountUsuariosArgs
   consultas?: boolean | EmpresaCountOutputTypeCountConsultasArgs
 }
 
@@ -764,8 +771,8 @@ export type EmpresaCountOutputTypeCountClientesArgs<ExtArgs extends runtime.Type
 /**
  * EmpresaCountOutputType without action
  */
-export type EmpresaCountOutputTypeCountConsultoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ConsultorWhereInput
+export type EmpresaCountOutputTypeCountUsuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
 }
 
 /**
@@ -785,7 +792,7 @@ export type EmpresaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   updatedAt?: boolean
   estado?: boolean | Prisma.EstadoDefaultArgs<ExtArgs>
   clientes?: boolean | Prisma.Empresa$clientesArgs<ExtArgs>
-  consultores?: boolean | Prisma.Empresa$consultoresArgs<ExtArgs>
+  usuarios?: boolean | Prisma.Empresa$usuariosArgs<ExtArgs>
   consultas?: boolean | Prisma.Empresa$consultasArgs<ExtArgs>
   _count?: boolean | Prisma.EmpresaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["empresa"]>
@@ -823,7 +830,7 @@ export type EmpresaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type EmpresaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   estado?: boolean | Prisma.EstadoDefaultArgs<ExtArgs>
   clientes?: boolean | Prisma.Empresa$clientesArgs<ExtArgs>
-  consultores?: boolean | Prisma.Empresa$consultoresArgs<ExtArgs>
+  usuarios?: boolean | Prisma.Empresa$usuariosArgs<ExtArgs>
   consultas?: boolean | Prisma.Empresa$consultasArgs<ExtArgs>
   _count?: boolean | Prisma.EmpresaCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -839,7 +846,7 @@ export type $EmpresaPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     estado: Prisma.$EstadoPayload<ExtArgs>
     clientes: Prisma.$ClientePayload<ExtArgs>[]
-    consultores: Prisma.$ConsultorPayload<ExtArgs>[]
+    usuarios: Prisma.$UserPayload<ExtArgs>[]
     consultas: Prisma.$ConsultaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1245,7 +1252,7 @@ export interface Prisma__EmpresaClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   estado<T extends Prisma.EstadoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EstadoDefaultArgs<ExtArgs>>): Prisma.Prisma__EstadoClient<runtime.Types.Result.GetResult<Prisma.$EstadoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   clientes<T extends Prisma.Empresa$clientesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$clientesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  consultores<T extends Prisma.Empresa$consultoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$consultoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConsultorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  usuarios<T extends Prisma.Empresa$usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   consultas<T extends Prisma.Empresa$consultasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Empresa$consultasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConsultaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1707,27 +1714,27 @@ export type Empresa$clientesArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Empresa.consultores
+ * Empresa.usuarios
  */
-export type Empresa$consultoresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Empresa$usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Consultor
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.ConsultorSelect<ExtArgs> | null
+  select?: Prisma.UserSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Consultor
+   * Omit specific fields from the User
    */
-  omit?: Prisma.ConsultorOmit<ExtArgs> | null
+  omit?: Prisma.UserOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ConsultorInclude<ExtArgs> | null
-  where?: Prisma.ConsultorWhereInput
-  orderBy?: Prisma.ConsultorOrderByWithRelationInput | Prisma.ConsultorOrderByWithRelationInput[]
-  cursor?: Prisma.ConsultorWhereUniqueInput
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ConsultorScalarFieldEnum | Prisma.ConsultorScalarFieldEnum[]
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**
