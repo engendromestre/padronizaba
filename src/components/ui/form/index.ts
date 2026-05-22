@@ -1,0 +1,10 @@
+// barrel file — centraliza todos os exports para você importar de um lugar só
+export { Field } from "./Field"
+export { Input } from "./Input"
+export { Select } from "./Select"
+export { Textarea } from "./TextArea"
+export { SegmentedControl } from "./SegmentControl"
+export { SelectMulti } from "./SelectMulti"
+export type { SelectMultiOption } from "./SelectMulti"
+export { FormSection } from "./FormSection"
+export { SubmitButton } from "./SubmitButton"

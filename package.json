@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "npx tsx prisma/seed.ts"
+    "seed": "npx tsx prisma/seed.ts",
+    "generate": "node scripts/generate-client.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -26,6 +27,7 @@
     "react-dom": "19.2.4",
     "react-hook-form": "^7.74.0",
     "react-number-format": "^5.4.5",
+    "resend": "^6.12.3",
     "zod": "^4.4.1"
   },
   "devDependencies": {
