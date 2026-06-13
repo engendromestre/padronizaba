@@ -59,7 +59,8 @@ export type GrupoWhatsapp = Prisma.GrupoWhatsappModel
 export type CategoriaAnimal = Prisma.CategoriaAnimalModel
 /**
  * Model User
- * 💥 CENTRAL DE IDENTIDADE
+ * *
+ *  * 💥 CENTRAL DE IDENTIDADE
  */
 export type User = Prisma.UserModel
 /**

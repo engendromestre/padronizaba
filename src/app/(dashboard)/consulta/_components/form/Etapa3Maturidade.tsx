@@ -1,9 +1,9 @@
 "use client"
 
+import { InputNumerico } from "@/components/ui/form/InputNumerico"
 import { ConsultaForm } from "@/lib/schemas/consulta"
-import { useFormContext } from "react-hook-form"
-import { CampoNumerico } from "@/components/ui/CampoNumerico"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
+import { useFormContext } from "react-hook-form"
 
 const categoriasDentes = [
   { name: "dentes0" as const, label: "0 Dentes" },
@@ -38,7 +38,7 @@ export function Etapa3Maturidade() {
       {/* Grid de Inputs para Mobile */}
       <div className="grid grid-cols-2 gap-4">
         {categoriasDentes.map((d) => (
-          <CampoNumerico
+          <InputNumerico
             key={d.name}
             label={d.label}
             name={d.name}

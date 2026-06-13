@@ -1520,6 +1520,8 @@ export const UserScalarFieldEnum = {
   nome: 'nome',
   email: 'email',
   senhaHash: 'senhaHash',
+  senhaResetToken: 'senhaResetToken',
+  senhaResetExpires: 'senhaResetExpires',
   role: 'role',
   ativo: 'ativo',
   invitedBy: 'invitedBy',

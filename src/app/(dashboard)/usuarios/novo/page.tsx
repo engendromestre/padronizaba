@@ -1,4 +1,3 @@
-// src/app/(dashboard)/usuarios/novo/page.tsx
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"

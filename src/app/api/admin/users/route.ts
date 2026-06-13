@@ -45,7 +45,7 @@ export async function POST(req: Request) {
                 senhaHash: senhaProvisoriaHash,
                 empresaId: empresaId || null,
                 clienteId: clienteId || null,
-                ativo: true,
+                ativo: false,
                 emailVerifiedAt: null,
                 invitedBy: session.user.id,
                 activationToken,

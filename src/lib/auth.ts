@@ -27,7 +27,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     signIn: "/login",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
+      // Login inicial — popula o token com os dados do usuário
       if (user) {
         token.id = user.id ?? ""
         token.nome = user.nome ?? ""
@@ -36,6 +37,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.clienteId = user.clienteId ?? null
         token.twoFactorEnabled = user.twoFactorEnabled
       }
+
+      // Revalida do banco a cada 24h (updateAge) ou quando trigger === "update"
+      if (!user && token.id) {
+        const agora = Date.now()
+        const ultimaVerificacao = (token.checkedAt as number) ?? 0
+        const vencido = agora - ultimaVerificacao > 24 * 60 * 60 * 1000
+
+        if (vencido || trigger === "update") {
+          const dbUser = await prisma.user.findUnique({
+            where: { id: token.id as string },
+            select: { role: true, ativo: true, nome: true, empresaId: true, clienteId: true },
+          })
+
+          if (!dbUser || !dbUser.ativo) {
+            // Usuário desativado — invalida o token forçando logout
+            return null
+          }
+
+          token.role = dbUser.role
+          token.nome = dbUser.nome
+          token.empresaId = dbUser.empresaId
+          token.clienteId = dbUser.clienteId
+          token.checkedAt = agora
+        }
+      }
+
       return token
     },
     async session({ session, token }) {

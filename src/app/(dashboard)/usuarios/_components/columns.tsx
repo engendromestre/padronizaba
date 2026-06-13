@@ -11,7 +11,7 @@ export interface UserItem {
     role: string;
     ativo: boolean;
     emailVerifiedAt?: string | null;
-    createdAt: string;
+    createdAt?: string;
 }
 
 interface ColumnActions {

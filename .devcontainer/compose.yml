@@ -7,6 +7,8 @@ services:
       - ../:/home/node/app:cached
     working_dir: /home/node/app
     command: sleep infinity
+    ports:
+      - "3000:3000"
     environment:
       - DATABASE_URL=postgresql://padronizaba:padronizaba@postgres:5432/padronizaba
     depends_on:

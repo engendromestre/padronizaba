@@ -88,7 +88,9 @@ export function DataTableActionMenu({
     { key: "report" as const, label: "Exportar Relatório", icon: FileText, action: onReport },
   ];
 
-  const visibleActions = allActions.filter((item) => enabledActions.includes(item.key));
+  const visibleActions = allActions.filter(
+    (item) => enabledActions.includes(item.key) && !!item.action
+  );
 
   // ================================================================
   // 💻 DESKTOP — Portal com posição calculada antes do paint

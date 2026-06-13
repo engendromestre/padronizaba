@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Lock, CheckCircle2 } from "lucide-react";
+import { Lock, CheckCircle2 } from "lucide-react";
+import { Input, SubmitButton } from "@/components/ui/form";
 
 interface FormAtivacaoProps {
   userId: string;
@@ -11,11 +12,9 @@ interface FormAtivacaoProps {
 
 export function FormAtivacao({ userId, token }: FormAtivacaoProps) {
   const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [sucesso, setSucesso] = useState(false);
-
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -49,12 +48,7 @@ export function FormAtivacao({ userId, token }: FormAtivacaoProps) {
       }
 
       setSucesso(true);
-      
-      // Aguarda 3 segundos e redireciona para a tela de login
-      setTimeout(() => {
-        router.push("/login");
-      }, 3000);
-
+      setTimeout(() => router.push("/login"), 3000);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erro inesperado.");
     } finally {
@@ -65,12 +59,12 @@ export function FormAtivacao({ userId, token }: FormAtivacaoProps) {
   if (sucesso) {
     return (
       <div className="text-center py-4 space-y-3 animate-in fade-in zoom-in-95">
-        <div className="w-12 h-12 bg-green-50 text-green-600 border border-green-100 rounded-full flex items-center justify-center mx-auto">
+        <div className="w-12 h-12 bg-success/10 text-success border border-success/20 rounded-full flex items-center justify-center mx-auto">
           <CheckCircle2 size={24} />
         </div>
         <h3 className="font-bold text-gray-900 text-base">Conta Ativada!</h3>
         <p className="text-xs text-gray-500">
-          A sua senha foi configurada com sucesso. Estamos a redirecioná-lo para a tela de login...
+          Senha configurada com sucesso. Redirecionando para o login...
         </p>
       </div>
     );
@@ -78,46 +72,25 @@ export function FormAtivacao({ userId, token }: FormAtivacaoProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Nova Senha</label>
-        <div className="relative">
-          <span className="absolute left-3 top-2.5 text-gray-400">
-            <Lock size={16} />
-          </span>
-          <input
-            type={showPassword ? "text" : "password"}
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full pl-9 pr-10 py-2 rounded-xl border border-gray-300 bg-white text-sm text-gray-900 focus:border-blue-500 focus:outline-none"
-            placeholder="••••••••"
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 cursor-pointer"
-          >
-            {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-          </button>
-        </div>
-      </div>
+      <Input
+        label="Nova Senha"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="••••••••"
+        icon={Lock}
+        required
+      />
 
-      <div>
-        <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Confirmar Nova Senha</label>
-        <div className="relative">
-          <span className="absolute left-3 top-2.5 text-gray-400">
-            <Lock size={16} />
-          </span>
-          <input
-            type={showPassword ? "text" : "password"}
-            required
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="w-full pl-9 pr-10 py-2 rounded-xl border border-gray-300 bg-white text-sm text-gray-900 focus:border-blue-500 focus:outline-none"
-            placeholder="••••••••"
-          />
-        </div>
-      </div>
+      <Input
+        label="Confirmar Nova Senha"
+        type="password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        placeholder="••••••••"
+        icon={Lock}
+        required
+      />
 
       {error && (
         <div className="p-3 bg-red-50 border border-red-100 text-red-600 text-xs rounded-xl font-medium">
@@ -125,13 +98,11 @@ export function FormAtivacao({ userId, token }: FormAtivacaoProps) {
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-semibold py-2.5 rounded-xl text-sm transition-all cursor-pointer shadow-sm text-center"
-      >
-        {loading ? "A processar..." : "Definir Senha e Ativar Conta"}
-      </button>
+      <SubmitButton
+        label="Definir Senha e Ativar Conta"
+        loadingLabel="Processando..."
+        loading={loading}
+      />
     </form>
   );
 }

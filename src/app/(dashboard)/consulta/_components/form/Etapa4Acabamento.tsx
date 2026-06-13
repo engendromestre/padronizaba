@@ -3,7 +3,7 @@
 import { useFormContext } from "react-hook-form"
 import { ConsultaForm } from "@/lib/schemas/consulta"
 import { Beef, CheckCircle2, AlertCircle } from "lucide-react"
-import { CampoNumerico } from "@/components/ui/CampoNumerico"
+import { InputNumerico } from "@/components/ui/form/InputNumerico"
 
 const acabamentos = [
   { name: "gordura1" as const, label: "1 — Ausente" },
@@ -41,7 +41,7 @@ export function Etapa4Acabamento() {
       {/* Grid de Inputs Otimizado */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {acabamentos.map((a) => (
-          <CampoNumerico
+          <InputNumerico
             key={a.name}
             label={a.label}
             name={a.name}

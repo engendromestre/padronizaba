@@ -11,10 +11,22 @@ declare module "next-auth" {
     twoFactorEnabled: boolean
   }
 
+  declare module "next-auth/jwt" {
+    interface JWT {
+      id: string
+      nome: string
+      role: "SUPER_ADMIN" | "ADMIN" | "CONSULTOR" | "CLIENTE"
+      empresaId: string | null
+      clienteId: string | null
+      twoFactorEnabled?: boolean
+      checkedAt?: number  // 👈 adiciona essa linha
+    }
+  }
+
   interface Session {
     user: {
       id: string
-      nome: string 
+      nome: string
       role: "SUPER_ADMIN" | "ADMIN" | "CONSULTOR" | "CLIENTE"
       empresaId?: string | null
       clienteId?: string | null
@@ -25,7 +37,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     id: string
-    nome: string 
+    nome: string
     role: "SUPER_ADMIN" | "ADMIN" | "CONSULTOR" | "CLIENTE"
     empresaId?: string | null
     clienteId?: string | null

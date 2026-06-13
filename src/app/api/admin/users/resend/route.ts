@@ -1,8 +1,9 @@
-import { NextResponse } from "next/server"
+// src/app/api/admin/invite/resend/route.ts
 import { auth } from "@/lib/auth"
-import { prisma } from "@/lib/prisma"
 import { enviarEmailConvite } from "@/lib/mailer"
+import { prisma } from "@/lib/prisma"
 import crypto from "crypto"
+import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
     try {
@@ -13,57 +14,47 @@ export async function POST(req: Request) {
 
         const temPermissao = ["SUPER_ADMIN", "ADMIN"].includes(session.user.role)
         if (!temPermissao) {
-            return NextResponse.json({ error: "Acesso negado" }, { status: 403 })
+            return NextResponse.json({ error: "Acesso negado." }, { status: 403 })
         }
 
         const { userId } = await req.json()
-
         if (!userId) {
-            return NextResponse.json({ error: "ID do usuário é obrigatório" }, { status: 400 })
+            return NextResponse.json({ error: "userId obrigatório" }, { status: 400 })
         }
 
-        // 🔍 Busca o usuário e garante que ele ainda não ativou a conta
-        const usuario = await prisma.user.findUnique({
-            where: { id: userId }
-        })
+        const user = await prisma.user.findUnique({ where: { id: userId } })
 
-        if (!usuario) {
-            return NextResponse.json({ error: "Usuário não encontrado" }, { status: 404 })
+        if (!user) {
+            return NextResponse.json({ error: "Usuário não encontrado." }, { status: 404 })
         }
 
-        if (usuario.emailVerifiedAt) {
+        if (user.emailVerifiedAt) {
             return NextResponse.json({ error: "Este usuário já ativou a conta." }, { status: 400 })
         }
 
-        // 🔑 Gera NOVO token e renova a expiração (48h a partir de agora)
+        // Gera novo token e renova expiração
         const activationToken = crypto.randomBytes(32).toString("hex")
-        const tokenExpiry = new Date(Date.now() + 48 * 60 * 60 * 1000)
+        const tokenExpires = new Date(Date.now() + 48 * 60 * 60 * 1000)
 
         await prisma.user.update({
             where: { id: userId },
-            data: {
-                activationToken,
-                tokenExpires: tokenExpiry,
-            }
+            data: { activationToken, tokenExpires },
         })
 
         const linkAtivacao = `${process.env.NEXTAUTH_URL}/convite/${activationToken}`
 
-        // 📧 Tenta reenviar o e-mail
         try {
             await enviarEmailConvite({
-                para: usuario.email,
-                nomeConvidado: usuario.nome,
+                para: user.email,
+                nomeConvidado: user.nome,
                 nomeQuemConvidou: session.user.name ?? "Administrador",
-                role: usuario.role,
+                role: user.role,
                 linkAtivacao,
             })
-        } catch (emailError) {
-            console.error("[Reenvio] Falha no disparo do e-mail:", emailError)
+        } catch {
             return NextResponse.json({
                 success: true,
                 emailEnviado: false,
-                message: "Link renovado, mas o e-mail falhou. Copie o link manualmente.",
                 linkAtivacao,
             })
         }
@@ -71,12 +62,10 @@ export async function POST(req: Request) {
         return NextResponse.json({
             success: true,
             emailEnviado: true,
-            message: "Convite reenviado com sucesso!",
-            linkAtivacao
+            linkAtivacao,
         })
-
     } catch (error) {
-        console.error("Erro no reenvio de convite:", error)
+        console.error("Erro na rota de convite:", error)
         return NextResponse.json({ error: "Erro interno no servidor" }, { status: 500 })
     }
 }

@@ -78,7 +78,7 @@ async function main() {
   ]
 
   console.log("⏳ Criando clientes, fazendas e grupos...")
-  
+
   for (const c of dadosClientes) {
     // Upsert do Cliente
     const cliente = await prisma.cliente.upsert({
@@ -121,9 +121,9 @@ async function main() {
 
   // 🏛️ CENTRAL DE IDENTIDADE: Configurando a malha de usuários do sistema
   console.log("⏳ Configurando a Central de Identidade (Múltiplos Perfis)...")
-  
+
   const senhaHash = await bcrypt.hash("123456", 10)
-  
+
   // 1. O Super Administrador (Você)
   const adminUser = await prisma.user.upsert({
     where: { email: "admin@padronizaba.com.br" },
@@ -194,6 +194,29 @@ async function main() {
       emailVerifiedAt: new Date(),
       activationToken: null,
       tokenExpires: null,
+    }
+  })
+
+  // 5. USUÁRIO PARA TESTE DE ATIVAÇÃO (Playwright)
+  // Este usuário terá um token válido para que o link /convite/token-playwright-valido funcione
+  await prisma.user.upsert({
+    where: { email: "teste-ativacao@padronizaba.com.br" },
+    update: {
+      activationToken: "token-playwright-valido",
+      tokenExpires: new Date(Date.now() + 48 * 60 * 60 * 1000), // Válido por 48h
+      ativo: false,
+      emailVerifiedAt: null,
+    },
+    create: {
+      nome: "Usuário Teste Ativação",
+      email: "teste-ativacao@padronizaba.com.br",
+      senhaHash: "", // Senha vazia pois ele ainda vai definir
+      role: "CLIENTE",
+      ativo: false,
+      empresaId: empresa.id,
+      activationToken: "token-playwright-valido",
+      tokenExpires: new Date(Date.now() + 48 * 60 * 60 * 1000),
+      emailVerifiedAt: null,
     }
   })
 

@@ -3,7 +3,13 @@ FROM node:20-alpine
 RUN apk add --no-cache \
   git \
   curl \
-  bash
+  bash \
+  chromium \
+  nss \
+  freetype \
+  harfbuzz \
+  ca-certificates \
+  ttf-freefont
 
 WORKDIR /home/node/app
 

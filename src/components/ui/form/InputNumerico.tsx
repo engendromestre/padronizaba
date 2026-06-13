@@ -4,7 +4,7 @@ import { PathValue, useFormContext, useWatch } from "react-hook-form"
 import { ConsultaForm } from "@/lib/schemas/consulta"
 import { NumericFormat } from "react-number-format"
 
-interface CampoNumericoProps {
+interface InputNumericoProps {
   label: string
   name: keyof ConsultaForm
   error?: { message?: string }
@@ -13,14 +13,14 @@ interface CampoNumericoProps {
   disabled?: boolean
 }
 
-export function CampoNumerico({
+export function InputNumerico({
   label,
   name,
   error,
   placeholder,
   suffix,
   disabled,
-}: CampoNumericoProps) {
+}: InputNumericoProps) {
   const { setValue, control, register } = useFormContext<ConsultaForm>()
 
   // Registramos o campo para o RHF rastrear o elemento, mas sem o onChange padrão

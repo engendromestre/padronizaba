@@ -1,17 +1,17 @@
 "use client"
 
+import {
+  FormSection,
+  Input,
+  SelectField,
+  SubmitButton
+} from "@/components/ui/form"
+import { ConviteForm, conviteSchema } from "@/lib/schemas/convite"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Check, CheckCircle2, Copy, Mail, User } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm, useWatch } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation"
-import { Mail, User, CheckCircle2, Copy, Check } from "lucide-react"
-import { conviteSchema, ConviteForm } from "@/lib/schemas/convite"
-import {
-  Input,
-  Select,
-  FormSection,
-  SubmitButton,
-} from "@/components/ui/form"
 
 interface Empresa {
   id: string
@@ -66,7 +66,7 @@ export function FormConvite({ empresas, clientes }: FormConviteProps) {
   async function onSubmit(data: ConviteForm) {
     setApiError(null)
     try {
-      const res = await fetch("/api/admin/invite", {
+      const res = await fetch("/api/admin/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -178,7 +178,7 @@ export function FormConvite({ empresas, clientes }: FormConviteProps) {
       </FormSection>
 
       <FormSection title="Perfil de Acesso" icon={Mail}>
-        <Select
+        <SelectField
           label="Tipo de perfil"
           registration={register("role")}
           error={errors.role}
@@ -188,7 +188,7 @@ export function FormConvite({ empresas, clientes }: FormConviteProps) {
         />
 
         {precisaEmpresa && (
-          <Select
+          <SelectField
             label="Empresa vinculada"
             registration={register("empresaId")}
             error={errors.empresaId}
@@ -196,10 +196,11 @@ export function FormConvite({ empresas, clientes }: FormConviteProps) {
             placeholder="Selecione a empresa"
             required
           />
+
         )}
 
         {precisaCliente && (
-          <Select
+          <SelectField
             label="Cliente vinculado"
             registration={register("clienteId")}
             error={errors.clienteId}

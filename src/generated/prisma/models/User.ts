@@ -14,7 +14,8 @@ import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model User
- * 💥 CENTRAL DE IDENTIDADE
+ * *
+ *  * 💥 CENTRAL DE IDENTIDADE
  */
 export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayload>
 
@@ -31,6 +32,8 @@ export type UserMinAggregateOutputType = {
   nome: string | null
   email: string | null
   senhaHash: string | null
+  senhaResetToken: string | null
+  senhaResetExpires: Date | null
   role: $Enums.Role | null
   ativo: boolean | null
   invitedBy: string | null
@@ -51,6 +54,8 @@ export type UserMaxAggregateOutputType = {
   nome: string | null
   email: string | null
   senhaHash: string | null
+  senhaResetToken: string | null
+  senhaResetExpires: Date | null
   role: $Enums.Role | null
   ativo: boolean | null
   invitedBy: string | null
@@ -71,6 +76,8 @@ export type UserCountAggregateOutputType = {
   nome: number
   email: number
   senhaHash: number
+  senhaResetToken: number
+  senhaResetExpires: number
   role: number
   ativo: number
   invitedBy: number
@@ -93,6 +100,8 @@ export type UserMinAggregateInputType = {
   nome?: true
   email?: true
   senhaHash?: true
+  senhaResetToken?: true
+  senhaResetExpires?: true
   role?: true
   ativo?: true
   invitedBy?: true
@@ -113,6 +122,8 @@ export type UserMaxAggregateInputType = {
   nome?: true
   email?: true
   senhaHash?: true
+  senhaResetToken?: true
+  senhaResetExpires?: true
   role?: true
   ativo?: true
   invitedBy?: true
@@ -133,6 +144,8 @@ export type UserCountAggregateInputType = {
   nome?: true
   email?: true
   senhaHash?: true
+  senhaResetToken?: true
+  senhaResetExpires?: true
   role?: true
   ativo?: true
   invitedBy?: true
@@ -226,6 +239,8 @@ export type UserGroupByOutputType = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken: string | null
+  senhaResetExpires: Date | null
   role: $Enums.Role
   ativo: boolean
   invitedBy: string | null
@@ -267,6 +282,8 @@ export type UserWhereInput = {
   nome?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   senhaHash?: Prisma.StringFilter<"User"> | string
+  senhaResetToken?: Prisma.StringNullableFilter<"User"> | string | null
+  senhaResetExpires?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   ativo?: Prisma.BoolFilter<"User"> | boolean
   invitedBy?: Prisma.StringNullableFilter<"User"> | string | null
@@ -291,6 +308,8 @@ export type UserOrderByWithRelationInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senhaHash?: Prisma.SortOrder
+  senhaResetToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  senhaResetExpires?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   invitedBy?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -311,6 +330,7 @@ export type UserOrderByWithRelationInput = {
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  senhaResetToken?: string
   activationToken?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
@@ -319,6 +339,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   clienteId?: Prisma.StringNullableFilter<"User"> | string | null
   nome?: Prisma.StringFilter<"User"> | string
   senhaHash?: Prisma.StringFilter<"User"> | string
+  senhaResetExpires?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   ativo?: Prisma.BoolFilter<"User"> | boolean
   invitedBy?: Prisma.StringNullableFilter<"User"> | string | null
@@ -333,7 +354,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   cliente?: Prisma.XOR<Prisma.ClienteNullableScalarRelationFilter, Prisma.ClienteWhereInput> | null
   consultas?: Prisma.ConsultaListRelationFilter
   auditoriaLogs?: Prisma.AuditoriaLogListRelationFilter
-}, "id" | "email" | "activationToken">
+}, "id" | "email" | "senhaResetToken" | "activationToken">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -342,6 +363,8 @@ export type UserOrderByWithAggregationInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senhaHash?: Prisma.SortOrder
+  senhaResetToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  senhaResetExpires?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   invitedBy?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -368,6 +391,8 @@ export type UserScalarWhereWithAggregatesInput = {
   nome?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   senhaHash?: Prisma.StringWithAggregatesFilter<"User"> | string
+  senhaResetToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  senhaResetExpires?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   ativo?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   invitedBy?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -386,6 +411,8 @@ export type UserCreateInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -410,6 +437,8 @@ export type UserUncheckedCreateInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -430,6 +459,8 @@ export type UserUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -454,6 +485,8 @@ export type UserUncheckedUpdateInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -476,6 +509,8 @@ export type UserCreateManyInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -494,6 +529,8 @@ export type UserUpdateManyMutationInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -514,6 +551,8 @@ export type UserUncheckedUpdateManyInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -544,6 +583,8 @@ export type UserCountOrderByAggregateInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senhaHash?: Prisma.SortOrder
+  senhaResetToken?: Prisma.SortOrder
+  senhaResetExpires?: Prisma.SortOrder
   role?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   invitedBy?: Prisma.SortOrder
@@ -564,6 +605,8 @@ export type UserMaxOrderByAggregateInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senhaHash?: Prisma.SortOrder
+  senhaResetToken?: Prisma.SortOrder
+  senhaResetExpires?: Prisma.SortOrder
   role?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   invitedBy?: Prisma.SortOrder
@@ -584,6 +627,8 @@ export type UserMinOrderByAggregateInput = {
   nome?: Prisma.SortOrder
   email?: Prisma.SortOrder
   senhaHash?: Prisma.SortOrder
+  senhaResetToken?: Prisma.SortOrder
+  senhaResetExpires?: Prisma.SortOrder
   role?: Prisma.SortOrder
   ativo?: Prisma.SortOrder
   invitedBy?: Prisma.SortOrder
@@ -691,12 +736,12 @@ export type UserUncheckedUpdateManyWithoutClienteNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
-export type EnumRoleFieldUpdateOperationsInput = {
-  set?: $Enums.Role
-}
-
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
+}
+
+export type EnumRoleFieldUpdateOperationsInput = {
+  set?: $Enums.Role
 }
 
 export type UserCreateNestedOneWithoutConsultasInput = {
@@ -734,6 +779,8 @@ export type UserCreateWithoutEmpresaInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -756,6 +803,8 @@ export type UserUncheckedCreateWithoutEmpresaInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -807,6 +856,8 @@ export type UserScalarWhereInput = {
   nome?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   senhaHash?: Prisma.StringFilter<"User"> | string
+  senhaResetToken?: Prisma.StringNullableFilter<"User"> | string | null
+  senhaResetExpires?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   ativo?: Prisma.BoolFilter<"User"> | boolean
   invitedBy?: Prisma.StringNullableFilter<"User"> | string | null
@@ -825,6 +876,8 @@ export type UserCreateWithoutClienteInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -847,6 +900,8 @@ export type UserUncheckedCreateWithoutClienteInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -893,6 +948,8 @@ export type UserCreateWithoutConsultasInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -916,6 +973,8 @@ export type UserUncheckedCreateWithoutConsultasInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -951,6 +1010,8 @@ export type UserUpdateWithoutConsultasInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -974,6 +1035,8 @@ export type UserUncheckedUpdateWithoutConsultasInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -993,6 +1056,8 @@ export type UserCreateWithoutAuditoriaLogsInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -1016,6 +1081,8 @@ export type UserUncheckedCreateWithoutAuditoriaLogsInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -1051,6 +1118,8 @@ export type UserUpdateWithoutAuditoriaLogsInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1074,6 +1143,8 @@ export type UserUncheckedUpdateWithoutAuditoriaLogsInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1094,6 +1165,8 @@ export type UserCreateManyEmpresaInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -1112,6 +1185,8 @@ export type UserUpdateWithoutEmpresaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1134,6 +1209,8 @@ export type UserUncheckedUpdateWithoutEmpresaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1155,6 +1232,8 @@ export type UserUncheckedUpdateManyWithoutEmpresaInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1174,6 +1253,8 @@ export type UserCreateManyClienteInput = {
   nome: string
   email: string
   senhaHash: string
+  senhaResetToken?: string | null
+  senhaResetExpires?: Date | string | null
   role?: $Enums.Role
   ativo?: boolean
   invitedBy?: string | null
@@ -1192,6 +1273,8 @@ export type UserUpdateWithoutClienteInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1214,6 +1297,8 @@ export type UserUncheckedUpdateWithoutClienteInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1235,6 +1320,8 @@ export type UserUncheckedUpdateManyWithoutClienteInput = {
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senhaHash?: Prisma.StringFieldUpdateOperationsInput | string
+  senhaResetToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaResetExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1295,6 +1382,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   nome?: boolean
   email?: boolean
   senhaHash?: boolean
+  senhaResetToken?: boolean
+  senhaResetExpires?: boolean
   role?: boolean
   ativo?: boolean
   invitedBy?: boolean
@@ -1320,6 +1409,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nome?: boolean
   email?: boolean
   senhaHash?: boolean
+  senhaResetToken?: boolean
+  senhaResetExpires?: boolean
   role?: boolean
   ativo?: boolean
   invitedBy?: boolean
@@ -1342,6 +1433,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   nome?: boolean
   email?: boolean
   senhaHash?: boolean
+  senhaResetToken?: boolean
+  senhaResetExpires?: boolean
   role?: boolean
   ativo?: boolean
   invitedBy?: boolean
@@ -1364,6 +1457,8 @@ export type UserSelectScalar = {
   nome?: boolean
   email?: boolean
   senhaHash?: boolean
+  senhaResetToken?: boolean
+  senhaResetExpires?: boolean
   role?: boolean
   ativo?: boolean
   invitedBy?: boolean
@@ -1377,7 +1472,7 @@ export type UserSelectScalar = {
   twoFactorSecret?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "clienteId" | "nome" | "email" | "senhaHash" | "role" | "ativo" | "invitedBy" | "createdAt" | "updatedAt" | "emailVerifiedAt" | "registrationIp" | "activationToken" | "tokenExpires" | "twoFactorEnabled" | "twoFactorSecret", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "clienteId" | "nome" | "email" | "senhaHash" | "senhaResetToken" | "senhaResetExpires" | "role" | "ativo" | "invitedBy" | "createdAt" | "updatedAt" | "emailVerifiedAt" | "registrationIp" | "activationToken" | "tokenExpires" | "twoFactorEnabled" | "twoFactorSecret", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   empresa?: boolean | Prisma.User$empresaArgs<ExtArgs>
   cliente?: boolean | Prisma.User$clienteArgs<ExtArgs>
@@ -1409,6 +1504,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     nome: string
     email: string
     senhaHash: string
+    senhaResetToken: string | null
+    senhaResetExpires: Date | null
     role: $Enums.Role
     ativo: boolean
     invitedBy: string | null
@@ -1853,6 +1950,8 @@ export interface UserFieldRefs {
   readonly nome: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly senhaHash: Prisma.FieldRef<"User", 'String'>
+  readonly senhaResetToken: Prisma.FieldRef<"User", 'String'>
+  readonly senhaResetExpires: Prisma.FieldRef<"User", 'DateTime'>
   readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly ativo: Prisma.FieldRef<"User", 'Boolean'>
   readonly invitedBy: Prisma.FieldRef<"User", 'String'>

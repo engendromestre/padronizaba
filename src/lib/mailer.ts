@@ -23,7 +23,7 @@ export async function enviarEmailConvite({
     const text = conviteEmailText({ nomeConvidado, nomeQuemConvidou, role, linkAtivacao })
 
     const { data, error } = await resend.emails.send({
-        from: "Padroniza <onboarding@resend.dev>", // ⚠️ Trocar pelo domínio verificado em produção
+        from: process.env.RESEND_FROM_EMAIL ?? "Padroniza <onboarding@resend.dev>",
         to: para,
         subject: `Você foi convidado para o Padroniza`,
         html,
@@ -36,4 +36,29 @@ export async function enviarEmailConvite({
     }
 
     return data
+}
+
+export async function enviarEmailResetSenha({
+    para,
+    nomeUsuario,
+    linkReset,
+}: {
+    para: string
+    nomeUsuario: string
+    linkReset: string
+}) {
+    const { resetSenhaEmailHtml, resetSenhaEmailText } = await import("@/lib/emails/resetSenha")
+
+    const { error } = await resend.emails.send({
+        from: process.env.RESEND_FROM_EMAIL ?? "Padroniza <onboarding@resend.dev>",
+        to: para,
+        subject: "Redefinição de senha — Padroniza.ba",
+        html: resetSenhaEmailHtml({ nomeUsuario, linkReset }),
+        text: resetSenhaEmailText({ nomeUsuario, linkReset }),
+    })
+
+    if (error) {
+        console.error("[Resend] Erro ao enviar e-mail de reset:", error)
+        throw new Error("Falha ao enviar e-mail de redefinição.")
+    }
 }
