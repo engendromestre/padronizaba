@@ -15,8 +15,8 @@ class CustomAuthError extends CredentialsSignin {
 }
 
 const loginSchema = z.object({
-  email: z.string().email("Formato de e-mail inválido"),
-  password: z.string().min(6, "A senha deve conter no mínimo 6 caracteres"),
+  email: z.email("Formato de e-mail inválido"),
+  password: z.string().min(8).max(64),
 })
 
 export const { handlers, signIn, signOut, auth } = NextAuth({

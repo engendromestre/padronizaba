@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Lock, CheckCircle2 } from "lucide-react";
 import { Input, SubmitButton } from "@/components/ui/form";
+import { senhaForteSchema } from "@/lib/schemas/senha";
 
 interface FormAtivacaoProps {
   userId: string;
@@ -22,6 +23,13 @@ export function FormAtivacao({ userId, token }: FormAtivacaoProps) {
     e.preventDefault();
     setError("");
 
+    const resultado = senhaForteSchema.safeParse(password)
+    if (!resultado.success) {
+        setError(resultado.error.issues[0].message)
+        return
+    }
+
+
     if (password.length < 6) {
       setError("A senha deve ter no mínimo 6 caracteres.");
       return;
@@ -31,7 +39,7 @@ export function FormAtivacao({ userId, token }: FormAtivacaoProps) {
       setError("As senhas digitadas não coincidem.");
       return;
     }
-
+    
     setLoading(true);
 
     try {

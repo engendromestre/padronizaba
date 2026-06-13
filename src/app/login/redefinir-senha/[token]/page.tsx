@@ -1,6 +1,7 @@
 "use client"
 
 import { Input, SubmitButton } from "@/components/ui/form"
+import { senhaForteSchema } from "@/lib/schemas/senha"
 import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import { useState } from "react"
@@ -16,12 +17,14 @@ export default function RedefinirSenhaPage() {
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
-        if (novaSenha !== confirmar) {
-            setErro("As senhas não coincidem.")
+
+        const resultado = senhaForteSchema.safeParse(novaSenha)
+        if (!resultado.success) {
+            setErro(resultado.error.issues[0].message)
             return
         }
-        if (novaSenha.length < 6) {
-            setErro("A senha deve ter no mínimo 6 caracteres.")
+        if (novaSenha !== confirmar) {
+            setErro("As senhas não coincidem.")
             return
         }
 
