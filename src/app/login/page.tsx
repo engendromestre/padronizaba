@@ -56,11 +56,16 @@ export default function LoginPage() {
     })
 
     if (result?.error) {
-      setError(
-        result.error.includes("ativação")
-          ? "Sua conta foi criada, mas ainda aguarda ativação pelo link do convite."
-          : "E-mail ou senha inválidos. Verifique suas credenciais."
-      )
+
+      const mensagens: Record<string, string> = {
+        rate_limit: "Muitas tentativas sem sucesso. Aguarde 15 minutos.",
+        aguarda_ativacao: "Sua conta aguarda ativação pelo link do convite.",
+        conta_suspensa: "Conta suspensa. Entre em contato com o administrador.",
+        senha_incorreta: "E-mail ou senha inválidos. Verifique suas credenciais.",
+        CredentialsSignin: "E-mail ou senha inválidos. Verifique suas credenciais.",
+      }
+
+      setError(mensagens[result.error] ?? "Erro ao autenticar. Tente novamente.")
       setLoading(false)
       return
     }
@@ -141,8 +146,8 @@ export default function LoginPage() {
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 text-xs font-medium p-3.5 rounded-xl flex items-start gap-2">
-                <span>❌</span>
+              <div className="bg-primary/5 border border-primary/20 text-primary text-xs font-medium p-3.5 rounded-xl flex items-start gap-2">
+                <span>⚠️</span>
                 <p className="leading-relaxed">{error}</p>
               </div>
             )}

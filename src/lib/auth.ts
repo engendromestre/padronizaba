@@ -3,12 +3,14 @@ import NextAuth, { CredentialsSignin } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import { z } from "zod"
 import { prisma } from "./prisma"
+import { verificarRateLimit, registrarTentativaFalha, registrarLoginSucesso } from "./rateLimit"
+import { headers } from "next/headers"
 
-// Classe customizada para passar mensagens do servidor para a tela de login
 class CustomAuthError extends CredentialsSignin {
-  constructor(message: string) {
-    super(message)
-    this.message = message
+  constructor(public code: string) {
+    super(code)
+    this.code = code
+    this.cause = { code }
   }
 }
 
@@ -20,15 +22,14 @@ const loginSchema = z.object({
 export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 📆 30 dias estável no campo
-    updateAge: 24 * 60 * 60,   // Atualiza a cada 24 horas
+    maxAge: 30 * 24 * 60 * 60,
+    updateAge: 24 * 60 * 60,
   },
   pages: {
     signIn: "/login",
   },
   callbacks: {
     async jwt({ token, user, trigger }) {
-      // Login inicial — popula o token com os dados do usuário
       if (user) {
         token.id = user.id ?? ""
         token.nome = user.nome ?? ""
@@ -38,7 +39,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.twoFactorEnabled = user.twoFactorEnabled
       }
 
-      // Revalida do banco a cada 24h (updateAge) ou quando trigger === "update"
       if (!user && token.id) {
         const agora = Date.now()
         const ultimaVerificacao = (token.checkedAt as number) ?? 0
@@ -50,10 +50,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             select: { role: true, ativo: true, nome: true, empresaId: true, clienteId: true },
           })
 
-          if (!dbUser || !dbUser.ativo) {
-            // Usuário desativado — invalida o token forçando logout
-            return null
-          }
+          if (!dbUser || !dbUser.ativo) return null
 
           token.role = dbUser.role
           token.nome = dbUser.nome
@@ -83,20 +80,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: "Senha", type: "password" },
       },
       async authorize(credentials) {
+        // Pega o IP via next/headers (disponível no Next.js 15+)
+        const headersList = await headers()
+        const ip = headersList.get("x-forwarded-for")?.split(",")[0].trim()
+          ?? headersList.get("x-real-ip")
+          ?? "unknown"
+
+        // Verifica rate limit
+        const { bloqueado } = verificarRateLimit(ip)
+        if (bloqueado) {
+          throw new CustomAuthError("rate_limit")
+        }
+
         const parsed = loginSchema.safeParse(credentials)
-        if (!parsed.success) return null
+        if (!parsed.success) {
+          registrarTentativaFalha(ip)
+          return null
+        }
 
         const user = await prisma.user.findUnique({
           where: { email: parsed.data.email },
         })
 
         if (!user || !user.ativo) {
-          throw new CustomAuthError("Credenciais inválidas ou conta suspensa.")
+          registrarTentativaFalha(ip)
+          throw new CustomAuthError("conta_suspensa")
         }
 
-        // 🔒 Auditoria / Convite Administrativo:
         if (!user.emailVerifiedAt) {
-          throw new CustomAuthError("Sua conta está aguardando ativação via link de convite.")
+          // Não conta como tentativa falha — não é erro de senha
+          throw new CustomAuthError("aguarda_ativacao")
         }
 
         const senhaCorreta = await bcrypt.compare(
@@ -105,8 +118,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         )
 
         if (!senhaCorreta) {
-          throw new CustomAuthError("E-mail ou senha incorretos.")
+          registrarTentativaFalha(ip)
+          throw new CustomAuthError("senha_incorreta")
         }
+
+        // Login bem-sucedido
+        registrarLoginSucesso(ip)
 
         return {
           id: user.id,
