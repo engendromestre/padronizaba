@@ -46,13 +46,13 @@ model Cidade {
 }
 
 model Frigorifico {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   nome      String
-  cnpj      String?  @unique
+  cnpj      String?   @unique
   cidadeId  String
-  ativo     Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  ativo     Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
   cidade    Cidade     @relation(fields: [cidadeId], references: [id])
@@ -77,14 +77,16 @@ model Empresa {
   @@map("empresas")
 }
 
-/* Produtor - Dono do Lote no Relatorio anual de faturamento */
+/**
+ * Produtor - Dono do Lote no Relatorio anual de faturamento
+ */
 model Cliente {
-  id           String   @id @default(cuid())
+  id           String    @id @default(cuid())
   empresaId    String
   nomeProdutor String
-  ativo        Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  ativo        Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
   deletedAt    DateTime?
 
   empresa   Empresa         @relation(fields: [empresaId], references: [id])
@@ -97,13 +99,13 @@ model Cliente {
 }
 
 model Fazenda {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   nome      String
   clienteId String
   cidadeId  String
-  ativo     Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  ativo     Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 
   cliente   Cliente    @relation(fields: [clienteId], references: [id])
@@ -114,13 +116,13 @@ model Fazenda {
 }
 
 model GrupoWhatsapp {
-  id              String   @id @default(cuid())
+  id              String    @id @default(cuid())
   clienteId       String
-  groupIdWhatsapp String   @unique
+  groupIdWhatsapp String    @unique
   nomeGrupo       String
-  ativo           Boolean  @default(true)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  ativo           Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
   deletedAt       DateTime?
 
   cliente   Cliente    @relation(fields: [clienteId], references: [id])
@@ -177,11 +179,19 @@ model User {
 
   // 🔑 Segurança de Sessão
   senhaAtualizadaEm DateTime? // invalida sessões antigas após troca de senha
+  consultasCanceladas Consulta[] @relation("ConsultasCanceladas")
 
   @@map("users")
 }
 
-/* Registro  de fechamento do late de abate */
+/**
+ * Registro  de fechamento do late de abate
+ */
+enum StatusConsulta {
+  ENVIADA
+  CANCELADA
+}
+
 model Consulta {
   id                String   @id @default(cuid())
   empresaId         String
@@ -250,7 +260,14 @@ model Consulta {
   whatsappLogs    WhatsAppLog[]
   auditoriaLogs   AuditoriaLog[]
 
-  gruposNotificados GrupoWhatsapp[] @relation("ConsultaGrupos")
+  status             StatusConsulta @default(ENVIADA)
+  canceladoPor       String? // userId de quem cancelou
+  canceladoEm        DateTime?
+  motivoCancelamento String?
+  deletedAt          DateTime?
+
+  gruposNotificados   GrupoWhatsapp[] @relation("ConsultaGrupos")
+  canceladoPorUsuario User?           @relation("ConsultasCanceladas", fields: [canceladoPor], references: [id])
 
   @@map("consultas")
 }
