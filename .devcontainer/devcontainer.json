@@ -25,5 +25,13 @@
       }
     }
   },
-  "forwardPorts": [3000, 5432]
+  "forwardPorts": [
+    3000
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "Next.js BFF",
+      "onAutoForward": "notify"
+    }
+  }
 }

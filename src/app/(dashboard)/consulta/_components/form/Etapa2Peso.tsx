@@ -1,10 +1,10 @@
 "use client"
 
+import { InputNumerico } from "@/components/ui/form"
 import { calcularTotais, ConsultaForm } from "@/lib/schemas/consulta"
+import { AlertTriangle, Info, Scale } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useFormContext } from "react-hook-form"
-import { CampoNumerico } from "./CampoNumerico"
-import { Scale, Info, AlertTriangle } from "lucide-react"
 
 export function Etapa2Peso() {
   const { watch, setValue, formState: { errors } } = useFormContext<ConsultaForm>()
@@ -49,7 +49,7 @@ export function Etapa2Peso() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Input Único de Quantidade Total */}
-          <CampoNumerico 
+          <InputNumerico 
             label="Quantidade de Animais" 
             name="qtdAnimais" 
             error={errors.qtdAnimais} 
@@ -105,7 +105,7 @@ export function Etapa2Peso() {
 
       {/* Peso Vivo */}
       <div className="space-y-1">
-        <CampoNumerico
+        <InputNumerico
           label="Peso Vivo Médio (Fazenda)"
           name="pesoVivoKg"
           error={errors.pesoVivoKg}
@@ -144,7 +144,7 @@ export function Etapa2Peso() {
       {/* Inputs de Peso (Um desabilitado conforme o modo) */}
       <div className="grid grid-cols-1 gap-4">
         <div className={modoEntrada === "MEDIA" ? "opacity-60" : ""}>
-          <CampoNumerico
+          <InputNumerico
             label="Peso Total (Carcaças)"
             name="pesoTotalLoteKg"
             error={errors.pesoTotalLoteKg}
@@ -154,7 +154,7 @@ export function Etapa2Peso() {
         </div>
 
         <div className={modoEntrada === "TOTAL" ? "opacity-60" : ""}>
-          <CampoNumerico
+          <InputNumerico
             label="Carcaça Média"
             name="pesoCarcacaKg"
             error={errors.pesoCarcacaKg}

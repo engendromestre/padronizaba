@@ -1,22 +1,23 @@
 // src/app/consulta/nova/page.tsx
 "use client"
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ChevronLeft, Loader2, Save } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { FieldErrors, FormProvider, useForm } from "react-hook-form"
 
-import { Etapa1Identificacao } from "@/app/components/features/form/Etapa1Identificacao"
-import { Etapa2Peso } from "@/app/components/features/form/Etapa2Peso"
-import { Etapa3Maturidade } from "@/app/components/features/form/Etapa3Maturidade"
-import { Etapa4Acabamento } from "@/app/components/features/form/Etapa4Acabamento"
-import { Etapa5Adicionais } from "@/app/components/features/form/Etapa5Adicionais"
-import { FormProgress } from "@/app/components/features/form/FormProgress"
-import { ConsultaForm, consultaSchema, calcularTotais } from "@/lib/schemas/consulta"
-import { useSidebar } from "@/app/components/layout/SidebarContext"
+import { Etapa1Identificacao } from "@/app/(dashboard)/consulta/_components/form/Etapa1Identificacao"
+import { Etapa2Peso } from "@/app/(dashboard)/consulta/_components/form/Etapa2Peso"
+import { Etapa3Maturidade } from "@/app/(dashboard)/consulta/_components/form/Etapa3Maturidade"
+import { Etapa4Acabamento } from "@/app/(dashboard)/consulta/_components/form/Etapa4Acabamento"
+import { Etapa5Adicionais } from "@/app/(dashboard)/consulta/_components/form/Etapa5Adicionais"
 
-const TOTAL_ETAPAS = 5
+import { useSidebar } from "@/components/layout/SidebarContext"
+import { FormProgress } from "@/components/ui/FormProgress"
+import { calcularTotais, ConsultaForm, consultaSchema } from "@/lib/schemas/consulta"
+import { CAMPOS_POR_ETAPA, TOTAL_ETAPAS, VALORES_RESET_PRODUCAO } from "../_constants/formConfig"
+import { salvarConsultaOffline } from "@/lib/schemas/offlineDb"
 
 export default function NovaConsultaPage() {
   const router = useRouter()
@@ -59,45 +60,34 @@ export default function NovaConsultaPage() {
       }
     }
     fetchData()
-  }, [])
-
-  const camposPorEtapa: Array<Array<keyof ConsultaForm>> = [
-    // Etapa 1: Adicionado grupoWhatsappId
-    ["clienteId", "fazendaId", "grupoWhatsappId", "frigorificoId", "categoriaAnimalId", "dataAbate"],
-    // Etapa 2: Adicionado sexoLote
-    ["qtdAnimais", "sexoLote", "pesoVivoKg", "pesoTotalLoteKg", "pesoCarcacaKg"],
-    // Etapa 3
-    ["dentes0", "dentes2", "dentes4", "dentes6", "dentes8"],
-    // Etapa 4
-    ["gordura1", "gordura2", "gordura3", "gordura4", "gordura5"],
-    // Etapa 5
-    ["deslocamento", "relatorioAbate"],
-  ]
+  }, []);
 
   async function avancar() {
-    const campos = camposPorEtapa[etapa - 1]
+    const campos = CAMPOS_POR_ETAPA[etapa - 1] // Usa a constante importada
     const valido = await trigger(campos)
     if (valido) setEtapa((e) => Math.min(e + 1, TOTAL_ETAPAS))
   }
 
   const voltar = () => setEtapa((e) => Math.max(e - 1, 1))
 
-  async function salvarOffline(data: ConsultaForm & { id: string; _savedAt: string }) {
-    return new Promise<void>((resolve, reject) => {
-      const request = indexedDB.open("padroniza-offline", 1)
-      request.onupgradeneeded = () => {
-        if (!request.result.objectStoreNames.contains("consultas-pendentes")) {
-          request.result.createObjectStore("consultas-pendentes", { keyPath: "id" })
-        }
-      }
-      request.onsuccess = () => {
-        const db = request.result
-        const tx = db.transaction("consultas-pendentes", "readwrite")
-        tx.objectStore("consultas-pendentes").add(data)
-        tx.oncomplete = () => resolve()
-        tx.onerror = () => reject(tx.error)
-      }
+  const [feedback, setFeedback] = useState<{ tipo: 'sucesso' | 'offline', visivel: boolean }>({
+    tipo: 'sucesso',
+    visivel: false
+  })
+
+  // Função para resetar o form e mostrar o aviso
+  function exibirFeedback(tipo: 'sucesso' | 'offline') {
+    setFeedback({ tipo, visivel: true })
+
+    // Reseta o formulário para os valores padrão
+    methods.reset({
+      ...methods.getValues(), // Mantém Identificação (Etapa 1)
+      ...VALORES_RESET_PRODUCAO // Sobrescreve zerando a Produção (Etapas 2 a 5)
     })
+    setEtapa(1)
+
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    setTimeout(() => setFeedback(prev => ({ ...prev, visivel: false })), 5000)
   }
 
   async function onSubmit(data: ConsultaForm) {
@@ -112,18 +102,28 @@ export default function NovaConsultaPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataFinal),
+        signal: AbortSignal.timeout(3000),
       })
 
       if (!res.ok) throw new Error("Erro no servidor")
-      router.push("/dashboard?sucesso=1")
+
+      exibirFeedback('sucesso')
+
     } catch {
-      const payloadOffline = {
+      await salvarConsultaOffline({
         ...dataFinal,
         id: crypto.randomUUID(),
         _savedAt: new Date().toISOString()
+      })
+
+      // Tenta registrar o sync se o navegador suportar
+      if ('serviceWorker' in navigator && 'SyncManager' in window) {
+        const reg = await navigator.serviceWorker.ready;
+        await reg.sync.register("sync-consultas");
       }
-      await salvarOffline(payloadOffline)
-      router.push("/dashboard?offline=1")
+
+      exibirFeedback('offline')
+
     } finally {
       if (loading) {
         setLoading(false)
@@ -156,6 +156,20 @@ export default function NovaConsultaPage() {
 
       {/* Área do Formulário */}
       <div className="max-w-lg mx-auto px-4 pt-6 pb-24 space-y-6 min-h-[calc(100vh-4rem)] flex flex-col">
+        {feedback.visivel && (
+          <div className={`p-4 rounded-2xl border flex items-center gap-3 animate-in fade-in zoom-in duration-300 ${feedback.tipo === 'sucesso'
+            ? "bg-green-50 border-green-100 text-green-700"
+            : "bg-blue-50 border-blue-100 text-blue-700"
+            }`}>
+            <div className={`h-2 w-2 rounded-full animate-ping ${feedback.tipo === 'sucesso' ? "bg-green-500" : "bg-blue-500"
+              }`} />
+            <p className="text-sm font-bold">
+              {feedback.tipo === 'sucesso'
+                ? "Lote enviado com sucesso!"
+                : "Lote salvo localmente! Sincronização automática ativa."}
+            </p>
+          </div>
+        )}
         <FormProgress etapaAtual={etapa} totalEtapas={TOTAL_ETAPAS} />
 
         <FormProvider {...methods}>

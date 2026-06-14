@@ -82,10 +82,11 @@ export type GrupoWhatsapp = Prisma.GrupoWhatsappModel
  */
 export type CategoriaAnimal = Prisma.CategoriaAnimalModel
 /**
- * Model Consultor
- * 
+ * Model User
+ * *
+ *  * 💥 CENTRAL DE IDENTIDADE
  */
-export type Consultor = Prisma.ConsultorModel
+export type User = Prisma.UserModel
 /**
  * Model Consulta
  * 

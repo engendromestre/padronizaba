@@ -1,25 +1,25 @@
 "use client"
 
-import { useFormContext } from "react-hook-form"
+import { InputNumerico } from "@/components/ui/form/InputNumerico"
 import { ConsultaForm } from "@/lib/schemas/consulta"
-import { CampoNumerico } from "./CampoNumerico"
-import { Beef, CheckCircle2, AlertCircle } from "lucide-react"
+import { AlertCircle, CheckCircle2 } from "lucide-react"
+import { useFormContext } from "react-hook-form"
 
-const acabamentos = [
-  { name: "gordura1" as const, label: "1 — Ausente" },
-  { name: "gordura2" as const, label: "2 — Escasso" },
-  { name: "gordura3" as const, label: "3 — Mediano" },
-  { name: "gordura4" as const, label: "4 — Uniforme" },
-  { name: "gordura5" as const, label: "5 — Excessivo" },
+const categoriasDentes = [
+  { name: "dentes0" as const, label: "0 Dentes" },
+  { name: "dentes2" as const, label: "2 Dentes" },
+  { name: "dentes4" as const, label: "4 Dentes" },
+  { name: "dentes6" as const, label: "6 Dentes" },
+  { name: "dentes8" as const, label: "8 Dentes" },
 ]
 
-export function Etapa4Acabamento() {
+export function Etapa3Maturidade() {
   const { watch, formState: { errors } } = useFormContext<ConsultaForm>()
   const valores = watch()
 
-  // Cálculo do total informado nesta etapa
-  const totalInformado = acabamentos.reduce(
-    (acc, a) => acc + Number(valores[a.name] ?? 0), 
+  // Cálculo dinâmico do total informado na etapa
+  const totalInformado = categoriasDentes.reduce(
+    (acc, d) => acc + Number(valores[d.name] ?? 0),
     0
   )
 
@@ -29,34 +29,31 @@ export function Etapa4Acabamento() {
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
       <div className="space-y-1 ml-1">
-        <div className="flex items-center gap-2">
-          <Beef size={16} className="text-primary" />
-          <h3 className="text-xs font-bold text-data-label uppercase tracking-widest">Acabamento de Gordura</h3>
-        </div>
+        <h3 className="text-xs font-bold text-data-label uppercase tracking-widest">Maturidade Dentária</h3>
         <p className="text-[10px] text-muted font-medium">
-          Distribua as {qtdTotalEsperada} carcaças conforme a classificação do frigorífico.
+          Distribua o total de {qtdTotalEsperada} animais pelas categorias abaixo.
         </p>
       </div>
 
-      {/* Grid de Inputs Otimizado */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {acabamentos.map((a) => (
-          <CampoNumerico
-            key={a.name}
-            label={a.label}
-            name={a.name}
-            error={errors[a.name]}
-            suffix="carc"
+      {/* Grid de Inputs para Mobile */}
+      <div className="grid grid-cols-2 gap-4">
+        {categoriasDentes.map((d) => (
+          <InputNumerico
+            key={d.name}
+            label={d.label}
+            name={d.name}
+            error={errors[d.name]}
+            suffix="cab"
             placeholder="0"
           />
         ))}
       </div>
 
-      {/* Card de Conferência (Consistência com a Etapa 3) */}
+      {/* Card de Conferência */}
       <div className={`
         mt-6 p-4 rounded-3xl border transition-all duration-500
-        ${isDivergente 
-          ? "bg-warning/10 border-warning/20 animate-pulse" 
+        ${isDivergente
+          ? "bg-warning/10 border-warning/20 animate-pulse"
           : "bg-success/10 border-success/20"}
       `}>
         <div className="flex items-center justify-between">
@@ -67,7 +64,7 @@ export function Etapa4Acabamento() {
               <CheckCircle2 size={18} className="text-success" />
             )}
             <span className={`text-[10px] font-black uppercase tracking-wider ${isDivergente ? "text-warning" : "text-success"}`}>
-              Contagem de Gordura
+              Conferência do Lote
             </span>
           </div>
           <span className={`text-sm font-bold ${isDivergente ? "text-warning" : "text-success"}`}>
@@ -75,9 +72,9 @@ export function Etapa4Acabamento() {
           </span>
         </div>
 
-        {/* Barra de Progresso Visual */}
+        {/* Barra de Progresso Visual de Conferência */}
         <div className="mt-3 h-1.5 w-full bg-black/5 rounded-full overflow-hidden">
-          <div 
+          <div
             className={`h-full transition-all duration-500 ${isDivergente ? "bg-warning" : "bg-success"}`}
             style={{ width: `${Math.min((totalInformado / (qtdTotalEsperada || 1)) * 100, 100)}%` }}
           />
@@ -85,7 +82,7 @@ export function Etapa4Acabamento() {
 
         {isDivergente && (
           <p className="mt-2 text-[10px] font-bold text-warning/80 text-center uppercase tracking-tight">
-            ⚠️ O total deve coincidir com os {qtdTotalEsperada} animais do lote
+            ⚠️ A soma não bate com o total de animais do lote
           </p>
         )}
       </div>

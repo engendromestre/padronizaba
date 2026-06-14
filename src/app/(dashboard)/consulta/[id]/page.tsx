@@ -14,7 +14,7 @@ export default async function ConsultaDetalhe({ params }: Props) {
     if (!session) redirect("/login")
 
     const consulta = await prisma.consulta.findFirst({
-        where: { id, empresaId: session.user.empresaId },
+        where: { id, empresaId: session.user.empresaId || "" },
         include: {
             cliente: true,
             fazenda: { include: { cidade: { include: { estado: true } } } },

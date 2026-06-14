@@ -9,7 +9,7 @@ export async function GET() {
 
   const clientes = await prisma.cliente.findMany({
     where: { 
-      empresaId: session.user.empresaId,
+      empresaId: session.user.empresaId || "",
       ativo: true 
     },
     include: {
