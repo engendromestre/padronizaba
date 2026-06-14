@@ -46,6 +46,7 @@ export async function POST(request: Request) {
                 emailVerifiedAt: new Date(),
                 activationToken: null,
                 tokenExpires: null,
+                senhaAtualizadaEm: new Date(), 
             },
         });
 

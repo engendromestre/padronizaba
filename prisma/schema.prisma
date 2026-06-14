@@ -175,6 +175,9 @@ model User {
   consultas     Consulta[] // Consultas que este usuário cadastrou (se for consultor)
   auditoriaLogs AuditoriaLog[]
 
+  // 🔑 Segurança de Sessão
+  senhaAtualizadaEm DateTime? // invalida sessões antigas após troca de senha
+
   @@map("users")
 }
 
