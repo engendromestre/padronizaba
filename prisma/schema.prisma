@@ -62,12 +62,13 @@ model Frigorifico {
 }
 
 model Empresa {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   nome      String
   estadoId  String
-  ativo     Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  ativo     Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
 
   estado    Estado     @relation(fields: [estadoId], references: [id])
   clientes  Cliente[]
@@ -178,7 +179,7 @@ model User {
   auditoriaLogs AuditoriaLog[]
 
   // 🔑 Segurança de Sessão
-  senhaAtualizadaEm DateTime? // invalida sessões antigas após troca de senha
+  senhaAtualizadaEm   DateTime? // invalida sessões antigas após troca de senha
   consultasCanceladas Consulta[] @relation("ConsultasCanceladas")
 
   @@map("users")

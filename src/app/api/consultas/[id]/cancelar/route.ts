@@ -1,11 +1,10 @@
 // src/app/api/consultas/[id]/cancelar/route.ts
-import { registrarAuditoria } from "@/lib/auditoria"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { registrarAuditoria } from "@/lib/auditoria"
+import { podeCancelarConsulta } from "@/lib/permissoes"
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
-
-const PRAZO_CANCELAMENTO_HORAS = 2
 
 export async function POST(
     req: NextRequest,
@@ -45,42 +44,19 @@ export async function POST(
         return NextResponse.json({ error: "Consulta já está cancelada." }, { status: 400 })
     }
 
-    const { role, id: userId, empresaId } = session.user
-
-    // Verifica permissão
-    if (role === "CONSULTOR") {
-        // Consultor só pode cancelar a própria consulta
-        if (consulta.consultorId !== userId) {
-            return NextResponse.json({ error: "Acesso negado." }, { status: 403 })
-        }
-
-        // Consultor só pode cancelar dentro do prazo de 2h
-        const horasDesdeCreacao = (Date.now() - consulta.createdAt.getTime()) / (1000 * 60 * 60)
-        if (horasDesdeCreacao > PRAZO_CANCELAMENTO_HORAS) {
-            return NextResponse.json(
-                { error: `O prazo de ${PRAZO_CANCELAMENTO_HORAS}h para cancelamento expirou. Contate um administrador.` },
-                { status: 403 }
-            )
-        }
-    } else if (role === "ADMIN") {
-        // Admin só pode cancelar consultas da própria empresa
-        if (consulta.empresaId !== empresaId) {
-            return NextResponse.json({ error: "Acesso negado." }, { status: 403 })
-        }
-    } else if (role !== "SUPER_ADMIN") {
-        return NextResponse.json({ error: "Acesso negado." }, { status: 403 })
+    // Verifica permissão via helper
+    const permissao = podeCancelarConsulta(session.user, consulta)
+    if (!permissao.pode) {
+        return NextResponse.json({ error: permissao.motivo }, { status: 403 })
     }
 
-    const consultaAntes = await prisma.consulta.findUnique({
-        where: { id },
-        select: { status: true, canceladoPor: true, canceladoEm: true, motivoCancelamento: true },
-    })
+    const consultaAntes = { status: consulta.status }
 
     const consultaAtualizada = await prisma.consulta.update({
         where: { id },
         data: {
             status: "CANCELADA",
-            canceladoPor: userId,
+            canceladoPor: session.user.id,
             canceladoEm: new Date(),
             motivoCancelamento: motivo.trim(),
         },
@@ -92,7 +68,7 @@ export async function POST(
         ?? null
 
     await registrarAuditoria({
-        usuarioId: userId,
+        usuarioId: session.user.id,
         tabelaAfetada: "consultas",
         registroId: id,
         acao: "UPDATE",
