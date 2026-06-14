@@ -9,7 +9,6 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "codeium.codeium",
         "prisma.prisma",
         "bradlc.vscode-tailwindcss",
         "dbaeumer.vscode-eslint",
