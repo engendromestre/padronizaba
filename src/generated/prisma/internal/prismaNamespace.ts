@@ -392,7 +392,7 @@ export const ModelName = {
   Fazenda: 'Fazenda',
   GrupoWhatsapp: 'GrupoWhatsapp',
   CategoriaAnimal: 'CategoriaAnimal',
-  Consultor: 'Consultor',
+  User: 'User',
   Consulta: 'Consulta',
   ConsultaFinanceiro: 'ConsultaFinanceiro',
   WhatsAppLog: 'WhatsAppLog',
@@ -412,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "estado" | "cidade" | "frigorifico" | "empresa" | "cliente" | "fazenda" | "grupoWhatsapp" | "categoriaAnimal" | "consultor" | "consulta" | "consultaFinanceiro" | "whatsAppLog" | "auditoriaLog"
+    modelProps: "estado" | "cidade" | "frigorifico" | "empresa" | "cliente" | "fazenda" | "grupoWhatsapp" | "categoriaAnimal" | "user" | "consulta" | "consultaFinanceiro" | "whatsAppLog" | "auditoriaLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1008,77 +1008,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Consultor: {
-      payload: Prisma.$ConsultorPayload<ExtArgs>
-      fields: Prisma.ConsultorFieldRefs
+    User: {
+      payload: Prisma.$UserPayload<ExtArgs>
+      fields: Prisma.UserFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ConsultorFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload> | null
+          args: Prisma.UserFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ConsultorFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload>
+          args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
         }
         findFirst: {
-          args: Prisma.ConsultorFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload> | null
+          args: Prisma.UserFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ConsultorFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload>
+          args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
         }
         findMany: {
-          args: Prisma.ConsultorFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload>[]
+          args: Prisma.UserFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
         }
         create: {
-          args: Prisma.ConsultorCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload>
+          args: Prisma.UserCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
         }
         createMany: {
-          args: Prisma.ConsultorCreateManyArgs<ExtArgs>
+          args: Prisma.UserCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ConsultorCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload>[]
+          args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
         }
         delete: {
-          args: Prisma.ConsultorDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload>
+          args: Prisma.UserDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
         }
         update: {
-          args: Prisma.ConsultorUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload>
+          args: Prisma.UserUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
         }
         deleteMany: {
-          args: Prisma.ConsultorDeleteManyArgs<ExtArgs>
+          args: Prisma.UserDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ConsultorUpdateManyArgs<ExtArgs>
+          args: Prisma.UserUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ConsultorUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload>[]
+          args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>[]
         }
         upsert: {
-          args: Prisma.ConsultorUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ConsultorPayload>
+          args: Prisma.UserUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPayload>
         }
         aggregate: {
-          args: Prisma.ConsultorAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateConsultor>
+          args: Prisma.UserAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUser>
         }
         groupBy: {
-          args: Prisma.ConsultorGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ConsultorGroupByOutputType>[]
+          args: Prisma.UserGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ConsultorCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ConsultorCountAggregateOutputType> | number
+          args: Prisma.UserCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
         }
       }
     }
@@ -1513,18 +1513,29 @@ export const CategoriaAnimalScalarFieldEnum = {
 export type CategoriaAnimalScalarFieldEnum = (typeof CategoriaAnimalScalarFieldEnum)[keyof typeof CategoriaAnimalScalarFieldEnum]
 
 
-export const ConsultorScalarFieldEnum = {
+export const UserScalarFieldEnum = {
   id: 'id',
   empresaId: 'empresaId',
+  clienteId: 'clienteId',
   nome: 'nome',
   email: 'email',
   senhaHash: 'senhaHash',
+  senhaResetToken: 'senhaResetToken',
+  senhaResetExpires: 'senhaResetExpires',
+  role: 'role',
   ativo: 'ativo',
+  invitedBy: 'invitedBy',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  emailVerifiedAt: 'emailVerifiedAt',
+  registrationIp: 'registrationIp',
+  activationToken: 'activationToken',
+  tokenExpires: 'tokenExpires',
+  twoFactorEnabled: 'twoFactorEnabled',
+  twoFactorSecret: 'twoFactorSecret'
 } as const
 
-export type ConsultorScalarFieldEnum = (typeof ConsultorScalarFieldEnum)[keyof typeof ConsultorScalarFieldEnum]
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
 export const ConsultaScalarFieldEnum = {
@@ -1612,7 +1623,7 @@ export type WhatsAppLogScalarFieldEnum = (typeof WhatsAppLogScalarFieldEnum)[key
 
 export const AuditoriaLogScalarFieldEnum = {
   id: 'id',
-  consultorId: 'consultorId',
+  usuarioId: 'usuarioId',
   consultaId: 'consultaId',
   tabelaAfetada: 'tabelaAfetada',
   registroId: 'registroId',
@@ -1705,6 +1716,20 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'Role'
+ */
+export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
+    
+
+
+/**
+ * Reference to a field of type 'Role[]'
+ */
+export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
     
 
 
@@ -1867,7 +1892,7 @@ export type GlobalOmitConfig = {
   fazenda?: Prisma.FazendaOmit
   grupoWhatsapp?: Prisma.GrupoWhatsappOmit
   categoriaAnimal?: Prisma.CategoriaAnimalOmit
-  consultor?: Prisma.ConsultorOmit
+  user?: Prisma.UserOmit
   consulta?: Prisma.ConsultaOmit
   consultaFinanceiro?: Prisma.ConsultaFinanceiroOmit
   whatsAppLog?: Prisma.WhatsAppLogOmit

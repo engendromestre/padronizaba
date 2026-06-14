@@ -59,7 +59,7 @@ export const ModelName = {
   Fazenda: 'Fazenda',
   GrupoWhatsapp: 'GrupoWhatsapp',
   CategoriaAnimal: 'CategoriaAnimal',
-  Consultor: 'Consultor',
+  User: 'User',
   Consulta: 'Consulta',
   ConsultaFinanceiro: 'ConsultaFinanceiro',
   WhatsAppLog: 'WhatsAppLog',
@@ -178,18 +178,29 @@ export const CategoriaAnimalScalarFieldEnum = {
 export type CategoriaAnimalScalarFieldEnum = (typeof CategoriaAnimalScalarFieldEnum)[keyof typeof CategoriaAnimalScalarFieldEnum]
 
 
-export const ConsultorScalarFieldEnum = {
+export const UserScalarFieldEnum = {
   id: 'id',
   empresaId: 'empresaId',
+  clienteId: 'clienteId',
   nome: 'nome',
   email: 'email',
   senhaHash: 'senhaHash',
+  senhaResetToken: 'senhaResetToken',
+  senhaResetExpires: 'senhaResetExpires',
+  role: 'role',
   ativo: 'ativo',
+  invitedBy: 'invitedBy',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  emailVerifiedAt: 'emailVerifiedAt',
+  registrationIp: 'registrationIp',
+  activationToken: 'activationToken',
+  tokenExpires: 'tokenExpires',
+  twoFactorEnabled: 'twoFactorEnabled',
+  twoFactorSecret: 'twoFactorSecret'
 } as const
 
-export type ConsultorScalarFieldEnum = (typeof ConsultorScalarFieldEnum)[keyof typeof ConsultorScalarFieldEnum]
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
 export const ConsultaScalarFieldEnum = {
@@ -277,7 +288,7 @@ export type WhatsAppLogScalarFieldEnum = (typeof WhatsAppLogScalarFieldEnum)[key
 
 export const AuditoriaLogScalarFieldEnum = {
   id: 'id',
-  consultorId: 'consultorId',
+  usuarioId: 'usuarioId',
   consultaId: 'consultaId',
   tabelaAfetada: 'tabelaAfetada',
   registroId: 'registroId',

@@ -695,12 +695,12 @@ export type ConsultaWhereInput = {
   empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   cliente?: Prisma.XOR<Prisma.ClienteScalarRelationFilter, Prisma.ClienteWhereInput>
   fazenda?: Prisma.XOR<Prisma.FazendaScalarRelationFilter, Prisma.FazendaWhereInput>
-  consultor?: Prisma.XOR<Prisma.ConsultorScalarRelationFilter, Prisma.ConsultorWhereInput>
+  consultor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   frigorifico?: Prisma.XOR<Prisma.FrigorificoScalarRelationFilter, Prisma.FrigorificoWhereInput>
   categoriaAnimal?: Prisma.XOR<Prisma.CategoriaAnimalScalarRelationFilter, Prisma.CategoriaAnimalWhereInput>
   financeiro?: Prisma.XOR<Prisma.ConsultaFinanceiroNullableScalarRelationFilter, Prisma.ConsultaFinanceiroWhereInput> | null
   whatsappLogs?: Prisma.WhatsAppLogListRelationFilter
-  logs?: Prisma.AuditoriaLogListRelationFilter
+  auditoriaLogs?: Prisma.AuditoriaLogListRelationFilter
   gruposNotificados?: Prisma.GrupoWhatsappListRelationFilter
 }
 
@@ -757,12 +757,12 @@ export type ConsultaOrderByWithRelationInput = {
   empresa?: Prisma.EmpresaOrderByWithRelationInput
   cliente?: Prisma.ClienteOrderByWithRelationInput
   fazenda?: Prisma.FazendaOrderByWithRelationInput
-  consultor?: Prisma.ConsultorOrderByWithRelationInput
+  consultor?: Prisma.UserOrderByWithRelationInput
   frigorifico?: Prisma.FrigorificoOrderByWithRelationInput
   categoriaAnimal?: Prisma.CategoriaAnimalOrderByWithRelationInput
   financeiro?: Prisma.ConsultaFinanceiroOrderByWithRelationInput
   whatsappLogs?: Prisma.WhatsAppLogOrderByRelationAggregateInput
-  logs?: Prisma.AuditoriaLogOrderByRelationAggregateInput
+  auditoriaLogs?: Prisma.AuditoriaLogOrderByRelationAggregateInput
   gruposNotificados?: Prisma.GrupoWhatsappOrderByRelationAggregateInput
 }
 
@@ -822,12 +822,12 @@ export type ConsultaWhereUniqueInput = Prisma.AtLeast<{
   empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   cliente?: Prisma.XOR<Prisma.ClienteScalarRelationFilter, Prisma.ClienteWhereInput>
   fazenda?: Prisma.XOR<Prisma.FazendaScalarRelationFilter, Prisma.FazendaWhereInput>
-  consultor?: Prisma.XOR<Prisma.ConsultorScalarRelationFilter, Prisma.ConsultorWhereInput>
+  consultor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   frigorifico?: Prisma.XOR<Prisma.FrigorificoScalarRelationFilter, Prisma.FrigorificoWhereInput>
   categoriaAnimal?: Prisma.XOR<Prisma.CategoriaAnimalScalarRelationFilter, Prisma.CategoriaAnimalWhereInput>
   financeiro?: Prisma.XOR<Prisma.ConsultaFinanceiroNullableScalarRelationFilter, Prisma.ConsultaFinanceiroWhereInput> | null
   whatsappLogs?: Prisma.WhatsAppLogListRelationFilter
-  logs?: Prisma.AuditoriaLogListRelationFilter
+  auditoriaLogs?: Prisma.AuditoriaLogListRelationFilter
   gruposNotificados?: Prisma.GrupoWhatsappListRelationFilter
 }, "id">
 
@@ -990,12 +990,12 @@ export type ConsultaCreateInput = {
   empresa: Prisma.EmpresaCreateNestedOneWithoutConsultasInput
   cliente: Prisma.ClienteCreateNestedOneWithoutConsultasInput
   fazenda: Prisma.FazendaCreateNestedOneWithoutConsultasInput
-  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.UserCreateNestedOneWithoutConsultasInput
   frigorifico: Prisma.FrigorificoCreateNestedOneWithoutConsultasInput
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
@@ -1051,7 +1051,7 @@ export type ConsultaUncheckedCreateInput = {
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
@@ -1102,12 +1102,12 @@ export type ConsultaUpdateInput = {
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutConsultasNestedInput
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutConsultasNestedInput
   fazenda?: Prisma.FazendaUpdateOneRequiredWithoutConsultasNestedInput
-  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.UserUpdateOneRequiredWithoutConsultasNestedInput
   frigorifico?: Prisma.FrigorificoUpdateOneRequiredWithoutConsultasNestedInput
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
@@ -1163,7 +1163,7 @@ export type ConsultaUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
@@ -1877,10 +1877,6 @@ export type NullableFloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type ConsultaCreateNestedOneWithoutFinanceiroInput = {
   create?: Prisma.XOR<Prisma.ConsultaCreateWithoutFinanceiroInput, Prisma.ConsultaUncheckedCreateWithoutFinanceiroInput>
   connectOrCreate?: Prisma.ConsultaCreateOrConnectWithoutFinanceiroInput
@@ -1909,20 +1905,20 @@ export type ConsultaUpdateOneRequiredWithoutWhatsappLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ConsultaUpdateToOneWithWhereWithoutWhatsappLogsInput, Prisma.ConsultaUpdateWithoutWhatsappLogsInput>, Prisma.ConsultaUncheckedUpdateWithoutWhatsappLogsInput>
 }
 
-export type ConsultaCreateNestedOneWithoutLogsInput = {
-  create?: Prisma.XOR<Prisma.ConsultaCreateWithoutLogsInput, Prisma.ConsultaUncheckedCreateWithoutLogsInput>
-  connectOrCreate?: Prisma.ConsultaCreateOrConnectWithoutLogsInput
+export type ConsultaCreateNestedOneWithoutAuditoriaLogsInput = {
+  create?: Prisma.XOR<Prisma.ConsultaCreateWithoutAuditoriaLogsInput, Prisma.ConsultaUncheckedCreateWithoutAuditoriaLogsInput>
+  connectOrCreate?: Prisma.ConsultaCreateOrConnectWithoutAuditoriaLogsInput
   connect?: Prisma.ConsultaWhereUniqueInput
 }
 
-export type ConsultaUpdateOneWithoutLogsNestedInput = {
-  create?: Prisma.XOR<Prisma.ConsultaCreateWithoutLogsInput, Prisma.ConsultaUncheckedCreateWithoutLogsInput>
-  connectOrCreate?: Prisma.ConsultaCreateOrConnectWithoutLogsInput
-  upsert?: Prisma.ConsultaUpsertWithoutLogsInput
+export type ConsultaUpdateOneWithoutAuditoriaLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.ConsultaCreateWithoutAuditoriaLogsInput, Prisma.ConsultaUncheckedCreateWithoutAuditoriaLogsInput>
+  connectOrCreate?: Prisma.ConsultaCreateOrConnectWithoutAuditoriaLogsInput
+  upsert?: Prisma.ConsultaUpsertWithoutAuditoriaLogsInput
   disconnect?: Prisma.ConsultaWhereInput | boolean
   delete?: Prisma.ConsultaWhereInput | boolean
   connect?: Prisma.ConsultaWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ConsultaUpdateToOneWithWhereWithoutLogsInput, Prisma.ConsultaUpdateWithoutLogsInput>, Prisma.ConsultaUncheckedUpdateWithoutLogsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ConsultaUpdateToOneWithWhereWithoutAuditoriaLogsInput, Prisma.ConsultaUpdateWithoutAuditoriaLogsInput>, Prisma.ConsultaUncheckedUpdateWithoutAuditoriaLogsInput>
 }
 
 export type ConsultaCreateWithoutFrigorificoInput = {
@@ -1972,11 +1968,11 @@ export type ConsultaCreateWithoutFrigorificoInput = {
   empresa: Prisma.EmpresaCreateNestedOneWithoutConsultasInput
   cliente: Prisma.ClienteCreateNestedOneWithoutConsultasInput
   fazenda: Prisma.FazendaCreateNestedOneWithoutConsultasInput
-  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.UserCreateNestedOneWithoutConsultasInput
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
@@ -2031,7 +2027,7 @@ export type ConsultaUncheckedCreateWithoutFrigorificoInput = {
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
@@ -2162,12 +2158,12 @@ export type ConsultaCreateWithoutEmpresaInput = {
   updatedAt?: Date | string
   cliente: Prisma.ClienteCreateNestedOneWithoutConsultasInput
   fazenda: Prisma.FazendaCreateNestedOneWithoutConsultasInput
-  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.UserCreateNestedOneWithoutConsultasInput
   frigorifico: Prisma.FrigorificoCreateNestedOneWithoutConsultasInput
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
@@ -2222,7 +2218,7 @@ export type ConsultaUncheckedCreateWithoutEmpresaInput = {
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
@@ -2298,12 +2294,12 @@ export type ConsultaCreateWithoutClienteInput = {
   updatedAt?: Date | string
   empresa: Prisma.EmpresaCreateNestedOneWithoutConsultasInput
   fazenda: Prisma.FazendaCreateNestedOneWithoutConsultasInput
-  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.UserCreateNestedOneWithoutConsultasInput
   frigorifico: Prisma.FrigorificoCreateNestedOneWithoutConsultasInput
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
@@ -2358,7 +2354,7 @@ export type ConsultaUncheckedCreateWithoutClienteInput = {
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
@@ -2434,12 +2430,12 @@ export type ConsultaCreateWithoutFazendaInput = {
   updatedAt?: Date | string
   empresa: Prisma.EmpresaCreateNestedOneWithoutConsultasInput
   cliente: Prisma.ClienteCreateNestedOneWithoutConsultasInput
-  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.UserCreateNestedOneWithoutConsultasInput
   frigorifico: Prisma.FrigorificoCreateNestedOneWithoutConsultasInput
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
@@ -2494,7 +2490,7 @@ export type ConsultaUncheckedCreateWithoutFazendaInput = {
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
@@ -2571,12 +2567,12 @@ export type ConsultaCreateWithoutGruposNotificadosInput = {
   empresa: Prisma.EmpresaCreateNestedOneWithoutConsultasInput
   cliente: Prisma.ClienteCreateNestedOneWithoutConsultasInput
   fazenda: Prisma.FazendaCreateNestedOneWithoutConsultasInput
-  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.UserCreateNestedOneWithoutConsultasInput
   frigorifico: Prisma.FrigorificoCreateNestedOneWithoutConsultasInput
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
 }
 
 export type ConsultaUncheckedCreateWithoutGruposNotificadosInput = {
@@ -2631,7 +2627,7 @@ export type ConsultaUncheckedCreateWithoutGruposNotificadosInput = {
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
 }
 
 export type ConsultaCreateOrConnectWithoutGruposNotificadosInput = {
@@ -2702,11 +2698,11 @@ export type ConsultaCreateWithoutCategoriaAnimalInput = {
   empresa: Prisma.EmpresaCreateNestedOneWithoutConsultasInput
   cliente: Prisma.ClienteCreateNestedOneWithoutConsultasInput
   fazenda: Prisma.FazendaCreateNestedOneWithoutConsultasInput
-  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.UserCreateNestedOneWithoutConsultasInput
   frigorifico: Prisma.FrigorificoCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
@@ -2761,7 +2757,7 @@ export type ConsultaUncheckedCreateWithoutCategoriaAnimalInput = {
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
@@ -2842,7 +2838,7 @@ export type ConsultaCreateWithoutConsultorInput = {
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
@@ -2897,7 +2893,7 @@ export type ConsultaUncheckedCreateWithoutConsultorInput = {
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
@@ -2974,11 +2970,11 @@ export type ConsultaCreateWithoutFinanceiroInput = {
   empresa: Prisma.EmpresaCreateNestedOneWithoutConsultasInput
   cliente: Prisma.ClienteCreateNestedOneWithoutConsultasInput
   fazenda: Prisma.FazendaCreateNestedOneWithoutConsultasInput
-  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.UserCreateNestedOneWithoutConsultasInput
   frigorifico: Prisma.FrigorificoCreateNestedOneWithoutConsultasInput
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   whatsappLogs?: Prisma.WhatsAppLogCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
@@ -3033,7 +3029,7 @@ export type ConsultaUncheckedCreateWithoutFinanceiroInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   whatsappLogs?: Prisma.WhatsAppLogUncheckedCreateNestedManyWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
@@ -3100,11 +3096,11 @@ export type ConsultaUpdateWithoutFinanceiroInput = {
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutConsultasNestedInput
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutConsultasNestedInput
   fazenda?: Prisma.FazendaUpdateOneRequiredWithoutConsultasNestedInput
-  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.UserUpdateOneRequiredWithoutConsultasNestedInput
   frigorifico?: Prisma.FrigorificoUpdateOneRequiredWithoutConsultasNestedInput
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
@@ -3159,7 +3155,7 @@ export type ConsultaUncheckedUpdateWithoutFinanceiroInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
@@ -3210,11 +3206,11 @@ export type ConsultaCreateWithoutWhatsappLogsInput = {
   empresa: Prisma.EmpresaCreateNestedOneWithoutConsultasInput
   cliente: Prisma.ClienteCreateNestedOneWithoutConsultasInput
   fazenda: Prisma.FazendaCreateNestedOneWithoutConsultasInput
-  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.UserCreateNestedOneWithoutConsultasInput
   frigorifico: Prisma.FrigorificoCreateNestedOneWithoutConsultasInput
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
@@ -3269,7 +3265,7 @@ export type ConsultaUncheckedCreateWithoutWhatsappLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedCreateNestedOneWithoutConsultaInput
-  logs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutConsultaInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
@@ -3336,11 +3332,11 @@ export type ConsultaUpdateWithoutWhatsappLogsInput = {
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutConsultasNestedInput
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutConsultasNestedInput
   fazenda?: Prisma.FazendaUpdateOneRequiredWithoutConsultasNestedInput
-  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.UserUpdateOneRequiredWithoutConsultasNestedInput
   frigorifico?: Prisma.FrigorificoUpdateOneRequiredWithoutConsultasNestedInput
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
@@ -3395,11 +3391,11 @@ export type ConsultaUncheckedUpdateWithoutWhatsappLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
-export type ConsultaCreateWithoutLogsInput = {
+export type ConsultaCreateWithoutAuditoriaLogsInput = {
   id?: string
   dataAbate: Date | string
   qtdAnimais?: number
@@ -3446,7 +3442,7 @@ export type ConsultaCreateWithoutLogsInput = {
   empresa: Prisma.EmpresaCreateNestedOneWithoutConsultasInput
   cliente: Prisma.ClienteCreateNestedOneWithoutConsultasInput
   fazenda: Prisma.FazendaCreateNestedOneWithoutConsultasInput
-  consultor: Prisma.ConsultorCreateNestedOneWithoutConsultasInput
+  consultor: Prisma.UserCreateNestedOneWithoutConsultasInput
   frigorifico: Prisma.FrigorificoCreateNestedOneWithoutConsultasInput
   categoriaAnimal: Prisma.CategoriaAnimalCreateNestedOneWithoutConsultasInput
   financeiro?: Prisma.ConsultaFinanceiroCreateNestedOneWithoutConsultaInput
@@ -3454,7 +3450,7 @@ export type ConsultaCreateWithoutLogsInput = {
   gruposNotificados?: Prisma.GrupoWhatsappCreateNestedManyWithoutConsultasInput
 }
 
-export type ConsultaUncheckedCreateWithoutLogsInput = {
+export type ConsultaUncheckedCreateWithoutAuditoriaLogsInput = {
   id?: string
   empresaId: string
   clienteId: string
@@ -3509,23 +3505,23 @@ export type ConsultaUncheckedCreateWithoutLogsInput = {
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutConsultasInput
 }
 
-export type ConsultaCreateOrConnectWithoutLogsInput = {
+export type ConsultaCreateOrConnectWithoutAuditoriaLogsInput = {
   where: Prisma.ConsultaWhereUniqueInput
-  create: Prisma.XOR<Prisma.ConsultaCreateWithoutLogsInput, Prisma.ConsultaUncheckedCreateWithoutLogsInput>
+  create: Prisma.XOR<Prisma.ConsultaCreateWithoutAuditoriaLogsInput, Prisma.ConsultaUncheckedCreateWithoutAuditoriaLogsInput>
 }
 
-export type ConsultaUpsertWithoutLogsInput = {
-  update: Prisma.XOR<Prisma.ConsultaUpdateWithoutLogsInput, Prisma.ConsultaUncheckedUpdateWithoutLogsInput>
-  create: Prisma.XOR<Prisma.ConsultaCreateWithoutLogsInput, Prisma.ConsultaUncheckedCreateWithoutLogsInput>
+export type ConsultaUpsertWithoutAuditoriaLogsInput = {
+  update: Prisma.XOR<Prisma.ConsultaUpdateWithoutAuditoriaLogsInput, Prisma.ConsultaUncheckedUpdateWithoutAuditoriaLogsInput>
+  create: Prisma.XOR<Prisma.ConsultaCreateWithoutAuditoriaLogsInput, Prisma.ConsultaUncheckedCreateWithoutAuditoriaLogsInput>
   where?: Prisma.ConsultaWhereInput
 }
 
-export type ConsultaUpdateToOneWithWhereWithoutLogsInput = {
+export type ConsultaUpdateToOneWithWhereWithoutAuditoriaLogsInput = {
   where?: Prisma.ConsultaWhereInput
-  data: Prisma.XOR<Prisma.ConsultaUpdateWithoutLogsInput, Prisma.ConsultaUncheckedUpdateWithoutLogsInput>
+  data: Prisma.XOR<Prisma.ConsultaUpdateWithoutAuditoriaLogsInput, Prisma.ConsultaUncheckedUpdateWithoutAuditoriaLogsInput>
 }
 
-export type ConsultaUpdateWithoutLogsInput = {
+export type ConsultaUpdateWithoutAuditoriaLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dataAbate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   qtdAnimais?: Prisma.IntFieldUpdateOperationsInput | number
@@ -3572,7 +3568,7 @@ export type ConsultaUpdateWithoutLogsInput = {
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutConsultasNestedInput
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutConsultasNestedInput
   fazenda?: Prisma.FazendaUpdateOneRequiredWithoutConsultasNestedInput
-  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.UserUpdateOneRequiredWithoutConsultasNestedInput
   frigorifico?: Prisma.FrigorificoUpdateOneRequiredWithoutConsultasNestedInput
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
@@ -3580,7 +3576,7 @@ export type ConsultaUpdateWithoutLogsInput = {
   gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
-export type ConsultaUncheckedUpdateWithoutLogsInput = {
+export type ConsultaUncheckedUpdateWithoutAuditoriaLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   empresaId?: Prisma.StringFieldUpdateOperationsInput | string
   clienteId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -3733,11 +3729,11 @@ export type ConsultaUpdateWithoutFrigorificoInput = {
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutConsultasNestedInput
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutConsultasNestedInput
   fazenda?: Prisma.FazendaUpdateOneRequiredWithoutConsultasNestedInput
-  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.UserUpdateOneRequiredWithoutConsultasNestedInput
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
@@ -3792,7 +3788,7 @@ export type ConsultaUncheckedUpdateWithoutFrigorificoInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
@@ -3944,12 +3940,12 @@ export type ConsultaUpdateWithoutEmpresaInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutConsultasNestedInput
   fazenda?: Prisma.FazendaUpdateOneRequiredWithoutConsultasNestedInput
-  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.UserUpdateOneRequiredWithoutConsultasNestedInput
   frigorifico?: Prisma.FrigorificoUpdateOneRequiredWithoutConsultasNestedInput
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
@@ -4004,7 +4000,7 @@ export type ConsultaUncheckedUpdateWithoutEmpresaInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
@@ -4156,12 +4152,12 @@ export type ConsultaUpdateWithoutClienteInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutConsultasNestedInput
   fazenda?: Prisma.FazendaUpdateOneRequiredWithoutConsultasNestedInput
-  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.UserUpdateOneRequiredWithoutConsultasNestedInput
   frigorifico?: Prisma.FrigorificoUpdateOneRequiredWithoutConsultasNestedInput
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
@@ -4216,7 +4212,7 @@ export type ConsultaUncheckedUpdateWithoutClienteInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
@@ -4368,12 +4364,12 @@ export type ConsultaUpdateWithoutFazendaInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutConsultasNestedInput
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutConsultasNestedInput
-  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.UserUpdateOneRequiredWithoutConsultasNestedInput
   frigorifico?: Prisma.FrigorificoUpdateOneRequiredWithoutConsultasNestedInput
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
@@ -4428,7 +4424,7 @@ export type ConsultaUncheckedUpdateWithoutFazendaInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
@@ -4530,12 +4526,12 @@ export type ConsultaUpdateWithoutGruposNotificadosInput = {
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutConsultasNestedInput
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutConsultasNestedInput
   fazenda?: Prisma.FazendaUpdateOneRequiredWithoutConsultasNestedInput
-  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.UserUpdateOneRequiredWithoutConsultasNestedInput
   frigorifico?: Prisma.FrigorificoUpdateOneRequiredWithoutConsultasNestedInput
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
 }
 
 export type ConsultaUncheckedUpdateWithoutGruposNotificadosInput = {
@@ -4590,7 +4586,7 @@ export type ConsultaUncheckedUpdateWithoutGruposNotificadosInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
 }
 
 export type ConsultaUncheckedUpdateManyWithoutGruposNotificadosInput = {
@@ -4743,11 +4739,11 @@ export type ConsultaUpdateWithoutCategoriaAnimalInput = {
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutConsultasNestedInput
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutConsultasNestedInput
   fazenda?: Prisma.FazendaUpdateOneRequiredWithoutConsultasNestedInput
-  consultor?: Prisma.ConsultorUpdateOneRequiredWithoutConsultasNestedInput
+  consultor?: Prisma.UserUpdateOneRequiredWithoutConsultasNestedInput
   frigorifico?: Prisma.FrigorificoUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
@@ -4802,7 +4798,7 @@ export type ConsultaUncheckedUpdateWithoutCategoriaAnimalInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
@@ -4959,7 +4955,7 @@ export type ConsultaUpdateWithoutConsultorInput = {
   categoriaAnimal?: Prisma.CategoriaAnimalUpdateOneRequiredWithoutConsultasNestedInput
   financeiro?: Prisma.ConsultaFinanceiroUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUpdateManyWithoutConsultasNestedInput
 }
 
@@ -5014,7 +5010,7 @@ export type ConsultaUncheckedUpdateWithoutConsultorInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financeiro?: Prisma.ConsultaFinanceiroUncheckedUpdateOneWithoutConsultaNestedInput
   whatsappLogs?: Prisma.WhatsAppLogUncheckedUpdateManyWithoutConsultaNestedInput
-  logs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
+  auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput
   gruposNotificados?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutConsultasNestedInput
 }
 
@@ -5076,13 +5072,13 @@ export type ConsultaUncheckedUpdateManyWithoutConsultorInput = {
 
 export type ConsultaCountOutputType = {
   whatsappLogs: number
-  logs: number
+  auditoriaLogs: number
   gruposNotificados: number
 }
 
 export type ConsultaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   whatsappLogs?: boolean | ConsultaCountOutputTypeCountWhatsappLogsArgs
-  logs?: boolean | ConsultaCountOutputTypeCountLogsArgs
+  auditoriaLogs?: boolean | ConsultaCountOutputTypeCountAuditoriaLogsArgs
   gruposNotificados?: boolean | ConsultaCountOutputTypeCountGruposNotificadosArgs
 }
 
@@ -5106,7 +5102,7 @@ export type ConsultaCountOutputTypeCountWhatsappLogsArgs<ExtArgs extends runtime
 /**
  * ConsultaCountOutputType without action
  */
-export type ConsultaCountOutputTypeCountLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type ConsultaCountOutputTypeCountAuditoriaLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.AuditoriaLogWhereInput
 }
 
@@ -5171,12 +5167,12 @@ export type ConsultaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
   fazenda?: boolean | Prisma.FazendaDefaultArgs<ExtArgs>
-  consultor?: boolean | Prisma.ConsultorDefaultArgs<ExtArgs>
+  consultor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   frigorifico?: boolean | Prisma.FrigorificoDefaultArgs<ExtArgs>
   categoriaAnimal?: boolean | Prisma.CategoriaAnimalDefaultArgs<ExtArgs>
   financeiro?: boolean | Prisma.Consulta$financeiroArgs<ExtArgs>
   whatsappLogs?: boolean | Prisma.Consulta$whatsappLogsArgs<ExtArgs>
-  logs?: boolean | Prisma.Consulta$logsArgs<ExtArgs>
+  auditoriaLogs?: boolean | Prisma.Consulta$auditoriaLogsArgs<ExtArgs>
   gruposNotificados?: boolean | Prisma.Consulta$gruposNotificadosArgs<ExtArgs>
   _count?: boolean | Prisma.ConsultaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["consulta"]>
@@ -5234,7 +5230,7 @@ export type ConsultaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
   fazenda?: boolean | Prisma.FazendaDefaultArgs<ExtArgs>
-  consultor?: boolean | Prisma.ConsultorDefaultArgs<ExtArgs>
+  consultor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   frigorifico?: boolean | Prisma.FrigorificoDefaultArgs<ExtArgs>
   categoriaAnimal?: boolean | Prisma.CategoriaAnimalDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["consulta"]>
@@ -5292,7 +5288,7 @@ export type ConsultaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
   fazenda?: boolean | Prisma.FazendaDefaultArgs<ExtArgs>
-  consultor?: boolean | Prisma.ConsultorDefaultArgs<ExtArgs>
+  consultor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   frigorifico?: boolean | Prisma.FrigorificoDefaultArgs<ExtArgs>
   categoriaAnimal?: boolean | Prisma.CategoriaAnimalDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["consulta"]>
@@ -5354,12 +5350,12 @@ export type ConsultaInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
   fazenda?: boolean | Prisma.FazendaDefaultArgs<ExtArgs>
-  consultor?: boolean | Prisma.ConsultorDefaultArgs<ExtArgs>
+  consultor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   frigorifico?: boolean | Prisma.FrigorificoDefaultArgs<ExtArgs>
   categoriaAnimal?: boolean | Prisma.CategoriaAnimalDefaultArgs<ExtArgs>
   financeiro?: boolean | Prisma.Consulta$financeiroArgs<ExtArgs>
   whatsappLogs?: boolean | Prisma.Consulta$whatsappLogsArgs<ExtArgs>
-  logs?: boolean | Prisma.Consulta$logsArgs<ExtArgs>
+  auditoriaLogs?: boolean | Prisma.Consulta$auditoriaLogsArgs<ExtArgs>
   gruposNotificados?: boolean | Prisma.Consulta$gruposNotificadosArgs<ExtArgs>
   _count?: boolean | Prisma.ConsultaCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -5367,7 +5363,7 @@ export type ConsultaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
   fazenda?: boolean | Prisma.FazendaDefaultArgs<ExtArgs>
-  consultor?: boolean | Prisma.ConsultorDefaultArgs<ExtArgs>
+  consultor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   frigorifico?: boolean | Prisma.FrigorificoDefaultArgs<ExtArgs>
   categoriaAnimal?: boolean | Prisma.CategoriaAnimalDefaultArgs<ExtArgs>
 }
@@ -5375,7 +5371,7 @@ export type ConsultaIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
   fazenda?: boolean | Prisma.FazendaDefaultArgs<ExtArgs>
-  consultor?: boolean | Prisma.ConsultorDefaultArgs<ExtArgs>
+  consultor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   frigorifico?: boolean | Prisma.FrigorificoDefaultArgs<ExtArgs>
   categoriaAnimal?: boolean | Prisma.CategoriaAnimalDefaultArgs<ExtArgs>
 }
@@ -5386,12 +5382,12 @@ export type $ConsultaPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     empresa: Prisma.$EmpresaPayload<ExtArgs>
     cliente: Prisma.$ClientePayload<ExtArgs>
     fazenda: Prisma.$FazendaPayload<ExtArgs>
-    consultor: Prisma.$ConsultorPayload<ExtArgs>
+    consultor: Prisma.$UserPayload<ExtArgs>
     frigorifico: Prisma.$FrigorificoPayload<ExtArgs>
     categoriaAnimal: Prisma.$CategoriaAnimalPayload<ExtArgs>
     financeiro: Prisma.$ConsultaFinanceiroPayload<ExtArgs> | null
     whatsappLogs: Prisma.$WhatsAppLogPayload<ExtArgs>[]
-    logs: Prisma.$AuditoriaLogPayload<ExtArgs>[]
+    auditoriaLogs: Prisma.$AuditoriaLogPayload<ExtArgs>[]
     gruposNotificados: Prisma.$GrupoWhatsappPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -5841,12 +5837,12 @@ export interface Prisma__ConsultaClient<T, Null = never, ExtArgs extends runtime
   empresa<T extends Prisma.EmpresaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EmpresaDefaultArgs<ExtArgs>>): Prisma.Prisma__EmpresaClient<runtime.Types.Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   cliente<T extends Prisma.ClienteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClienteDefaultArgs<ExtArgs>>): Prisma.Prisma__ClienteClient<runtime.Types.Result.GetResult<Prisma.$ClientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   fazenda<T extends Prisma.FazendaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FazendaDefaultArgs<ExtArgs>>): Prisma.Prisma__FazendaClient<runtime.Types.Result.GetResult<Prisma.$FazendaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  consultor<T extends Prisma.ConsultorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConsultorDefaultArgs<ExtArgs>>): Prisma.Prisma__ConsultorClient<runtime.Types.Result.GetResult<Prisma.$ConsultorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  consultor<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   frigorifico<T extends Prisma.FrigorificoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FrigorificoDefaultArgs<ExtArgs>>): Prisma.Prisma__FrigorificoClient<runtime.Types.Result.GetResult<Prisma.$FrigorificoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   categoriaAnimal<T extends Prisma.CategoriaAnimalDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoriaAnimalDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoriaAnimalClient<runtime.Types.Result.GetResult<Prisma.$CategoriaAnimalPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   financeiro<T extends Prisma.Consulta$financeiroArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consulta$financeiroArgs<ExtArgs>>): Prisma.Prisma__ConsultaFinanceiroClient<runtime.Types.Result.GetResult<Prisma.$ConsultaFinanceiroPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   whatsappLogs<T extends Prisma.Consulta$whatsappLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consulta$whatsappLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WhatsAppLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  logs<T extends Prisma.Consulta$logsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consulta$logsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditoriaLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  auditoriaLogs<T extends Prisma.Consulta$auditoriaLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consulta$auditoriaLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditoriaLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   gruposNotificados<T extends Prisma.Consulta$gruposNotificadosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Consulta$gruposNotificadosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GrupoWhatsappPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6370,9 +6366,9 @@ export type Consulta$whatsappLogsArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
- * Consulta.logs
+ * Consulta.auditoriaLogs
  */
-export type Consulta$logsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Consulta$auditoriaLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the AuditoriaLog
    */

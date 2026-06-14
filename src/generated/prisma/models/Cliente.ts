@@ -194,6 +194,7 @@ export type ClienteWhereInput = {
   fazendas?: Prisma.FazendaListRelationFilter
   grupos?: Prisma.GrupoWhatsappListRelationFilter
   consultas?: Prisma.ConsultaListRelationFilter
+  usuarios?: Prisma.UserListRelationFilter
 }
 
 export type ClienteOrderByWithRelationInput = {
@@ -207,6 +208,7 @@ export type ClienteOrderByWithRelationInput = {
   fazendas?: Prisma.FazendaOrderByRelationAggregateInput
   grupos?: Prisma.GrupoWhatsappOrderByRelationAggregateInput
   consultas?: Prisma.ConsultaOrderByRelationAggregateInput
+  usuarios?: Prisma.UserOrderByRelationAggregateInput
 }
 
 export type ClienteWhereUniqueInput = Prisma.AtLeast<{
@@ -223,6 +225,7 @@ export type ClienteWhereUniqueInput = Prisma.AtLeast<{
   fazendas?: Prisma.FazendaListRelationFilter
   grupos?: Prisma.GrupoWhatsappListRelationFilter
   consultas?: Prisma.ConsultaListRelationFilter
+  usuarios?: Prisma.UserListRelationFilter
 }, "id">
 
 export type ClienteOrderByWithAggregationInput = {
@@ -259,6 +262,7 @@ export type ClienteCreateInput = {
   fazendas?: Prisma.FazendaCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutClienteInput
+  usuarios?: Prisma.UserCreateNestedManyWithoutClienteInput
 }
 
 export type ClienteUncheckedCreateInput = {
@@ -271,6 +275,7 @@ export type ClienteUncheckedCreateInput = {
   fazendas?: Prisma.FazendaUncheckedCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutClienteInput
+  usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutClienteInput
 }
 
 export type ClienteUpdateInput = {
@@ -283,6 +288,7 @@ export type ClienteUpdateInput = {
   fazendas?: Prisma.FazendaUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutClienteNestedInput
+  usuarios?: Prisma.UserUpdateManyWithoutClienteNestedInput
 }
 
 export type ClienteUncheckedUpdateInput = {
@@ -295,6 +301,7 @@ export type ClienteUncheckedUpdateInput = {
   fazendas?: Prisma.FazendaUncheckedUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutClienteNestedInput
+  usuarios?: Prisma.UserUncheckedUpdateManyWithoutClienteNestedInput
 }
 
 export type ClienteCreateManyInput = {
@@ -363,6 +370,11 @@ export type ClienteMinOrderByAggregateInput = {
 export type ClienteScalarRelationFilter = {
   is?: Prisma.ClienteWhereInput
   isNot?: Prisma.ClienteWhereInput
+}
+
+export type ClienteNullableScalarRelationFilter = {
+  is?: Prisma.ClienteWhereInput | null
+  isNot?: Prisma.ClienteWhereInput | null
 }
 
 export type ClienteCreateNestedManyWithoutEmpresaInput = {
@@ -435,6 +447,22 @@ export type ClienteUpdateOneRequiredWithoutGruposNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClienteUpdateToOneWithWhereWithoutGruposInput, Prisma.ClienteUpdateWithoutGruposInput>, Prisma.ClienteUncheckedUpdateWithoutGruposInput>
 }
 
+export type ClienteCreateNestedOneWithoutUsuariosInput = {
+  create?: Prisma.XOR<Prisma.ClienteCreateWithoutUsuariosInput, Prisma.ClienteUncheckedCreateWithoutUsuariosInput>
+  connectOrCreate?: Prisma.ClienteCreateOrConnectWithoutUsuariosInput
+  connect?: Prisma.ClienteWhereUniqueInput
+}
+
+export type ClienteUpdateOneWithoutUsuariosNestedInput = {
+  create?: Prisma.XOR<Prisma.ClienteCreateWithoutUsuariosInput, Prisma.ClienteUncheckedCreateWithoutUsuariosInput>
+  connectOrCreate?: Prisma.ClienteCreateOrConnectWithoutUsuariosInput
+  upsert?: Prisma.ClienteUpsertWithoutUsuariosInput
+  disconnect?: Prisma.ClienteWhereInput | boolean
+  delete?: Prisma.ClienteWhereInput | boolean
+  connect?: Prisma.ClienteWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClienteUpdateToOneWithWhereWithoutUsuariosInput, Prisma.ClienteUpdateWithoutUsuariosInput>, Prisma.ClienteUncheckedUpdateWithoutUsuariosInput>
+}
+
 export type ClienteCreateNestedOneWithoutConsultasInput = {
   create?: Prisma.XOR<Prisma.ClienteCreateWithoutConsultasInput, Prisma.ClienteUncheckedCreateWithoutConsultasInput>
   connectOrCreate?: Prisma.ClienteCreateOrConnectWithoutConsultasInput
@@ -458,6 +486,7 @@ export type ClienteCreateWithoutEmpresaInput = {
   fazendas?: Prisma.FazendaCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutClienteInput
+  usuarios?: Prisma.UserCreateNestedManyWithoutClienteInput
 }
 
 export type ClienteUncheckedCreateWithoutEmpresaInput = {
@@ -469,6 +498,7 @@ export type ClienteUncheckedCreateWithoutEmpresaInput = {
   fazendas?: Prisma.FazendaUncheckedCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutClienteInput
+  usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutClienteInput
 }
 
 export type ClienteCreateOrConnectWithoutEmpresaInput = {
@@ -518,6 +548,7 @@ export type ClienteCreateWithoutFazendasInput = {
   empresa: Prisma.EmpresaCreateNestedOneWithoutClientesInput
   grupos?: Prisma.GrupoWhatsappCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutClienteInput
+  usuarios?: Prisma.UserCreateNestedManyWithoutClienteInput
 }
 
 export type ClienteUncheckedCreateWithoutFazendasInput = {
@@ -529,6 +560,7 @@ export type ClienteUncheckedCreateWithoutFazendasInput = {
   updatedAt?: Date | string
   grupos?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutClienteInput
+  usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutClienteInput
 }
 
 export type ClienteCreateOrConnectWithoutFazendasInput = {
@@ -556,6 +588,7 @@ export type ClienteUpdateWithoutFazendasInput = {
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutClientesNestedInput
   grupos?: Prisma.GrupoWhatsappUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutClienteNestedInput
+  usuarios?: Prisma.UserUpdateManyWithoutClienteNestedInput
 }
 
 export type ClienteUncheckedUpdateWithoutFazendasInput = {
@@ -567,6 +600,7 @@ export type ClienteUncheckedUpdateWithoutFazendasInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   grupos?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutClienteNestedInput
+  usuarios?: Prisma.UserUncheckedUpdateManyWithoutClienteNestedInput
 }
 
 export type ClienteCreateWithoutGruposInput = {
@@ -578,6 +612,7 @@ export type ClienteCreateWithoutGruposInput = {
   empresa: Prisma.EmpresaCreateNestedOneWithoutClientesInput
   fazendas?: Prisma.FazendaCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutClienteInput
+  usuarios?: Prisma.UserCreateNestedManyWithoutClienteInput
 }
 
 export type ClienteUncheckedCreateWithoutGruposInput = {
@@ -589,6 +624,7 @@ export type ClienteUncheckedCreateWithoutGruposInput = {
   updatedAt?: Date | string
   fazendas?: Prisma.FazendaUncheckedCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutClienteInput
+  usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutClienteInput
 }
 
 export type ClienteCreateOrConnectWithoutGruposInput = {
@@ -616,6 +652,7 @@ export type ClienteUpdateWithoutGruposInput = {
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutClientesNestedInput
   fazendas?: Prisma.FazendaUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutClienteNestedInput
+  usuarios?: Prisma.UserUpdateManyWithoutClienteNestedInput
 }
 
 export type ClienteUncheckedUpdateWithoutGruposInput = {
@@ -626,6 +663,71 @@ export type ClienteUncheckedUpdateWithoutGruposInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fazendas?: Prisma.FazendaUncheckedUpdateManyWithoutClienteNestedInput
+  consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutClienteNestedInput
+  usuarios?: Prisma.UserUncheckedUpdateManyWithoutClienteNestedInput
+}
+
+export type ClienteCreateWithoutUsuariosInput = {
+  id?: string
+  nomeProdutor: string
+  ativo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  empresa: Prisma.EmpresaCreateNestedOneWithoutClientesInput
+  fazendas?: Prisma.FazendaCreateNestedManyWithoutClienteInput
+  grupos?: Prisma.GrupoWhatsappCreateNestedManyWithoutClienteInput
+  consultas?: Prisma.ConsultaCreateNestedManyWithoutClienteInput
+}
+
+export type ClienteUncheckedCreateWithoutUsuariosInput = {
+  id?: string
+  empresaId: string
+  nomeProdutor: string
+  ativo?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  fazendas?: Prisma.FazendaUncheckedCreateNestedManyWithoutClienteInput
+  grupos?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutClienteInput
+  consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutClienteInput
+}
+
+export type ClienteCreateOrConnectWithoutUsuariosInput = {
+  where: Prisma.ClienteWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClienteCreateWithoutUsuariosInput, Prisma.ClienteUncheckedCreateWithoutUsuariosInput>
+}
+
+export type ClienteUpsertWithoutUsuariosInput = {
+  update: Prisma.XOR<Prisma.ClienteUpdateWithoutUsuariosInput, Prisma.ClienteUncheckedUpdateWithoutUsuariosInput>
+  create: Prisma.XOR<Prisma.ClienteCreateWithoutUsuariosInput, Prisma.ClienteUncheckedCreateWithoutUsuariosInput>
+  where?: Prisma.ClienteWhereInput
+}
+
+export type ClienteUpdateToOneWithWhereWithoutUsuariosInput = {
+  where?: Prisma.ClienteWhereInput
+  data: Prisma.XOR<Prisma.ClienteUpdateWithoutUsuariosInput, Prisma.ClienteUncheckedUpdateWithoutUsuariosInput>
+}
+
+export type ClienteUpdateWithoutUsuariosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nomeProdutor?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  empresa?: Prisma.EmpresaUpdateOneRequiredWithoutClientesNestedInput
+  fazendas?: Prisma.FazendaUpdateManyWithoutClienteNestedInput
+  grupos?: Prisma.GrupoWhatsappUpdateManyWithoutClienteNestedInput
+  consultas?: Prisma.ConsultaUpdateManyWithoutClienteNestedInput
+}
+
+export type ClienteUncheckedUpdateWithoutUsuariosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  empresaId?: Prisma.StringFieldUpdateOperationsInput | string
+  nomeProdutor?: Prisma.StringFieldUpdateOperationsInput | string
+  ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  fazendas?: Prisma.FazendaUncheckedUpdateManyWithoutClienteNestedInput
+  grupos?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutClienteNestedInput
 }
 
@@ -638,6 +740,7 @@ export type ClienteCreateWithoutConsultasInput = {
   empresa: Prisma.EmpresaCreateNestedOneWithoutClientesInput
   fazendas?: Prisma.FazendaCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappCreateNestedManyWithoutClienteInput
+  usuarios?: Prisma.UserCreateNestedManyWithoutClienteInput
 }
 
 export type ClienteUncheckedCreateWithoutConsultasInput = {
@@ -649,6 +752,7 @@ export type ClienteUncheckedCreateWithoutConsultasInput = {
   updatedAt?: Date | string
   fazendas?: Prisma.FazendaUncheckedCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutClienteInput
+  usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutClienteInput
 }
 
 export type ClienteCreateOrConnectWithoutConsultasInput = {
@@ -676,6 +780,7 @@ export type ClienteUpdateWithoutConsultasInput = {
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutClientesNestedInput
   fazendas?: Prisma.FazendaUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUpdateManyWithoutClienteNestedInput
+  usuarios?: Prisma.UserUpdateManyWithoutClienteNestedInput
 }
 
 export type ClienteUncheckedUpdateWithoutConsultasInput = {
@@ -687,6 +792,7 @@ export type ClienteUncheckedUpdateWithoutConsultasInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fazendas?: Prisma.FazendaUncheckedUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput
+  usuarios?: Prisma.UserUncheckedUpdateManyWithoutClienteNestedInput
 }
 
 export type ClienteCreateManyEmpresaInput = {
@@ -706,6 +812,7 @@ export type ClienteUpdateWithoutEmpresaInput = {
   fazendas?: Prisma.FazendaUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutClienteNestedInput
+  usuarios?: Prisma.UserUpdateManyWithoutClienteNestedInput
 }
 
 export type ClienteUncheckedUpdateWithoutEmpresaInput = {
@@ -717,6 +824,7 @@ export type ClienteUncheckedUpdateWithoutEmpresaInput = {
   fazendas?: Prisma.FazendaUncheckedUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutClienteNestedInput
+  usuarios?: Prisma.UserUncheckedUpdateManyWithoutClienteNestedInput
 }
 
 export type ClienteUncheckedUpdateManyWithoutEmpresaInput = {
@@ -736,12 +844,14 @@ export type ClienteCountOutputType = {
   fazendas: number
   grupos: number
   consultas: number
+  usuarios: number
 }
 
 export type ClienteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fazendas?: boolean | ClienteCountOutputTypeCountFazendasArgs
   grupos?: boolean | ClienteCountOutputTypeCountGruposArgs
   consultas?: boolean | ClienteCountOutputTypeCountConsultasArgs
+  usuarios?: boolean | ClienteCountOutputTypeCountUsuariosArgs
 }
 
 /**
@@ -775,6 +885,13 @@ export type ClienteCountOutputTypeCountConsultasArgs<ExtArgs extends runtime.Typ
   where?: Prisma.ConsultaWhereInput
 }
 
+/**
+ * ClienteCountOutputType without action
+ */
+export type ClienteCountOutputTypeCountUsuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserWhereInput
+}
+
 
 export type ClienteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -787,6 +904,7 @@ export type ClienteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   fazendas?: boolean | Prisma.Cliente$fazendasArgs<ExtArgs>
   grupos?: boolean | Prisma.Cliente$gruposArgs<ExtArgs>
   consultas?: boolean | Prisma.Cliente$consultasArgs<ExtArgs>
+  usuarios?: boolean | Prisma.Cliente$usuariosArgs<ExtArgs>
   _count?: boolean | Prisma.ClienteCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cliente"]>
 
@@ -825,6 +943,7 @@ export type ClienteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   fazendas?: boolean | Prisma.Cliente$fazendasArgs<ExtArgs>
   grupos?: boolean | Prisma.Cliente$gruposArgs<ExtArgs>
   consultas?: boolean | Prisma.Cliente$consultasArgs<ExtArgs>
+  usuarios?: boolean | Prisma.Cliente$usuariosArgs<ExtArgs>
   _count?: boolean | Prisma.ClienteCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClienteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -841,6 +960,7 @@ export type $ClientePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     fazendas: Prisma.$FazendaPayload<ExtArgs>[]
     grupos: Prisma.$GrupoWhatsappPayload<ExtArgs>[]
     consultas: Prisma.$ConsultaPayload<ExtArgs>[]
+    usuarios: Prisma.$UserPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1247,6 +1367,7 @@ export interface Prisma__ClienteClient<T, Null = never, ExtArgs extends runtime.
   fazendas<T extends Prisma.Cliente$fazendasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cliente$fazendasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FazendaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   grupos<T extends Prisma.Cliente$gruposArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cliente$gruposArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GrupoWhatsappPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   consultas<T extends Prisma.Cliente$consultasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cliente$consultasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConsultaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  usuarios<T extends Prisma.Cliente$usuariosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Cliente$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1752,6 +1873,30 @@ export type Cliente$consultasArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.ConsultaScalarFieldEnum | Prisma.ConsultaScalarFieldEnum[]
+}
+
+/**
+ * Cliente.usuarios
+ */
+export type Cliente$usuariosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
+  orderBy?: Prisma.UserOrderByWithRelationInput | Prisma.UserOrderByWithRelationInput[]
+  cursor?: Prisma.UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserScalarFieldEnum | Prisma.UserScalarFieldEnum[]
 }
 
 /**

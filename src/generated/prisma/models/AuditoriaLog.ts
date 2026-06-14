@@ -26,7 +26,7 @@ export type AggregateAuditoriaLog = {
 
 export type AuditoriaLogMinAggregateOutputType = {
   id: string | null
-  consultorId: string | null
+  usuarioId: string | null
   consultaId: string | null
   tabelaAfetada: string | null
   registroId: string | null
@@ -37,7 +37,7 @@ export type AuditoriaLogMinAggregateOutputType = {
 
 export type AuditoriaLogMaxAggregateOutputType = {
   id: string | null
-  consultorId: string | null
+  usuarioId: string | null
   consultaId: string | null
   tabelaAfetada: string | null
   registroId: string | null
@@ -48,7 +48,7 @@ export type AuditoriaLogMaxAggregateOutputType = {
 
 export type AuditoriaLogCountAggregateOutputType = {
   id: number
-  consultorId: number
+  usuarioId: number
   consultaId: number
   tabelaAfetada: number
   registroId: number
@@ -63,7 +63,7 @@ export type AuditoriaLogCountAggregateOutputType = {
 
 export type AuditoriaLogMinAggregateInputType = {
   id?: true
-  consultorId?: true
+  usuarioId?: true
   consultaId?: true
   tabelaAfetada?: true
   registroId?: true
@@ -74,7 +74,7 @@ export type AuditoriaLogMinAggregateInputType = {
 
 export type AuditoriaLogMaxAggregateInputType = {
   id?: true
-  consultorId?: true
+  usuarioId?: true
   consultaId?: true
   tabelaAfetada?: true
   registroId?: true
@@ -85,7 +85,7 @@ export type AuditoriaLogMaxAggregateInputType = {
 
 export type AuditoriaLogCountAggregateInputType = {
   id?: true
-  consultorId?: true
+  usuarioId?: true
   consultaId?: true
   tabelaAfetada?: true
   registroId?: true
@@ -171,7 +171,7 @@ export type AuditoriaLogGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 
 export type AuditoriaLogGroupByOutputType = {
   id: string
-  consultorId: string | null
+  usuarioId: string | null
   consultaId: string | null
   tabelaAfetada: string
   registroId: string
@@ -205,7 +205,7 @@ export type AuditoriaLogWhereInput = {
   OR?: Prisma.AuditoriaLogWhereInput[]
   NOT?: Prisma.AuditoriaLogWhereInput | Prisma.AuditoriaLogWhereInput[]
   id?: Prisma.StringFilter<"AuditoriaLog"> | string
-  consultorId?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
+  usuarioId?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
   consultaId?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
   tabelaAfetada?: Prisma.StringFilter<"AuditoriaLog"> | string
   registroId?: Prisma.StringFilter<"AuditoriaLog"> | string
@@ -214,13 +214,13 @@ export type AuditoriaLogWhereInput = {
   dadosDepois?: Prisma.JsonNullableFilter<"AuditoriaLog">
   ipOrigem?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AuditoriaLog"> | Date | string
-  consultor?: Prisma.XOR<Prisma.ConsultorNullableScalarRelationFilter, Prisma.ConsultorWhereInput> | null
+  usuario?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   consulta?: Prisma.XOR<Prisma.ConsultaNullableScalarRelationFilter, Prisma.ConsultaWhereInput> | null
 }
 
 export type AuditoriaLogOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  consultorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  usuarioId?: Prisma.SortOrderInput | Prisma.SortOrder
   consultaId?: Prisma.SortOrderInput | Prisma.SortOrder
   tabelaAfetada?: Prisma.SortOrder
   registroId?: Prisma.SortOrder
@@ -229,7 +229,7 @@ export type AuditoriaLogOrderByWithRelationInput = {
   dadosDepois?: Prisma.SortOrderInput | Prisma.SortOrder
   ipOrigem?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  consultor?: Prisma.ConsultorOrderByWithRelationInput
+  usuario?: Prisma.UserOrderByWithRelationInput
   consulta?: Prisma.ConsultaOrderByWithRelationInput
 }
 
@@ -238,7 +238,7 @@ export type AuditoriaLogWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.AuditoriaLogWhereInput | Prisma.AuditoriaLogWhereInput[]
   OR?: Prisma.AuditoriaLogWhereInput[]
   NOT?: Prisma.AuditoriaLogWhereInput | Prisma.AuditoriaLogWhereInput[]
-  consultorId?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
+  usuarioId?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
   consultaId?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
   tabelaAfetada?: Prisma.StringFilter<"AuditoriaLog"> | string
   registroId?: Prisma.StringFilter<"AuditoriaLog"> | string
@@ -247,13 +247,13 @@ export type AuditoriaLogWhereUniqueInput = Prisma.AtLeast<{
   dadosDepois?: Prisma.JsonNullableFilter<"AuditoriaLog">
   ipOrigem?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
   createdAt?: Prisma.DateTimeFilter<"AuditoriaLog"> | Date | string
-  consultor?: Prisma.XOR<Prisma.ConsultorNullableScalarRelationFilter, Prisma.ConsultorWhereInput> | null
+  usuario?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   consulta?: Prisma.XOR<Prisma.ConsultaNullableScalarRelationFilter, Prisma.ConsultaWhereInput> | null
 }, "id">
 
 export type AuditoriaLogOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  consultorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  usuarioId?: Prisma.SortOrderInput | Prisma.SortOrder
   consultaId?: Prisma.SortOrderInput | Prisma.SortOrder
   tabelaAfetada?: Prisma.SortOrder
   registroId?: Prisma.SortOrder
@@ -272,7 +272,7 @@ export type AuditoriaLogScalarWhereWithAggregatesInput = {
   OR?: Prisma.AuditoriaLogScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AuditoriaLogScalarWhereWithAggregatesInput | Prisma.AuditoriaLogScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"AuditoriaLog"> | string
-  consultorId?: Prisma.StringNullableWithAggregatesFilter<"AuditoriaLog"> | string | null
+  usuarioId?: Prisma.StringNullableWithAggregatesFilter<"AuditoriaLog"> | string | null
   consultaId?: Prisma.StringNullableWithAggregatesFilter<"AuditoriaLog"> | string | null
   tabelaAfetada?: Prisma.StringWithAggregatesFilter<"AuditoriaLog"> | string
   registroId?: Prisma.StringWithAggregatesFilter<"AuditoriaLog"> | string
@@ -292,13 +292,13 @@ export type AuditoriaLogCreateInput = {
   dadosDepois?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipOrigem?: string | null
   createdAt?: Date | string
-  consultor?: Prisma.ConsultorCreateNestedOneWithoutLogsInput
-  consulta?: Prisma.ConsultaCreateNestedOneWithoutLogsInput
+  usuario?: Prisma.UserCreateNestedOneWithoutAuditoriaLogsInput
+  consulta?: Prisma.ConsultaCreateNestedOneWithoutAuditoriaLogsInput
 }
 
 export type AuditoriaLogUncheckedCreateInput = {
   id?: string
-  consultorId?: string | null
+  usuarioId?: string | null
   consultaId?: string | null
   tabelaAfetada: string
   registroId: string
@@ -318,13 +318,13 @@ export type AuditoriaLogUpdateInput = {
   dadosDepois?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipOrigem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  consultor?: Prisma.ConsultorUpdateOneWithoutLogsNestedInput
-  consulta?: Prisma.ConsultaUpdateOneWithoutLogsNestedInput
+  usuario?: Prisma.UserUpdateOneWithoutAuditoriaLogsNestedInput
+  consulta?: Prisma.ConsultaUpdateOneWithoutAuditoriaLogsNestedInput
 }
 
 export type AuditoriaLogUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  consultorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuarioId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   consultaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tabelaAfetada?: Prisma.StringFieldUpdateOperationsInput | string
   registroId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -337,7 +337,7 @@ export type AuditoriaLogUncheckedUpdateInput = {
 
 export type AuditoriaLogCreateManyInput = {
   id?: string
-  consultorId?: string | null
+  usuarioId?: string | null
   consultaId?: string | null
   tabelaAfetada: string
   registroId: string
@@ -361,7 +361,7 @@ export type AuditoriaLogUpdateManyMutationInput = {
 
 export type AuditoriaLogUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  consultorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuarioId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   consultaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tabelaAfetada?: Prisma.StringFieldUpdateOperationsInput | string
   registroId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -384,7 +384,7 @@ export type AuditoriaLogOrderByRelationAggregateInput = {
 
 export type AuditoriaLogCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  consultorId?: Prisma.SortOrder
+  usuarioId?: Prisma.SortOrder
   consultaId?: Prisma.SortOrder
   tabelaAfetada?: Prisma.SortOrder
   registroId?: Prisma.SortOrder
@@ -397,7 +397,7 @@ export type AuditoriaLogCountOrderByAggregateInput = {
 
 export type AuditoriaLogMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  consultorId?: Prisma.SortOrder
+  usuarioId?: Prisma.SortOrder
   consultaId?: Prisma.SortOrder
   tabelaAfetada?: Prisma.SortOrder
   registroId?: Prisma.SortOrder
@@ -408,7 +408,7 @@ export type AuditoriaLogMaxOrderByAggregateInput = {
 
 export type AuditoriaLogMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  consultorId?: Prisma.SortOrder
+  usuarioId?: Prisma.SortOrder
   consultaId?: Prisma.SortOrder
   tabelaAfetada?: Prisma.SortOrder
   registroId?: Prisma.SortOrder
@@ -417,45 +417,45 @@ export type AuditoriaLogMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
-export type AuditoriaLogCreateNestedManyWithoutConsultorInput = {
-  create?: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutConsultorInput, Prisma.AuditoriaLogUncheckedCreateWithoutConsultorInput> | Prisma.AuditoriaLogCreateWithoutConsultorInput[] | Prisma.AuditoriaLogUncheckedCreateWithoutConsultorInput[]
-  connectOrCreate?: Prisma.AuditoriaLogCreateOrConnectWithoutConsultorInput | Prisma.AuditoriaLogCreateOrConnectWithoutConsultorInput[]
-  createMany?: Prisma.AuditoriaLogCreateManyConsultorInputEnvelope
+export type AuditoriaLogCreateNestedManyWithoutUsuarioInput = {
+  create?: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutUsuarioInput, Prisma.AuditoriaLogUncheckedCreateWithoutUsuarioInput> | Prisma.AuditoriaLogCreateWithoutUsuarioInput[] | Prisma.AuditoriaLogUncheckedCreateWithoutUsuarioInput[]
+  connectOrCreate?: Prisma.AuditoriaLogCreateOrConnectWithoutUsuarioInput | Prisma.AuditoriaLogCreateOrConnectWithoutUsuarioInput[]
+  createMany?: Prisma.AuditoriaLogCreateManyUsuarioInputEnvelope
   connect?: Prisma.AuditoriaLogWhereUniqueInput | Prisma.AuditoriaLogWhereUniqueInput[]
 }
 
-export type AuditoriaLogUncheckedCreateNestedManyWithoutConsultorInput = {
-  create?: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutConsultorInput, Prisma.AuditoriaLogUncheckedCreateWithoutConsultorInput> | Prisma.AuditoriaLogCreateWithoutConsultorInput[] | Prisma.AuditoriaLogUncheckedCreateWithoutConsultorInput[]
-  connectOrCreate?: Prisma.AuditoriaLogCreateOrConnectWithoutConsultorInput | Prisma.AuditoriaLogCreateOrConnectWithoutConsultorInput[]
-  createMany?: Prisma.AuditoriaLogCreateManyConsultorInputEnvelope
+export type AuditoriaLogUncheckedCreateNestedManyWithoutUsuarioInput = {
+  create?: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutUsuarioInput, Prisma.AuditoriaLogUncheckedCreateWithoutUsuarioInput> | Prisma.AuditoriaLogCreateWithoutUsuarioInput[] | Prisma.AuditoriaLogUncheckedCreateWithoutUsuarioInput[]
+  connectOrCreate?: Prisma.AuditoriaLogCreateOrConnectWithoutUsuarioInput | Prisma.AuditoriaLogCreateOrConnectWithoutUsuarioInput[]
+  createMany?: Prisma.AuditoriaLogCreateManyUsuarioInputEnvelope
   connect?: Prisma.AuditoriaLogWhereUniqueInput | Prisma.AuditoriaLogWhereUniqueInput[]
 }
 
-export type AuditoriaLogUpdateManyWithoutConsultorNestedInput = {
-  create?: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutConsultorInput, Prisma.AuditoriaLogUncheckedCreateWithoutConsultorInput> | Prisma.AuditoriaLogCreateWithoutConsultorInput[] | Prisma.AuditoriaLogUncheckedCreateWithoutConsultorInput[]
-  connectOrCreate?: Prisma.AuditoriaLogCreateOrConnectWithoutConsultorInput | Prisma.AuditoriaLogCreateOrConnectWithoutConsultorInput[]
-  upsert?: Prisma.AuditoriaLogUpsertWithWhereUniqueWithoutConsultorInput | Prisma.AuditoriaLogUpsertWithWhereUniqueWithoutConsultorInput[]
-  createMany?: Prisma.AuditoriaLogCreateManyConsultorInputEnvelope
+export type AuditoriaLogUpdateManyWithoutUsuarioNestedInput = {
+  create?: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutUsuarioInput, Prisma.AuditoriaLogUncheckedCreateWithoutUsuarioInput> | Prisma.AuditoriaLogCreateWithoutUsuarioInput[] | Prisma.AuditoriaLogUncheckedCreateWithoutUsuarioInput[]
+  connectOrCreate?: Prisma.AuditoriaLogCreateOrConnectWithoutUsuarioInput | Prisma.AuditoriaLogCreateOrConnectWithoutUsuarioInput[]
+  upsert?: Prisma.AuditoriaLogUpsertWithWhereUniqueWithoutUsuarioInput | Prisma.AuditoriaLogUpsertWithWhereUniqueWithoutUsuarioInput[]
+  createMany?: Prisma.AuditoriaLogCreateManyUsuarioInputEnvelope
   set?: Prisma.AuditoriaLogWhereUniqueInput | Prisma.AuditoriaLogWhereUniqueInput[]
   disconnect?: Prisma.AuditoriaLogWhereUniqueInput | Prisma.AuditoriaLogWhereUniqueInput[]
   delete?: Prisma.AuditoriaLogWhereUniqueInput | Prisma.AuditoriaLogWhereUniqueInput[]
   connect?: Prisma.AuditoriaLogWhereUniqueInput | Prisma.AuditoriaLogWhereUniqueInput[]
-  update?: Prisma.AuditoriaLogUpdateWithWhereUniqueWithoutConsultorInput | Prisma.AuditoriaLogUpdateWithWhereUniqueWithoutConsultorInput[]
-  updateMany?: Prisma.AuditoriaLogUpdateManyWithWhereWithoutConsultorInput | Prisma.AuditoriaLogUpdateManyWithWhereWithoutConsultorInput[]
+  update?: Prisma.AuditoriaLogUpdateWithWhereUniqueWithoutUsuarioInput | Prisma.AuditoriaLogUpdateWithWhereUniqueWithoutUsuarioInput[]
+  updateMany?: Prisma.AuditoriaLogUpdateManyWithWhereWithoutUsuarioInput | Prisma.AuditoriaLogUpdateManyWithWhereWithoutUsuarioInput[]
   deleteMany?: Prisma.AuditoriaLogScalarWhereInput | Prisma.AuditoriaLogScalarWhereInput[]
 }
 
-export type AuditoriaLogUncheckedUpdateManyWithoutConsultorNestedInput = {
-  create?: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutConsultorInput, Prisma.AuditoriaLogUncheckedCreateWithoutConsultorInput> | Prisma.AuditoriaLogCreateWithoutConsultorInput[] | Prisma.AuditoriaLogUncheckedCreateWithoutConsultorInput[]
-  connectOrCreate?: Prisma.AuditoriaLogCreateOrConnectWithoutConsultorInput | Prisma.AuditoriaLogCreateOrConnectWithoutConsultorInput[]
-  upsert?: Prisma.AuditoriaLogUpsertWithWhereUniqueWithoutConsultorInput | Prisma.AuditoriaLogUpsertWithWhereUniqueWithoutConsultorInput[]
-  createMany?: Prisma.AuditoriaLogCreateManyConsultorInputEnvelope
+export type AuditoriaLogUncheckedUpdateManyWithoutUsuarioNestedInput = {
+  create?: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutUsuarioInput, Prisma.AuditoriaLogUncheckedCreateWithoutUsuarioInput> | Prisma.AuditoriaLogCreateWithoutUsuarioInput[] | Prisma.AuditoriaLogUncheckedCreateWithoutUsuarioInput[]
+  connectOrCreate?: Prisma.AuditoriaLogCreateOrConnectWithoutUsuarioInput | Prisma.AuditoriaLogCreateOrConnectWithoutUsuarioInput[]
+  upsert?: Prisma.AuditoriaLogUpsertWithWhereUniqueWithoutUsuarioInput | Prisma.AuditoriaLogUpsertWithWhereUniqueWithoutUsuarioInput[]
+  createMany?: Prisma.AuditoriaLogCreateManyUsuarioInputEnvelope
   set?: Prisma.AuditoriaLogWhereUniqueInput | Prisma.AuditoriaLogWhereUniqueInput[]
   disconnect?: Prisma.AuditoriaLogWhereUniqueInput | Prisma.AuditoriaLogWhereUniqueInput[]
   delete?: Prisma.AuditoriaLogWhereUniqueInput | Prisma.AuditoriaLogWhereUniqueInput[]
   connect?: Prisma.AuditoriaLogWhereUniqueInput | Prisma.AuditoriaLogWhereUniqueInput[]
-  update?: Prisma.AuditoriaLogUpdateWithWhereUniqueWithoutConsultorInput | Prisma.AuditoriaLogUpdateWithWhereUniqueWithoutConsultorInput[]
-  updateMany?: Prisma.AuditoriaLogUpdateManyWithWhereWithoutConsultorInput | Prisma.AuditoriaLogUpdateManyWithWhereWithoutConsultorInput[]
+  update?: Prisma.AuditoriaLogUpdateWithWhereUniqueWithoutUsuarioInput | Prisma.AuditoriaLogUpdateWithWhereUniqueWithoutUsuarioInput[]
+  updateMany?: Prisma.AuditoriaLogUpdateManyWithWhereWithoutUsuarioInput | Prisma.AuditoriaLogUpdateManyWithWhereWithoutUsuarioInput[]
   deleteMany?: Prisma.AuditoriaLogScalarWhereInput | Prisma.AuditoriaLogScalarWhereInput[]
 }
 
@@ -501,7 +501,7 @@ export type AuditoriaLogUncheckedUpdateManyWithoutConsultaNestedInput = {
   deleteMany?: Prisma.AuditoriaLogScalarWhereInput | Prisma.AuditoriaLogScalarWhereInput[]
 }
 
-export type AuditoriaLogCreateWithoutConsultorInput = {
+export type AuditoriaLogCreateWithoutUsuarioInput = {
   id?: string
   tabelaAfetada: string
   registroId: string
@@ -510,10 +510,10 @@ export type AuditoriaLogCreateWithoutConsultorInput = {
   dadosDepois?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipOrigem?: string | null
   createdAt?: Date | string
-  consulta?: Prisma.ConsultaCreateNestedOneWithoutLogsInput
+  consulta?: Prisma.ConsultaCreateNestedOneWithoutAuditoriaLogsInput
 }
 
-export type AuditoriaLogUncheckedCreateWithoutConsultorInput = {
+export type AuditoriaLogUncheckedCreateWithoutUsuarioInput = {
   id?: string
   consultaId?: string | null
   tabelaAfetada: string
@@ -525,30 +525,30 @@ export type AuditoriaLogUncheckedCreateWithoutConsultorInput = {
   createdAt?: Date | string
 }
 
-export type AuditoriaLogCreateOrConnectWithoutConsultorInput = {
+export type AuditoriaLogCreateOrConnectWithoutUsuarioInput = {
   where: Prisma.AuditoriaLogWhereUniqueInput
-  create: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutConsultorInput, Prisma.AuditoriaLogUncheckedCreateWithoutConsultorInput>
+  create: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutUsuarioInput, Prisma.AuditoriaLogUncheckedCreateWithoutUsuarioInput>
 }
 
-export type AuditoriaLogCreateManyConsultorInputEnvelope = {
-  data: Prisma.AuditoriaLogCreateManyConsultorInput | Prisma.AuditoriaLogCreateManyConsultorInput[]
+export type AuditoriaLogCreateManyUsuarioInputEnvelope = {
+  data: Prisma.AuditoriaLogCreateManyUsuarioInput | Prisma.AuditoriaLogCreateManyUsuarioInput[]
   skipDuplicates?: boolean
 }
 
-export type AuditoriaLogUpsertWithWhereUniqueWithoutConsultorInput = {
+export type AuditoriaLogUpsertWithWhereUniqueWithoutUsuarioInput = {
   where: Prisma.AuditoriaLogWhereUniqueInput
-  update: Prisma.XOR<Prisma.AuditoriaLogUpdateWithoutConsultorInput, Prisma.AuditoriaLogUncheckedUpdateWithoutConsultorInput>
-  create: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutConsultorInput, Prisma.AuditoriaLogUncheckedCreateWithoutConsultorInput>
+  update: Prisma.XOR<Prisma.AuditoriaLogUpdateWithoutUsuarioInput, Prisma.AuditoriaLogUncheckedUpdateWithoutUsuarioInput>
+  create: Prisma.XOR<Prisma.AuditoriaLogCreateWithoutUsuarioInput, Prisma.AuditoriaLogUncheckedCreateWithoutUsuarioInput>
 }
 
-export type AuditoriaLogUpdateWithWhereUniqueWithoutConsultorInput = {
+export type AuditoriaLogUpdateWithWhereUniqueWithoutUsuarioInput = {
   where: Prisma.AuditoriaLogWhereUniqueInput
-  data: Prisma.XOR<Prisma.AuditoriaLogUpdateWithoutConsultorInput, Prisma.AuditoriaLogUncheckedUpdateWithoutConsultorInput>
+  data: Prisma.XOR<Prisma.AuditoriaLogUpdateWithoutUsuarioInput, Prisma.AuditoriaLogUncheckedUpdateWithoutUsuarioInput>
 }
 
-export type AuditoriaLogUpdateManyWithWhereWithoutConsultorInput = {
+export type AuditoriaLogUpdateManyWithWhereWithoutUsuarioInput = {
   where: Prisma.AuditoriaLogScalarWhereInput
-  data: Prisma.XOR<Prisma.AuditoriaLogUpdateManyMutationInput, Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultorInput>
+  data: Prisma.XOR<Prisma.AuditoriaLogUpdateManyMutationInput, Prisma.AuditoriaLogUncheckedUpdateManyWithoutUsuarioInput>
 }
 
 export type AuditoriaLogScalarWhereInput = {
@@ -556,7 +556,7 @@ export type AuditoriaLogScalarWhereInput = {
   OR?: Prisma.AuditoriaLogScalarWhereInput[]
   NOT?: Prisma.AuditoriaLogScalarWhereInput | Prisma.AuditoriaLogScalarWhereInput[]
   id?: Prisma.StringFilter<"AuditoriaLog"> | string
-  consultorId?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
+  usuarioId?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
   consultaId?: Prisma.StringNullableFilter<"AuditoriaLog"> | string | null
   tabelaAfetada?: Prisma.StringFilter<"AuditoriaLog"> | string
   registroId?: Prisma.StringFilter<"AuditoriaLog"> | string
@@ -576,12 +576,12 @@ export type AuditoriaLogCreateWithoutConsultaInput = {
   dadosDepois?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipOrigem?: string | null
   createdAt?: Date | string
-  consultor?: Prisma.ConsultorCreateNestedOneWithoutLogsInput
+  usuario?: Prisma.UserCreateNestedOneWithoutAuditoriaLogsInput
 }
 
 export type AuditoriaLogUncheckedCreateWithoutConsultaInput = {
   id?: string
-  consultorId?: string | null
+  usuarioId?: string | null
   tabelaAfetada: string
   registroId: string
   acao: string
@@ -617,7 +617,7 @@ export type AuditoriaLogUpdateManyWithWhereWithoutConsultaInput = {
   data: Prisma.XOR<Prisma.AuditoriaLogUpdateManyMutationInput, Prisma.AuditoriaLogUncheckedUpdateManyWithoutConsultaInput>
 }
 
-export type AuditoriaLogCreateManyConsultorInput = {
+export type AuditoriaLogCreateManyUsuarioInput = {
   id?: string
   consultaId?: string | null
   tabelaAfetada: string
@@ -629,7 +629,7 @@ export type AuditoriaLogCreateManyConsultorInput = {
   createdAt?: Date | string
 }
 
-export type AuditoriaLogUpdateWithoutConsultorInput = {
+export type AuditoriaLogUpdateWithoutUsuarioInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   tabelaAfetada?: Prisma.StringFieldUpdateOperationsInput | string
   registroId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -638,10 +638,10 @@ export type AuditoriaLogUpdateWithoutConsultorInput = {
   dadosDepois?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipOrigem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  consulta?: Prisma.ConsultaUpdateOneWithoutLogsNestedInput
+  consulta?: Prisma.ConsultaUpdateOneWithoutAuditoriaLogsNestedInput
 }
 
-export type AuditoriaLogUncheckedUpdateWithoutConsultorInput = {
+export type AuditoriaLogUncheckedUpdateWithoutUsuarioInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   consultaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tabelaAfetada?: Prisma.StringFieldUpdateOperationsInput | string
@@ -653,7 +653,7 @@ export type AuditoriaLogUncheckedUpdateWithoutConsultorInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type AuditoriaLogUncheckedUpdateManyWithoutConsultorInput = {
+export type AuditoriaLogUncheckedUpdateManyWithoutUsuarioInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   consultaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tabelaAfetada?: Prisma.StringFieldUpdateOperationsInput | string
@@ -667,7 +667,7 @@ export type AuditoriaLogUncheckedUpdateManyWithoutConsultorInput = {
 
 export type AuditoriaLogCreateManyConsultaInput = {
   id?: string
-  consultorId?: string | null
+  usuarioId?: string | null
   tabelaAfetada: string
   registroId: string
   acao: string
@@ -686,12 +686,12 @@ export type AuditoriaLogUpdateWithoutConsultaInput = {
   dadosDepois?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   ipOrigem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  consultor?: Prisma.ConsultorUpdateOneWithoutLogsNestedInput
+  usuario?: Prisma.UserUpdateOneWithoutAuditoriaLogsNestedInput
 }
 
 export type AuditoriaLogUncheckedUpdateWithoutConsultaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  consultorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuarioId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tabelaAfetada?: Prisma.StringFieldUpdateOperationsInput | string
   registroId?: Prisma.StringFieldUpdateOperationsInput | string
   acao?: Prisma.StringFieldUpdateOperationsInput | string
@@ -703,7 +703,7 @@ export type AuditoriaLogUncheckedUpdateWithoutConsultaInput = {
 
 export type AuditoriaLogUncheckedUpdateManyWithoutConsultaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  consultorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  usuarioId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tabelaAfetada?: Prisma.StringFieldUpdateOperationsInput | string
   registroId?: Prisma.StringFieldUpdateOperationsInput | string
   acao?: Prisma.StringFieldUpdateOperationsInput | string
@@ -717,7 +717,7 @@ export type AuditoriaLogUncheckedUpdateManyWithoutConsultaInput = {
 
 export type AuditoriaLogSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  consultorId?: boolean
+  usuarioId?: boolean
   consultaId?: boolean
   tabelaAfetada?: boolean
   registroId?: boolean
@@ -726,13 +726,13 @@ export type AuditoriaLogSelect<ExtArgs extends runtime.Types.Extensions.Internal
   dadosDepois?: boolean
   ipOrigem?: boolean
   createdAt?: boolean
-  consultor?: boolean | Prisma.AuditoriaLog$consultorArgs<ExtArgs>
+  usuario?: boolean | Prisma.AuditoriaLog$usuarioArgs<ExtArgs>
   consulta?: boolean | Prisma.AuditoriaLog$consultaArgs<ExtArgs>
 }, ExtArgs["result"]["auditoriaLog"]>
 
 export type AuditoriaLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  consultorId?: boolean
+  usuarioId?: boolean
   consultaId?: boolean
   tabelaAfetada?: boolean
   registroId?: boolean
@@ -741,13 +741,13 @@ export type AuditoriaLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   dadosDepois?: boolean
   ipOrigem?: boolean
   createdAt?: boolean
-  consultor?: boolean | Prisma.AuditoriaLog$consultorArgs<ExtArgs>
+  usuario?: boolean | Prisma.AuditoriaLog$usuarioArgs<ExtArgs>
   consulta?: boolean | Prisma.AuditoriaLog$consultaArgs<ExtArgs>
 }, ExtArgs["result"]["auditoriaLog"]>
 
 export type AuditoriaLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  consultorId?: boolean
+  usuarioId?: boolean
   consultaId?: boolean
   tabelaAfetada?: boolean
   registroId?: boolean
@@ -756,13 +756,13 @@ export type AuditoriaLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   dadosDepois?: boolean
   ipOrigem?: boolean
   createdAt?: boolean
-  consultor?: boolean | Prisma.AuditoriaLog$consultorArgs<ExtArgs>
+  usuario?: boolean | Prisma.AuditoriaLog$usuarioArgs<ExtArgs>
   consulta?: boolean | Prisma.AuditoriaLog$consultaArgs<ExtArgs>
 }, ExtArgs["result"]["auditoriaLog"]>
 
 export type AuditoriaLogSelectScalar = {
   id?: boolean
-  consultorId?: boolean
+  usuarioId?: boolean
   consultaId?: boolean
   tabelaAfetada?: boolean
   registroId?: boolean
@@ -773,29 +773,29 @@ export type AuditoriaLogSelectScalar = {
   createdAt?: boolean
 }
 
-export type AuditoriaLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "consultorId" | "consultaId" | "tabelaAfetada" | "registroId" | "acao" | "dadosAntes" | "dadosDepois" | "ipOrigem" | "createdAt", ExtArgs["result"]["auditoriaLog"]>
+export type AuditoriaLogOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "usuarioId" | "consultaId" | "tabelaAfetada" | "registroId" | "acao" | "dadosAntes" | "dadosDepois" | "ipOrigem" | "createdAt", ExtArgs["result"]["auditoriaLog"]>
 export type AuditoriaLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  consultor?: boolean | Prisma.AuditoriaLog$consultorArgs<ExtArgs>
+  usuario?: boolean | Prisma.AuditoriaLog$usuarioArgs<ExtArgs>
   consulta?: boolean | Prisma.AuditoriaLog$consultaArgs<ExtArgs>
 }
 export type AuditoriaLogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  consultor?: boolean | Prisma.AuditoriaLog$consultorArgs<ExtArgs>
+  usuario?: boolean | Prisma.AuditoriaLog$usuarioArgs<ExtArgs>
   consulta?: boolean | Prisma.AuditoriaLog$consultaArgs<ExtArgs>
 }
 export type AuditoriaLogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  consultor?: boolean | Prisma.AuditoriaLog$consultorArgs<ExtArgs>
+  usuario?: boolean | Prisma.AuditoriaLog$usuarioArgs<ExtArgs>
   consulta?: boolean | Prisma.AuditoriaLog$consultaArgs<ExtArgs>
 }
 
 export type $AuditoriaLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AuditoriaLog"
   objects: {
-    consultor: Prisma.$ConsultorPayload<ExtArgs> | null
+    usuario: Prisma.$UserPayload<ExtArgs> | null
     consulta: Prisma.$ConsultaPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    consultorId: string | null
+    usuarioId: string | null
     consultaId: string | null
     tabelaAfetada: string
     registroId: string
@@ -1198,7 +1198,7 @@ readonly fields: AuditoriaLogFieldRefs;
  */
 export interface Prisma__AuditoriaLogClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  consultor<T extends Prisma.AuditoriaLog$consultorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AuditoriaLog$consultorArgs<ExtArgs>>): Prisma.Prisma__ConsultorClient<runtime.Types.Result.GetResult<Prisma.$ConsultorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  usuario<T extends Prisma.AuditoriaLog$usuarioArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AuditoriaLog$usuarioArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   consulta<T extends Prisma.AuditoriaLog$consultaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AuditoriaLog$consultaArgs<ExtArgs>>): Prisma.Prisma__ConsultaClient<runtime.Types.Result.GetResult<Prisma.$ConsultaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1230,7 +1230,7 @@ export interface Prisma__AuditoriaLogClient<T, Null = never, ExtArgs extends run
  */
 export interface AuditoriaLogFieldRefs {
   readonly id: Prisma.FieldRef<"AuditoriaLog", 'String'>
-  readonly consultorId: Prisma.FieldRef<"AuditoriaLog", 'String'>
+  readonly usuarioId: Prisma.FieldRef<"AuditoriaLog", 'String'>
   readonly consultaId: Prisma.FieldRef<"AuditoriaLog", 'String'>
   readonly tabelaAfetada: Prisma.FieldRef<"AuditoriaLog", 'String'>
   readonly registroId: Prisma.FieldRef<"AuditoriaLog", 'String'>
@@ -1640,22 +1640,22 @@ export type AuditoriaLogDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
- * AuditoriaLog.consultor
+ * AuditoriaLog.usuario
  */
-export type AuditoriaLog$consultorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type AuditoriaLog$usuarioArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Consultor
+   * Select specific fields to fetch from the User
    */
-  select?: Prisma.ConsultorSelect<ExtArgs> | null
+  select?: Prisma.UserSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Consultor
+   * Omit specific fields from the User
    */
-  omit?: Prisma.ConsultorOmit<ExtArgs> | null
+  omit?: Prisma.UserOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ConsultorInclude<ExtArgs> | null
-  where?: Prisma.ConsultorWhereInput
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**
