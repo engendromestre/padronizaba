@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
+import { senhaForteSchema } from "@/lib/schemas/senha";
 
 export async function POST(request: Request) {
     try {
@@ -10,7 +11,15 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Dados em falta para a ativação." }, { status: 400 });
         }
 
-        // 🔍 Dupla validação de segurança direto no banco
+        // Valida força da senha no servidor
+        const validacao = senhaForteSchema.safeParse(password)
+        if (!validacao.success) {
+            return NextResponse.json(
+                { error: validacao.error.issues[0].message },
+                { status: 400 }
+            )
+        }
+
         const user = await prisma.user.findFirst({
             where: {
                 id: userId,
@@ -22,16 +31,13 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "Token de ativação inválido." }, { status: 400 });
         }
 
-        // Valida expiração novamente
         const agora = new Date();
         if (user.tokenExpires && agora > new Date(user.tokenExpires)) {
             return NextResponse.json({ error: "Este token já expirou." }, { status: 400 });
         }
 
-        // 🔒 Gera o Hash seguro da nova senha escolhida pelo utilizador
-        const senhaHash = await bcrypt.hash(password, 10);
+        const senhaHash = await bcrypt.hash(password, 12);
 
-        // 📝 Atualiza o utilizador tornando-o Ativo e limpando os tokens de convite
         await prisma.user.update({
             where: { id: userId },
             data: {
