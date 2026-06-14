@@ -56,6 +56,7 @@ export default function LoginPage() {
     })
 
     if (result?.error) {
+      const codigo = result.code ?? result.error
 
       const mensagens: Record<string, string> = {
         rate_limit: "Muitas tentativas sem sucesso. Aguarde 15 minutos.",
@@ -65,7 +66,7 @@ export default function LoginPage() {
         CredentialsSignin: "E-mail ou senha inválidos. Verifique suas credenciais.",
       }
 
-      setError(mensagens[result.error] ?? "Erro ao autenticar. Tente novamente.")
+      setError(mensagens[codigo] ?? "Erro ao autenticar. Tente novamente.")
       setLoading(false)
       return
     }
