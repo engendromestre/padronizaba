@@ -47,10 +47,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (vencido || trigger === "update") {
           const dbUser = await prisma.user.findUnique({
             where: { id: token.id as string },
-            select: { role: true, ativo: true, nome: true, empresaId: true, clienteId: true },
+            select: {
+              role: true,
+              ativo: true,
+              nome: true,
+              empresaId: true,
+              clienteId: true,
+              senhaAtualizadaEm: true,
+            },
           })
 
           if (!dbUser || !dbUser.ativo) return null
+
+          // Invalida sessão se senha foi trocada após emissão do token
+          if (dbUser.senhaAtualizadaEm) {
+            const tokenEmitidoEm = (token.iat as number) * 1000
+            if (dbUser.senhaAtualizadaEm.getTime() > tokenEmitidoEm) {
+              return null // força logout
+            }
+          }
 
           token.role = dbUser.role
           token.nome = dbUser.nome

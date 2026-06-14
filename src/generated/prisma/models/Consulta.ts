@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model Consulta
- * 
+ * Registro  de fechamento do late de abate
  */
 export type ConsultaModel = runtime.Types.Result.DefaultSelection<Prisma.$ConsultaPayload>
 

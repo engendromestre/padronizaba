@@ -39,12 +39,14 @@ export type UserMinAggregateOutputType = {
   invitedBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
   emailVerifiedAt: Date | null
   registrationIp: string | null
   activationToken: string | null
   tokenExpires: Date | null
   twoFactorEnabled: boolean | null
   twoFactorSecret: string | null
+  senhaAtualizadaEm: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -61,12 +63,14 @@ export type UserMaxAggregateOutputType = {
   invitedBy: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
   emailVerifiedAt: Date | null
   registrationIp: string | null
   activationToken: string | null
   tokenExpires: Date | null
   twoFactorEnabled: boolean | null
   twoFactorSecret: string | null
+  senhaAtualizadaEm: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -83,12 +87,14 @@ export type UserCountAggregateOutputType = {
   invitedBy: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   emailVerifiedAt: number
   registrationIp: number
   activationToken: number
   tokenExpires: number
   twoFactorEnabled: number
   twoFactorSecret: number
+  senhaAtualizadaEm: number
   _all: number
 }
 
@@ -107,12 +113,14 @@ export type UserMinAggregateInputType = {
   invitedBy?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   emailVerifiedAt?: true
   registrationIp?: true
   activationToken?: true
   tokenExpires?: true
   twoFactorEnabled?: true
   twoFactorSecret?: true
+  senhaAtualizadaEm?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -129,12 +137,14 @@ export type UserMaxAggregateInputType = {
   invitedBy?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   emailVerifiedAt?: true
   registrationIp?: true
   activationToken?: true
   tokenExpires?: true
   twoFactorEnabled?: true
   twoFactorSecret?: true
+  senhaAtualizadaEm?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -151,12 +161,14 @@ export type UserCountAggregateInputType = {
   invitedBy?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   emailVerifiedAt?: true
   registrationIp?: true
   activationToken?: true
   tokenExpires?: true
   twoFactorEnabled?: true
   twoFactorSecret?: true
+  senhaAtualizadaEm?: true
   _all?: true
 }
 
@@ -246,12 +258,14 @@ export type UserGroupByOutputType = {
   invitedBy: string | null
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date | null
   emailVerifiedAt: Date | null
   registrationIp: string | null
   activationToken: string | null
   tokenExpires: Date | null
   twoFactorEnabled: boolean
   twoFactorSecret: string | null
+  senhaAtualizadaEm: Date | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -289,12 +303,14 @@ export type UserWhereInput = {
   invitedBy?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   registrationIp?: Prisma.StringNullableFilter<"User"> | string | null
   activationToken?: Prisma.StringNullableFilter<"User"> | string | null
   tokenExpires?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   twoFactorEnabled?: Prisma.BoolFilter<"User"> | boolean
   twoFactorSecret?: Prisma.StringNullableFilter<"User"> | string | null
+  senhaAtualizadaEm?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   empresa?: Prisma.XOR<Prisma.EmpresaNullableScalarRelationFilter, Prisma.EmpresaWhereInput> | null
   cliente?: Prisma.XOR<Prisma.ClienteNullableScalarRelationFilter, Prisma.ClienteWhereInput> | null
   consultas?: Prisma.ConsultaListRelationFilter
@@ -315,12 +331,14 @@ export type UserOrderByWithRelationInput = {
   invitedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   registrationIp?: Prisma.SortOrderInput | Prisma.SortOrder
   activationToken?: Prisma.SortOrderInput | Prisma.SortOrder
   tokenExpires?: Prisma.SortOrderInput | Prisma.SortOrder
   twoFactorEnabled?: Prisma.SortOrder
   twoFactorSecret?: Prisma.SortOrderInput | Prisma.SortOrder
+  senhaAtualizadaEm?: Prisma.SortOrderInput | Prisma.SortOrder
   empresa?: Prisma.EmpresaOrderByWithRelationInput
   cliente?: Prisma.ClienteOrderByWithRelationInput
   consultas?: Prisma.ConsultaOrderByRelationAggregateInput
@@ -345,11 +363,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   invitedBy?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   registrationIp?: Prisma.StringNullableFilter<"User"> | string | null
   tokenExpires?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   twoFactorEnabled?: Prisma.BoolFilter<"User"> | boolean
   twoFactorSecret?: Prisma.StringNullableFilter<"User"> | string | null
+  senhaAtualizadaEm?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   empresa?: Prisma.XOR<Prisma.EmpresaNullableScalarRelationFilter, Prisma.EmpresaWhereInput> | null
   cliente?: Prisma.XOR<Prisma.ClienteNullableScalarRelationFilter, Prisma.ClienteWhereInput> | null
   consultas?: Prisma.ConsultaListRelationFilter
@@ -370,12 +390,14 @@ export type UserOrderByWithAggregationInput = {
   invitedBy?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   registrationIp?: Prisma.SortOrderInput | Prisma.SortOrder
   activationToken?: Prisma.SortOrderInput | Prisma.SortOrder
   tokenExpires?: Prisma.SortOrderInput | Prisma.SortOrder
   twoFactorEnabled?: Prisma.SortOrder
   twoFactorSecret?: Prisma.SortOrderInput | Prisma.SortOrder
+  senhaAtualizadaEm?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -398,12 +420,14 @@ export type UserScalarWhereWithAggregatesInput = {
   invitedBy?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   emailVerifiedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   registrationIp?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   activationToken?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   tokenExpires?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   twoFactorEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   twoFactorSecret?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  senhaAtualizadaEm?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
 }
 
 export type UserCreateInput = {
@@ -418,12 +442,14 @@ export type UserCreateInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
   empresa?: Prisma.EmpresaCreateNestedOneWithoutUsuariosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutUsuariosInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutConsultorInput
@@ -444,12 +470,14 @@ export type UserUncheckedCreateInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutConsultorInput
   auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutUsuarioInput
 }
@@ -466,12 +494,14 @@ export type UserUpdateInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   empresa?: Prisma.EmpresaUpdateOneWithoutUsuariosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutUsuariosNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutConsultorNestedInput
@@ -492,12 +522,14 @@ export type UserUncheckedUpdateInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutConsultorNestedInput
   auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutUsuarioNestedInput
 }
@@ -516,12 +548,14 @@ export type UserCreateManyInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -536,12 +570,14 @@ export type UserUpdateManyMutationInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -558,12 +594,14 @@ export type UserUncheckedUpdateManyInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserListRelationFilter = {
@@ -590,12 +628,14 @@ export type UserCountOrderByAggregateInput = {
   invitedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrder
   registrationIp?: Prisma.SortOrder
   activationToken?: Prisma.SortOrder
   tokenExpires?: Prisma.SortOrder
   twoFactorEnabled?: Prisma.SortOrder
   twoFactorSecret?: Prisma.SortOrder
+  senhaAtualizadaEm?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -612,12 +652,14 @@ export type UserMaxOrderByAggregateInput = {
   invitedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrder
   registrationIp?: Prisma.SortOrder
   activationToken?: Prisma.SortOrder
   tokenExpires?: Prisma.SortOrder
   twoFactorEnabled?: Prisma.SortOrder
   twoFactorSecret?: Prisma.SortOrder
+  senhaAtualizadaEm?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -634,12 +676,14 @@ export type UserMinOrderByAggregateInput = {
   invitedBy?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
   emailVerifiedAt?: Prisma.SortOrder
   registrationIp?: Prisma.SortOrder
   activationToken?: Prisma.SortOrder
   tokenExpires?: Prisma.SortOrder
   twoFactorEnabled?: Prisma.SortOrder
   twoFactorSecret?: Prisma.SortOrder
+  senhaAtualizadaEm?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -736,10 +780,6 @@ export type UserUncheckedUpdateManyWithoutClienteNestedInput = {
   deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type EnumRoleFieldUpdateOperationsInput = {
   set?: $Enums.Role
 }
@@ -786,12 +826,14 @@ export type UserCreateWithoutEmpresaInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
   cliente?: Prisma.ClienteCreateNestedOneWithoutUsuariosInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutConsultorInput
   auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutUsuarioInput
@@ -810,12 +852,14 @@ export type UserUncheckedCreateWithoutEmpresaInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutConsultorInput
   auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutUsuarioInput
 }
@@ -863,12 +907,14 @@ export type UserScalarWhereInput = {
   invitedBy?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   emailVerifiedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   registrationIp?: Prisma.StringNullableFilter<"User"> | string | null
   activationToken?: Prisma.StringNullableFilter<"User"> | string | null
   tokenExpires?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   twoFactorEnabled?: Prisma.BoolFilter<"User"> | boolean
   twoFactorSecret?: Prisma.StringNullableFilter<"User"> | string | null
+  senhaAtualizadaEm?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
 }
 
 export type UserCreateWithoutClienteInput = {
@@ -883,12 +929,14 @@ export type UserCreateWithoutClienteInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
   empresa?: Prisma.EmpresaCreateNestedOneWithoutUsuariosInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutConsultorInput
   auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutUsuarioInput
@@ -907,12 +955,14 @@ export type UserUncheckedCreateWithoutClienteInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutConsultorInput
   auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutUsuarioInput
 }
@@ -955,12 +1005,14 @@ export type UserCreateWithoutConsultasInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
   empresa?: Prisma.EmpresaCreateNestedOneWithoutUsuariosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutUsuariosInput
   auditoriaLogs?: Prisma.AuditoriaLogCreateNestedManyWithoutUsuarioInput
@@ -980,12 +1032,14 @@ export type UserUncheckedCreateWithoutConsultasInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
   auditoriaLogs?: Prisma.AuditoriaLogUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
@@ -1017,12 +1071,14 @@ export type UserUpdateWithoutConsultasInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   empresa?: Prisma.EmpresaUpdateOneWithoutUsuariosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutUsuariosNestedInput
   auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutUsuarioNestedInput
@@ -1042,12 +1098,14 @@ export type UserUncheckedUpdateWithoutConsultasInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
@@ -1063,12 +1121,14 @@ export type UserCreateWithoutAuditoriaLogsInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
   empresa?: Prisma.EmpresaCreateNestedOneWithoutUsuariosInput
   cliente?: Prisma.ClienteCreateNestedOneWithoutUsuariosInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutConsultorInput
@@ -1088,12 +1148,14 @@ export type UserUncheckedCreateWithoutAuditoriaLogsInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutConsultorInput
 }
 
@@ -1125,12 +1187,14 @@ export type UserUpdateWithoutAuditoriaLogsInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   empresa?: Prisma.EmpresaUpdateOneWithoutUsuariosNestedInput
   cliente?: Prisma.ClienteUpdateOneWithoutUsuariosNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutConsultorNestedInput
@@ -1150,12 +1214,14 @@ export type UserUncheckedUpdateWithoutAuditoriaLogsInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutConsultorNestedInput
 }
 
@@ -1172,12 +1238,14 @@ export type UserCreateManyEmpresaInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
 }
 
 export type UserUpdateWithoutEmpresaInput = {
@@ -1192,12 +1260,14 @@ export type UserUpdateWithoutEmpresaInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente?: Prisma.ClienteUpdateOneWithoutUsuariosNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutConsultorNestedInput
   auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutUsuarioNestedInput
@@ -1216,12 +1286,14 @@ export type UserUncheckedUpdateWithoutEmpresaInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutConsultorNestedInput
   auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutUsuarioNestedInput
 }
@@ -1239,12 +1311,14 @@ export type UserUncheckedUpdateManyWithoutEmpresaInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type UserCreateManyClienteInput = {
@@ -1260,12 +1334,14 @@ export type UserCreateManyClienteInput = {
   invitedBy?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   emailVerifiedAt?: Date | string | null
   registrationIp?: string | null
   activationToken?: string | null
   tokenExpires?: Date | string | null
   twoFactorEnabled?: boolean
   twoFactorSecret?: string | null
+  senhaAtualizadaEm?: Date | string | null
 }
 
 export type UserUpdateWithoutClienteInput = {
@@ -1280,12 +1356,14 @@ export type UserUpdateWithoutClienteInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   empresa?: Prisma.EmpresaUpdateOneWithoutUsuariosNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutConsultorNestedInput
   auditoriaLogs?: Prisma.AuditoriaLogUpdateManyWithoutUsuarioNestedInput
@@ -1304,12 +1382,14 @@ export type UserUncheckedUpdateWithoutClienteInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutConsultorNestedInput
   auditoriaLogs?: Prisma.AuditoriaLogUncheckedUpdateManyWithoutUsuarioNestedInput
 }
@@ -1327,12 +1407,14 @@ export type UserUncheckedUpdateManyWithoutClienteInput = {
   invitedBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   emailVerifiedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   registrationIp?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   activationToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tokenExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  senhaAtualizadaEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1389,12 +1471,14 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   invitedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   emailVerifiedAt?: boolean
   registrationIp?: boolean
   activationToken?: boolean
   tokenExpires?: boolean
   twoFactorEnabled?: boolean
   twoFactorSecret?: boolean
+  senhaAtualizadaEm?: boolean
   empresa?: boolean | Prisma.User$empresaArgs<ExtArgs>
   cliente?: boolean | Prisma.User$clienteArgs<ExtArgs>
   consultas?: boolean | Prisma.User$consultasArgs<ExtArgs>
@@ -1416,12 +1500,14 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   invitedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   emailVerifiedAt?: boolean
   registrationIp?: boolean
   activationToken?: boolean
   tokenExpires?: boolean
   twoFactorEnabled?: boolean
   twoFactorSecret?: boolean
+  senhaAtualizadaEm?: boolean
   empresa?: boolean | Prisma.User$empresaArgs<ExtArgs>
   cliente?: boolean | Prisma.User$clienteArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -1440,12 +1526,14 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   invitedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   emailVerifiedAt?: boolean
   registrationIp?: boolean
   activationToken?: boolean
   tokenExpires?: boolean
   twoFactorEnabled?: boolean
   twoFactorSecret?: boolean
+  senhaAtualizadaEm?: boolean
   empresa?: boolean | Prisma.User$empresaArgs<ExtArgs>
   cliente?: boolean | Prisma.User$clienteArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -1464,15 +1552,17 @@ export type UserSelectScalar = {
   invitedBy?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   emailVerifiedAt?: boolean
   registrationIp?: boolean
   activationToken?: boolean
   tokenExpires?: boolean
   twoFactorEnabled?: boolean
   twoFactorSecret?: boolean
+  senhaAtualizadaEm?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "clienteId" | "nome" | "email" | "senhaHash" | "senhaResetToken" | "senhaResetExpires" | "role" | "ativo" | "invitedBy" | "createdAt" | "updatedAt" | "emailVerifiedAt" | "registrationIp" | "activationToken" | "tokenExpires" | "twoFactorEnabled" | "twoFactorSecret", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "clienteId" | "nome" | "email" | "senhaHash" | "senhaResetToken" | "senhaResetExpires" | "role" | "ativo" | "invitedBy" | "createdAt" | "updatedAt" | "deletedAt" | "emailVerifiedAt" | "registrationIp" | "activationToken" | "tokenExpires" | "twoFactorEnabled" | "twoFactorSecret" | "senhaAtualizadaEm", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   empresa?: boolean | Prisma.User$empresaArgs<ExtArgs>
   cliente?: boolean | Prisma.User$clienteArgs<ExtArgs>
@@ -1511,12 +1601,14 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     invitedBy: string | null
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     emailVerifiedAt: Date | null
     registrationIp: string | null
     activationToken: string | null
     tokenExpires: Date | null
     twoFactorEnabled: boolean
     twoFactorSecret: string | null
+    senhaAtualizadaEm: Date | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1957,12 +2049,14 @@ export interface UserFieldRefs {
   readonly invitedBy: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly emailVerifiedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly registrationIp: Prisma.FieldRef<"User", 'String'>
   readonly activationToken: Prisma.FieldRef<"User", 'String'>
   readonly tokenExpires: Prisma.FieldRef<"User", 'DateTime'>
   readonly twoFactorEnabled: Prisma.FieldRef<"User", 'Boolean'>
   readonly twoFactorSecret: Prisma.FieldRef<"User", 'String'>
+  readonly senhaAtualizadaEm: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 

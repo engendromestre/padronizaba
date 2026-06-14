@@ -32,6 +32,7 @@ export type FazendaMinAggregateOutputType = {
   ativo: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type FazendaMaxAggregateOutputType = {
@@ -42,6 +43,7 @@ export type FazendaMaxAggregateOutputType = {
   ativo: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type FazendaCountAggregateOutputType = {
@@ -52,6 +54,7 @@ export type FazendaCountAggregateOutputType = {
   ativo: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -64,6 +67,7 @@ export type FazendaMinAggregateInputType = {
   ativo?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type FazendaMaxAggregateInputType = {
@@ -74,6 +78,7 @@ export type FazendaMaxAggregateInputType = {
   ativo?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type FazendaCountAggregateInputType = {
@@ -84,6 +89,7 @@ export type FazendaCountAggregateInputType = {
   ativo?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -167,6 +173,7 @@ export type FazendaGroupByOutputType = {
   ativo: boolean
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date | null
   _count: FazendaCountAggregateOutputType | null
   _min: FazendaMinAggregateOutputType | null
   _max: FazendaMaxAggregateOutputType | null
@@ -198,6 +205,7 @@ export type FazendaWhereInput = {
   ativo?: Prisma.BoolFilter<"Fazenda"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Fazenda"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Fazenda"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Fazenda"> | Date | string | null
   cliente?: Prisma.XOR<Prisma.ClienteScalarRelationFilter, Prisma.ClienteWhereInput>
   cidade?: Prisma.XOR<Prisma.CidadeScalarRelationFilter, Prisma.CidadeWhereInput>
   consultas?: Prisma.ConsultaListRelationFilter
@@ -211,6 +219,7 @@ export type FazendaOrderByWithRelationInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cliente?: Prisma.ClienteOrderByWithRelationInput
   cidade?: Prisma.CidadeOrderByWithRelationInput
   consultas?: Prisma.ConsultaOrderByRelationAggregateInput
@@ -227,6 +236,7 @@ export type FazendaWhereUniqueInput = Prisma.AtLeast<{
   ativo?: Prisma.BoolFilter<"Fazenda"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Fazenda"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Fazenda"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Fazenda"> | Date | string | null
   cliente?: Prisma.XOR<Prisma.ClienteScalarRelationFilter, Prisma.ClienteWhereInput>
   cidade?: Prisma.XOR<Prisma.CidadeScalarRelationFilter, Prisma.CidadeWhereInput>
   consultas?: Prisma.ConsultaListRelationFilter
@@ -240,6 +250,7 @@ export type FazendaOrderByWithAggregationInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FazendaCountOrderByAggregateInput
   _max?: Prisma.FazendaMaxOrderByAggregateInput
   _min?: Prisma.FazendaMinOrderByAggregateInput
@@ -256,6 +267,7 @@ export type FazendaScalarWhereWithAggregatesInput = {
   ativo?: Prisma.BoolWithAggregatesFilter<"Fazenda"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Fazenda"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Fazenda"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Fazenda"> | Date | string | null
 }
 
 export type FazendaCreateInput = {
@@ -264,6 +276,7 @@ export type FazendaCreateInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   cliente: Prisma.ClienteCreateNestedOneWithoutFazendasInput
   cidade: Prisma.CidadeCreateNestedOneWithoutFazendasInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutFazendaInput
@@ -277,6 +290,7 @@ export type FazendaUncheckedCreateInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutFazendaInput
 }
 
@@ -286,6 +300,7 @@ export type FazendaUpdateInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutFazendasNestedInput
   cidade?: Prisma.CidadeUpdateOneRequiredWithoutFazendasNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutFazendaNestedInput
@@ -299,6 +314,7 @@ export type FazendaUncheckedUpdateInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutFazendaNestedInput
 }
 
@@ -310,6 +326,7 @@ export type FazendaCreateManyInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type FazendaUpdateManyMutationInput = {
@@ -318,6 +335,7 @@ export type FazendaUpdateManyMutationInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FazendaUncheckedUpdateManyInput = {
@@ -328,6 +346,7 @@ export type FazendaUncheckedUpdateManyInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FazendaListRelationFilter = {
@@ -348,6 +367,7 @@ export type FazendaCountOrderByAggregateInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type FazendaMaxOrderByAggregateInput = {
@@ -358,6 +378,7 @@ export type FazendaMaxOrderByAggregateInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type FazendaMinOrderByAggregateInput = {
@@ -368,6 +389,7 @@ export type FazendaMinOrderByAggregateInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type FazendaScalarRelationFilter = {
@@ -479,6 +501,7 @@ export type FazendaCreateWithoutCidadeInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   cliente: Prisma.ClienteCreateNestedOneWithoutFazendasInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutFazendaInput
 }
@@ -490,6 +513,7 @@ export type FazendaUncheckedCreateWithoutCidadeInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutFazendaInput
 }
 
@@ -530,6 +554,7 @@ export type FazendaScalarWhereInput = {
   ativo?: Prisma.BoolFilter<"Fazenda"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Fazenda"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Fazenda"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Fazenda"> | Date | string | null
 }
 
 export type FazendaCreateWithoutClienteInput = {
@@ -538,6 +563,7 @@ export type FazendaCreateWithoutClienteInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   cidade: Prisma.CidadeCreateNestedOneWithoutFazendasInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutFazendaInput
 }
@@ -549,6 +575,7 @@ export type FazendaUncheckedCreateWithoutClienteInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutFazendaInput
 }
 
@@ -584,6 +611,7 @@ export type FazendaCreateWithoutConsultasInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   cliente: Prisma.ClienteCreateNestedOneWithoutFazendasInput
   cidade: Prisma.CidadeCreateNestedOneWithoutFazendasInput
 }
@@ -596,6 +624,7 @@ export type FazendaUncheckedCreateWithoutConsultasInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type FazendaCreateOrConnectWithoutConsultasInput = {
@@ -620,6 +649,7 @@ export type FazendaUpdateWithoutConsultasInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutFazendasNestedInput
   cidade?: Prisma.CidadeUpdateOneRequiredWithoutFazendasNestedInput
 }
@@ -632,6 +662,7 @@ export type FazendaUncheckedUpdateWithoutConsultasInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FazendaCreateManyCidadeInput = {
@@ -641,6 +672,7 @@ export type FazendaCreateManyCidadeInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type FazendaUpdateWithoutCidadeInput = {
@@ -649,6 +681,7 @@ export type FazendaUpdateWithoutCidadeInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cliente?: Prisma.ClienteUpdateOneRequiredWithoutFazendasNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutFazendaNestedInput
 }
@@ -660,6 +693,7 @@ export type FazendaUncheckedUpdateWithoutCidadeInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutFazendaNestedInput
 }
 
@@ -670,6 +704,7 @@ export type FazendaUncheckedUpdateManyWithoutCidadeInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FazendaCreateManyClienteInput = {
@@ -679,6 +714,7 @@ export type FazendaCreateManyClienteInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type FazendaUpdateWithoutClienteInput = {
@@ -687,6 +723,7 @@ export type FazendaUpdateWithoutClienteInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cidade?: Prisma.CidadeUpdateOneRequiredWithoutFazendasNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutFazendaNestedInput
 }
@@ -698,6 +735,7 @@ export type FazendaUncheckedUpdateWithoutClienteInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutFazendaNestedInput
 }
 
@@ -708,6 +746,7 @@ export type FazendaUncheckedUpdateManyWithoutClienteInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -749,6 +788,7 @@ export type FazendaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
   cidade?: boolean | Prisma.CidadeDefaultArgs<ExtArgs>
   consultas?: boolean | Prisma.Fazenda$consultasArgs<ExtArgs>
@@ -763,6 +803,7 @@ export type FazendaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
   cidade?: boolean | Prisma.CidadeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fazenda"]>
@@ -775,6 +816,7 @@ export type FazendaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
   cidade?: boolean | Prisma.CidadeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["fazenda"]>
@@ -787,9 +829,10 @@ export type FazendaSelectScalar = {
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type FazendaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "clienteId" | "cidadeId" | "ativo" | "createdAt" | "updatedAt", ExtArgs["result"]["fazenda"]>
+export type FazendaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "clienteId" | "cidadeId" | "ativo" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["fazenda"]>
 export type FazendaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
   cidade?: boolean | Prisma.CidadeDefaultArgs<ExtArgs>
@@ -820,6 +863,7 @@ export type $FazendaPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     ativo: boolean
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["fazenda"]>
   composites: {}
 }
@@ -1253,6 +1297,7 @@ export interface FazendaFieldRefs {
   readonly ativo: Prisma.FieldRef<"Fazenda", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Fazenda", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Fazenda", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"Fazenda", 'DateTime'>
 }
     
 

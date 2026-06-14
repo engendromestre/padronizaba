@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
             senhaHash,
             senhaResetToken: null,
             senhaResetExpires: null,
+            senhaAtualizadaEm: new Date(),
         },
     })
 

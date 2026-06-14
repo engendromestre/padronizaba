@@ -1447,7 +1447,8 @@ export const FrigorificoScalarFieldEnum = {
   cidadeId: 'cidadeId',
   ativo: 'ativo',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type FrigorificoScalarFieldEnum = (typeof FrigorificoScalarFieldEnum)[keyof typeof FrigorificoScalarFieldEnum]
@@ -1471,7 +1472,8 @@ export const ClienteScalarFieldEnum = {
   nomeProdutor: 'nomeProdutor',
   ativo: 'ativo',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type ClienteScalarFieldEnum = (typeof ClienteScalarFieldEnum)[keyof typeof ClienteScalarFieldEnum]
@@ -1484,7 +1486,8 @@ export const FazendaScalarFieldEnum = {
   cidadeId: 'cidadeId',
   ativo: 'ativo',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type FazendaScalarFieldEnum = (typeof FazendaScalarFieldEnum)[keyof typeof FazendaScalarFieldEnum]
@@ -1497,7 +1500,8 @@ export const GrupoWhatsappScalarFieldEnum = {
   nomeGrupo: 'nomeGrupo',
   ativo: 'ativo',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 } as const
 
 export type GrupoWhatsappScalarFieldEnum = (typeof GrupoWhatsappScalarFieldEnum)[keyof typeof GrupoWhatsappScalarFieldEnum]
@@ -1527,12 +1531,14 @@ export const UserScalarFieldEnum = {
   invitedBy: 'invitedBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
   emailVerifiedAt: 'emailVerifiedAt',
   registrationIp: 'registrationIp',
   activationToken: 'activationToken',
   tokenExpires: 'tokenExpires',
   twoFactorEnabled: 'twoFactorEnabled',
-  twoFactorSecret: 'twoFactorSecret'
+  twoFactorSecret: 'twoFactorSecret',
+  senhaAtualizadaEm: 'senhaAtualizadaEm'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

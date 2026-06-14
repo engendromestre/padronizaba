@@ -63,7 +63,7 @@ export type Frigorifico = Prisma.FrigorificoModel
 export type Empresa = Prisma.EmpresaModel
 /**
  * Model Cliente
- * 
+ * Produtor - Dono do Lote no Relatorio anual de faturamento
  */
 export type Cliente = Prisma.ClienteModel
 /**
@@ -89,7 +89,7 @@ export type CategoriaAnimal = Prisma.CategoriaAnimalModel
 export type User = Prisma.UserModel
 /**
  * Model Consulta
- * 
+ * Registro  de fechamento do late de abate
  */
 export type Consulta = Prisma.ConsultaModel
 /**

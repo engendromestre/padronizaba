@@ -14,7 +14,7 @@ import type * as Prisma from "../internal/prismaNamespace"
 
 /**
  * Model Cliente
- * 
+ * Produtor - Dono do Lote no Relatorio anual de faturamento
  */
 export type ClienteModel = runtime.Types.Result.DefaultSelection<Prisma.$ClientePayload>
 
@@ -31,6 +31,7 @@ export type ClienteMinAggregateOutputType = {
   ativo: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type ClienteMaxAggregateOutputType = {
@@ -40,6 +41,7 @@ export type ClienteMaxAggregateOutputType = {
   ativo: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type ClienteCountAggregateOutputType = {
@@ -49,6 +51,7 @@ export type ClienteCountAggregateOutputType = {
   ativo: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -60,6 +63,7 @@ export type ClienteMinAggregateInputType = {
   ativo?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type ClienteMaxAggregateInputType = {
@@ -69,6 +73,7 @@ export type ClienteMaxAggregateInputType = {
   ativo?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type ClienteCountAggregateInputType = {
@@ -78,6 +83,7 @@ export type ClienteCountAggregateInputType = {
   ativo?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -160,6 +166,7 @@ export type ClienteGroupByOutputType = {
   ativo: boolean
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date | null
   _count: ClienteCountAggregateOutputType | null
   _min: ClienteMinAggregateOutputType | null
   _max: ClienteMaxAggregateOutputType | null
@@ -190,6 +197,7 @@ export type ClienteWhereInput = {
   ativo?: Prisma.BoolFilter<"Cliente"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Cliente"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cliente"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Cliente"> | Date | string | null
   empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   fazendas?: Prisma.FazendaListRelationFilter
   grupos?: Prisma.GrupoWhatsappListRelationFilter
@@ -204,6 +212,7 @@ export type ClienteOrderByWithRelationInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   empresa?: Prisma.EmpresaOrderByWithRelationInput
   fazendas?: Prisma.FazendaOrderByRelationAggregateInput
   grupos?: Prisma.GrupoWhatsappOrderByRelationAggregateInput
@@ -221,6 +230,7 @@ export type ClienteWhereUniqueInput = Prisma.AtLeast<{
   ativo?: Prisma.BoolFilter<"Cliente"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Cliente"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cliente"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Cliente"> | Date | string | null
   empresa?: Prisma.XOR<Prisma.EmpresaScalarRelationFilter, Prisma.EmpresaWhereInput>
   fazendas?: Prisma.FazendaListRelationFilter
   grupos?: Prisma.GrupoWhatsappListRelationFilter
@@ -235,6 +245,7 @@ export type ClienteOrderByWithAggregationInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ClienteCountOrderByAggregateInput
   _max?: Prisma.ClienteMaxOrderByAggregateInput
   _min?: Prisma.ClienteMinOrderByAggregateInput
@@ -250,6 +261,7 @@ export type ClienteScalarWhereWithAggregatesInput = {
   ativo?: Prisma.BoolWithAggregatesFilter<"Cliente"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Cliente"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Cliente"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Cliente"> | Date | string | null
 }
 
 export type ClienteCreateInput = {
@@ -258,6 +270,7 @@ export type ClienteCreateInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   empresa: Prisma.EmpresaCreateNestedOneWithoutClientesInput
   fazendas?: Prisma.FazendaCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappCreateNestedManyWithoutClienteInput
@@ -272,6 +285,7 @@ export type ClienteUncheckedCreateInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   fazendas?: Prisma.FazendaUncheckedCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutClienteInput
@@ -284,6 +298,7 @@ export type ClienteUpdateInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutClientesNestedInput
   fazendas?: Prisma.FazendaUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUpdateManyWithoutClienteNestedInput
@@ -298,6 +313,7 @@ export type ClienteUncheckedUpdateInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fazendas?: Prisma.FazendaUncheckedUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutClienteNestedInput
@@ -311,6 +327,7 @@ export type ClienteCreateManyInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type ClienteUpdateManyMutationInput = {
@@ -319,6 +336,7 @@ export type ClienteUpdateManyMutationInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ClienteUncheckedUpdateManyInput = {
@@ -328,6 +346,7 @@ export type ClienteUncheckedUpdateManyInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ClienteListRelationFilter = {
@@ -347,6 +366,7 @@ export type ClienteCountOrderByAggregateInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type ClienteMaxOrderByAggregateInput = {
@@ -356,6 +376,7 @@ export type ClienteMaxOrderByAggregateInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type ClienteMinOrderByAggregateInput = {
@@ -365,6 +386,7 @@ export type ClienteMinOrderByAggregateInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type ClienteScalarRelationFilter = {
@@ -483,6 +505,7 @@ export type ClienteCreateWithoutEmpresaInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   fazendas?: Prisma.FazendaCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutClienteInput
@@ -495,6 +518,7 @@ export type ClienteUncheckedCreateWithoutEmpresaInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   fazendas?: Prisma.FazendaUncheckedCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutClienteInput
@@ -537,6 +561,7 @@ export type ClienteScalarWhereInput = {
   ativo?: Prisma.BoolFilter<"Cliente"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Cliente"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Cliente"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Cliente"> | Date | string | null
 }
 
 export type ClienteCreateWithoutFazendasInput = {
@@ -545,6 +570,7 @@ export type ClienteCreateWithoutFazendasInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   empresa: Prisma.EmpresaCreateNestedOneWithoutClientesInput
   grupos?: Prisma.GrupoWhatsappCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutClienteInput
@@ -558,6 +584,7 @@ export type ClienteUncheckedCreateWithoutFazendasInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   grupos?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutClienteInput
   usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutClienteInput
@@ -585,6 +612,7 @@ export type ClienteUpdateWithoutFazendasInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutClientesNestedInput
   grupos?: Prisma.GrupoWhatsappUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutClienteNestedInput
@@ -598,6 +626,7 @@ export type ClienteUncheckedUpdateWithoutFazendasInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   grupos?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutClienteNestedInput
   usuarios?: Prisma.UserUncheckedUpdateManyWithoutClienteNestedInput
@@ -609,6 +638,7 @@ export type ClienteCreateWithoutGruposInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   empresa: Prisma.EmpresaCreateNestedOneWithoutClientesInput
   fazendas?: Prisma.FazendaCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutClienteInput
@@ -622,6 +652,7 @@ export type ClienteUncheckedCreateWithoutGruposInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   fazendas?: Prisma.FazendaUncheckedCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutClienteInput
   usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutClienteInput
@@ -649,6 +680,7 @@ export type ClienteUpdateWithoutGruposInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutClientesNestedInput
   fazendas?: Prisma.FazendaUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutClienteNestedInput
@@ -662,6 +694,7 @@ export type ClienteUncheckedUpdateWithoutGruposInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fazendas?: Prisma.FazendaUncheckedUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutClienteNestedInput
   usuarios?: Prisma.UserUncheckedUpdateManyWithoutClienteNestedInput
@@ -673,6 +706,7 @@ export type ClienteCreateWithoutUsuariosInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   empresa: Prisma.EmpresaCreateNestedOneWithoutClientesInput
   fazendas?: Prisma.FazendaCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappCreateNestedManyWithoutClienteInput
@@ -686,6 +720,7 @@ export type ClienteUncheckedCreateWithoutUsuariosInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   fazendas?: Prisma.FazendaUncheckedCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutClienteInput
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutClienteInput
@@ -713,6 +748,7 @@ export type ClienteUpdateWithoutUsuariosInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutClientesNestedInput
   fazendas?: Prisma.FazendaUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUpdateManyWithoutClienteNestedInput
@@ -726,6 +762,7 @@ export type ClienteUncheckedUpdateWithoutUsuariosInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fazendas?: Prisma.FazendaUncheckedUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutClienteNestedInput
@@ -737,6 +774,7 @@ export type ClienteCreateWithoutConsultasInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   empresa: Prisma.EmpresaCreateNestedOneWithoutClientesInput
   fazendas?: Prisma.FazendaCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappCreateNestedManyWithoutClienteInput
@@ -750,6 +788,7 @@ export type ClienteUncheckedCreateWithoutConsultasInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   fazendas?: Prisma.FazendaUncheckedCreateNestedManyWithoutClienteInput
   grupos?: Prisma.GrupoWhatsappUncheckedCreateNestedManyWithoutClienteInput
   usuarios?: Prisma.UserUncheckedCreateNestedManyWithoutClienteInput
@@ -777,6 +816,7 @@ export type ClienteUpdateWithoutConsultasInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   empresa?: Prisma.EmpresaUpdateOneRequiredWithoutClientesNestedInput
   fazendas?: Prisma.FazendaUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUpdateManyWithoutClienteNestedInput
@@ -790,6 +830,7 @@ export type ClienteUncheckedUpdateWithoutConsultasInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fazendas?: Prisma.FazendaUncheckedUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput
   usuarios?: Prisma.UserUncheckedUpdateManyWithoutClienteNestedInput
@@ -801,6 +842,7 @@ export type ClienteCreateManyEmpresaInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type ClienteUpdateWithoutEmpresaInput = {
@@ -809,6 +851,7 @@ export type ClienteUpdateWithoutEmpresaInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fazendas?: Prisma.FazendaUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutClienteNestedInput
@@ -821,6 +864,7 @@ export type ClienteUncheckedUpdateWithoutEmpresaInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   fazendas?: Prisma.FazendaUncheckedUpdateManyWithoutClienteNestedInput
   grupos?: Prisma.GrupoWhatsappUncheckedUpdateManyWithoutClienteNestedInput
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutClienteNestedInput
@@ -833,6 +877,7 @@ export type ClienteUncheckedUpdateManyWithoutEmpresaInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -900,6 +945,7 @@ export type ClienteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   fazendas?: boolean | Prisma.Cliente$fazendasArgs<ExtArgs>
   grupos?: boolean | Prisma.Cliente$gruposArgs<ExtArgs>
@@ -915,6 +961,7 @@ export type ClienteSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cliente"]>
 
@@ -925,6 +972,7 @@ export type ClienteSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cliente"]>
 
@@ -935,9 +983,10 @@ export type ClienteSelectScalar = {
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type ClienteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "nomeProdutor" | "ativo" | "createdAt" | "updatedAt", ExtArgs["result"]["cliente"]>
+export type ClienteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "empresaId" | "nomeProdutor" | "ativo" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["cliente"]>
 export type ClienteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   empresa?: boolean | Prisma.EmpresaDefaultArgs<ExtArgs>
   fazendas?: boolean | Prisma.Cliente$fazendasArgs<ExtArgs>
@@ -969,6 +1018,7 @@ export type $ClientePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     ativo: boolean
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["cliente"]>
   composites: {}
 }
@@ -1403,6 +1453,7 @@ export interface ClienteFieldRefs {
   readonly ativo: Prisma.FieldRef<"Cliente", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Cliente", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Cliente", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"Cliente", 'DateTime'>
 }
     
 

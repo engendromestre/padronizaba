@@ -32,6 +32,7 @@ export type FrigorificoMinAggregateOutputType = {
   ativo: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type FrigorificoMaxAggregateOutputType = {
@@ -42,6 +43,7 @@ export type FrigorificoMaxAggregateOutputType = {
   ativo: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  deletedAt: Date | null
 }
 
 export type FrigorificoCountAggregateOutputType = {
@@ -52,6 +54,7 @@ export type FrigorificoCountAggregateOutputType = {
   ativo: number
   createdAt: number
   updatedAt: number
+  deletedAt: number
   _all: number
 }
 
@@ -64,6 +67,7 @@ export type FrigorificoMinAggregateInputType = {
   ativo?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type FrigorificoMaxAggregateInputType = {
@@ -74,6 +78,7 @@ export type FrigorificoMaxAggregateInputType = {
   ativo?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
 }
 
 export type FrigorificoCountAggregateInputType = {
@@ -84,6 +89,7 @@ export type FrigorificoCountAggregateInputType = {
   ativo?: true
   createdAt?: true
   updatedAt?: true
+  deletedAt?: true
   _all?: true
 }
 
@@ -167,6 +173,7 @@ export type FrigorificoGroupByOutputType = {
   ativo: boolean
   createdAt: Date
   updatedAt: Date
+  deletedAt: Date | null
   _count: FrigorificoCountAggregateOutputType | null
   _min: FrigorificoMinAggregateOutputType | null
   _max: FrigorificoMaxAggregateOutputType | null
@@ -198,6 +205,7 @@ export type FrigorificoWhereInput = {
   ativo?: Prisma.BoolFilter<"Frigorifico"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Frigorifico"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Frigorifico"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Frigorifico"> | Date | string | null
   cidade?: Prisma.XOR<Prisma.CidadeScalarRelationFilter, Prisma.CidadeWhereInput>
   consultas?: Prisma.ConsultaListRelationFilter
 }
@@ -210,6 +218,7 @@ export type FrigorificoOrderByWithRelationInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cidade?: Prisma.CidadeOrderByWithRelationInput
   consultas?: Prisma.ConsultaOrderByRelationAggregateInput
 }
@@ -225,6 +234,7 @@ export type FrigorificoWhereUniqueInput = Prisma.AtLeast<{
   ativo?: Prisma.BoolFilter<"Frigorifico"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Frigorifico"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Frigorifico"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Frigorifico"> | Date | string | null
   cidade?: Prisma.XOR<Prisma.CidadeScalarRelationFilter, Prisma.CidadeWhereInput>
   consultas?: Prisma.ConsultaListRelationFilter
 }, "id" | "cnpj">
@@ -237,6 +247,7 @@ export type FrigorificoOrderByWithAggregationInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FrigorificoCountOrderByAggregateInput
   _max?: Prisma.FrigorificoMaxOrderByAggregateInput
   _min?: Prisma.FrigorificoMinOrderByAggregateInput
@@ -253,6 +264,7 @@ export type FrigorificoScalarWhereWithAggregatesInput = {
   ativo?: Prisma.BoolWithAggregatesFilter<"Frigorifico"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Frigorifico"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Frigorifico"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Frigorifico"> | Date | string | null
 }
 
 export type FrigorificoCreateInput = {
@@ -262,6 +274,7 @@ export type FrigorificoCreateInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   cidade: Prisma.CidadeCreateNestedOneWithoutFrigorificosInput
   consultas?: Prisma.ConsultaCreateNestedManyWithoutFrigorificoInput
 }
@@ -274,6 +287,7 @@ export type FrigorificoUncheckedCreateInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutFrigorificoInput
 }
 
@@ -284,6 +298,7 @@ export type FrigorificoUpdateInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cidade?: Prisma.CidadeUpdateOneRequiredWithoutFrigorificosNestedInput
   consultas?: Prisma.ConsultaUpdateManyWithoutFrigorificoNestedInput
 }
@@ -296,6 +311,7 @@ export type FrigorificoUncheckedUpdateInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutFrigorificoNestedInput
 }
 
@@ -307,6 +323,7 @@ export type FrigorificoCreateManyInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type FrigorificoUpdateManyMutationInput = {
@@ -316,6 +333,7 @@ export type FrigorificoUpdateManyMutationInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FrigorificoUncheckedUpdateManyInput = {
@@ -326,6 +344,7 @@ export type FrigorificoUncheckedUpdateManyInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FrigorificoListRelationFilter = {
@@ -346,6 +365,7 @@ export type FrigorificoCountOrderByAggregateInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type FrigorificoMaxOrderByAggregateInput = {
@@ -356,6 +376,7 @@ export type FrigorificoMaxOrderByAggregateInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type FrigorificoMinOrderByAggregateInput = {
@@ -366,6 +387,7 @@ export type FrigorificoMinOrderByAggregateInput = {
   ativo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  deletedAt?: Prisma.SortOrder
 }
 
 export type FrigorificoScalarRelationFilter = {
@@ -419,6 +441,10 @@ export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type FrigorificoCreateNestedOneWithoutConsultasInput = {
   create?: Prisma.XOR<Prisma.FrigorificoCreateWithoutConsultasInput, Prisma.FrigorificoUncheckedCreateWithoutConsultasInput>
   connectOrCreate?: Prisma.FrigorificoCreateOrConnectWithoutConsultasInput
@@ -440,6 +466,7 @@ export type FrigorificoCreateWithoutCidadeInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   consultas?: Prisma.ConsultaCreateNestedManyWithoutFrigorificoInput
 }
 
@@ -450,6 +477,7 @@ export type FrigorificoUncheckedCreateWithoutCidadeInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   consultas?: Prisma.ConsultaUncheckedCreateNestedManyWithoutFrigorificoInput
 }
 
@@ -490,6 +518,7 @@ export type FrigorificoScalarWhereInput = {
   ativo?: Prisma.BoolFilter<"Frigorifico"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Frigorifico"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Frigorifico"> | Date | string
+  deletedAt?: Prisma.DateTimeNullableFilter<"Frigorifico"> | Date | string | null
 }
 
 export type FrigorificoCreateWithoutConsultasInput = {
@@ -499,6 +528,7 @@ export type FrigorificoCreateWithoutConsultasInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
   cidade: Prisma.CidadeCreateNestedOneWithoutFrigorificosInput
 }
 
@@ -510,6 +540,7 @@ export type FrigorificoUncheckedCreateWithoutConsultasInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type FrigorificoCreateOrConnectWithoutConsultasInput = {
@@ -535,6 +566,7 @@ export type FrigorificoUpdateWithoutConsultasInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cidade?: Prisma.CidadeUpdateOneRequiredWithoutFrigorificosNestedInput
 }
 
@@ -546,6 +578,7 @@ export type FrigorificoUncheckedUpdateWithoutConsultasInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type FrigorificoCreateManyCidadeInput = {
@@ -555,6 +588,7 @@ export type FrigorificoCreateManyCidadeInput = {
   ativo?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  deletedAt?: Date | string | null
 }
 
 export type FrigorificoUpdateWithoutCidadeInput = {
@@ -564,6 +598,7 @@ export type FrigorificoUpdateWithoutCidadeInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consultas?: Prisma.ConsultaUpdateManyWithoutFrigorificoNestedInput
 }
 
@@ -574,6 +609,7 @@ export type FrigorificoUncheckedUpdateWithoutCidadeInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   consultas?: Prisma.ConsultaUncheckedUpdateManyWithoutFrigorificoNestedInput
 }
 
@@ -584,6 +620,7 @@ export type FrigorificoUncheckedUpdateManyWithoutCidadeInput = {
   ativo?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -625,6 +662,7 @@ export type FrigorificoSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   cidade?: boolean | Prisma.CidadeDefaultArgs<ExtArgs>
   consultas?: boolean | Prisma.Frigorifico$consultasArgs<ExtArgs>
   _count?: boolean | Prisma.FrigorificoCountOutputTypeDefaultArgs<ExtArgs>
@@ -638,6 +676,7 @@ export type FrigorificoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   cidade?: boolean | Prisma.CidadeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["frigorifico"]>
 
@@ -649,6 +688,7 @@ export type FrigorificoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
   cidade?: boolean | Prisma.CidadeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["frigorifico"]>
 
@@ -660,9 +700,10 @@ export type FrigorificoSelectScalar = {
   ativo?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  deletedAt?: boolean
 }
 
-export type FrigorificoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "cnpj" | "cidadeId" | "ativo" | "createdAt" | "updatedAt", ExtArgs["result"]["frigorifico"]>
+export type FrigorificoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "cnpj" | "cidadeId" | "ativo" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["frigorifico"]>
 export type FrigorificoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cidade?: boolean | Prisma.CidadeDefaultArgs<ExtArgs>
   consultas?: boolean | Prisma.Frigorifico$consultasArgs<ExtArgs>
@@ -689,6 +730,7 @@ export type $FrigorificoPayload<ExtArgs extends runtime.Types.Extensions.Interna
     ativo: boolean
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
   }, ExtArgs["result"]["frigorifico"]>
   composites: {}
 }
@@ -1121,6 +1163,7 @@ export interface FrigorificoFieldRefs {
   readonly ativo: Prisma.FieldRef<"Frigorifico", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Frigorifico", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Frigorifico", 'DateTime'>
+  readonly deletedAt: Prisma.FieldRef<"Frigorifico", 'DateTime'>
 }
     
 
