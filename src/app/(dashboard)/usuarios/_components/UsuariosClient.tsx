@@ -4,14 +4,17 @@ import { DataTable } from "@/components/data-table/DataTable";
 import { FilterAPI } from "@/components/data-table/types";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ConfirmModal } from "@/components/ui/ConfirmModal";
+import { Button } from "@/components/ui/form/Button";
 import { ToastList } from "@/components/ui/ToastList";
 import { useToast } from "@/components/ui/useToast";
+import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { createColumns, UserItem } from "./columns";
 import { EditUsuarioModal } from "./modals/EditusuarioModal";
 import { ResendResultModal } from "./modals/ResendResultModal";
 import { ViewUsuarioModal } from "./modals/ViewUsuarioModal";
+import { UsuariosFilters } from "./UsuariosFilters";
 
 interface UsuariosClientProps {
     initialUsers: UserItem[];
@@ -168,53 +171,10 @@ export function UsuariosClient({ initialUsers }: UsuariosClientProps) {
         }
     }, [addToast]);
 
-    const renderFilters = useCallback(({ setColumnFilter, activeFilters }: FilterAPI) => {
-        return (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold uppercase text-gray-400">Permissão</label>
-                    <select
-                        className="w-full bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm outline-none focus:border-primary transition-all"
-                        value={(activeFilters.find((f) => f.id === "role")?.value as string) || ""}
-                        onChange={(e) => setColumnFilter("role", e.target.value)}
-                    >
-                        <option value="">Todos os Papéis</option>
-                        <option value="SUPER_ADMIN">Super Admin</option>
-                        <option value="ADMIN">Administrador</option>
-                        <option value="CONSULTOR">Consultor</option>
-                        <option value="CLIENTE">Cliente</option>
-                    </select>
-                </div>
-
-                <div className="space-y-1.5">
-                    <label className="text-[11px] font-bold uppercase text-gray-400">Status</label>
-                    <div className="flex gap-2">
-                        {[
-                            { label: "Todos", value: "" },
-                            { label: "Ativos", value: "true" },
-                            { label: "Inativos", value: "false" }
-                        ].map((opt) => {
-                            const isActive = (activeFilters.find((f) => f.id === "ativo")?.value ?? "") === opt.value;
-                            return (
-                                <button
-                                    key={opt.label}
-                                    onClick={() => setColumnFilter("ativo", opt.value === "" ? "" : opt.value === "true")}
-                                    className={`flex-1 py-2 text-xs font-semibold rounded-lg border transition-all ${isActive
-                                        ? "bg-primary text-white border-primary"
-                                        : "bg-white text-gray-500 border-gray-200 hover:bg-gray-50"
-                                        }`}
-                                >
-                                    {opt.label}
-                                </button>
-                            );
-                        })}
-                    </div>
-                </div>
-            </div>
-        );
-    }, []);
-
-
+    const renderFilters = useCallback(
+        (api: FilterAPI) => <UsuariosFilters {...api} />,
+        []
+    )
 
     const columns = useMemo(() =>
         createColumns({
@@ -226,12 +186,13 @@ export function UsuariosClient({ initialUsers }: UsuariosClientProps) {
         [handleView, handleEdit, handleDelete, handleResendInvite]);
 
     const headerActions = (
-        <button
+        <Button
             onClick={() => router.push("/usuarios/novo")}
-            className="flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary-700 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+            icon={Plus}
+            size="md"
         >
-            + Novo Convite
-        </button>
+            Novo Convite
+        </Button>
     );
 
     return (

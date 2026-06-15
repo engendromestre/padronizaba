@@ -1,5 +1,7 @@
 "use client"
 
+import { Button } from "./form/Button"
+
 interface ConfirmModalProps {
     isOpen: boolean
     title: string
@@ -29,23 +31,22 @@ export function ConfirmModal({
                 <h2 className="text-lg font-bold text-gray-900">{title}</h2>
                 <div className="text-sm text-gray-500">{description}</div>
                 <div className="flex gap-3 pt-2">
-                    <button
+                    <Button
+                        variant="outline"
                         onClick={onCancel}
                         disabled={isLoading}
-                        className="flex-1 py-2.5 border border-gray-200 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all cursor-pointer disabled:opacity-50"
+                        fullWidth
                     >
                         Cancelar
-                    </button>
-                    <button
+                    </Button>
+                    <Button
+                        variant={variant === "danger" ? "danger" : "primary"}
                         onClick={onConfirm}
-                        disabled={isLoading}
-                        className={`flex-1 py-2.5 text-white rounded-xl text-sm font-semibold active:scale-[0.98] transition-all cursor-pointer disabled:opacity-70 ${variant === "danger"
-                                ? "bg-red-500 hover:bg-red-600"
-                                : "bg-primary hover:bg-primary-700"
-                            }`}
+                        loading={isLoading}
+                        fullWidth
                     >
                         {isLoading ? "Aguarde..." : label}
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
