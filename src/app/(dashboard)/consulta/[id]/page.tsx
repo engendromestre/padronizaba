@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth"
 import { formatarArroba, formatarKg, formatarPercentual } from "@/lib/formatters"
+import { filtroConsultas } from "@/lib/permissoes"
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
@@ -14,7 +15,12 @@ export default async function ConsultaDetalhe({ params }: Props) {
     if (!session) redirect("/login")
 
     const consulta = await prisma.consulta.findFirst({
-        where: { id, empresaId: session.user.empresaId || "" },
+        where: {
+            id,
+            ...filtroConsultas(session.user),
+            deletedAt: null,
+            status: "ENVIADA",
+        },
         include: {
             cliente: true,
             fazenda: { include: { cidade: { include: { estado: true } } } },

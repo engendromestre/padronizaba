@@ -13,12 +13,12 @@ export default async function NovoUsuarioPage() {
 
     const [empresas, clientes] = await Promise.all([
         prisma.empresa.findMany({
-            where: { ativo: true },
+            where: { ativo: true, deletedAt: null },
             select: { id: true, nome: true },
             orderBy: { nome: "asc" },
         }),
         prisma.cliente.findMany({
-            where: { ativo: true },
+            where: { ativo: true, deletedAt: null },
             select: { id: true, nomeProdutor: true, empresaId: true },
             orderBy: { nomeProdutor: "asc" },
         }),

@@ -24,6 +24,10 @@ export default async function UsuariosPage() {
     }
 
     const users = await prisma.user.findMany({
+        where: {
+            ...(session.user.role === "SUPER_ADMIN" ? {} : { empresaId: session.user.empresaId! }),
+            deletedAt: null,
+        },
         select: {
             id: true,
             nome: true,
@@ -31,13 +35,14 @@ export default async function UsuariosPage() {
             role: true,
             ativo: true,
             emailVerifiedAt: true,
-            empresa: { select: { nome: true } },
+            createdAt: true,
         },
         orderBy: { createdAt: "desc" },
-    });
+    })
 
     const initialUsers = users.map((user) => ({
         ...user,
+        createdAt: user.createdAt.toISOString(),
         emailVerifiedAt: user.emailVerifiedAt ? user.emailVerifiedAt.toISOString() : null,
     }));
 
