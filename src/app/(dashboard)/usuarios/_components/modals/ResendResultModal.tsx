@@ -3,6 +3,7 @@
 
 import { useState } from "react"
 import { Copy, Check, X, CheckCircle2 } from "lucide-react"
+import { Button } from "@/components/ui/form/Button"
 
 interface ResendResultModalProps {
     link: string
@@ -65,12 +66,9 @@ export function ResendResultModal({ link, emailEnviado, onClose }: ResendResultM
                     <p className="text-[10px] text-muted">⏱️ Expira em 48 horas</p>
                 </div>
 
-                <button
-                    onClick={onClose}
-                    className="w-full py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary-700 active:scale-[0.98] transition-all cursor-pointer"
-                >
+                <Button onClick={onClose} fullWidth>
                     Fechar
-                </button>
+                </Button>
             </div>
         </div>
     )

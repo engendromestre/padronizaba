@@ -4,6 +4,7 @@
 import { X } from "lucide-react"
 import { Input, SelectControlled, Toggle } from "@/components/ui/form"
 import { UserItem } from "../columns"
+import { Button } from "@/components/ui/form/Button"
 
 interface EditUsuarioModalProps {
     user: UserItem
@@ -51,28 +52,17 @@ export function EditUsuarioModal({
                 </div>
 
                 <div className="space-y-3">
-                    {/* Nome */}
+                    <Input
+                        label="Nome"
+                        value={nome}
+                        onChange={(e) => onNomeChange(e.target.value)}
+                    />
                     <div className="space-y-1.5">
-                        <Input
-                            label="Nome"
-                            value={nome}
-                            onChange={(e) => onNomeChange(e.target.value)}
-                        />
-                    </div>
-
-                    {/* E-mail — somente leitura */}
-                    <div className="space-y-1.5">
-                        <Input
-                            label="E-mail"
-                            value={user.email}
-                            disabled
-                        />
+                        <Input label="E-mail" value={user.email} disabled />
                         <p className="text-[11px] text-amber-600 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2 leading-relaxed">
                             Para trocar o e-mail, exclua este usuário e crie um novo convite com o e-mail correto.
                         </p>
                     </div>
-
-                    {/* Papel */}
                     <SelectControlled
                         label="Permissão"
                         value={role}
@@ -88,27 +78,17 @@ export function EditUsuarioModal({
                 </div>
 
                 <div className="flex gap-3 pt-2">
-                    <button
-                        onClick={onClose}
-                        disabled={isLoading}
-                        className="flex-1 py-2.5 border border-gray-200 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all cursor-pointer disabled:opacity-50"
-                    >
+                    <Button variant="outline" onClick={onClose} disabled={isLoading} fullWidth>
                         Cancelar
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         onClick={onSave}
-                        disabled={isLoading || !nome.trim()}
-                        className="flex-1 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary-700 active:scale-[0.98] transition-all cursor-pointer disabled:opacity-70"
+                        loading={isLoading}
+                        disabled={!nome.trim()}
+                        fullWidth
                     >
-                        {isLoading ? "Salvando..." : "Salvar"}
-                    </button>
-                    <button
-                        onClick={onClose}
-                        className="p-1.5 hover:bg-gray-100 rounded-full text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
-                    >
-                        <X size={15} />
-                    </button>
-
+                        Salvar
+                    </Button>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 // src/app/(dashboard)/usuarios/_components/modals/ViewUsuarioModal.tsx
 "use client"
 
+import { Button } from "@/components/ui/form/Button"
 import { X } from "lucide-react"
 import { UserItem } from "../columns"
 
@@ -108,18 +109,16 @@ export function ViewUsuarioModal({ user, onClose, onEdit }: ViewUsuarioModalProp
 
                 {/* Footer */}
                 <div className="px-6 pb-6 pt-2 flex gap-3">
-                    <button
+                    <Button
+                        variant="outline"
                         onClick={() => { onClose(); onEdit(user) }}
-                        className="flex-1 py-2.5 border border-gray-200 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-all cursor-pointer"
+                        fullWidth
                     >
                         Editar
-                    </button>
-                    <button
-                        onClick={onClose}
-                        className="flex-1 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:bg-primary-700 active:scale-[0.98] transition-all cursor-pointer"
-                    >
+                    </Button>
+                    <Button onClick={onClose} fullWidth>
                         Fechar
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
