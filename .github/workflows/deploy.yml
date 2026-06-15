@@ -27,3 +27,4 @@ jobs:
         run: |
           cd /opt/padronizaba
           docker compose exec app npx prisma migrate deploy
+          docker compose exec app npx prisma generate
