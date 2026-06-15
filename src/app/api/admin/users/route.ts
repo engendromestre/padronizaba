@@ -88,3 +88,42 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Erro interno no servidor" }, { status: 500 })
     }
 }
+
+export async function GET() {
+    try {
+        const session = await auth()
+        if (!session?.user) {
+            return NextResponse.json({ error: "Não autorizado" }, { status: 401 })
+        }
+
+        if (!["SUPER_ADMIN", "ADMIN"].includes(session.user.role)) {
+            return NextResponse.json({ error: "Acesso negado." }, { status: 403 })
+        }
+
+        const filtro = session.user.role === "SUPER_ADMIN"
+            ? {}
+            : { empresaId: session.user.empresaId! }
+
+        const usuarios = await prisma.user.findMany({
+            where: {
+                ...filtro,
+                deletedAt: null,
+            },
+            select: {
+                id: true,
+                nome: true,
+                email: true,
+                role: true,
+                ativo: true,
+                emailVerifiedAt: true,
+                createdAt: true,
+            },
+            orderBy: { createdAt: "desc" },
+        })
+
+        return NextResponse.json(usuarios)
+    } catch (error) {
+        console.error("Erro ao listar usuários:", error)
+        return NextResponse.json({ error: "Erro interno." }, { status: 500 })
+    }
+}

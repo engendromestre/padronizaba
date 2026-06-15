@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { filtroConsultas } from "@/lib/permissoes"
 import { NextResponse } from "next/server"
 
 export async function GET(
@@ -13,30 +14,13 @@ export async function GET(
         }
 
         const { id } = await params
-        const { role, id: userId, empresaId, clienteId } = session.user
-
-        // Filtro por role
-        const filtroRole = (() => {
-            switch (role) {
-                case "SUPER_ADMIN":
-                    return {}
-                case "ADMIN":
-                    return { empresaId: empresaId! }
-                case "CONSULTOR":
-                    return { empresaId: empresaId!, consultorId: userId }
-                case "CLIENTE":
-                    return { clienteId: clienteId! }
-                default:
-                    return { id: "none" }
-            }
-        })()
 
         const consulta = await prisma.consulta.findFirst({
             where: {
                 id,
-                ...filtroRole,
-                status: "ENVIADA",  // 👈 não retorna canceladas
-                deletedAt: null,    // 👈 soft delete
+                ...filtroConsultas(session.user),
+                status: "ENVIADA",
+                deletedAt: null,
             },
             include: {
                 cliente: {
