@@ -39,6 +39,11 @@ jobs:
         env:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      
+      - name: Install Playwright browsers
+        run: |
+          cd $GITHUB_WORKSPACE
+          npx playwright install --with-deps chromium
 
       - name: Run tests
         run: |

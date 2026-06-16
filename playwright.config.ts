@@ -17,14 +17,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome'],
-        // CONFIGURAÇÃO OBRIGATÓRIA PARA RODAR NO SEU CONTAINER ALPINE:
-        launchOptions: {
-          executablePath: '/usr/bin/chromium-browser',
-          args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
-        },
-      },
+      use: { ...devices['Desktop Chrome'] },
     },
     // Removi Firefox e Webkit pois eles não funcionam no Alpine sem configs complexas
   ],
