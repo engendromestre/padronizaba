@@ -67,8 +67,8 @@ test.describe('Fluxo de Ativação de Convite', () => {
         const inputSenha = page.locator('input[placeholder="••••••••"]').first();
         const inputConfirmacao = page.locator('input[placeholder="••••••••"]').last();
 
-        await inputSenha.fill('senha123456');
-        await inputConfirmacao.fill('senha123456');
+        await inputSenha.fill('Senha123456!');
+        await inputConfirmacao.fill('Senha123456!');
 
         // 4. Submissão
         await page.getByRole('button', { name: /Definir Senha e Ativar Conta/i }).click();
