@@ -22,6 +22,11 @@ jobs:
           cd $GITHUB_WORKSPACE
           npm ci
 
+      - name: Generate Prisma Client
+        run: |
+          cd $GITHUB_WORKSPACE
+          npx prisma generate
+
       - name: Run lint
         run: |
           cd $GITHUB_WORKSPACE
@@ -34,3 +39,20 @@ jobs:
         env:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Run tests
+        run: |
+          cd $GITHUB_WORKSPACE
+          npm run test
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+      - name: Build check
+        run: |
+          cd $GITHUB_WORKSPACE
+          npm run build
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
