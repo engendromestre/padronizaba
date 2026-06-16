@@ -43,7 +43,7 @@ jobs:
       - name: Install Playwright browsers
         run: |
           cd $GITHUB_WORKSPACE
-          npx playwright install --with-deps chromium
+          npx playwright install chromium
 
       - name: Run tests
         run: |
@@ -53,6 +53,7 @@ jobs:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          PLAYWRIGHT_CHROMIUM_PATH: /usr/bin/chromium-browser
 
       - name: Build check
         run: |

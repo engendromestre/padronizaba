@@ -9,9 +9,13 @@ export default defineConfig({
   reporter: 'html',
 
   use: {
-    // URL base do seu Next.js
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
+    // Passamos o executablePath dentro de launchOptions. 
+    // O TypeScript sempre aceita o objeto de inicialização aqui.
+    launchOptions: process.env.PLAYWRIGHT_CHROMIUM_PATH
+      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH }
+      : undefined,
   },
 
   projects: [
@@ -19,10 +23,8 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    // Removi Firefox e Webkit pois eles não funcionam no Alpine sem configs complexas
   ],
 
-  // Isso faz o Playwright tentar rodar seu servidor se ele não estiver de pé
   webServer: {
     command: 'npm run dev',
     url: 'http://localhost:3000',
