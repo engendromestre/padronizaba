@@ -26,6 +26,13 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           npx prisma generate
+      
+      - name: Run Prisma Migrations
+        run: |
+          cd $GITHUB_WORKSPACE
+          npx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Run lint
         run: |
