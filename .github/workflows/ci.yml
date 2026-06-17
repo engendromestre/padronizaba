@@ -60,7 +60,7 @@ jobs:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
-          PLAYWRIGHT_CHROMIUM_PATH: /usr/bin/chromium-browser
+          # REMOVIDO: PLAYWRIGHT_CHROMIUM_PATH daqui
 
       - name: Build check
         run: |
