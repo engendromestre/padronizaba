@@ -9,7 +9,6 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "codeium.codeium",
         "prisma.prisma",
         "bradlc.vscode-tailwindcss",
         "dbaeumer.vscode-eslint",
@@ -25,5 +24,13 @@
       }
     }
   },
-  "forwardPorts": [3000, 5432]
+  "forwardPorts": [
+    3000
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "Next.js BFF",
+      "onAutoForward": "notify"
+    }
+  }
 }

@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { consultaSchema, calcularTotais } from "@/lib/schemas/consulta";
+import { calcularTotais, consultaSchema } from "@/lib/schemas/consulta";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -20,7 +20,6 @@ export async function POST(req: Request) {
     const data = parsed.data;
     const totais = calcularTotais(data);
 
-    // Persistência no Banco de Dados
     const consulta = await prisma.consulta.create({
       data: {
         empresaId: session.user.empresaId,
@@ -71,8 +70,6 @@ export async function POST(req: Request) {
       },
     });
 
-    // Disparar webhook do n8n (Fire and Forget)
-    // Removido o 'await' para que o consultor não espere o processamento externo
     if (process.env.N8N_WEBHOOK_URL) {
       fetch(process.env.N8N_WEBHOOK_URL, {
         method: "POST",
@@ -94,23 +91,42 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
   try {
     const session = await auth();
-    if (!session?.user?.empresaId) {
+    if (!session?.user) {
       return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
     }
 
-    // Paginação básica via Query Params
     const { searchParams } = new URL(req.url);
     const limit = Math.min(parseInt(searchParams.get("limit") || "10"), 50);
     const page = Math.max(parseInt(searchParams.get("page") || "1"), 1);
     const skip = (page - 1) * limit;
 
+    const { role, id: userId, empresaId, clienteId } = session.user
+
+    // Filtro por role — multi-tenant
+    const filtroRole = (() => {
+      switch (role) {
+        case "SUPER_ADMIN":
+          return {}
+        case "ADMIN":
+          return { empresaId: empresaId! }
+        case "CONSULTOR":
+          return { empresaId: empresaId!, consultorId: userId }
+        case "CLIENTE":
+          return { clienteId: clienteId! }
+        default:
+          return { id: "none" } // bloqueia
+      }
+    })()
+
+    const where = {
+      ...filtroRole,
+      status: "ENVIADA" as const,  // 👈 exclui canceladas
+      deletedAt: null,              // 👈 soft delete
+    }
+
     const [consultas, total] = await prisma.$transaction([
       prisma.consulta.findMany({
-        where: {
-          empresaId: session.user.empresaId,
-          // Se for Admin, talvez queira ver tudo? Por enquanto mantemos o filtro por consultor
-          consultorId: session.user.id,
-        },
+        where,
         include: {
           cliente: { select: { nomeProdutor: true } },
           fazenda: { select: { nome: true } },
@@ -121,12 +137,7 @@ export async function GET(req: Request) {
         skip,
         take: limit,
       }),
-      prisma.consulta.count({
-        where: {
-          empresaId: session.user.empresaId,
-          consultorId: session.user.id,
-        },
-      }),
+      prisma.consulta.count({ where }),
     ]);
 
     return NextResponse.json({

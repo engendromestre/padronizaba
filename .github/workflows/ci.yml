@@ -22,6 +22,18 @@ jobs:
           cd $GITHUB_WORKSPACE
           npm ci
 
+      - name: Generate Prisma Client
+        run: |
+          cd $GITHUB_WORKSPACE
+          npx prisma generate
+      
+      - name: Run Prisma Migrations
+        run: |
+          cd $GITHUB_WORKSPACE
+          npx prisma migrate deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
       - name: Run lint
         run: |
           cd $GITHUB_WORKSPACE
@@ -31,3 +43,31 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           npx tsc --noEmit
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      
+      - name: Install Playwright browsers
+        run: |
+          cd $GITHUB_WORKSPACE
+          npx playwright install chromium
+
+      - name: Run tests
+        run: |
+          cd $GITHUB_WORKSPACE
+          npm run test
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          # REMOVIDO: PLAYWRIGHT_CHROMIUM_PATH daqui
+
+      - name: Build check
+        run: |
+          cd $GITHUB_WORKSPACE
+          npm run build
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY || 're_mock_key_for_build' }}
