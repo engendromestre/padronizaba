@@ -170,7 +170,7 @@ export default function LoginPage() {
       <div className="hidden lg:block lg:col-span-7 relative bg-gray-900 overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-tr from-gray-950 via-gray-950/40 to-transparent z-10" />
         <Image
-          src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&q=80&w=1200"
+          src="https://unsplash.com/pt-br/fotografias/fotografia-de-foco-seletivo-de-vaca-qysVTP1OONk"
           alt="Pecuária de Precisão e Padronização de Carcaça"
           fill
           priority
