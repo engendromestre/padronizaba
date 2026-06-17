@@ -18,21 +18,22 @@ jobs:
           cd /opt/padronizaba
           git pull origin main
 
-      # Rodar a migração ANTES de compilar o novo container
+      - name: Build new image
+        run: |
+          cd /opt/padronizaba
+          docker compose -f docker-compose.prod.yml build app
+
       - name: Run database migrations
         run: |
           cd /opt/padronizaba
-          # Rodamos o migrate usando um container temporário para preparar o banco de dados
-          docker compose run --rm app npx prisma migrate deploy
+          docker compose -f docker-compose.prod.yml run --rm app npx prisma migrate deploy
 
-      # Buildar e reiniciar os containers já com o banco atualizado
-      - name: Build and restart containers
+      - name: Generate Prisma Client
         run: |
           cd /opt/padronizaba
-          docker compose up -d --build
+          docker compose -f docker-compose.prod.yml run --rm app npx prisma generate
 
-      # Se o seu Dockerfile não rodar o prisma generate internamente no build:
-      - name: Regenerate Prisma Client inside container
+      - name: Restart containers
         run: |
           cd /opt/padronizaba
-          docker compose exec -T app npx prisma generate
+          docker compose -f docker-compose.prod.yml up -d
