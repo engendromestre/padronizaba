@@ -51,3 +51,6 @@ node_modules/
 /playwright/.auth/
 src/generated/
 src/generated/
+
+# postgres data (volume local de desenvolvimento/produção)
+postgres-data/
