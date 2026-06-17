@@ -21,19 +21,19 @@ jobs:
       - name: Build new image
         run: |
           cd /opt/padronizaba
-          docker compose build app
+          docker compose -f docker-compose.prod.yml build app
 
       - name: Run database migrations
         run: |
           cd /opt/padronizaba
-          docker compose run --rm app npx prisma migrate deploy
+          docker compose -f docker-compose.prod.yml run --rm app npx prisma migrate deploy
 
       - name: Generate Prisma Client
         run: |
           cd /opt/padronizaba
-          docker compose run --rm app npx prisma generate
+          docker compose -f docker-compose.prod.yml run --rm app npx prisma generate
 
       - name: Restart containers
         run: |
           cd /opt/padronizaba
-          docker compose up -d
+          docker compose -f docker-compose.prod.yml up -d
