@@ -174,6 +174,7 @@ export default function LoginPage() {
           alt="Pecuária de Precisão e Padronização de Carcaça"
           fill
           priority
+          unoptimized
           className="object-cover object-center transform scale-105"
         />
         <div className="absolute bottom-16 left-16 right-16 z-20 text-white space-y-4">
