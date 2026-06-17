@@ -52,6 +52,11 @@ jobs:
           cd $GITHUB_WORKSPACE
           npx prisma migrate deploy
 
+      - name: Run Seed
+        run: |
+          cd $GITHUB_WORKSPACE
+          npm run seed
+
       - name: Run lint
         run: |
           cd $GITHUB_WORKSPACE
