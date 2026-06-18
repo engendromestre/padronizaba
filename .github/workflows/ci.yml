@@ -79,7 +79,7 @@ jobs:
         env:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/padronizaba_test
-          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXTAUTH_URL: http://localhost:3000
           AUTH_TRUST_HOST: "true"
 
       - name: Build check
