@@ -180,6 +180,7 @@ export default function LoginPage() {
           alt="Pecuária de Precisão e Padronização de Carcaça"
           fill
           priority
+          sizes="100vw"
           className="object-cover object-[90%_center]"
         />
         <div className="absolute bottom-16 left-16 right-16 z-20 text-white space-y-4">

@@ -11,6 +11,8 @@ RUN apk add --no-cache \
   ca-certificates \
   ttf-freefont
 
+ENV PLAYWRIGHT_CHROMIUM_PATH=/usr/bin/chromium-browser
+
 WORKDIR /home/node/app
 
 RUN npm install -g npm@latest

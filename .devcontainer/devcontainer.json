@@ -16,7 +16,8 @@
         "rangav.vscode-thunder-client",
         "ms-azuretools.vscode-docker",
         "github.vscode-github-actions",
-        "usernamehw.errorlens"
+        "usernamehw.errorlens",
+        "ms-playwright.playwright"
       ],
       "settings": {
         "editor.formatOnSave": true,
