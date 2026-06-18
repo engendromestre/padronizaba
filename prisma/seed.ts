@@ -123,28 +123,30 @@ async function main() {
   console.log("⏳ Configurando a Central de Identidade (Múltiplos Perfis)...")
 
   const senhaHash = await bcrypt.hash("123456", 10)
+  const senhaAdmin: string = process.env.SEED_ADMIN_PASSWORD ?? "superForce!!!"
+  const senhaAdminHash = await bcrypt.hash(senhaAdmin, 10)
 
   // 1. O Super Administrador (Você)
   const adminUser = await prisma.user.upsert({
-    where: { email: "admin@padronizaba.com.br" },
-    update: {
-      senhaHash,
-      role: "SUPER_ADMIN",
-      ativo: true,
-      emailVerifiedAt: new Date(),
-    },
-    create: {
-      nome: "Administrador Global",
-      email: "admin@padronizaba.com.br",
-      senhaHash,
-      role: "SUPER_ADMIN",
-      ativo: true,
-      empresaId: empresa.id,
-      emailVerifiedAt: new Date(),
-      activationToken: null,
-      tokenExpires: null,
-    },
-  })
+  where: { email: "admin@padronizaba.com.br" },
+  update: {
+    senhaHash: senhaAdminHash,
+    role: "SUPER_ADMIN",
+    ativo: true,
+    emailVerifiedAt: new Date(),
+  },
+  create: {
+    nome: "Administrador Global",
+    email: "admin@padronizaba.com.br",
+    senhaHash: senhaAdminHash,
+    role: "SUPER_ADMIN",
+    ativo: true,
+    empresaId: empresa.id,
+    emailVerifiedAt: new Date(),
+    activationToken: null,
+    tokenExpires: null,
+  },
+})
 
   // 2. Novo: Consultor Master (Aparece ativo no cabeçalho das suas imagens)
   await prisma.user.upsert({

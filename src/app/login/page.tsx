@@ -94,8 +94,14 @@ export default function LoginPage() {
           {/* Marca */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <div className="flex items-center gap-2 mb-3">
-              <div className="w-10 h-10 bg-primary text-primary-foreground rounded-xl flex items-center justify-center font-black text-xl shadow-md">
-                P
+              <div className="w-10 h-10 rounded-xl overflow-hidden">
+                <Image
+                  src="/images/icon.png"
+                  alt="Padroniza"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
               </div>
               <span className="text-2xl font-black tracking-tight text-foreground">
                 padroniza<span className="text-primary">.ba</span>
@@ -170,12 +176,11 @@ export default function LoginPage() {
       <div className="hidden lg:block lg:col-span-7 relative bg-gray-900 overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-tr from-gray-950 via-gray-950/40 to-transparent z-10" />
         <Image
-          src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&q=80&w=1200"
+          src="/images/login_fundo.png"
           alt="Pecuária de Precisão e Padronização de Carcaça"
           fill
           priority
-          unoptimized
-          className="object-cover object-center transform scale-105"
+          className="object-cover object-[90%_center]"
         />
         <div className="absolute bottom-16 left-16 right-16 z-20 text-white space-y-4">
           <div className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase inline-block border border-white/20">
