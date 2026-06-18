@@ -76,6 +76,11 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           npm run test
+        env:
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/padronizaba_test
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          AUTH_TRUST_HOST: "true"
 
       - name: Build check
         run: |
