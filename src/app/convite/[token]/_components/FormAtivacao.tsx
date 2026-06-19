@@ -20,6 +20,7 @@ export function FormAtivacao({ userId, token }: FormAtivacaoProps) {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
+    console.log("handleSubmit chamado", e.type)
     e.preventDefault();
     setError("");
 
@@ -79,7 +80,7 @@ export function FormAtivacao({ userId, token }: FormAtivacaoProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} method="post" className="space-y-4">
       <Input
         label="Nova Senha"
         type="password"

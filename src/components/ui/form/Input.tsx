@@ -1,6 +1,6 @@
 "use client"
 
-import { ElementType, useState } from "react"
+import { ElementType, useState, useId } from "react"
 import { FieldError, UseFormRegisterReturn } from "react-hook-form"
 import { Eye, EyeOff, LucideProps } from "lucide-react"
 import { Field } from "./Field"
@@ -39,9 +39,18 @@ export function Input({
     const [showPassword, setShowPassword] = useState(false)
     const isPassword = type === "password"
     const inputType = isPassword ? (showPassword ? "text" : "password") : type
+    const autoId = useId()
+    const inputId = `input-${autoId}`
 
     return (
-        <Field label={label} error={error} hint={hint} required={required} className={className}>
+        <Field
+            label={label}
+            error={error}
+            hint={hint}
+            required={required}
+            className={className}
+            htmlFor={inputId}
+        >
             <div className="relative w-full">
                 {Icon && (
                     <span className={`absolute left-3 top-1/2 -translate-y-1/2 ${disabled ? "text-muted/30" : "text-muted"}`}>
@@ -52,6 +61,7 @@ export function Input({
                 <input
                     {...registration}
                     value={value}
+                    id={inputId}
                     onChange={onChange ?? registration?.onChange}
                     type={inputType}
                     placeholder={placeholder}

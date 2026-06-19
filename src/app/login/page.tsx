@@ -100,7 +100,7 @@ export default function LoginPage() {
                   alt="Padroniza"
                   width={40}
                   height={40}
-                  className="object-contain"
+                  style={{ width: 'auto', height: '100%' }}
                 />
               </div>
               <span className="text-2xl font-black tracking-tight text-foreground">
@@ -180,7 +180,7 @@ export default function LoginPage() {
           alt="Pecuária de Precisão e Padronização de Carcaça"
           fill
           priority
-          sizes="100vw"
+          sizes="(min-width: 1024px) 58vw, 100vw"
           className="object-cover object-[90%_center]"
         />
         <div className="absolute bottom-16 left-16 right-16 z-20 text-white space-y-4">

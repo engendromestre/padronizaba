@@ -8,13 +8,17 @@ interface FieldProps {
     required?: boolean
     children: ReactNode
     className?: string
+    htmlFor?: string
 }
 
-export function Field({ label, error, required, children, className }: FieldProps) {
+export function Field({ label, error, required, children, className, htmlFor }: FieldProps) {
     return (
         <div className={`flex flex-col w-full ${className ?? ""}`}>
             {label && (
-                <label className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-data-label ml-1 mb-1">
+                <label
+                    htmlFor={htmlFor}
+                    className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-data-label ml-1 mb-1"
+                >
                     {label}
                     {required ? <span className="text-primary">*</span> : null}
                 </label>
