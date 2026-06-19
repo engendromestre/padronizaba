@@ -11,7 +11,9 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
-    // Limpo: Sem launchOptions configurado para o Snap
+    launchOptions: {
+      executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH || undefined,
+    },
   },
 
   projects: [
@@ -22,10 +24,11 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
+    command: process.env.CI ? 'npm run build && npm run start' : 'npm run dev',
     url: 'http://localhost:3000',
-    reuseExistingServer: true,
-    stdout: 'ignore',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000,
+    stdout: 'pipe',
     stderr: 'pipe',
   },
 });
