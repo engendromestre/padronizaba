@@ -34,7 +34,7 @@ async function main() {
     const senhaAdminHash = await bcrypt.hash(senhaAdmin, 10)
 
     const adminUser = await prisma.user.upsert({
-        where: { email: "codealta9@gmail.com" },
+        where: { email: "superadmin@codealta.com.br" },
         update: {
             senhaHash: senhaAdminHash,
             role: "SUPER_ADMIN",
@@ -42,8 +42,8 @@ async function main() {
             emailVerifiedAt: new Date(),
         },
         create: {
-            nome: "Administrador Padroniza.ba",
-            email: "codealta9@gmail.com",
+            nome: "Super Admin",
+            email: "superadmin@codealta.com.br",
             senhaHash: senhaAdminHash,
             role: "SUPER_ADMIN",
             ativo: true,
