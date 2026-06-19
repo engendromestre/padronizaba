@@ -13,7 +13,7 @@ export async function POST(req: Request) {
         }
 
         // 🛡️ 2. Apenas SUPER_ADMIN e ADMIN podem convidar
-        const temPermissao = ["SUPER_ADMIN", "ADMIN"].includes(session.user.role)
+        const temPermissao = ["SUPER_ADMIN"].includes(session.user.role)
         if (!temPermissao) {
             return NextResponse.json({ error: "Acesso negado. Nível de permissão insuficiente." }, { status: 403 })
         }
