@@ -33,6 +33,13 @@ jobs:
           cd /opt/padronizaba
           docker compose -f docker-compose.prod.yml run --rm app npx prisma generate
 
+      - name: Run production seed
+        run: |
+          cd /opt/padronizaba
+          docker compose -f docker-compose.prod.yml run --rm app npm run seed:prod
+        env:
+          SEED_ADMIN_PASSWORD: ${{ secrets.SEED_ADMIN_PASSWORD }}
+
       - name: Restart containers
         run: |
           cd /opt/padronizaba
