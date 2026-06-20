@@ -1,12 +1,21 @@
-import { Resend } from "resend"
+import nodemailer from "nodemailer"
+import SMTPTransport from "nodemailer/lib/smtp-transport"
 
-let resend: Resend | null = null
+let transporter: nodemailer.Transporter<SMTPTransport.SentMessageInfo> | null = null
 
-function getResend() {
-    if (!resend) {
-        resend = new Resend(process.env.RESEND_API_KEY)
+function getTransporter() {
+    if (!transporter) {
+        transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port: parseInt(process.env.SMTP_PORT || "587", 10),
+            secure: process.env.SMTP_SECURE === "true", 
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASS,
+            },
+        })
     }
-    return resend
+    return transporter
 }
 
 interface EnviarConviteProps {
@@ -29,20 +38,21 @@ export async function enviarEmailConvite({
     const html = conviteEmailHtml({ nomeConvidado, nomeQuemConvidou, role, linkAtivacao })
     const text = conviteEmailText({ nomeConvidado, nomeQuemConvidou, role, linkAtivacao })
 
-    const { data, error } = await getResend().emails.send({
-        from: process.env.RESEND_FROM_EMAIL ?? "Padroniza <onboarding@resend.dev>",
-        to: para,
-        subject: `Você foi convidado para o Padroniza`,
-        html,
-        text,
-    })
+    try {
+        // Correção aqui: Chamando getTransporter()
+        const info = await getTransporter().sendMail({
+            from: process.env.MAIL_FROM ?? '"Padroniza" <codealta9@gmail.com>',
+            to: para,
+            subject: `Você foi convidado para o Padroniza`,
+            html,
+            text,
+        })
 
-    if (error) {
-        console.error("[Resend] Erro ao enviar e-mail de convite:", error)
+        return info
+    } catch (error) {
+        console.error("[SMTP/Brevo] Erro ao enviar e-mail de convite:", error)
         throw new Error("Falha ao enviar e-mail de convite.")
     }
-
-    return data
 }
 
 export async function enviarEmailResetSenha({
@@ -56,16 +66,17 @@ export async function enviarEmailResetSenha({
 }) {
     const { resetSenhaEmailHtml, resetSenhaEmailText } = await import("@/lib/emails/resetSenha")
 
-    const { error } = await getResend().emails.send({
-        from: process.env.RESEND_FROM_EMAIL ?? "Padroniza <onboarding@resend.dev>",
-        to: para,
-        subject: "Redefinição de senha — Padroniza.ba",
-        html: resetSenhaEmailHtml({ nomeUsuario, linkReset }),
-        text: resetSenhaEmailText({ nomeUsuario, linkReset }),
-    })
-
-    if (error) {
-        console.error("[Resend] Erro ao enviar e-mail de reset:", error)
+    try {
+        // Correção aqui: Chamando getTransporter()
+        await getTransporter().sendMail({
+            from: process.env.MAIL_FROM ?? '"Padroniza" <codealta9@gmail.com>',
+            to: para,
+            subject: "Redefinição de senha — Padroniza.ba",
+            html: resetSenhaEmailHtml({ nomeUsuario, linkReset }),
+            text: resetSenhaEmailText({ nomeUsuario, linkReset }),
+        })
+    } catch (error) {
+        console.error("[SMTP/Brevo] Erro ao enviar e-mail de reset:", error)
         throw new Error("Falha ao enviar e-mail de redefinição.")
     }
 }
