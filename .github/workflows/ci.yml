@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches:
@@ -8,11 +7,9 @@ on:
     branches:
       - main
       - develop
-
 jobs:
   lint:
     runs-on: self-hosted
-
     services:
       postgres:
         image: postgres:16
@@ -27,51 +24,45 @@ jobs:
           --health-interval 5s
           --health-timeout 5s
           --health-retries 10
-
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5433/padronizaba_test
       NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
       NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Install dependencies
         run: |
           cd $GITHUB_WORKSPACE
           npm ci
-
       - name: Generate Prisma Client
         run: |
           cd $GITHUB_WORKSPACE
           npx prisma generate
-
       - name: Run Prisma Migrations
         run: |
           cd $GITHUB_WORKSPACE
           npx prisma migrate deploy
-
       - name: Run Seed
         run: |
           cd $GITHUB_WORKSPACE
           npm run seed
-
       - name: Run lint
         run: |
           cd $GITHUB_WORKSPACE
           npm run lint
-
+      - name: Run unit tests
+        run: |
+          cd $GITHUB_WORKSPACE
+          npm run test:unit
       - name: Check types
         run: |
           cd $GITHUB_WORKSPACE
           npx tsc --noEmit
-
       - name: Install Playwright browsers
         run: |
           cd $GITHUB_WORKSPACE
           npx playwright install chromium
-
       - name: Run tests
         run: |
           cd $GITHUB_WORKSPACE
@@ -81,7 +72,6 @@ jobs:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5433/padronizaba_test
           NEXTAUTH_URL: http://127.0.0.1:3000
           AUTH_TRUST_HOST: "true"
-
       - name: Build check
         run: |
           cd $GITHUB_WORKSPACE

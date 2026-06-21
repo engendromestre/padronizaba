@@ -47,9 +47,9 @@ export default function NovaConsultaPage() {
     async function fetchData() {
       try {
         const [c, f, cat] = await Promise.all([
-          fetch("/api/admin/grupos").then((r) => r.json()),
-          fetch("/api/admin/frigorificos").then((r) => r.json()),
-          fetch("/api/admin/categorias").then((r) => r.json()),
+          fetch("/api/grupos").then((r) => r.json()),
+          fetch("/api/frigorificos").then((r) => r.json()),
+          fetch("/api/categorias").then((r) => r.json()),
         ])
         setClientes(c)
         setFrigorificos(f)
