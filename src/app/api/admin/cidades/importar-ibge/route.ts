@@ -5,22 +5,31 @@ import { prisma } from "@/lib/prisma"
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
 
+async function getIp() {
+    const headersList = await headers()
+    return headersList.get("x-forwarded-for")?.split(",")[0].trim()
+        ?? headersList.get("x-real-ip")
+        ?? null
+}
+
 export async function POST(req: Request) {
     const session = await auth()
     if (!session?.user || !["SUPER_ADMIN", "ADMIN"].includes(session.user.role)) {
         return NextResponse.json({ error: "Acesso negado." }, { status: 403 })
     }
 
-    const { estadoId, uf } = await req.json()
+    const { uf, nome } = await req.json()
 
-    if (!estadoId || !uf) {
-        return NextResponse.json({ error: "estadoId e uf são obrigatórios." }, { status: 400 })
+    if (!uf || !nome) {
+        return NextResponse.json({ error: "uf e nome são obrigatórios." }, { status: 400 })
     }
 
-    const estado = await prisma.estado.findUnique({ where: { id: estadoId } })
-    if (!estado) {
-        return NextResponse.json({ error: "Estado não encontrado." }, { status: 404 })
-    }
+    // Cria o estado se ainda não existir (upsert)
+    const estado = await prisma.estado.upsert({
+        where: { uf },
+        update: {},
+        create: { uf, nome },
+    })
 
     let cidadesIbge
     try {
@@ -38,26 +47,26 @@ export async function POST(req: Request) {
         const existe = await prisma.cidade.findUnique({ where: { ibge: ibgeCode } })
         if (!existe) {
             await prisma.cidade.create({
-                data: { nome: c.nome, ibge: ibgeCode, estadoId },
+                data: { nome: c.nome, ibge: ibgeCode, estadoId: estado.id },
             })
             importadas++
         }
     }
 
-    const headersList = await headers()
-    const ip = headersList.get("x-forwarded-for")?.split(",")[0].trim()
-        ?? headersList.get("x-real-ip")
-        ?? null
-
+    const ip = await getIp()
     await registrarAuditoria({
         usuarioId: session.user.id,
-        tabelaAfetada: "cidades",
-        registroId: estadoId,
+        tabelaAfetada: "estados",
+        registroId: estado.id,
         acao: "CREATE",
         dadosAntes: null,
-        dadosDepois: { importadas, total: cidadesIbge.length, uf },
+        dadosDepois: { uf, nome, cidadesImportadas: importadas, totalIbge: cidadesIbge.length },
         ipOrigem: ip,
     })
 
-    return NextResponse.json({ importadas, total: cidadesIbge.length })
+    return NextResponse.json({
+        estado,
+        importadas,
+        total: cidadesIbge.length,
+    })
 }
