@@ -15,9 +15,9 @@ const ASSETS_ESTATICOS = [
 
 // APIs de lookup que usam Stale While Revalidate
 const LOOKUP_URLS = [
-    "/api/admin/grupos",
-    "/api/admin/frigorificos",
-    "/api/admin/categorias",
+    "/api/grupos",
+    "/api/frigorificos",
+    "/api/categorias",
 ]
 
 // Install: pre-cache assets estáticos

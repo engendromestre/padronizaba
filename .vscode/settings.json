@@ -1,0 +1,4 @@
+{
+  "playwright.testDir": "tests/auth",
+  "playwright.testMatch": "**/tests/auth/**/*.spec.ts"
+}
