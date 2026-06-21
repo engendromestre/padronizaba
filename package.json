@@ -10,7 +10,7 @@
     "seed": "npx tsx prisma/seed.ts",
     "seed:prod": "npx tsx prisma/seed.prod.ts",
     "generate": "node scripts/generate-client.mjs",
-    "test": "playwright test",
+    "test:e2e": "playwright test",
     "test:unit": "vitest run"
   },
   "dependencies": {
