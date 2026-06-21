@@ -1,7 +1,6 @@
 "use client"
 
-import { adminMenuItems } from "@/config/navigation"
-import { ChevronDown, LogOut, UserCircle } from "lucide-react"
+import { ChevronDown, LayoutGrid, LogOut, UserCircle } from "lucide-react"
 import { signOut } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
@@ -23,7 +22,7 @@ export function UserMenu({ nome, role }: UserMenuProps) {
     const menuRef = useRef<HTMLDivElement>(null)
     const router = useRouter()
 
-    const itensVisiveis = adminMenuItems.filter(item => item.allowedRoles.includes(role as "SUPER_ADMIN" | "ADMIN"))
+    const ehAdmin = ["SUPER_ADMIN", "ADMIN"].includes(role)
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -76,21 +75,15 @@ export function UserMenu({ nome, role }: UserMenuProps) {
 
             {open && (
                 <div className="absolute right-0 top-full mt-2 w-56 bg-card border border-border rounded-2xl shadow-xl py-2 z-50 animate-in fade-in zoom-in-95 duration-100 origin-top-right">
-                    {itensVisiveis.length > 0 && (
+                    {ehAdmin && (
                         <>
-                            <p className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider text-muted">
-                                Administração
-                            </p>
-                            {itensVisiveis.map((item) => (
-                                <button
-                                    key={item.href}
-                                    onClick={() => handleNavigate(item.href)}
-                                    className="w-full px-4 py-2.5 text-left flex items-center gap-2.5 hover:bg-primary/5 text-sm font-semibold text-foreground transition-colors cursor-pointer"
-                                >
-                                    <item.icon size={16} className="text-muted" />
-                                    {item.label}
-                                </button>
-                            ))}
+                            <button
+                                onClick={() => handleNavigate("/admin")}
+                                className="w-full px-4 py-2.5 text-left flex items-center gap-2.5 hover:bg-primary/5 text-sm font-semibold text-foreground transition-colors cursor-pointer"
+                            >
+                                <LayoutGrid size={16} className="text-muted" />
+                                Painel Administrativo
+                            </button>
                             <div className="border-t border-border my-1.5" />
                         </>
                     )}
