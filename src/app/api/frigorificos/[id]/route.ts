@@ -1,6 +1,7 @@
 import { registrarAuditoria } from "@/lib/auditoria"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { validarRemocaoFrigorifico } from "@/lib/validacoes/frigorifico"
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -30,18 +31,50 @@ export async function PATCH(
     if (erro) return erro
 
     const { id } = await params
-    const { nome, cnpj, cidadeId, ativo } = await req.json()
-    const ip = await getIp()
+    const { nome, cnpj, cidadeId } = await req.json()
+
+    if (!nome?.trim()) {
+        return NextResponse.json({ error: "Nome é obrigatório." }, { status: 400 })
+    }
+    if (!cidadeId?.trim()) {
+        return NextResponse.json({ error: "Cidade é obrigatória." }, { status: 400 })
+    }
+
+    if (cnpj?.trim()) {
+        const existe = await prisma.frigorifico.findFirst({
+            where: { cnpj: cnpj.trim(), NOT: { id } },
+        })
+        if (existe) {
+            return NextResponse.json({ error: "Já existe um frigorífico com esse CNPJ." }, { status: 409 })
+        }
+    }
 
     try {
         const antes = await prisma.frigorifico.findUnique({ where: { id } })
-
         const depois = await prisma.frigorifico.update({
             where: { id },
-            data: { nome, cnpj, cidadeId, ativo },
-            include: { cidade: { include: { estado: true } } },
+            data: {
+                nome: nome.trim(),
+                cnpj: cnpj?.trim() || null,
+                cidadeId,
+            },
+            select: {
+                id: true,
+                nome: true,
+                cnpj: true,
+                ativo: true,
+                createdAt: true,
+                cidade: {
+                    select: {
+                        id: true,
+                        nome: true,
+                        estado: { select: { id: true, uf: true } },
+                    },
+                },
+            },
         })
 
+        const ip = await getIp()
         await registrarAuditoria({
             usuarioId: session!.user.id,
             tabelaAfetada: "frigorificos",
@@ -53,8 +86,7 @@ export async function PATCH(
         })
 
         return NextResponse.json(depois)
-    } catch (error) {
-        console.error("Erro ao atualizar frigorífico:", error)
+    } catch {
         return NextResponse.json({ error: "Erro ao atualizar frigorífico." }, { status: 500 })
     }
 }
@@ -67,29 +99,42 @@ export async function DELETE(
     if (erro) return erro
 
     const { id } = await params
-    const ip = await getIp()
+
+    const frigorificoExiste = await prisma.frigorifico.findUnique({
+        where: { id },
+        select: { id: true },
+    })
+
+    const consultasVinculadas = await prisma.consulta.count({
+        where: { frigorificoId: id },
+    })
+
+    const validacao = validarRemocaoFrigorifico({
+        frigorificoExiste: !!frigorificoExiste,
+        consultasVinculadas,
+    })
+
+    if (!validacao.podeRemover) {
+        return NextResponse.json({ error: validacao.error }, { status: validacao.status })
+    }
 
     try {
         const antes = await prisma.frigorifico.findUnique({ where: { id } })
+        await prisma.frigorifico.delete({ where: { id } })
 
-        await prisma.frigorifico.update({
-            where: { id },
-            data: { deletedAt: new Date(), ativo: false },
-        })
-
+        const ip = await getIp()
         await registrarAuditoria({
             usuarioId: session!.user.id,
             tabelaAfetada: "frigorificos",
             registroId: id,
             acao: "DELETE",
             dadosAntes: antes,
-            dadosDepois: { deletedAt: new Date(), ativo: false },
+            dadosDepois: null,
             ipOrigem: ip,
         })
 
         return NextResponse.json({ success: true })
-    } catch (error) {
-        console.error("Erro ao excluir frigorífico:", error)
+    } catch {
         return NextResponse.json({ error: "Erro ao excluir frigorífico." }, { status: 500 })
     }
 }

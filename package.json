@@ -30,6 +30,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.74.0",
+    "react-imask": "^7.6.1",
     "react-number-format": "^5.4.5",
     "resend": "^6.12.3",
     "zod": "^4.4.1"
