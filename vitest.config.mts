@@ -5,12 +5,11 @@ export default defineConfig({
     test: {
         environment: 'node',
         include: ['src/**/*.test.ts', 'tests/unit/**/*.test.ts'],
-        exclude: ['tests/auth/**', 'node_modules/**'],
+        exclude: ['tests/auth/**', 'tests/e2e/**', 'node_modules/**'],
         globals: true,
     },
     resolve: {
         alias: {
-            // Resolves the @/ alias using native ESM path utilities
             '@': fileURLToPath(new URL('./src', import.meta.url)),
         },
     },

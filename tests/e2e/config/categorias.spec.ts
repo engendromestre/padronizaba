@@ -5,9 +5,12 @@ const BASE_URL = "http://localhost:3000"
 
 // Reutilize isso em todos os specs que precisam de auth
 async function login(page: Page) {
+    const ADMIN_EMAIL = process.env.SEED_ADMIN_EMAIL ?? "superadmin@codealta.com.br";
+    const ADMIN_PASSWORD = process.env.SEED_ADMIN_PASSWORD ?? "superForce!!!";
+
     await page.goto(`${BASE_URL}/login`)
-    await page.getByPlaceholder("consultor@padronizaba.com.br").fill("prbo.btu@gmail.com")
-    await page.getByPlaceholder("••••••••").fill(process.env.SEED_ADMIN_PASSWORD!)
+    await page.getByPlaceholder("consultor@padronizaba.com.br").fill(ADMIN_EMAIL)
+    await page.getByPlaceholder("••••••••").fill(ADMIN_PASSWORD)
     await page.getByRole("button", { name: /entrar no sistema/i }).click()
     await page.waitForURL(/.*dashboard/)
 }
