@@ -1,7 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from "dotenv"
+import path from 'path';
 
-dotenv.config()
+// Carrega o .env local apenas se NÃO estiver no CI do GitHub
+if (!process.env.CI) {
+  dotenv.config({ path: path.resolve(__dirname, '.env') });
+}
 
 export default defineConfig({
   testDir: './tests/e2e',
