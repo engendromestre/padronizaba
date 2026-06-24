@@ -72,6 +72,8 @@ jobs:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5433/padronizaba_test
           NEXTAUTH_URL: http://127.0.0.1:3000
           AUTH_TRUST_HOST: "true"
+          SEED_ADMIN_EMAIL: ${{ secrets.SEED_ADMIN_EMAIL }}
+          SEED_ADMIN_PASSWORD: ${{ secrets.SEED_ADMIN_PASSWORD }}
       - name: Build check
         run: |
           cd $GITHUB_WORKSPACE
