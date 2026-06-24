@@ -34,7 +34,7 @@ async function main() {
     const senhaAdminHash = await bcrypt.hash(senhaAdmin, 10)
 
     const adminUser = await prisma.user.upsert({
-        where: { email: "superadmin@codealta.com.br" },
+        where: { email: process.env.SEED_ADMIN_EMAIL ??"superadmin@codealta.com.br" },
         update: {
             senhaHash: senhaAdminHash,
             role: "SUPER_ADMIN",

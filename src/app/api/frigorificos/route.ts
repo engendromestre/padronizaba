@@ -16,14 +16,22 @@ export async function GET() {
   if (!session?.user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
   const frigorificos = await prisma.frigorifico.findMany({
-    where: {
-      ativo: true,
-      deletedAt: null,
-    },
-    include: {
-      cidade: { include: { estado: true } },
-    },
+    where: { deletedAt: null },
     orderBy: { nome: "asc" },
+    select: {
+      id: true,
+      nome: true,
+      cnpj: true,
+      ativo: true,
+      createdAt: true,
+      cidade: {
+        select: {
+          id: true,
+          nome: true,
+          estado: { select: { id: true, uf: true } },
+        },
+      },
+    },
   })
 
   return NextResponse.json(frigorificos)
@@ -31,45 +39,58 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const session = await auth()
-  if (!session?.user) {
-    return NextResponse.json({ error: "Não autorizado." }, { status: 401 })
-  }
-
-  if (!["SUPER_ADMIN", "ADMIN"].includes(session.user.role)) {
+  if (!session?.user || !["SUPER_ADMIN", "ADMIN"].includes(session.user.role)) {
     return NextResponse.json({ error: "Acesso negado." }, { status: 403 })
   }
 
-  const body = await req.json()
-  const { nome, cnpj, cidadeId } = body
+  const { nome, cnpj, cidadeId } = await req.json()
 
-  if (!nome?.trim() || !cidadeId) {
-    return NextResponse.json({ error: "Nome e cidade são obrigatórios." }, { status: 400 })
+  if (!nome?.trim()) {
+    return NextResponse.json({ error: "Nome é obrigatório." }, { status: 400 })
+  }
+  if (!cidadeId?.trim()) {
+    return NextResponse.json({ error: "Cidade é obrigatória." }, { status: 400 })
   }
 
-  try {
-    const frigorifico = await prisma.frigorifico.create({
-      data: {
-        nome: nome.trim(),
-        cnpj: cnpj?.trim() || null,
-        cidadeId,
+  if (cnpj?.trim()) {
+    const existe = await prisma.frigorifico.findUnique({ where: { cnpj: cnpj.trim() } })
+    if (existe) {
+      return NextResponse.json({ error: "Já existe um frigorífico com esse CNPJ." }, { status: 409 })
+    }
+  }
+
+  const frigorifico = await prisma.frigorifico.create({
+    data: {
+      nome: nome.trim(),
+      cnpj: cnpj?.trim() || null,
+      cidadeId,
+    },
+    select: {
+      id: true,
+      nome: true,
+      cnpj: true,
+      ativo: true,
+      createdAt: true,
+      cidade: {
+        select: {
+          id: true,
+          nome: true,
+          estado: { select: { id: true, uf: true } },
+        },
       },
-      include: { cidade: { include: { estado: true } } },
-    })
+    },
+  })
 
-    const ip = await getIp()
-    await registrarAuditoria({
-      usuarioId: session.user.id,
-      tabelaAfetada: "frigorificos",
-      registroId: frigorifico.id,
-      acao: "CREATE",
-      dadosAntes: null,
-      dadosDepois: frigorifico,
-      ipOrigem: ip,
-    })
+  const ip = await getIp()
+  await registrarAuditoria({
+    usuarioId: session.user.id,
+    tabelaAfetada: "frigorificos",
+    registroId: frigorifico.id,
+    acao: "CREATE",
+    dadosAntes: null,
+    dadosDepois: frigorifico,
+    ipOrigem: ip,
+  })
 
-    return NextResponse.json(frigorifico, { status: 201 })
-  } catch (error) {
-    console.error("Erro ao criar frigorífico:", error)
-    return NextResponse.json({ error: "Erro ao criar frigorífico." }, { status: 500 })
-  }
+  return NextResponse.json(frigorifico, { status: 201 })
 }
