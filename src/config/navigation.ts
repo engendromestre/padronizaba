@@ -87,7 +87,7 @@ export const adminCards: AdminCardItem[] = [
     description: "Defina as categorias usadas na classificação do lote.",
     href: "/config/categorias",
     allowedRoles: ["SUPER_ADMIN", "ADMIN"],
-    disponivel: false,
+    disponivel: true,
   },
   {
     icon: Users,
