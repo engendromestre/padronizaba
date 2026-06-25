@@ -79,7 +79,7 @@ export const adminCards: AdminCardItem[] = [
     description: "Cadastre as unidades de abate disponíveis para consulta.",
     href: "/config/frigorificos",
     allowedRoles: ["SUPER_ADMIN", "ADMIN"],
-    disponivel: false,
+    disponivel: true,
   },
   {
     icon: Beef,
@@ -87,7 +87,7 @@ export const adminCards: AdminCardItem[] = [
     description: "Defina as categorias usadas na classificação do lote.",
     href: "/config/categorias",
     allowedRoles: ["SUPER_ADMIN", "ADMIN"],
-    disponivel: false,
+    disponivel: true,
   },
   {
     icon: Users,
