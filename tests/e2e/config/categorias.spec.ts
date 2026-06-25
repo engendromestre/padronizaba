@@ -46,10 +46,11 @@ test.describe("Categorias de Animal", () => {
         await page.goto(`${BASE_URL}/config/categorias`)
         await page.waitForSelector("table")
 
-        // Abre o dropdown (botão MoreHorizontal sem texto acessível)
+        // Abre o dropdown
         await page.locator("button.rounded-full").first().click()
 
-        // Clica em "Editar" dentro do portal (renderizado no body)
+        // Espera o portal renderizar no body antes de clicar
+        await page.waitForSelector("button:has-text('Editar')", { timeout: 5000 })
         await page.getByRole("button", { name: "Editar" }).click()
 
         await expect(page.getByRole("heading", { name: "Editar Categoria" })).toBeVisible()
