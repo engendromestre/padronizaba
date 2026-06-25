@@ -106,7 +106,9 @@ jobs:
         run: npm run seed
 
       - name: Install Playwright browsers
-        run: npx playwright install chromium --with-deps
+        run: npx playwright install chromium
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 0
 
       - name: Run E2E tests
         run: npm run test:e2e
