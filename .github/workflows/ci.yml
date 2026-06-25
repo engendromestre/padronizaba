@@ -18,7 +18,7 @@ env:
   SEED_ADMIN_PASSWORD: ${{ secrets.SEED_ADMIN_PASSWORD }}
 
 jobs:
-  # ── Job 1: Qualidade de código ───────────────────────────────────
+  # Job 1: Qualidade de código 
   quality:
     name: Lint & Types
     runs-on: self-hosted
@@ -37,7 +37,7 @@ jobs:
       - name: Check types
         run: npx tsc --noEmit
 
-  # ── Job 2: Testes unitários ──────────────────────────────────────
+  # Job 2: Testes unitários
   unit:
     name: Unit Tests
     runs-on: self-hosted
@@ -68,7 +68,7 @@ jobs:
       - name: Run unit tests
         run: npm run test:unit
 
-  # ── Job 3: Testes E2E ────────────────────────────────────────────
+  #Job 3: Testes E2E
   e2e:
     name: E2E Tests
     runs-on: self-hosted
@@ -81,7 +81,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: padronizaba_test
         ports:
-          - 5432:5432
+          - 5433:5432
         options: >-
           --health-cmd "pg_isready -U postgres"
           --health-interval 5s
@@ -116,7 +116,7 @@ jobs:
           path: playwright-report/
           retention-days: 7
 
-  # ── Job 4: Build ─────────────────────────────────────────────────
+  #Job 4: Build
   build:
     name: Build Check
     runs-on: self-hosted
