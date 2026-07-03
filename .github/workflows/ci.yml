@@ -1,13 +1,19 @@
-name: CI
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
+      - main
       - develop
   pull_request:
     branches:
       - main
       - develop
+
+# Cancela execuções antigas na mesma branch se você commitar algo novo
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
@@ -17,12 +23,18 @@ env:
   SEED_ADMIN_PASSWORD: ${{ secrets.SEED_ADMIN_PASSWORD }}
 
 jobs:
-  # ── Job 1: Qualidade de código ───────────────────────────────────
+  # ── Etapa 1: Qualidade de código ───────────────────────────────────
   quality:
     name: Lint & Types
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
+
+      - name: Setup Node.js Cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
@@ -36,7 +48,7 @@ jobs:
       - name: Check types
         run: npx tsc --noEmit
 
-  # ── Job 2: Testes unitários ──────────────────────────────────────
+  # ── Etapa 2: Testes unitários (Só roda se a qualidade passar) ──────
   unit:
     name: Unit Tests
     runs-on: self-hosted
@@ -60,6 +72,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js Cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
 
@@ -69,11 +87,11 @@ jobs:
       - name: Run unit tests
         run: npm run test:unit
 
-  # ── Job 3: Testes E2E ────────────────────────────────────────────
+  # ── Etapa 3: Testes E2E (Só roda se o Unit passar - protege a CPU) ──
   e2e:
     name: E2E Tests
     runs-on: self-hosted
-    needs: quality
+    needs: unit # <--- Força a sequência para poupar sua 1 CPU
     services:
       postgres:
         image: postgres:16
@@ -93,6 +111,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js Cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
 
@@ -104,6 +128,15 @@ jobs:
 
       - name: Run Seed
         run: npm run seed
+
+      # Ativa o cache do navegador do Playwright (Economiza muita CPU e banda)
+      - name: Cache Playwright Browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
 
       - name: Install Playwright browsers
         run: npx playwright install chromium
@@ -121,11 +154,11 @@ jobs:
           path: playwright-report/
           retention-days: 7
 
-  # ── Job 4: Build ─────────────────────────────────────────────────
+  # ── Etapa 4: Build Check (Só roda se os testes passarem) ───────────
   build:
     name: Build Check
     runs-on: self-hosted
-    needs: [unit, e2e]
+    needs: e2e
     env:
       DATABASE_URL: postgresql://padronizaba:padronizaba@localhost:5433/padronizaba_test
       SMTP_HOST: ${{ secrets.SMTP_HOST || 'smtp-relay.brevo.com' }}
@@ -137,6 +170,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js Cache
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
 
@@ -145,3 +184,63 @@ jobs:
 
       - name: Build
         run: npm run build
+
+  # ── Etapa 5: Deploy (Só executa após o Build E apenas na branch main) ──
+  deploy:
+    name: Deploy to VPS
+    runs-on: self-hosted
+    needs: build
+    # Condição mágica: Só roda se o commit atual for de fato na branch main
+    if: github.ref == 'refs/heads/main'
+    env:
+      SEED_ADMIN_EMAIL: ${{ secrets.SEED_ADMIN_EMAIL }}
+      SEED_ADMIN_PASSWORD: ${{ secrets.SEED_ADMIN_PASSWORD }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy code to VPS
+        run: |
+          rsync -av --exclude='.git' --exclude='node_modules' \
+            $GITHUB_WORKSPACE/ /opt/padronizaba/
+
+      - name: Build new image
+        run: |
+          cd /opt/padronizaba
+          docker compose -f docker-compose.prod.yml build app
+
+      - name: Generate Prisma Client
+        run: |
+          cd /opt/padronizaba
+          docker compose -f docker-compose.prod.yml run --rm app npx prisma generate
+
+      - name: Run database migrations
+        run: |
+          cd /opt/padronizaba
+          docker compose -f docker-compose.prod.yml run --rm app npx prisma migrate deploy
+
+      - name: Restart containers
+        run: |
+          cd /opt/padronizaba
+          docker compose -f docker-compose.prod.yml up -d --no-deps app
+
+      - name: Wait for app to be healthy
+        run: |
+          echo "Aguardando app inicializar..."
+          sleep 10
+          APP_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' padronizaba-app)
+          echo "IP do container: $APP_IP"
+          for i in $(seq 1 20); do
+            curl -sf http://$APP_IP:3000 && echo "✅ App online!" && exit 0
+            echo "Aguardando app... ($i/20)"
+            sleep 3
+          done
+          echo "❌ App não respondeu a tempo"
+          exit 1
+
+      - name: Notify failure
+        if: failure()
+        run: |
+          echo "❌ Deploy falhou! Revertendo para imagem anterior..."
+          cd /opt/padronizaba
+          docker compose -f docker-compose.prod.yml up -d --no-deps app
