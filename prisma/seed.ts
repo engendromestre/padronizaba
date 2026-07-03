@@ -1,6 +1,7 @@
-import { PrismaClient } from "../src/generated/prisma/client"
-import { PrismaPg } from "@prisma/adapter-pg"
-import bcrypt from "bcryptjs"
+import { PrismaPg } from "@prisma/adapter-pg";
+import bcrypt from "bcryptjs";
+import 'dotenv/config';
+import { PrismaClient } from "../src/generated/prisma/client";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL!,
@@ -122,32 +123,53 @@ async function main() {
   // 🏛️ CENTRAL DE IDENTIDADE: Configurando a malha de usuários do sistema
   console.log("⏳ Configurando a Central de Identidade (Múltiplos Perfis)...")
 
-  const emailAdmin = process.env.SEED_ADMIN_EMAIL ??"superadmin@codealta.com.br";
+  const emailAdmin = process.env.SEED_ADMIN_EMAIL ?? "superadmin2@codealta.com.br";
   const senhaHash = await bcrypt.hash("123456", 10)
   const senhaAdmin: string = process.env.SEED_ADMIN_PASSWORD ?? "superForce!!!"
   const senhaAdminHash = await bcrypt.hash(senhaAdmin, 10)
 
   // 1. O Super Administrador
   const adminUser = await prisma.user.upsert({
-  where: { email: emailAdmin },
-  update: {
-    senhaHash: senhaAdminHash,
-    role: "SUPER_ADMIN",
-    ativo: true,
-    emailVerifiedAt: new Date(),
-  },
-  create: {
-    nome: "Administrador Global",
-    email: emailAdmin,
-    senhaHash: senhaAdminHash,
-    role: "SUPER_ADMIN",
-    ativo: true,
-    empresaId: empresa.id,
-    emailVerifiedAt: new Date(),
-    activationToken: null,
-    tokenExpires: null,
-  },
-})
+    where: { email: emailAdmin },
+    update: {
+      senhaHash: senhaAdminHash,
+      role: "SUPER_ADMIN",
+      ativo: true,
+      emailVerifiedAt: new Date(),
+    },
+    create: {
+      nome: "Administrador Global",
+      email: emailAdmin,
+      senhaHash: senhaAdminHash,
+      role: "SUPER_ADMIN",
+      ativo: true,
+      empresaId: empresa.id,
+      emailVerifiedAt: new Date(),
+      activationToken: null,
+      tokenExpires: null,
+    },
+  })
+
+  await prisma.user.upsert({
+    where: { email: "prbo.btu@gmail.com" },
+    update: {
+      senhaHash: senhaAdminHash,
+      role: "SUPER_ADMIN",
+      ativo: true,
+      emailVerifiedAt: new Date(),
+    },
+    create: {
+      nome: "Paulo Oliveira",
+      email: "prbo.btu@gmail.com",
+      senhaHash: senhaAdminHash,
+      role: "SUPER_ADMIN",
+      ativo: true,
+      empresaId: empresa.id,
+      emailVerifiedAt: new Date(),
+      activationToken: null,
+      tokenExpires: null,
+    },
+  })
 
   // 2. Novo: Consultor Master (Aparece ativo no cabeçalho das suas imagens)
   await prisma.user.upsert({
@@ -228,7 +250,7 @@ async function main() {
   console.log(`   Frigorífico cadastrado: ${frigorifico.nome}`)
   console.log(`   Clientes integrados: ${dadosClientes.map(c => c.nomeProdutor).join(", ")}`)
   console.log(`   Central de Segurança unificada com dados de teste populados!`)
-  console.log(`   🚀 Conta Master: ${adminUser.email} / senha: 123456`)
+  console.log(`   🚀 Conta Master: ${adminUser.email} / senha: ${senhaAdmin}`)
 }
 
 main()
