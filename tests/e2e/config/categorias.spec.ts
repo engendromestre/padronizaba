@@ -44,15 +44,22 @@ test.describe("Categorias de Animal", () => {
 
     test("deve abrir modal de edição ao clicar em editar", async ({ page }) => {
         await page.goto(`${BASE_URL}/config/categorias`)
-        await page.waitForSelector("table")
 
-        // Abre o dropdown
-        await page.locator("button.rounded-full").first().click()
+        // Garante que a tabela e as linhas carregaram
+        const tabela = page.locator("table")
+        await expect(tabela).toBeVisible()
 
-        // Espera o portal renderizar no body antes de clicar
-        await page.waitForSelector("button:has-text('Editar')", { timeout: 5000 })
-        await page.getByRole("button", { name: "Editar" }).click()
+        // Em vez de pegar qualquer botão da tela, pegamos o primeiro botão de dentro da tabela
+        const botaoAcoes = tabela.locator("button.rounded-full").first()
+        await botaoAcoes.waitFor({ state: "visible", timeout: 10000 })
+        await botaoAcoes.click()
 
-        await expect(page.getByRole("heading", { name: "Editar Categoria" })).toBeVisible()
+        // Usa o Locator nativo com auto-wait estendido para o portal abrir
+        const botaoEditar = page.getByRole("menuitem", { name: /editar/i }).or(page.getByRole("button", { name: "Editar" }))
+        await botaoEditar.waitFor({ state: "visible", timeout: 10000 })
+        await botaoEditar.click()
+
+        // Valida se o modal abriu
+        await expect(page.getByRole("heading", { name: "Editar Categoria" })).toBeVisible({ timeout: 10000 })
     })
 })
