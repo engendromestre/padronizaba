@@ -1,22 +1,23 @@
 import {
-  LayoutDashboard,
-  PlusCircle,
+  Beef,
+  Building2,
+  Factory,
   FileText,
-  Users,
+  LayoutDashboard,
   LucideIcon,
   MapPin,
-  UserRoundCog,
-  Beef, Factory,
+  PlusCircle,
+  ShieldCheck,
   Tractor,
-  ShieldCheck
-} from "lucide-react";
+  UserRoundCog,
+  Users,
+} from "lucide-react"
 
-// Definimos estritamente o tipo para garantir o autocomplete no projeto
 export interface NavigationItem {
-  icon: LucideIcon;
-  label: string;
-  href: string;
-  allowedRoles: ("SUPER_ADMIN" | "ADMIN" | "CONSULTOR" | "CLIENTE")[];
+  icon: LucideIcon
+  label: string
+  href: string
+  allowedRoles: ("SUPER_ADMIN" | "ADMIN" | "CONSULTOR" | "CLIENTE")[]
 }
 
 export const dashboardNavigation: NavigationItem[] = [
@@ -24,36 +25,35 @@ export const dashboardNavigation: NavigationItem[] = [
     icon: LayoutDashboard,
     label: "Dashboard",
     href: "/dashboard",
-    allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR", "CLIENTE"]
+    allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR", "CLIENTE"],
   },
   {
     icon: PlusCircle,
     label: "Nova Consulta",
     href: "/consulta/nova",
-    allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR"]
+    allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR"],
   },
   {
     icon: FileText,
     label: "Relatórios",
     href: "/relatorios",
-    allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR", "CLIENTE"]
+    allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR", "CLIENTE"],
   },
   {
     icon: Users,
     label: "Clientes",
     href: "/clientes",
-    allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR"]
+    allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR"],
   },
-];
+]
 
-// Itens administrativos — vivem no hub /admin, acessível via dropdown do avatar
 export interface AdminCardItem {
-  icon: LucideIcon;
-  label: string;
-  description: string;
-  href: string;
-  allowedRoles: ("SUPER_ADMIN" | "ADMIN")[];
-  disponivel: boolean; // false = mostra "Em breve", sem link ativo
+  icon: LucideIcon
+  label: string
+  description: string
+  href: string
+  allowedRoles: ("SUPER_ADMIN" | "ADMIN")[]
+  disponivel: boolean
 }
 
 export const adminCards: AdminCardItem[] = [
@@ -62,6 +62,14 @@ export const adminCards: AdminCardItem[] = [
     label: "Usuários",
     description: "Gerencie acessos administrativos, consultores e clientes vinculados.",
     href: "/usuarios",
+    allowedRoles: ["SUPER_ADMIN", "ADMIN"],
+    disponivel: true,
+  },
+  {
+    icon: Building2,
+    label: "Empresas",
+    description: "Cadastre e gerencie as empresas do sistema.",
+    href: "/config/empresas",
     allowedRoles: ["SUPER_ADMIN", "ADMIN"],
     disponivel: true,
   },
@@ -113,4 +121,4 @@ export const adminCards: AdminCardItem[] = [
     allowedRoles: ["SUPER_ADMIN", "ADMIN"],
     disponivel: false,
   },
-];
+]
