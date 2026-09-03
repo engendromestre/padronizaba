@@ -4,6 +4,8 @@
   "service": "app",
   "workspaceFolder": "/home/node/app",
   "remoteUser": "node",
+  "containerUser": "node",
+  "updateRemoteUserUID": false,
   "features": {
     "ghcr.io/devcontainers/features/git:1": {}
   },
