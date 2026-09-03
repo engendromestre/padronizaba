@@ -20,6 +20,31 @@ export async function POST(req: Request) {
     const data = parsed.data;
     const totais = calcularTotais(data);
 
+    const parceiroIds = data.clienteParceiroId ?? []; // agora é array
+
+    // 🔒 Integridade: dono não pode estar na própria lista de parceiros
+    if (parceiroIds.includes(data.clienteId)) {
+      return NextResponse.json(
+        { error: "O cliente proprietário não pode ser adicionado como parceiro." },
+        { status: 400 }
+      );
+    }
+
+    // 🔒 Integridade: sem duplicados na lista (defesa extra; @@unique cobre no banco também)
+    if (new Set(parceiroIds).size !== parceiroIds.length) {
+      return NextResponse.json(
+        { error: "Há clientes parceiros duplicados na lista." },
+        { status: 400 }
+      );
+    }
+
+    // Calcula os grupos a notificar: dono + todos os parceiros
+    const clienteIds = [data.clienteId, ...parceiroIds];
+    const gruposParaNotificar = await prisma.grupoWhatsapp.findMany({
+      where: { clienteId: { in: clienteIds }, ativo: true },
+      select: { id: true },
+    });
+
     const consulta = await prisma.consulta.create({
       data: {
         empresaId: session.user.empresaId,
@@ -67,6 +92,14 @@ export async function POST(req: Request) {
         hematomasKg: data.hematomasKg,
         deslocamento: data.deslocamento,
         relatorioAbate: data.relatorioAbate,
+        gruposNotificados: {
+          connect: gruposParaNotificar.map((g) => ({ id: g.id })),
+        },
+        ...(parceiroIds.length > 0 && {
+          parceiros: {
+            create: parceiroIds.map((clienteId: string) => ({ clienteId })),
+          },
+        }),
       },
     });
 
@@ -112,7 +145,12 @@ export async function GET(req: Request) {
         case "CONSULTOR":
           return { empresaId: empresaId!, consultorId: userId }
         case "CLIENTE":
-          return { clienteId: clienteId! }
+          return {
+            OR: [
+              { clienteId: clienteId! },
+              { parceiros: { some: { clienteId: clienteId! } } },
+            ],
+          }
         default:
           return { id: "none" } // bloqueia
       }

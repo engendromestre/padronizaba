@@ -3,6 +3,7 @@ import { z } from "zod";
 export const consultaSchema = z.object({
   // Etapa 1 — Identificação
   clienteId: z.string().min(1, "Selecione o cliente"),
+  clienteParceiroId: z.array(z.string()).optional().default([]),
   fazendaId: z.string().min(1, "Selecione a fazenda"),
   grupoWhatsappId: z.array(z.string()).min(1, "Selecione ao menos um grupo de envio"),
   frigorificoId: z.string().min(1, "Selecione o frigorífico"),

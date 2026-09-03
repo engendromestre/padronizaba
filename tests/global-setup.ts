@@ -16,7 +16,7 @@ export default async function globalSetup() {
     })
 
     console.log('🌱 Populando dados de teste...')
-    execSync('npx tsx prisma/seed.ts', {
+    execSync('npx tsx prisma/seed-test.ts', {
         env: { ...process.env },
         stdio: 'inherit',
     })

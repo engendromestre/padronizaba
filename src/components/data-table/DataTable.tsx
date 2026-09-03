@@ -113,7 +113,7 @@ export function DataTable<TData>({
                                     ))}
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
-                                    {table.getRowModel().rows.length === 0 ? (
+                                    {table.getRowModel().rows?.length === 0 ? (
                                         <tr>
                                             <td
                                                 colSpan={columns.length}

@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   LucideIcon,
   MapPin,
+  MessagesSquare,
   PlusCircle,
   ShieldCheck,
   Tractor,
@@ -103,7 +104,15 @@ export const adminCards: AdminCardItem[] = [
     description: "Cadastre produtores e seus dados de contato.",
     href: "/config/clientes",
     allowedRoles: ["SUPER_ADMIN", "ADMIN"],
-    disponivel: false,
+    disponivel: true,
+  },
+  {
+    icon: MessagesSquare,
+    label: "Grupos de WhatsApp",
+    description: "Selecione quais grupos ficam disponíveis para vínculo com clientes.",
+    href: "/config/grupos-whatsapp",
+    allowedRoles: ["SUPER_ADMIN", "ADMIN"],
+    disponivel: true,
   },
   {
     icon: Tractor,
@@ -111,7 +120,7 @@ export const adminCards: AdminCardItem[] = [
     description: "Cadastre as propriedades vinculadas a cada cliente.",
     href: "/config/fazendas",
     allowedRoles: ["SUPER_ADMIN", "ADMIN"],
-    disponivel: true,
+    disponivel: false,
   },
   {
     icon: ShieldCheck,

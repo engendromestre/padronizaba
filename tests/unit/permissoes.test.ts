@@ -46,9 +46,14 @@ describe("filtroConsultas", () => {
         expect(filtroConsultas(user)).toEqual({ empresaId: "empresa-1", consultorId: "user-1" })
     })
 
-    it("CLIENTE filtra apenas pelo próprio clienteId", () => {
+    it("CLIENTE filtra pelo próprio clienteId ou por parcerias", () => {
         const user = criarUser({ role: "CLIENTE", clienteId: "cliente-1" })
-        expect(filtroConsultas(user)).toEqual({ clienteId: "cliente-1" })
+        expect(filtroConsultas(user)).toEqual({
+            OR: [
+                { clienteId: "cliente-1" },
+                { parceiros: { some: { clienteId: "cliente-1" } } },
+            ],
+        })
     })
 
     it("role desconhecida lança erro", () => {
