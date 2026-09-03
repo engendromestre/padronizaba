@@ -66,18 +66,15 @@ test.describe('Fluxo de Ativação de Convite', () => {
     await page.getByRole('textbox', { name: 'Nova Senha *', exact: true }).fill('Senha123456!');
     await page.getByRole('textbox', { name: 'Confirmar Nova Senha *', exact: true }).fill('Senha123456!');
 
-    // await Promise.all([
-    //   page.waitForResponse(
-    //     response =>
-    //       response.url().includes('/api/auth/activate') &&
-    //       response.request().method() === 'POST' &&
-    //       response.ok()
-    //   ),
-    //   page.getByRole('button', { name: /Definir Senha e Ativar Conta/i }).click(),
-    // ]);
+    // Configura o observador de URL antes do clique (evita race conditions)
+    const urlPromise = page.waitForURL('**/dashboard', { timeout: 10000 }).catch(() => null);
 
+    // Clica no botão de ativação
     await page.getByRole('button', { name: /Definir Senha e Ativar Conta/i }).click();
-    await page.waitForTimeout(3000);
+
+    // Aguarda o redirecionamento acontecer de forma dinâmica
+    await urlPromise;
+
     console.log('URL após clique:', page.url());
 
     // Aguarda o redirecionamento com mais tempo

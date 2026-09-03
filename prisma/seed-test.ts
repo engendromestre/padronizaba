@@ -5,6 +5,7 @@
 import { PrismaClient } from "../src/generated/prisma/client"
 import { PrismaPg } from "@prisma/adapter-pg"
 import bcrypt from "bcryptjs"
+import { limparBanco } from "../tests/db-helpers"
 
 const adapter = new PrismaPg({
     connectionString: process.env.DATABASE_URL!,
@@ -14,21 +15,7 @@ const prisma = new PrismaClient({ adapter })
 
 async function main() {
     console.log("🧹 Limpando banco de teste...")
-
-    // Apaga na ordem correta (respeita FK)
-    await prisma.auditoriaLog.deleteMany()
-    await prisma.whatsAppLog.deleteMany()
-    await prisma.consultaFinanceiro.deleteMany()
-    await prisma.consulta.deleteMany()
-    await prisma.grupoWhatsapp.deleteMany()
-    await prisma.fazenda.deleteMany()
-    await prisma.frigorifico.deleteMany()
-    await prisma.cliente.deleteMany()
-    await prisma.user.deleteMany()
-    await prisma.empresa.deleteMany()
-    await prisma.categoriaAnimal.deleteMany()
-    await prisma.cidade.deleteMany()
-    await prisma.estado.deleteMany()
+     await limparBanco()
 
     console.log("🌱 Populando dados de teste...")
 
@@ -62,7 +49,12 @@ async function main() {
 
     // Cliente + Fazenda
     const cliente = await prisma.cliente.create({
-        data: { id: "cliente-test", nomeProdutor: "Cliente Teste", empresaId: empresa.id },
+        data: {
+            id: "cliente-test",
+            nomeProdutor: "Cliente Teste",
+            empresaId: empresa.id,
+            documento: "00000000000"
+        },
     })
 
     await prisma.fazenda.create({
@@ -71,6 +63,16 @@ async function main() {
             nome: "Fazenda Teste",
             clienteId: cliente.id,
             cidadeId: cidade.id,
+        },
+    })
+
+    // Segundo cliente, usado em testes de parceria/notificação cruzada
+    await prisma.cliente.create({
+        data: {
+            id: "cliente-parceiro-test",
+            nomeProdutor: "Cliente Parceiro Teste",
+            empresaId: empresa.id,
+            documento: "11111111111",
         },
     })
 
@@ -87,6 +89,37 @@ async function main() {
             empresaId: empresa.id,
             emailVerifiedAt: new Date(),
         },
+    })
+
+    const senhaConsultorHash = await bcrypt.hash(process.env.SEED_CONSULTOR_PASSWORD ?? "Test@12345", 10)
+
+    await prisma.user.create({
+        data: {
+            id: "consultor-test",
+            nome: "Consultor Teste",
+            email: "consultor@test.com",
+            senhaHash: senhaConsultorHash,
+            role: "CONSULTOR",
+            ativo: true,
+            empresaId: empresa.id,
+            emailVerifiedAt: new Date(),
+        },
+    })
+
+    // 💡 ADICIONE AQUI: O usuário que o teste 'convite.spec.ts' precisa encontrar
+    await prisma.user.create({
+        data: {
+            nome: "Usuário Teste Ativação",
+            email: "teste-ativacao@padronizaba.com.br",
+            senhaHash: "", // Começa vazio para ser definido no fluxo
+            role: "CLIENTE",
+            ativo: false,
+            empresaId: empresa.id,
+            activationToken: "token-playwright-valido",
+            // Válido por 48 horas a partir do momento do teste
+            tokenExpires: new Date(Date.now() + 48 * 60 * 60 * 1000),
+            emailVerifiedAt: null,
+        }
     })
 
     console.log("✅ Banco de teste pronto!")
