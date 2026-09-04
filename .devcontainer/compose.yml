@@ -6,6 +6,7 @@ services:
     volumes:
       - ../:/home/node/app:cached
     working_dir: /home/node/app
+    user: "node"
     command: sleep infinity
     ports:
       - "3000:3000"

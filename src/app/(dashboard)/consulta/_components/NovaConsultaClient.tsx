@@ -18,6 +18,12 @@ import { calcularTotais, ConsultaForm, consultaSchema } from "@/lib/schemas/cons
 import { CAMPOS_POR_ETAPA, TOTAL_ETAPAS, VALORES_RESET_PRODUCAO } from "../_constants/formConfig"
 import { salvarConsultaOffline } from "@/lib/schemas/offlineDb"
 
+function hojeLocal() {
+  const hoje = new Date()
+  const offset = hoje.getTimezoneOffset() * 60000
+  return new Date(hoje.getTime() - offset).toISOString().split("T")[0]
+}
+
 export default function NovaConsultaPage() {
   const router = useRouter()
   const [etapa, setEtapa] = useState(1)
@@ -37,6 +43,7 @@ export default function NovaConsultaPage() {
       gordura1: 0, gordura2: 0, gordura3: 0, gordura4: 0, gordura5: 0,
       bezerrosP: 0, bezerrosM: 0, bezerrosG: 0,
       deslocamento: false, relatorioAbate: false,
+      dataAbate: hojeLocal(),
     },
   })
 

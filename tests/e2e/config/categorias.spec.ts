@@ -1,12 +1,11 @@
 import { test, expect } from "@playwright/test"
 import { Page } from "@playwright/test"
+import { ADMIN_EMAIL, ADMIN_PASSWORD } from "../../fixtures/credenciais"
 
 const BASE_URL = "http://localhost:3000"
 
 // Reutilize isso em todos os specs que precisam de auth
 async function login(page: Page) {
-    const ADMIN_EMAIL = process.env.SEED_ADMIN_EMAIL ?? "superadmin@codealta.com.br";
-    const ADMIN_PASSWORD = process.env.SEED_ADMIN_PASSWORD ?? "superForce!!!";
 
     await page.goto(`${BASE_URL}/login`)
     await page.getByPlaceholder("consultor@padronizaba.com.br").fill(ADMIN_EMAIL)

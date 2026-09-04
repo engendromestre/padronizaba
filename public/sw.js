@@ -66,6 +66,12 @@ self.addEventListener("fetch", (event) => {
         return
     }
 
+    // Qualquer outra rota de API → sempre busca da rede, nunca cacheia
+    if (url.pathname.startsWith("/api/")) {
+        event.respondWith(fetch(request))
+        return
+    }
+
     // Assets estáticos → Cache First
     event.respondWith(cacheFirst(request))
 })

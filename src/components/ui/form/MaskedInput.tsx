@@ -1,36 +1,22 @@
 "use client"
 
-import { IMaskInput } from "react-imask"
-import { ChangeEvent } from "react"
+import { ChangeEvent, useEffect, useRef } from "react"
 import { FieldError, UseFormRegisterReturn } from "react-hook-form"
 import { Field } from "./Field"
 
-// Máscaras predefinidas
 export type MaskType = "cpf" | "cnpj" | "telefone" | "celular" | "cpf-cnpj"
 
-const MASKS: Record<MaskType, object> = {
-    cpf: {
-        mask: "000.000.000-00",
-    },
-    cnpj: {
-        mask: "00.000.000/0000-00",
-    },
-    telefone: {
-        mask: "(00) 0000-0000",
-    },
-    celular: {
-        mask: "(00) 00000-0000",
-    },
-    "cpf-cnpj": {
-        // Troca automaticamente entre CPF e CNPJ conforme digita
-        mask: [
-            { mask: "000.000.000-00", maxLength: 11 },
-            { mask: "00.000.000/0000-00" },
-        ],
-    },
+const maskFormatters: Record<string, (val: string) => string> = {
+    cpf: (v) => v.replace(/\D/g, "").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d)/, "$1.$2").replace(/(\d{3})(\d{1,2})$/, "$1-$2").substring(0, 14),
+    cnpj: (v) => v.replace(/\D/g, "").replace(/^(\d{2})(\d)/, "$1.$2").replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3").replace(/\.(\d{3})(\d)/, ".$1/$2").replace(/(\d{4})(\d)/, "$1-$2").substring(0, 18),
+    telefone: (v) => v.replace(/\D/g, "").replace(/^(\d{2})(\d)/, "($1) $2").replace(/(\d{4})(\d)/, "$1-$2").substring(0, 14),
+    celular: (v) => v.replace(/\D/g, "").replace(/^(\d{2})(\d)/, "($1) $2").replace(/(\d{5})(\d)/, "$1-$2").substring(0, 15),
+    "cpf-cnpj": (v) => {
+        const digits = v.replace(/\D/g, "")
+        return digits.length <= 11 ? maskFormatters.cpf(v) : maskFormatters.cnpj(v)
+    }
 }
 
-// Estilos base compartilhados
 function inputClassName(disabled?: boolean, error?: FieldError) {
     return `
         w-full px-4 py-3.5 rounded-2xl border font-medium text-sm transition-all outline-none
@@ -43,7 +29,6 @@ function inputClassName(disabled?: boolean, error?: FieldError) {
     `
 }
 
-// Integrado ao RHF
 interface MaskedFieldProps {
     mask: MaskType
     label?: string
@@ -53,7 +38,7 @@ interface MaskedFieldProps {
     disabled?: boolean
     placeholder?: string
     className?: string
-    registration: Partial<UseFormRegisterReturn>
+    registration: UseFormRegisterReturn
 }
 
 export function MaskedField({
@@ -65,65 +50,47 @@ export function MaskedField({
     disabled,
     placeholder,
     className,
-    registration,
+    registration
 }: MaskedFieldProps) {
-    const { ref: rhfRef, onChange, ...rest } = registration
+    const inputRef = useRef<HTMLInputElement | null>(null)
+    const { ref: rhfRef, onChange: rhfOnChange, ...restRegistration } = registration
+
+    // 💡 Monitora o valor do elemento de forma contínua para garantir o preenchimento na Edição
+    useEffect(() => {
+        if (inputRef.current) {
+            const rawValue = inputRef.current.value
+            if (rawValue) {
+                const formatted = maskFormatters[mask](rawValue)
+                if (rawValue !== formatted) {
+                    inputRef.current.value = formatted
+                }
+            }
+        }
+    }) // Sem array de dependências: roda a cada ciclo garantindo que o valor inicial seja capturado
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        // Aplica a formatação visual imediata
+        e.target.value = maskFormatters[mask](e.target.value)
+
+        // Dispara o evento modificado para o React Hook Form coletar a string formatada
+        if (rhfOnChange) {
+            rhfOnChange(e)
+        }
+    }
 
     return (
         <Field label={label ?? ""} error={error} hint={hint} required={required} className={className}>
-            <IMaskInput
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                {...(MASKS[mask] as any)}
-                {...rest}
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                inputRef={rhfRef as any}
+            <input
+                {...restRegistration} // Mantém name, onBlur e propriedades nativas do RHF
+                type="text"
                 disabled={disabled}
                 placeholder={placeholder}
                 className={inputClassName(disabled, error)}
-                onAccept={(value: string) => {
-                    onChange?.({ target: { value } } as ChangeEvent<HTMLInputElement>)
+                onChange={handleChange}
+                ref={(el) => {
+                    inputRef.current = el // Seta a ref local para o formatador do useEffect
+                    if (rhfRef) rhfRef(el)  // Seta a ref do React Hook Form para não quebrar o ciclo
                 }}
-            />
-        </Field>
-    )
-}
-
-// Controlado manualmente
-interface MaskedControlledProps {
-    mask: MaskType
-    label?: string
-    value: string
-    onChange: (value: string) => void
-    error?: FieldError
-    hint?: string
-    required?: boolean
-    disabled?: boolean
-    placeholder?: string
-    className?: string
-}
-
-export function MaskedControlled({
-    mask,
-    label,
-    value,
-    onChange,
-    error,
-    hint,
-    required,
-    disabled,
-    placeholder,
-    className,
-}: MaskedControlledProps) {
-    return (
-        <Field label={label ?? ""} error={error} hint={hint} required={required} className={className}>
-            <IMaskInput
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                {...(MASKS[mask] as any)}
-                value={value}
-                disabled={disabled}
-                placeholder={placeholder}
-                className={inputClassName(disabled, error)}
-                onAccept={(value: string) => onChange(value)}
             />
         </Field>
     )

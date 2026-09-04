@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma"
 import { redirect } from "next/navigation"
 import { PageHeader } from "../../../components/layout/PageHeader"
 import { DashboardClient } from "./_components/DashboardClient"
+import { filtroConsultas } from "@/lib/permissoes"
 
 
 export default async function DashboardPage() {
@@ -11,8 +12,9 @@ export default async function DashboardPage() {
 
   const consultas = await prisma.consulta.findMany({
     where: {
-      empresaId: session.user.empresaId || "",
-      consultorId: session.user.id,
+      ...filtroConsultas(session.user),
+      // status: "ENVIADA",
+      deletedAt: null,
     },
     include: {
       cliente: true,

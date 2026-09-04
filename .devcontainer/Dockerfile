@@ -1,17 +1,15 @@
-FROM node:20-alpine
+FROM node:24-bookworm-slim
 
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y --no-install-recommends \
   git \
   curl \
   bash \
-  chromium \
-  nss \
-  freetype \
-  harfbuzz \
   ca-certificates \
-  ttf-freefont
+  chromium \
+  fonts-freefont-ttf \
+  && rm -rf /var/lib/apt/lists/*
 
-ENV PLAYWRIGHT_CHROMIUM_PATH=/usr/bin/chromium-browser
+ENV PLAYWRIGHT_CHROMIUM_PATH=/usr/bin/chromium
 
 WORKDIR /home/node/app
 

@@ -13,7 +13,12 @@ export function filtroConsultas(user: UserSession) {
         case "CONSULTOR":
             return { empresaId: user.empresaId!, consultorId: user.id }
         case "CLIENTE":
-            return { clienteId: user.clienteId! }
+            return {
+                OR: [
+                    { clienteId: user.clienteId! },
+                    { parceiros: { some: { clienteId: user.clienteId! } } },
+                ],
+            }
         default:
             throw new Error("Role não reconhecida")
     }

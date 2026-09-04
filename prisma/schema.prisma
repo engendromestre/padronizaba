@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
   moduleFormat = "cjs"
 }
 
@@ -86,6 +86,7 @@ model Cliente {
   id           String    @id @default(cuid())
   empresaId    String
   nomeProdutor String
+  documento    String
   ativo        Boolean   @default(true)
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
@@ -94,9 +95,12 @@ model Cliente {
   empresa   Empresa         @relation(fields: [empresaId], references: [id])
   fazendas  Fazenda[]
   grupos    GrupoWhatsapp[]
-  consultas Consulta[]
+  consultas Consulta[]      @relation("ConsultaDono")
   usuarios  User[]
 
+  parceriasComoParceiro ConsultaParceiro[] @relation("ClienteParceiro")
+
+  @@unique([documento, empresaId])
   @@map("clientes")
 }
 
@@ -131,6 +135,17 @@ model GrupoWhatsapp {
   consultas Consulta[] @relation("ConsultaGrupos")
 
   @@map("grupos_whatsapp")
+}
+
+model EvolutionGrupoCache {
+  id              String   @id @default(cuid())
+  groupIdWhatsapp String   @unique
+  nomeGrupo       String
+  visivelParaVinculo  Boolean  @default(false)
+  atualizadoEm    DateTime @updatedAt
+  createdAt       DateTime @default(now())
+
+  @@map("evolution_grupos_cache")
 }
 
 model CategoriaAnimal {
@@ -253,7 +268,7 @@ model Consulta {
   updatedAt       DateTime  @updatedAt
 
   empresa         Empresa             @relation(fields: [empresaId], references: [id])
-  cliente         Cliente             @relation(fields: [clienteId], references: [id])
+  cliente         Cliente             @relation("ConsultaDono", fields: [clienteId], references: [id])
   fazenda         Fazenda             @relation(fields: [fazendaId], references: [id])
   consultor       User                @relation(fields: [consultorId], references: [id]) // 💥 Alterado para User
   frigorifico     Frigorifico         @relation(fields: [frigorificoId], references: [id])
@@ -268,10 +283,30 @@ model Consulta {
   motivoCancelamento String?
   deletedAt          DateTime?
 
-  gruposNotificados   GrupoWhatsapp[] @relation("ConsultaGrupos")
-  canceladoPorUsuario User?           @relation("ConsultasCanceladas", fields: [canceladoPor], references: [id])
+  gruposNotificados   GrupoWhatsapp[]    @relation("ConsultaGrupos")
+  canceladoPorUsuario User?              @relation("ConsultasCanceladas", fields: [canceladoPor], references: [id])
+  parceiros           ConsultaParceiro[] @relation("ConsultaDoParceiro")
 
   @@map("consultas")
+}
+
+/**
+ * Parceria de notificação entre clientes num mesmo lote.
+ * Ex: lote fiscal é do Tiago, mas o Jorge participa como parceiro
+ * e também deve ser notificado no grupo dele.
+ * Não trata rateio financeiro/sociedade — apenas visibilidade/notificação.
+ */
+model ConsultaParceiro {
+  id         String   @id @default(cuid())
+  consultaId String
+  clienteId  String
+  createdAt  DateTime @default(now())
+
+  consulta Consulta @relation("ConsultaDoParceiro", fields: [consultaId], references: [id], onDelete: Cascade)
+  cliente  Cliente  @relation("ClienteParceiro", fields: [clienteId], references: [id], onDelete: Restrict)
+
+  @@unique([consultaId, clienteId])
+  @@map("consulta_parceiros")
 }
 
 model ConsultaFinanceiro {

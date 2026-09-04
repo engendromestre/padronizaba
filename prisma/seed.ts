@@ -57,6 +57,7 @@ async function main() {
     {
       id: "cliente-joao-silva",
       nomeProdutor: "João Silva",
+      documento: "44667218905",
       fazendas: [
         { id: "fazenda-boa-vista", nome: "Fazenda Boa Vista" }
       ],
@@ -68,6 +69,7 @@ async function main() {
     {
       id: "cliente-pedro-santos",
       nomeProdutor: "Pedro Santos",
+      documento: "44667218906",
       fazendas: [
         { id: "fazenda-ouro-verde", nome: "Fazenda Ouro Verde" }
       ],
@@ -83,12 +85,20 @@ async function main() {
   for (const c of dadosClientes) {
     // Upsert do Cliente
     const cliente = await prisma.cliente.upsert({
-      where: { id: c.id },
-      update: {},
+      where: {
+        documento_empresaId: {
+          documento: c.documento,
+          empresaId: empresa.id,
+        },
+      },
+      update: {
+        nomeProdutor: c.nomeProdutor,
+      },
       create: {
         id: c.id,
         nomeProdutor: c.nomeProdutor,
         empresaId: empresa.id,
+        documento: c.documento
       },
     })
 
