@@ -24,6 +24,7 @@ export function ImportarEstadoModal({ onClose, onImportado, addToast }: Importar
     const [estadosIbge, setEstadosIbge] = useState<EstadoIbgeOption[]>([])
     const [importando, setImportando] = useState<string | null>(null)
 
+
     useEffect(() => {
         async function carregarEstados() {
             setCarregando(true)
