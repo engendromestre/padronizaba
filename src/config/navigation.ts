@@ -40,6 +40,7 @@ export const dashboardNavigation: NavigationItem[] = [
     href: "/relatorios",
     allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR", "CLIENTE"],
   },
+  
   {
     icon: Users,
     label: "Clientes",
@@ -105,6 +106,14 @@ export const adminCards: AdminCardItem[] = [
     href: "/config/clientes",
     allowedRoles: ["SUPER_ADMIN", "ADMIN"],
     disponivel: true,
+  },
+  {
+    icon: FileText,
+    label: "Relatórios",
+    description: "Acesse os relatórios gerados pelas consultas.",
+    href: "/relatorios",
+    allowedRoles: ["SUPER_ADMIN", "ADMIN"],
+    disponivel: false,
   },
   {
     icon: MessagesSquare,
