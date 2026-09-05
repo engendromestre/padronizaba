@@ -5,7 +5,7 @@ import { ConfirmModal } from "@/components/ui/ConfirmModal"
 import { Button } from "@/components/ui/form/Button"
 import { ToastList } from "@/components/ui/ToastList"
 import { useToast } from "@/components/ui/useToast"
-import { MapPin, Plus, Trash2 } from "lucide-react"
+import { MapPin, Plus, RefreshCw, Trash2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { ImportarEstadoModal } from "./ImportarEstadoModal"
@@ -25,6 +25,7 @@ export function LocalizacaoClient({ initialEstados }: LocalizacaoClientProps) {
     const router = useRouter()
     const [estados, setEstados] = useState<EstadoItem[]>(initialEstados)
     const [modalAberto, setModalAberto] = useState(false)
+    const [atualizando, setAtualizando] = useState<string | null>(null)
     const { toasts, addToast } = useToast()
 
     const [confirmDelete, setConfirmDelete] = useState<{
@@ -39,6 +40,37 @@ export function LocalizacaoClient({ initialEstados }: LocalizacaoClientProps) {
             return [...semDuplicata, estado].sort((a, b) => a.nome.localeCompare(b.nome))
         })
         router.refresh()
+    }
+
+    async function atualizarCidades(estado: EstadoItem) {
+        setAtualizando(estado.id)
+        try {
+            const res = await fetch("/api/admin/cidades/importar-ibge", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ uf: estado.uf, nome: estado.nome }),
+            })
+            const json = await res.json()
+
+            if (!res.ok) {
+                addToast("error", json.error ?? "Erro ao atualizar cidades.")
+                return
+            }
+
+            const mensagem = json.importadas > 0
+                ? `${estado.nome}: ${json.importadas} cidade(s) nova(s) importada(s).`
+                : `${estado.nome} já está com todas as cidades atualizadas.`
+
+            addToast("success", mensagem)
+            setEstados((prev) =>
+                prev.map((e) => (e.id === estado.id ? { ...e, totalCidades: json.total ?? e.totalCidades } : e))
+            )
+            router.refresh()
+        } catch {
+            addToast("error", "Erro de conexão. Tente novamente.")
+        } finally {
+            setAtualizando(null)
+        }
     }
 
     function askDelete(estado: EstadoItem) {
@@ -111,6 +143,14 @@ export function LocalizacaoClient({ initialEstados }: LocalizacaoClientProps) {
                                             {estado.uf} · {estado.totalCidades} {estado.totalCidades === 1 ? "cidade" : "cidades"}
                                         </p>
                                     </div>
+                                    <button
+                                        onClick={() => atualizarCidades(estado)}
+                                        disabled={atualizando === estado.id}
+                                        className="p-2 text-muted hover:text-primary hover:bg-primary/10 rounded-lg transition-colors opacity-0 group-hover:opacity-100 disabled:opacity-100 disabled:cursor-wait"
+                                        title="Atualizar cidades"
+                                    >
+                                        <RefreshCw size={16} className={atualizando === estado.id ? "animate-spin" : ""} />
+                                    </button>
                                     <button
                                         onClick={() => askDelete(estado)}
                                         className="p-2 text-muted hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors opacity-0 group-hover:opacity-100"
