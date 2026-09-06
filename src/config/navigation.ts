@@ -34,19 +34,19 @@ export const dashboardNavigation: NavigationItem[] = [
     href: "/consulta/nova",
     allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR"],
   },
-  {
-    icon: FileText,
-    label: "Relatórios",
-    href: "/relatorios",
-    allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR", "CLIENTE"],
-  },
-  
-  {
-    icon: Users,
-    label: "Clientes",
-    href: "/clientes",
-    allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR"],
-  },
+  // {
+  //   icon: FileText,
+  //   label: "Relatórios",
+  //   href: "/relatorios",
+  //   allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR", "CLIENTE"],
+  // },
+
+  // {
+  //   icon: Users,
+  //   label: "Clientes",
+  //   href: "/clientes",
+  //   allowedRoles: ["SUPER_ADMIN", "ADMIN", "CONSULTOR"],
+  // },
 ]
 
 export interface AdminCardItem {
