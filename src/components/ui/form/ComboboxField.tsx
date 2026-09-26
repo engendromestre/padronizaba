@@ -79,12 +79,19 @@ export function ComboboxField({
     return (
         <Field label={label} error={error} hint={hint} required={required} className={className}>
             <div ref={containerRef} className={`relative ${disabled ? "opacity-50 pointer-events-none" : ""}`}>
-                <button
-                    type="button"
+                <div
+                    role="button"
+                    tabIndex={0}
                     onClick={() => setAberto((prev) => !prev)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault()
+                            setAberto((prev) => !prev)
+                        }
+                    }}
                     className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl border text-left text-sm font-medium transition-all cursor-pointer
-                        ${aberto ? "border-primary ring-2 ring-primary/20" : "border-border hover:bg-muted/5"}
-                        bg-card`}
+        ${aberto ? "border-primary ring-2 ring-primary/20" : "border-border hover:bg-muted/5"}
+        bg-card`}
                 >
                     <span className={selecionado ? "text-foreground truncate" : "text-muted truncate"}>
                         {selecionado ? selecionado.label : placeholder}
@@ -101,7 +108,7 @@ export function ComboboxField({
                         )}
                         <ChevronDown size={14} className={`text-muted transition-transform ${aberto ? "rotate-180" : ""}`} />
                     </div>
-                </button>
+                </div>
 
                 {aberto && (
                     <div className="absolute z-20 mt-1.5 w-full bg-card border border-border rounded-xl shadow-lg overflow-hidden">

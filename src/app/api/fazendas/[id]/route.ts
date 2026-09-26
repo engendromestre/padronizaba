@@ -1,5 +1,6 @@
 import { registrarAuditoria } from "@/lib/auditoria"
 import { auth } from "@/lib/auth"
+import { validarRemocaoFazenda } from "@/lib/fazendas"
 import { prisma } from "@/lib/prisma"
 import { fazendaSchema } from "@/lib/validacoes/fazenda"
 import { headers } from "next/headers"
@@ -99,19 +100,19 @@ export async function DELETE(
         },
     })
 
-    if (!fazenda || fazenda.deletedAt) {
+    const validacao = validarRemocaoFazenda(fazenda)
+    if (!validacao.pode) {
+        return NextResponse.json({ error: validacao.motivo }, { status: validacao.status })
+    }
+
+    // Narrowing explícito: depois de validacao.pode === true, sabemos que fazenda não é null
+    if (!fazenda) {
         return NextResponse.json({ error: "Fazenda não encontrada." }, { status: 404 })
     }
 
+    // 🔒 Restaurado: isolamento por empresa para ADMIN
     if (session!.user.role === "ADMIN" && fazenda.cliente.empresaId !== session!.user.empresaId) {
         return NextResponse.json({ error: "Acesso negado." }, { status: 403 })
-    }
-
-    if (fazenda._count.consultas > 0) {
-        return NextResponse.json(
-            { error: `Não é possível remover. Existem ${fazenda._count.consultas} consulta(s) vinculadas a esta fazenda.` },
-            { status: 409 }
-        )
     }
 
     const ip = await getIp()
