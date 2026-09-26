@@ -129,7 +129,7 @@ export const adminCards: AdminCardItem[] = [
     description: "Cadastre as propriedades vinculadas a cada cliente.",
     href: "/config/fazendas",
     allowedRoles: ["SUPER_ADMIN", "ADMIN"],
-    disponivel: false,
+    disponivel: true,
   },
   {
     icon: ShieldCheck,

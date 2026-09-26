@@ -2,6 +2,7 @@ import {
     filtroClientes,
     filtroConsultas,
     filtroEmpresas,
+    filtroFazendas,
     filtroUsuarios,
     podeCancelarConsulta,
     podeGerenciarUsuarios,
@@ -217,5 +218,34 @@ describe("podeCancelarConsulta", () => {
         const resultado = podeCancelarConsulta(user, consultaBase)
         expect(resultado.pode).toBe(false)
         expect(resultado.motivo).toBe("Acesso negado.")
+    })
+})
+
+describe("filtroFazendas", () => {
+    it("SUPER_ADMIN vê todas as fazendas, sem filtro", () => {
+        const user = criarUser({ role: "SUPER_ADMIN" })
+        expect(filtroFazendas(user)).toEqual({})
+    })
+
+    it("ADMIN filtra por empresa do cliente dono da fazenda", () => {
+        const user = criarUser({ role: "ADMIN", empresaId: "empresa-1" })
+        expect(filtroFazendas(user)).toEqual({ cliente: { empresaId: "empresa-1" } })
+    })
+
+    it("CONSULTOR filtra por empresa do cliente dono da fazenda", () => {
+        const user = criarUser({ role: "CONSULTOR", empresaId: "empresa-1" })
+        expect(filtroFazendas(user)).toEqual({ cliente: { empresaId: "empresa-1" } })
+    })
+
+    it("CLIENTE só enxerga as próprias fazendas", () => {
+        const user = criarUser({ role: "CLIENTE", clienteId: "cliente-1" })
+        expect(filtroFazendas(user)).toEqual({ clienteId: "cliente-1" })
+    })
+
+    it("role desconhecida retorna filtro que bloqueia tudo (id: 'none'), sem lançar erro", () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        const user = criarUser({ role: "ROLE_INEXISTENTE" })
+        expect(filtroFazendas(user)).toEqual({ id: "none" })
     })
 })
