@@ -68,6 +68,7 @@ export function podeGerenciarUsuarios(user: UserSession) {
     return ["SUPER_ADMIN", "ADMIN"].includes(user.role)
 }
 
+// Consultas
 export function podeCancelarConsulta(user: UserSession, consulta: {
     consultorId: string
     empresaId: string
@@ -94,4 +95,20 @@ export function podeCancelarConsulta(user: UserSession, consulta: {
     }
 
     return { pode: false, motivo: "Acesso negado." }
+}
+
+// Fazendas
+export function filtroFazendas(user: { role: string; empresaId?: string | null; clienteId?: string | null }) {
+    switch (user.role) {
+        case "SUPER_ADMIN":
+            return {}
+        case "ADMIN":
+            return { cliente: { empresaId: user.empresaId! } }
+        case "CONSULTOR":
+            return { cliente: { empresaId: user.empresaId! } }
+        case "CLIENTE":
+            return { clienteId: user.clienteId! }
+        default:
+            return { id: "none" }
+    }
 }
