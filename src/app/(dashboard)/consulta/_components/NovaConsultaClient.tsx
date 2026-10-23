@@ -1,7 +1,7 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ChevronLeft, Loader2, Save } from "lucide-react"
+import { ChevronLeft, Loader2, Plus, Save } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { FieldErrors, FormProvider, useForm } from "react-hook-form"
@@ -11,11 +11,12 @@ import { Etapa2Peso } from "@/app/(dashboard)/consulta/_components/form/Etapa2Pe
 import { Etapa3Maturidade } from "@/app/(dashboard)/consulta/_components/form/Etapa3Maturidade"
 import { Etapa4Acabamento } from "@/app/(dashboard)/consulta/_components/form/Etapa4Acabamento"
 import { Etapa5Adicionais } from "@/app/(dashboard)/consulta/_components/form/Etapa5Adicionais"
+import { ConsultaEnviada, Etapa6Confirmacao } from "@/app/(dashboard)/consulta/_components/form/Etapa6Confirmacao"
 
 import { useSidebar } from "@/components/layout/SidebarContext"
 import { FormProgress } from "@/components/ui/FormProgress"
 import { calcularTotais, ConsultaForm, consultaSchema } from "@/lib/schemas/consulta"
-import { CAMPOS_POR_ETAPA, TOTAL_ETAPAS, VALORES_RESET_PRODUCAO } from "../_constants/formConfig"
+import { CAMPOS_POR_ETAPA, ETAPA_CONFIRMACAO, TOTAL_ETAPAS, VALORES_RESET_PRODUCAO } from "../_constants/formConfig"
 import { salvarConsultaOffline } from "@/lib/schemas/offlineDb"
 
 function hojeLocal() {
@@ -29,6 +30,8 @@ export default function NovaConsultaPage() {
   const [etapa, setEtapa] = useState(1)
   const [loading, setLoading] = useState(false)
   const [erro, setErro] = useState("")
+  const [consultaEnviada, setConsultaEnviada] = useState<ConsultaEnviada | null>(null)
+  const [salvoOffline, setSalvoOffline] = useState(false)
 
   const [clientes, setClientes] = useState([])
   const [frigorificos, setFrigorificos] = useState([])
@@ -76,24 +79,23 @@ export default function NovaConsultaPage() {
 
   const voltar = () => setEtapa((e) => Math.max(e - 1, 1))
 
-  const [feedback, setFeedback] = useState<{ tipo: 'sucesso' | 'offline', visivel: boolean }>({
-    tipo: 'sucesso',
-    visivel: false
-  })
+  function exibirConfirmacao(dados: ConsultaEnviada, offline: boolean) {
+    setConsultaEnviada(dados)
+    setSalvoOffline(offline)
+    setEtapa(ETAPA_CONFIRMACAO)
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
 
-  // Função para resetar o form e mostrar o aviso
-  function exibirFeedback(tipo: 'sucesso' | 'offline') {
-    setFeedback({ tipo, visivel: true })
-
-    // Reseta o formulário para os valores padrão
+  function iniciarNovaConsulta() {
     methods.reset({
-      ...methods.getValues(), // Mantém Identificação (Etapa 1)
-      ...VALORES_RESET_PRODUCAO // Sobrescreve zerando a Produção (Etapas 2 a 5)
+      ...methods.getValues(),
+      ...VALORES_RESET_PRODUCAO,
     })
+    setConsultaEnviada(null)
+    setSalvoOffline(false)
+    setErro("")
     setEtapa(1)
-
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-    setTimeout(() => setFeedback(prev => ({ ...prev, visivel: false })), 5000)
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   async function onSubmit(data: ConsultaForm) {
@@ -101,7 +103,7 @@ export default function NovaConsultaPage() {
     setErro("")
 
     const totais = calcularTotais(data)
-    const dataFinal = { ...data, ...totais }
+    const dataFinal: ConsultaEnviada = { ...data, ...totais }
 
     try {
       const res = await fetch("/api/consultas", {
@@ -113,7 +115,7 @@ export default function NovaConsultaPage() {
 
       if (!res.ok) throw new Error("Erro no servidor")
 
-      exibirFeedback('sucesso')
+      exibirConfirmacao(dataFinal, false)
 
     } catch {
       await salvarConsultaOffline({
@@ -128,12 +130,10 @@ export default function NovaConsultaPage() {
         await reg.sync.register("sync-consultas");
       }
 
-      exibirFeedback('offline')
+      exibirConfirmacao(dataFinal, true)
 
     } finally {
-      if (loading) {
-        setLoading(false)
-      }
+      setLoading(false)
     }
   }
 
@@ -162,35 +162,31 @@ export default function NovaConsultaPage() {
 
       {/* Área do Formulário */}
       <div className="max-w-lg mx-auto px-4 pt-6 pb-24 space-y-6 min-h-[calc(100vh-4rem)] flex flex-col">
-        {feedback.visivel && (
-          <div className={`p-4 rounded-2xl border flex items-center gap-3 animate-in fade-in zoom-in duration-300 ${feedback.tipo === 'sucesso'
-            ? "bg-green-50 border-green-100 text-green-700"
-            : "bg-blue-50 border-blue-100 text-blue-700"
-            }`}>
-            <div className={`h-2 w-2 rounded-full animate-ping ${feedback.tipo === 'sucesso' ? "bg-green-500" : "bg-blue-500"
-              }`} />
-            <p className="text-sm font-bold">
-              {feedback.tipo === 'sucesso'
-                ? "Lote enviado com sucesso!"
-                : "Lote salvo localmente! Sincronização automática ativa."}
-            </p>
-          </div>
+        <FormProgress etapaAtual={etapa} totalEtapas={ETAPA_CONFIRMACAO} />
+
+        {etapa === ETAPA_CONFIRMACAO && consultaEnviada ? (
+          <Etapa6Confirmacao
+            dados={consultaEnviada}
+            clientes={clientes}
+            frigorificos={frigorificos}
+            categorias={categorias}
+            salvoOffline={salvoOffline}
+          />
+        ) : (
+          <FormProvider {...methods}>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex-1 flex flex-col">
+              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 flex-1">
+                {etapa === 1 && <Etapa1Identificacao clientes={clientes} frigorificos={frigorificos} categorias={categorias} />}
+                {etapa === 2 && <Etapa2Peso />}
+                {etapa === 3 && <Etapa3Maturidade />}
+                {etapa === 4 && <Etapa4Acabamento />}
+                {etapa === 5 && <Etapa5Adicionais />}
+              </div>
+            </form>
+          </FormProvider>
         )}
-        <FormProgress etapaAtual={etapa} totalEtapas={TOTAL_ETAPAS} />
 
-        <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)} className="flex-1 flex flex-col">
-            <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 flex-1">
-              {etapa === 1 && <Etapa1Identificacao clientes={clientes} frigorificos={frigorificos} categorias={categorias} />}
-              {etapa === 2 && <Etapa2Peso />}
-              {etapa === 3 && <Etapa3Maturidade />}
-              {etapa === 4 && <Etapa4Acabamento />}
-              {etapa === 5 && <Etapa5Adicionais />}
-            </div>
-          </form>
-        </FormProvider>
-
-        {erro && (
+        {erro && etapa !== ETAPA_CONFIRMACAO && (
           <div className="p-4 bg-red-50 border border-red-100 text-red-600 rounded-2xl text-sm font-medium flex items-center gap-2 animate-in shake duration-300">
             <span className="h-2 w-2 bg-red-600 rounded-full animate-pulse" />
             {erro}
@@ -205,33 +201,45 @@ export default function NovaConsultaPage() {
       >
         {/* div interna com w-full para se comportar de forma previsível */}
         <div className="max-w-lg mx-auto w-full flex gap-3">
-          {etapa > 1 && (
+          {etapa === ETAPA_CONFIRMACAO ? (
             <button
               type="button"
-              onClick={voltar}
-              className="flex-1 py-3.5 rounded-2xl border border-border bg-card text-foreground font-semibold hover:bg-accent active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+              onClick={iniciarNovaConsulta}
+              className="flex-1 py-3.5 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap flex items-center justify-center gap-2"
             >
-              Voltar
-            </button>
-          )}
-
-          {etapa < TOTAL_ETAPAS ? (
-            <button
-              type="button"
-              onClick={avancar}
-              className="flex-1 py-3.5 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
-            >
-              Próxima Etapa
+              <Plus size={20} /> Nova consulta
             </button>
           ) : (
-            <button
-              type="button"
-              disabled={loading}
-              onClick={handleSubmit(onSubmit, onError)}
-              className="flex-1 py-3.5 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 disabled:opacity-50 flex items-center justify-center gap-2 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
-            >
-              {loading ? <Loader2 className="animate-spin" size={20} /> : <><Save size={20} /> Salvar</>}
-            </button>
+            <>
+              {etapa > 1 && (
+                <button
+                  type="button"
+                  onClick={voltar}
+                  className="flex-1 py-3.5 rounded-2xl border border-border bg-card text-foreground font-semibold hover:bg-accent active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+                >
+                  Voltar
+                </button>
+              )}
+
+              {etapa < TOTAL_ETAPAS ? (
+                <button
+                  type="button"
+                  onClick={avancar}
+                  className="flex-1 py-3.5 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+                >
+                  Próxima Etapa
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  disabled={loading}
+                  onClick={handleSubmit(onSubmit, onError)}
+                  className="flex-1 py-3.5 rounded-2xl bg-primary text-white font-bold shadow-lg shadow-primary/20 disabled:opacity-50 flex items-center justify-center gap-2 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+                >
+                  {loading ? <Loader2 className="animate-spin" size={20} /> : <><Save size={20} /> Salvar</>}
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>

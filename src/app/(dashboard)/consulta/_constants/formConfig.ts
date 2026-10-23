@@ -1,6 +1,7 @@
 import { ConsultaForm } from "@/lib/schemas/consulta"
 
 export const TOTAL_ETAPAS = 5
+export const ETAPA_CONFIRMACAO = 6
 
 export const CAMPOS_POR_ETAPA: Array<Array<keyof ConsultaForm>> = [
     // Etapa 1: Identificação
