@@ -103,7 +103,7 @@ export default function NovaConsultaPage() {
     setErro("")
 
     const totais = calcularTotais(data)
-    const dataFinal: ConsultaEnviada = { ...data, ...totais }
+    const dataFinal = { ...data, ...totais } as ConsultaEnviada
 
     try {
       const res = await fetch("/api/consultas", {

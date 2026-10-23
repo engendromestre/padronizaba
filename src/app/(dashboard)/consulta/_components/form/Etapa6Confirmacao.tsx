@@ -4,7 +4,7 @@ import type { ReactNode } from "react"
 import { CheckCircle2 } from "lucide-react"
 
 import { formatarArroba, formatarKg, formatarPercentual } from "@/lib/formatters"
-import { calcularTotais, ConsultaForm } from "@/lib/schemas/consulta"
+import { calcularTotais, ConsultaFormValues } from "@/lib/schemas/consulta"
 
 interface Cliente {
   id: string
@@ -24,7 +24,7 @@ interface CategoriaAnimal {
   nome: string
 }
 
-export type ConsultaEnviada = ConsultaForm & ReturnType<typeof calcularTotais>
+export type ConsultaEnviada = ConsultaFormValues & ReturnType<typeof calcularTotais>
 
 interface Props {
   dados: ConsultaEnviada
@@ -63,9 +63,8 @@ function Secao({ titulo, children }: { titulo: string; children: ReactNode }) {
   )
 }
 
-function cabecasComPct(qtd: number | undefined, pct: number | undefined) {
-  const quantidade = Number(qtd ?? 0)
-  return `${quantidade} cab${pct !== undefined ? ` (${formatarPercentual(pct)})` : ""}`
+function cabecasComPct(qtd: number, pct: number | null | undefined) {
+  return `${qtd} cab${pct == null ? "" : ` (${formatarPercentual(pct)})`}`
 }
 
 export function Etapa6Confirmacao({
@@ -134,19 +133,19 @@ export function Etapa6Confirmacao({
       </Secao>
 
       <Secao titulo="Maturidade Dentária">
-        <Linha label="0 Dentes" value={cabecasComPct(dados.dentes0, dados.dentes0Pct ?? undefined)} />
-        <Linha label="2 Dentes" value={cabecasComPct(dados.dentes2, dados.dentes2Pct ?? undefined)} />
-        <Linha label="4 Dentes" value={cabecasComPct(dados.dentes4, dados.dentes4Pct ?? undefined)} />
-        <Linha label="6 Dentes" value={cabecasComPct(dados.dentes6, dados.dentes6Pct ?? undefined)} />
-        <Linha label="8 Dentes" value={cabecasComPct(dados.dentes8, dados.dentes8Pct ?? undefined)} />
+        <Linha label="0 Dentes" value={cabecasComPct(dados.dentes0, dados.dentes0Pct)} />
+        <Linha label="2 Dentes" value={cabecasComPct(dados.dentes2, dados.dentes2Pct)} />
+        <Linha label="4 Dentes" value={cabecasComPct(dados.dentes4, dados.dentes4Pct)} />
+        <Linha label="6 Dentes" value={cabecasComPct(dados.dentes6, dados.dentes6Pct)} />
+        <Linha label="8 Dentes" value={cabecasComPct(dados.dentes8, dados.dentes8Pct)} />
       </Secao>
 
       <Secao titulo="Acabamento de Gordura">
-        <Linha label="1 — Ausente" value={cabecasComPct(dados.gordura1, dados.gordura1Pct ?? undefined)} />
-        <Linha label="2 — Escasso" value={cabecasComPct(dados.gordura2, dados.gordura2Pct ?? undefined)} />
-        <Linha label="3 — Mediano" value={cabecasComPct(dados.gordura3, dados.gordura3Pct ?? undefined)} />
-        <Linha label="4 — Uniforme" value={cabecasComPct(dados.gordura4, dados.gordura4Pct ?? undefined)} />
-        <Linha label="5 — Excessivo" value={cabecasComPct(dados.gordura5, dados.gordura5Pct ?? undefined)} />
+        <Linha label="1 — Ausente" value={cabecasComPct(dados.gordura1, dados.gordura1Pct)} />
+        <Linha label="2 — Escasso" value={cabecasComPct(dados.gordura2, dados.gordura2Pct)} />
+        <Linha label="3 — Mediano" value={cabecasComPct(dados.gordura3, dados.gordura3Pct)} />
+        <Linha label="4 — Uniforme" value={cabecasComPct(dados.gordura4, dados.gordura4Pct)} />
+        <Linha label="5 — Excessivo" value={cabecasComPct(dados.gordura5, dados.gordura5Pct)} />
       </Secao>
 
       <Secao titulo="Informações Adicionais">

@@ -65,6 +65,7 @@ export const consultaSchema = z.object({
 });
 
 export type ConsultaForm = z.input<typeof consultaSchema>
+export type ConsultaFormValues = z.output<typeof consultaSchema>
 
 export function calcularTotais(data: Partial<ConsultaForm>) {
   const qtdTotal = Number(data.qtdAnimais || 0)
