@@ -36,6 +36,11 @@ export function UserMenu({ nome, role }: UserMenuProps) {
 
     async function handleLogout() {
         localStorage.removeItem("@padroniza:identity")
+        
+        // Limpa todos os caches do SW ao fazer logout
+        const cacheNames = await caches.keys()
+        await Promise.all(cacheNames.map(name => caches.delete(name)))
+        
         await signOut({ redirectTo: "/login" })
     }
 
