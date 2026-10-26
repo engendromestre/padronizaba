@@ -11,6 +11,7 @@ const etapas = [
   "Maturidade",
   "Acabamento",
   "Adicionais",
+  "Confirmação",
 ]
 
 export function FormProgress({ etapaAtual, totalEtapas }: FormProgressProps) {
