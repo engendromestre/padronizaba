@@ -20,6 +20,41 @@ export async function POST(req: Request) {
     const data = parsed.data;
     const totais = calcularTotais(data);
 
+    // Impede que pendências de um usuário sejam gravadas
+    // como se pertencessem ao usuário atualmente autenticado.
+    if (
+      data.offlineUserId &&
+      data.offlineUserId !== session.user.id
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Esta consulta offline pertence a outro usuário. Entre na conta original para sincronizá-la.",
+        },
+        { status: 403 }
+      );
+    }
+
+    // Idempotência: não criar novamente uma consulta já sincronizada.
+    if (data.offlineId) {
+      const existente = await prisma.consulta.findUnique({
+        where: {
+          empresaId_offlineId: {
+            empresaId: session.user.empresaId,
+            offlineId: data.offlineId,
+          },
+        },
+        select: { id: true },
+      });
+
+      if (existente) {
+        return NextResponse.json(
+          { id: existente.id, jaExistia: true },
+          { status: 200 }
+        );
+      }
+    }
+
     const parceiroIds = data.clienteParceiroId ?? []; // agora é array
 
     // 🔒 Integridade: dono não pode estar na própria lista de parceiros
@@ -47,6 +82,7 @@ export async function POST(req: Request) {
 
     const consulta = await prisma.consulta.create({
       data: {
+        offlineId: data.offlineId ?? null,
         empresaId: session.user.empresaId,
         clienteId: data.clienteId,
         fazendaId: data.fazendaId,

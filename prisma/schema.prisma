@@ -138,12 +138,12 @@ model GrupoWhatsapp {
 }
 
 model EvolutionGrupoCache {
-  id              String   @id @default(cuid())
-  groupIdWhatsapp String   @unique
-  nomeGrupo       String
-  visivelParaVinculo  Boolean  @default(false)
-  atualizadoEm    DateTime @updatedAt
-  createdAt       DateTime @default(now())
+  id                 String   @id @default(cuid())
+  groupIdWhatsapp    String   @unique
+  nomeGrupo          String
+  visivelParaVinculo Boolean  @default(false)
+  atualizadoEm       DateTime @updatedAt
+  createdAt          DateTime @default(now())
 
   @@map("evolution_grupos_cache")
 }
@@ -210,6 +210,10 @@ enum StatusConsulta {
 }
 
 model Consulta {
+  // Identificador estável gerado pelo dispositivo para sincronização offline.
+  // Nulo para consultas criadas pelo fluxo online atual.
+  offlineId String?
+
   id                String   @id @default(cuid())
   empresaId         String
   clienteId         String
@@ -287,6 +291,7 @@ model Consulta {
   canceladoPorUsuario User?              @relation("ConsultasCanceladas", fields: [canceladoPor], references: [id])
   parceiros           ConsultaParceiro[] @relation("ConsultaDoParceiro")
 
+  @@unique([empresaId, offlineId])
   @@map("consultas")
 }
 

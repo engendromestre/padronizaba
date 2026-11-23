@@ -18,23 +18,27 @@ const ASSETS_ESTATICOS = [
 // Install: pre-cache assets estáticos
 self.addEventListener("install", (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_ESTATICOS))
+        caches
+            .open(CACHE_NAME)
+            .then((cache) => cache.addAll(ASSETS_ESTATICOS))
+            .then(() => self.skipWaiting())
     )
-    self.skipWaiting()
 })
 
 // Activate: limpa TODOS os caches antigos incluindo o padroniza-lookup-v1
 self.addEventListener("activate", (event) => {
     event.waitUntil(
-        caches.keys().then((keys) =>
-            Promise.all(
-                keys
-                    .filter((k) => k !== CACHE_NAME)
-                    .map((k) => caches.delete(k))
+        caches
+            .keys()
+            .then((keys) =>
+                Promise.all(
+                    keys
+                        .filter((k) => k !== CACHE_NAME)
+                        .map((k) => caches.delete(k))
+                )
             )
-        )
+            .then(() => self.clients.claim())
     )
-    self.clients.claim()
 })
 
 // Fetch: estratégias por tipo de request
@@ -45,20 +49,28 @@ self.addEventListener("fetch", (event) => {
     if (request.method !== "GET") return
     if (url.origin !== self.location.origin) return
 
-    // Navegação de páginas — serve do cache se offline
+    // Navegação de páginas — tenta a rede e usa o cache se offline
     if (request.mode === "navigate") {
         event.respondWith(
-            fetch(request).catch(() =>
-                caches.match(request) ??
-                caches.match("/dashboard") ??
-                new Response("Offline", { status: 503 })
-            )
+            fetch(request).catch(async () => {
+                const cachedPage = await caches.match(request)
+
+                if (cachedPage) return cachedPage
+
+                const dashboard = await caches.match("/dashboard")
+
+                return dashboard ?? new Response("Offline", {
+                    status: 503,
+                    headers: {
+                        "Content-Type": "text/plain; charset=utf-8",
+                    },
+                })
+            })
         )
         return
     }
 
-    // Todas as rotas de API → sempre busca da rede, NUNCA cacheia
-    // Dados de usuário não podem ser compartilhados entre sessões via Cache Storage
+    // Todas as rotas de API → sempre busca da rede (sem interceptar)
     if (url.pathname.startsWith("/api/")) {
         event.respondWith(fetch(request))
         return
@@ -84,16 +96,6 @@ self.addEventListener("message", (event) => {
         console.log("[SW] Sincronização forçada solicitada")
         event.waitUntil(sincronizarConsultas())
     }
-
-    // Logout: limpa o cache de assets para garantir isolamento entre usuários
-    if (event.data.type === "LOGOUT") {
-        console.log("[SW] Logout detectado — limpando caches")
-        event.waitUntil(
-            caches.keys().then((keys) =>
-                Promise.all(keys.map((k) => caches.delete(k)))
-            )
-        )
-    }
 })
 
 // Estratégia: Cache First
@@ -109,7 +111,8 @@ async function cacheFirst(request) {
         }
         return response
     } catch {
-        return caches.match("/dashboard") ?? new Response("Offline", { status: 503 })
+        // CORREÇÃO 1: await antes do ?? (caches.match retorna Promise, nunca nula)
+        return (await caches.match("/dashboard")) ?? new Response("Offline", { status: 503 })
     }
 }
 
@@ -122,37 +125,55 @@ async function sincronizarConsultas() {
         pendentes.map((consulta) => enviarConsulta(consulta))
     )
 
-    resultados.forEach((resultado, i) => {
-        if (resultado.status === "fulfilled") {
-            removerConsultaPendente(pendentes[i].id)
-        }
-    })
+    // CORREÇÃO 3: remoção aguardada, para o waitUntil só terminar depois de limpar o IndexedDB
+    let sincronizadas = 0
+    for (let i = 0; i < resultados.length; i++) {
+        if (resultados[i].status !== "fulfilled") continue
 
-    const sincronizadas = resultados.filter((r) => r.status === "fulfilled").length
+        try {
+            await removerConsultaPendente(pendentes[i].id)
+            sincronizadas++
+        } catch (erro) {
+            console.error(`[SW] Falha ao remover consulta pendente ${pendentes[i].id}:`, erro)
+        }
+    }
+
     if (sincronizadas > 0) {
-        self.clients.matchAll().then((clients) => {
-            clients.forEach((client) =>
-                client.postMessage({ type: "SYNC_COMPLETO", sincronizadas })
-            )
-        })
+        const clients = await self.clients.matchAll()
+        clients.forEach((client) =>
+            client.postMessage({ type: "SYNC_COMPLETO", sincronizadas })
+        )
     }
 }
 
 async function enviarConsulta(consulta) {
-    console.log(`[SW] Tentando sincronizar consulta: ${consulta.id}`)
-    const { ...dados } = consulta
+    console.log(`[SW] Tentando sincronizar consulta: ${consulta.id}`);
+
     const res = await fetch("/api/consultas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dados),
-    })
+        body: JSON.stringify(consulta),
+        cache: "no-store",
+    });
 
     if (!res.ok) {
-        const erroTexto = await res.text()
-        throw new Error(`Erro ${res.status}: ${erroTexto}`)
+        const erroTexto = await res.text();
+        throw new Error(`Erro ${res.status}: ${erroTexto}`);
     }
 
-    return res.json()
+    const contentType = res.headers.get("content-type") || "";
+
+    if (!contentType.includes("application/json")) {
+        throw new Error("Resposta do servidor sem confirmação JSON.");
+    }
+
+    const resultado = await res.json();
+
+    if (!resultado?.id) {
+        throw new Error("Servidor não confirmou o ID da consulta.");
+    }
+
+    return resultado;
 }
 
 // IndexedDB helpers
