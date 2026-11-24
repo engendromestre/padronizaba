@@ -1,6 +1,10 @@
 import { z } from "zod";
 
 export const consultaSchema = z.object({
+  // Identificação da sincronização offline
+  offlineId: z.string().min(1).max(100).optional(),
+  offlineUserId: z.string().min(1).max(100).optional(),
+
   // Etapa 1 — Identificação
   clienteId: z.string().min(1, "Selecione o cliente"),
   clienteParceiroId: z.array(z.string()).optional().default([]),
@@ -58,7 +62,7 @@ export const consultaSchema = z.object({
   relatorioAbate: z.boolean().default(false),
 }).refine((data) => {
   const rc = (data.pesoCarcacaKg / data.pesoVivoKg) * 100;
-  return rc < 65; 
+  return rc < 65;
 }, {
   message: "O Peso da Carcaça está alto demais em relação ao Peso Vivo. Você digitou o Peso Total no campo de Média?",
   path: ["pesoCarcacaKg"],

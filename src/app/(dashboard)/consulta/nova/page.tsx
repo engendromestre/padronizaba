@@ -11,5 +11,5 @@ export default async function NovaConsultaPage() {
         redirect("/dashboard")
     }
 
-    return <NovaConsultaClient />
+    return <NovaConsultaClient usuarioId={session.user.id} />
 }

@@ -1,29 +1,74 @@
-import { ConsultaForm } from "@/lib/schemas/consulta"
+import type { ConsultaForm } from "@/lib/schemas/consulta";
 
 export interface PayloadOffline extends ConsultaForm {
-    id: string
-    _savedAt: string
+    id: string;
+    offlineId?: string;
+    offlineUserId?: string;
+    _savedAt: string;
 }
 
-export async function salvarConsultaOffline(data: PayloadOffline): Promise<void> {
+export async function salvarConsultaOffline(
+    data: PayloadOffline
+): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-        // Mantendo a versão 2 combinada com o Service Worker
-        const request = indexedDB.open("padroniza-offline", 2)
+        const request = indexedDB.open("padroniza-offline", 2);
 
         request.onupgradeneeded = () => {
-            if (!request.result.objectStoreNames.contains("consultas-pendentes")) {
-                request.result.createObjectStore("consultas-pendentes", { keyPath: "id" })
+            const db = request.result;
+
+            if (!db.objectStoreNames.contains("consultas-pendentes")) {
+                db.createObjectStore("consultas-pendentes", {
+                    keyPath: "id",
+                });
             }
-        }
+        };
+
+        request.onerror = () => {
+            reject(request.error ?? new Error("Erro ao abrir o banco offline."));
+        };
 
         request.onsuccess = () => {
-            const db = request.result
-            const tx = db.transaction("consultas-pendentes", "readwrite")
-            tx.objectStore("consultas-pendentes").add(data)
-            tx.oncomplete = () => resolve()
-            tx.onerror = () => reject(tx.error)
-        }
+            const db = request.result;
 
-        request.onerror = () => reject(request.error)
-    })
+            let tx: IDBTransaction;
+
+            try {
+                tx = db.transaction("consultas-pendentes", "readwrite");
+
+                const payload: PayloadOffline = {
+                    ...data,
+                    // O ID local permanece estável durante as tentativas de envio.
+                    offlineId: data.offlineId ?? data.id,
+                };
+
+                tx.objectStore("consultas-pendentes").put(payload);
+
+                tx.oncomplete = () => {
+                    db.close();
+                    resolve();
+                };
+
+                tx.onerror = () => {
+                    const error = tx.error ?? new Error(
+                        "Erro ao salvar a consulta offline."
+                    );
+
+                    db.close();
+                    reject(error);
+                };
+
+                tx.onabort = () => {
+                    const error = tx.error ?? new Error(
+                        "A gravação da consulta offline foi cancelada."
+                    );
+
+                    db.close();
+                    reject(error);
+                };
+            } catch (error) {
+                db.close();
+                reject(error);
+            }
+        };
+    });
 }
