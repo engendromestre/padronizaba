@@ -76,7 +76,7 @@ export function DashboardClient({ consultas, podeSincronizar }: Props) {
                         <p className="text-sm font-bold text-foreground">
                             {pendentesN8n} consulta{pendentesN8n > 1 ? "s" : ""} sem sincronizar
                         </p>
-                        <p className="text-xs text-muted">Envia ao n8n as consultas já gravadas e as que falharam.</p>
+                        <p className="text-xs text-muted">Envia ao fluxo de trabalho as consultas já gravadas e as que falharam.</p>
                     </div>
                     <SincronizarN8nButton label="Sincronizar" />
                 </div>

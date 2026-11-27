@@ -53,7 +53,7 @@ export function SincronizarN8nButton({
         setErro(true)
         setMensagem(`${enviados} enviada(s), ${falhas} com falha.`)
       } else {
-        setMensagem(enviados === 1 ? "Consulta enviada ao n8n." : `${enviados} consultas enviadas ao n8n.`)
+        setMensagem(enviados === 1 ? "Consulta enviada ao fluxo de trabalho." : `${enviados} consultas enviadas ao fluxo de trabalho.`)
       }
 
       router.refresh()

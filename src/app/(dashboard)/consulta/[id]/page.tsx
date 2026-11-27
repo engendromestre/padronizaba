@@ -99,7 +99,7 @@ G - ${consulta.bezerrosG}
                         <SincronizarN8nButton
                             consultaId={consulta.id}
                             reenviar
-                            label={consulta.n8nStatus === "ENVIADO" ? "Reenviar ao n8n" : "Enviar ao n8n"}
+                            label={consulta.n8nStatus === "ENVIADO" ? "Reenviar abate" : "Enviar abate"}
                         />
                     )}
                 </div>
