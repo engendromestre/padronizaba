@@ -209,6 +209,13 @@ enum StatusConsulta {
   CANCELADA
 }
 
+enum StatusN8n {
+  PENDENTE
+  ENVIANDO
+  ENVIADO
+  FALHOU
+}
+
 model Consulta {
   // Identificador estável gerado pelo dispositivo para sincronização offline.
   // Nulo para consultas criadas pelo fluxo online atual.
@@ -282,6 +289,10 @@ model Consulta {
   auditoriaLogs   AuditoriaLog[]
 
   status             StatusConsulta @default(ENVIADA)
+  n8nStatus          StatusN8n      @default(PENDENTE)
+  n8nEnviadoEm       DateTime?
+  n8nTentativaEm     DateTime?
+  n8nErro            String?        @db.VarChar(500)
   canceladoPor       String? // userId de quem cancelou
   canceladoEm        DateTime?
   motivoCancelamento String?

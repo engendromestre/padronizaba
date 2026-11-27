@@ -3,6 +3,8 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { WifiOff, Plus, ChevronRight, ChevronDown, Loader2 } from "lucide-react"
+import { precisaSincronizarN8n, rotuloEnvio } from "@/lib/n8n-status"
+import { SincronizarN8nButton } from "../../consulta/_components/SincronizarN8nButton"
 
 interface Consulta {
     id: string
@@ -19,13 +21,15 @@ interface Consulta {
     frigorifico: { nome: string }
     categoriaAnimal: { nome: string }
     whatsappLogs: { status: string; sentAt: Date }[]
+    n8nStatus: string
 }
 
 interface Props {
     consultas: Consulta[]
+    podeSincronizar: boolean
 }
 
-export function DashboardClient({ consultas }: Props) {
+export function DashboardClient({ consultas, podeSincronizar }: Props) {
     const [pendentes, setPendentes] = useState(0)
 
     // Estados para gerenciar a paginação interna
@@ -61,25 +65,23 @@ export function DashboardClient({ consultas }: Props) {
         }, 500)
     }
 
-    function getStatusConfig(logs: { status: string }[]) {
-        if (logs.length === 0) return {
-            bg: "bg-muted/10", text: "text-muted", label: "Não enviado"
-        }
-        const status = logs[0].status
-        if (status === "SENT") return {
-            bg: "bg-success/10", text: "text-success", label: "Enviado ✅"
-        }
-        if (status === "FAILED") return {
-            bg: "bg-primary/10", text: "text-primary-700", label: "Falhou ❌"
-        }
-        return {
-            bg: "bg-warning/10", text: "text-warning", label: "Pendente ⏳"
-        }
-    }
+    const pendentesN8n = consultas.filter((c) => precisaSincronizarN8n(c.n8nStatus)).length
 
     return (
         <div className="w-full max-w-lg mx-auto space-y-6 pb-24">
             {/* Alerta Offline */}
+            {podeSincronizar && pendentesN8n > 0 && (
+                <div className="bg-card border border-border px-4 py-4 rounded-2xl space-y-3">
+                    <div>
+                        <p className="text-sm font-bold text-foreground">
+                            {pendentesN8n} consulta{pendentesN8n > 1 ? "s" : ""} sem sincronizar
+                        </p>
+                        <p className="text-xs text-muted">Envia ao n8n as consultas já gravadas e as que falharam.</p>
+                    </div>
+                    <SincronizarN8nButton label="Sincronizar" />
+                </div>
+            )}
+
             {pendentes > 0 && (
                 <div className="bg-warning/10 border border-warning/20 px-4 py-4 rounded-2xl flex items-center gap-4 animate-in fade-in slide-in-from-top-2">
                     <div className="bg-warning/20 p-2 rounded-lg text-warning">
@@ -118,7 +120,7 @@ export function DashboardClient({ consultas }: Props) {
 
                     {/* Lista de Cards */}
                     {consultasExibidas.map((c) => {
-                        const status = getStatusConfig(c.whatsappLogs)
+                        const status = rotuloEnvio(c)
 
                         // 💥 CORREGIDO: Pega o valor real direto da nova propriedade unificada
                         const totalAnimais = Number(c.qtdAnimais || 0)
