@@ -1,0 +1,8 @@
+-- CreateEnum
+CREATE TYPE "StatusN8n" AS ENUM ('PENDENTE', 'ENVIANDO', 'ENVIADO', 'FALHOU');
+
+-- AlterTable
+ALTER TABLE "consultas" ADD COLUMN "n8nStatus" "StatusN8n" NOT NULL DEFAULT 'PENDENTE',
+ADD COLUMN "n8nEnviadoEm" TIMESTAMP(3),
+ADD COLUMN "n8nTentativaEm" TIMESTAMP(3),
+ADD COLUMN "n8nErro" VARCHAR(500);
