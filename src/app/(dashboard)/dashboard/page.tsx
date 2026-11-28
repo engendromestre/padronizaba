@@ -42,10 +42,7 @@ export default async function DashboardPage() {
       />
 
       <div className="max-w-lg mx-auto px-4 pt-4">
-        <DashboardClient
-          consultas={consultas}
-          podeSincronizar={session.user.role !== "CLIENTE"}
-        />
+        <DashboardClient consultas={consultas} />
       </div>
 
       <div className="h-24" />

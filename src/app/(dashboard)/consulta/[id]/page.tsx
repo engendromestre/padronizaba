@@ -1,11 +1,9 @@
 import { auth } from "@/lib/auth"
 import { formatarArroba, formatarKg, formatarPercentual } from "@/lib/formatters"
-import { rotuloEnvio } from "@/lib/n8n-status"
 import { filtroConsultas } from "@/lib/permissoes"
 import { prisma } from "@/lib/prisma"
 import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
-import { SincronizarN8nButton } from "../_components/SincronizarN8nButton"
 
 interface Props {
     params: Promise<{ id: string }>
@@ -75,8 +73,7 @@ G - ${consulta.bezerrosG}
 💰 Contaminações: ${consulta.contaminacaoGiKg ?? "-"}kg
 🩸 Hematomas: ${consulta.hematomasKg ?? "-"}kg`
 
-    const statusEnvio = rotuloEnvio(consulta)
-    const podeSincronizar = session.user.role !== "CLIENTE"
+    const ultimoLog = consulta.whatsappLogs[0]
 
     return (
         <main className="min-h-screen bg-gray-50 pb-8">
@@ -90,18 +87,13 @@ G - ${consulta.bezerrosG}
             <div className="max-w-lg mx-auto px-4 pt-4 space-y-4">
 
                 {/* Status WhatsApp */}
-                <div className={`px-4 py-3 rounded-xl text-sm font-medium space-y-3 ${statusEnvio.bg} ${statusEnvio.text}`}>
-                    <p>{statusEnvio.label}</p>
-                    {consulta.n8nErro && (
-                        <p className="text-xs font-normal opacity-80">{consulta.n8nErro}</p>
-                    )}
-                    {podeSincronizar && (
-                        <SincronizarN8nButton
-                            consultaId={consulta.id}
-                            reenviar
-                            label={consulta.n8nStatus === "ENVIADO" ? "Reenviar abate" : "Enviar abate"}
-                        />
-                    )}
+                <div className={`px-4 py-3 rounded-xl text-sm font-medium ${!ultimoLog ? "bg-gray-100 text-gray-600" :
+                    ultimoLog.status === "SENT" ? "bg-green-50 text-primary-700" :
+                        "bg-red-50 text-red-700"
+                    }`}>
+                    {!ultimoLog ? "⏳ Mensagem ainda não enviada" :
+                        ultimoLog.status === "SENT" ? "✅ Mensagem enviada com sucesso" :
+                            "❌ Falha no envio da mensagem"}
                 </div>
 
                 {/* Identificação */}

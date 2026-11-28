@@ -1,8 +1,6 @@
 import { auth } from "@/lib/auth";
-import { sincronizarConsultaComN8n } from "@/lib/n8n";
 import { prisma } from "@/lib/prisma";
 import { calcularTotais, consultaSchema } from "@/lib/schemas/consulta";
-import { after } from "next/server";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -46,13 +44,10 @@ export async function POST(req: Request) {
             offlineId: data.offlineId,
           },
         },
-        select: { id: true, n8nStatus: true },
+        select: { id: true },
       });
 
       if (existente) {
-        if (existente.n8nStatus !== "ENVIADO") {
-          after(() => sincronizarConsultaComN8n(existente.id));
-        }
         return NextResponse.json(
           { id: existente.id, jaExistia: true },
           { status: 200 }
@@ -144,7 +139,13 @@ export async function POST(req: Request) {
       },
     });
 
-    after(() => sincronizarConsultaComN8n(consulta.id));
+    if (process.env.N8N_WEBHOOK_URL) {
+      fetch(process.env.N8N_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ consultaId: consulta.id }),
+      }).catch((e) => console.error("Erro silencioso n8n:", e));
+    }
 
     return NextResponse.json({ id: consulta.id }, { status: 201 });
   } catch (error) {

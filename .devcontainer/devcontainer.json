@@ -16,8 +16,6 @@
         "bradlc.vscode-tailwindcss",
         "dbaeumer.vscode-eslint",
         "eamodio.gitlens",
-        "rangav.vscode-thunder-client",
-        "ms-azuretools.vscode-docker",
         "github.vscode-github-actions",
         "usernamehw.errorlens",
         "ms-playwright.playwright"
